@@ -1,0 +1,49 @@
+{
+  "header": {
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "bookings": "Bookings",
+    "messages": "Messages"
+  },
+  "cities": {
+    "minsk": "Minsk",
+    "gomel": "Gomel",
+    "vitebsk": "Vitebsk",
+    "grodno": "Grodno",
+    "brest": "Brest",
+    "mogilev": "Mogilev"
+  },
+  "languages": {
+    "ru": "Русский",
+    "en": "English",
+    "be": "Беларуская"
+  },
+  "footer": {
+    "description": "Get everything done with kids — easily!",
+    "services": {
+      "title": "Services",
+      "findSitter": "Find babysitter",
+      "onlineClasses": "Online classes",
+      "becomeSitter": "Become a babysitter"
+    },
+    "info": {
+      "title": "Information",
+      "about": "About us",
+      "faq": "FAQ",
+      "blog": "Blog",
+      "help": "Help"
+    },
+    "contact": {
+      "title": "Contact",
+      "hours": "Daily from 9:00 to 22:00"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "cookies": "Cookie Policy",
+      "offer": "Public Offer"
+    }
+  }
+}
+
