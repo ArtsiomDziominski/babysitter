@@ -8,18 +8,6 @@
           <span>Babysitter</span>
         </NuxtLink>
 
-        <div>
-          <UButton
-              v-for="link in navLinks"
-              :key="link.to"
-              :to="link.to"
-              variant="ghost"
-              color="neutral"
-          >
-            {{ $t(link.label) }}
-          </UButton>
-        </div>
-
         <div class="flex items-center gap-3">
           <USelect
               v-model="selectedCity"
@@ -37,17 +25,20 @@
               class="min-w-[120px]"
           />
 
-          <template v-if="!isAuthenticated">
+          <template v-if="!authStore.isAuthenticated">
             <UButton color="primary" to="/login">
               {{ $t('header.login') }}
             </UButton>
           </template>
           <template v-else>
-            <div class="flex items-center gap-4">
-              <UButton color="error" variant="solid" @click="handleLogout">
-                {{ $t('header.logout') }}
-              </UButton>
-            </div>
+            <UDropdownMenu :items="accountMenuItems" :popper="{ placement: 'bottom-end' }">
+              <UAvatar
+                  :src="authStore.currentUser?.avatar"
+                  :alt="authStore.currentUser?.name"
+                  size="md"
+                  class="cursor-pointer hover:ring-2 hover:ring-primary-500 transition-all"
+              />
+            </UDropdownMenu>
           </template>
         </div>
       </div>
@@ -57,10 +48,10 @@
 
 <script setup lang="ts">
 const { locale, locales, t, setLocale } = useI18n()
+const authStore = useAuthStore()
 
 const cityKeys = ['minsk', 'gomel', 'vitebsk', 'grodno', 'brest', 'mogilev']
 const selectedCity = useState('selectedCity', () => cityKeys[0])
-const isAuthenticated = useState('isAuthenticated', () => false)
 
 const cityOptions = computed(() =>
     cityKeys.map(key => ({
@@ -76,13 +67,74 @@ const localeOptions = computed(() => {
   return locales.value
 })
 
-const navLinks = [
-  { to: '/profile', label: 'header.profile' },
-  { to: '/bookings', label: 'header.bookings' },
-  { to: '/messages', label: 'header.messages' }
-]
+const accountMenuItems = computed(() => {
+  const role = authStore.currentUser?.role
+  const user = authStore.currentUser
+  
+  const mainMenuItems = [
+    {
+      label: t('header.menu.account'),
+      icon: 'i-lucide-user',
+      to: '/account'
+    },
+    {
+      label: t('header.menu.bookings'),
+      icon: 'i-lucide-calendar',
+      to: '/account/bookings'
+    },
+    {
+      label: t('header.menu.messages'),
+      icon: 'i-lucide-message-square',
+      to: '/account/messages'
+    }
+  ]
+
+  if (role === 'parent') {
+    mainMenuItems.push({
+      label: t('header.menu.favorites'),
+      icon: 'i-lucide-heart',
+      to: '/account/favorites'
+    })
+  } else if (role === 'nanny') {
+    mainMenuItems.push({
+      label: t('header.menu.schedule'),
+      icon: 'i-lucide-calendar-clock',
+      to: '/account/schedule'
+    })
+  }
+
+  const items = [
+    [
+      {
+        label: user?.name || '',
+        avatar: {
+          src: user?.avatar
+        },
+        type: 'label'
+      }
+    ],
+    mainMenuItems,
+    [
+      {
+        label: t('header.menu.settings'),
+        icon: 'i-lucide-settings',
+        to: '/account/settings'
+      }
+    ],
+    [
+      {
+        label: t('header.logout'),
+        icon: 'i-lucide-log-out',
+        click: () => handleLogout()
+      }
+    ]
+  ]
+
+  return items
+})
 
 const handleLogout = () => {
-  isAuthenticated.value = false
+  authStore.logout()
+  navigateTo('/')
 }
 </script>

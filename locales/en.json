@@ -4,7 +4,15 @@
     "logout": "Logout",
     "profile": "Profile",
     "bookings": "Bookings",
-    "messages": "Messages"
+    "messages": "Messages",
+    "menu": {
+      "account": "Account",
+      "bookings": "Bookings",
+      "messages": "Messages",
+      "favorites": "Favorites",
+      "schedule": "Schedule",
+      "settings": "Settings"
+    }
   },
   "cities": {
     "minsk": "Minsk",
@@ -43,6 +51,37 @@
       "terms": "Terms of Use",
       "cookies": "Cookie Policy",
       "offer": "Public Offer"
+    }
+  },
+  "account": {
+    "title": "Account",
+    "welcome": "Welcome, {name}!",
+    "email": "Email",
+    "phone": "Phone",
+    "editProfile": "Edit Profile",
+    "role": {
+      "nanny": "Nanny",
+      "parent": "Parent"
+    },
+    "parent": {
+      "dashboard": "Parent Dashboard",
+      "activeBookings": "Active Bookings",
+      "favoriteNannies": "Favorite Nannies",
+      "messages": "Messages",
+      "reviews": "Reviews",
+      "quickActions": "Quick Actions",
+      "bookNanny": "Book Nanny",
+      "findNanny": "Find Nanny"
+    },
+    "nanny": {
+      "dashboard": "Nanny Dashboard",
+      "activeBookings": "Active Bookings",
+      "clients": "Clients",
+      "messages": "Messages",
+      "rating": "Rating",
+      "quickActions": "Quick Actions",
+      "editProfile": "Edit Profile",
+      "manageSchedule": "Manage Schedule"
     }
   }
 }

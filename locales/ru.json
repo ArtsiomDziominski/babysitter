@@ -4,7 +4,15 @@
     "logout": "Выйти",
     "profile": "Профиль",
     "bookings": "Бронирования",
-    "messages": "Сообщения"
+    "messages": "Сообщения",
+    "menu": {
+      "account": "Аккаунт",
+      "bookings": "Бронирования",
+      "messages": "Сообщения",
+      "favorites": "Избранное",
+      "schedule": "Расписание",
+      "settings": "Настройки"
+    }
   },
   "cities": {
     "minsk": "Минск",
@@ -43,6 +51,37 @@
       "terms": "Условия использования",
       "cookies": "Политика cookies",
       "offer": "Публичная оферта"
+    }
+  },
+  "account": {
+    "title": "Личный кабинет",
+    "welcome": "Добро пожаловать, {name}!",
+    "email": "Email",
+    "phone": "Телефон",
+    "editProfile": "Редактировать профиль",
+    "role": {
+      "nanny": "Няня",
+      "parent": "Родитель"
+    },
+    "parent": {
+      "dashboard": "Панель родителя",
+      "activeBookings": "Активные бронирования",
+      "favoriteNannies": "Избранные няни",
+      "messages": "Сообщения",
+      "reviews": "Отзывы",
+      "quickActions": "Быстрые действия",
+      "bookNanny": "Забронировать няню",
+      "findNanny": "Найти няню"
+    },
+    "nanny": {
+      "dashboard": "Панель няни",
+      "activeBookings": "Активные бронирования",
+      "clients": "Клиенты",
+      "messages": "Сообщения",
+      "rating": "Рейтинг",
+      "quickActions": "Быстрые действия",
+      "editProfile": "Редактировать профиль",
+      "manageSchedule": "Управление расписанием"
     }
   }
 }
