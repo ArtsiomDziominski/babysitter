@@ -1,11 +1,11 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-
+  <div class="min-h-screen">
+    <PageMainHeroSection />
+    <PageMainStatsSection />
+    <PageMainHowItWorksSection />
+    <PageMainAdvantagesSection />
+    <PageMainImageGallerySection />
+    <PageMainReviewsSection />
+    <PageMainCTASection />
+  </div>
 </template>
-
-<style scoped>
-
-</style>

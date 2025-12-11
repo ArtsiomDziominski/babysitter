@@ -14,6 +14,66 @@
     "brest": "Brest",
     "mogilev": "Mogilev"
   },
+  "home": {
+    "hero": {
+      "title": "Find a verified babysitter near you",
+      "subtitle": "Thousands of happy parents have already found reliable help for their children",
+      "cta": "Find a babysitter",
+      "ctaSecondary": "Learn more"
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "step1": {
+        "title": "Choose a babysitter",
+        "description": "Browse profiles of verified babysitters in your city"
+      },
+      "step2": {
+        "title": "Book a time",
+        "description": "Select a convenient date and time for the meeting"
+      },
+      "step3": {
+        "title": "Meet in person",
+        "description": "Get to know the babysitter before the first visit"
+      },
+      "step4": {
+        "title": "Enjoy your free time",
+        "description": "Your children are in safe hands, and you can take care of your business"
+      }
+    },
+    "advantages": {
+      "title": "Why choose us",
+      "verified": {
+        "title": "Verified babysitters",
+        "description": "All our babysitters undergo document verification and interviews"
+      },
+      "safe": {
+        "title": "Safety",
+        "description": "Insurance and guarantees for your peace of mind"
+      },
+      "flexible": {
+        "title": "Flexible schedule",
+        "description": "Choose the time that suits you"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Our support service is always ready to help"
+      }
+    },
+    "reviews": {
+      "title": "Parent reviews",
+      "more": "All reviews"
+    },
+    "stats": {
+      "sitters": "Babysitters",
+      "families": "Families",
+      "bookings": "Bookings",
+      "rating": "Average rating"
+    },
+    "cta": {
+      "title": "Ready to find the perfect babysitter?",
+      "subtitle": "Join thousands of happy parents"
+    }
+  },
   "footer": {
     "description": "Get everything done with kids — easily!",
     "services": {
