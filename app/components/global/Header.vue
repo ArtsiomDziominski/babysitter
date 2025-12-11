@@ -1,48 +1,73 @@
 <template>
-  <header class="border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 bg-white dark:bg-gray-900">
-    <UContainer>
-      <div class="flex items-center justify-between gap-4 py-4">
-        <NuxtLink to="/"
-                  class="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white hover:text-primary-500 transition-colors">
-          <Icon name="mdi:account-child" size="32"/>
-          <span>Babysitter</span>
+  <header class="header">
+    <div class="header__container">
+      <div class="header__content">
+        <NuxtLink to="/" class="header__logo">
+          <Icon name="mdi:account-child" size="32" class="header__logo-icon"/>
+          <span class="header__logo-text">Babysitter</span>
         </NuxtLink>
 
-        <div class="flex items-center gap-3">
-          <USelect
-              v-model="selectedCity"
-              :items="cityOptions"
-              labelKey="label"
-              valueKey="value"
-              class="min-w-[150px]"
-          />
-          <USelect
-              :model-value="locale"
-              :items="localeOptions"
-              labelKey="name"
-              valueKey="code"
-              @update:model-value="(value) => setLocale(value as 'ru' | 'en' | 'be')"
-              class="min-w-[120px]"
-          />
+        <nav v-if="authStore.isAuthenticated" class="header__nav">
+          <NuxtLink to="/account/bookings" class="header__nav-link">
+            {{ $t('header.bookings') }}
+          </NuxtLink>
+          <NuxtLink to="/account/messages" class="header__nav-link">
+            {{ $t('header.messages') }}
+          </NuxtLink>
+        </nav>
 
-          <template v-if="!authStore.isAuthenticated">
-            <UButton color="primary" to="/login">
-              {{ $t('header.login') }}
-            </UButton>
-          </template>
-          <template v-else>
-            <UDropdownMenu :items="accountMenuItems" :popper="{ placement: 'bottom-end' }">
-              <UAvatar
-                  :src="authStore.currentUser?.avatar"
-                  :alt="authStore.currentUser?.name"
-                  size="md"
-                  class="cursor-pointer hover:ring-2 hover:ring-primary-500 transition-all"
-              />
-            </UDropdownMenu>
-          </template>
+        <div class="header__controls">
+          <ClientOnly>
+            <template v-if="cityOptions.length > 0 && localeOptions.length > 0">
+              <div class="header__selects">
+                <USelect
+                    v-model="selectedCity"
+                    :items="cityOptions"
+                    labelKey="label"
+                    valueKey="value"
+                    class="header__select"
+                />
+                <USelect
+                    :model-value="locale"
+                    :items="localeOptions"
+                    labelKey="name"
+                    valueKey="code"
+                    @update:model-value="(value) => setLocale(value as 'ru' | 'en' | 'be')"
+                    class="header__select header__select--locale"
+                />
+              </div>
+            </template>
+            <template #fallback>
+              <div class="header__select-fallback"></div>
+              <div class="header__select-fallback header__select-fallback--locale"></div>
+            </template>
+          </ClientOnly>
+
+          <ClientOnly>
+            <template v-if="!authStore.isAuthenticated">
+              <UButton color="primary" to="/login" variant="solid">
+                {{ $t('header.login') }}
+              </UButton>
+            </template>
+            <template v-else>
+              <div class="header__auth">
+                <UDropdownMenu :items="accountMenuItems" :popper="{ placement: 'bottom-end' }">
+                  <UAvatar
+                      :src="authStore.currentUser?.avatar"
+                      :alt="authStore.currentUser?.name"
+                      size="md"
+                      class="header__avatar"
+                  />
+                </UDropdownMenu>
+              </div>
+            </template>
+            <template #fallback>
+              <div class="header__auth-fallback"></div>
+            </template>
+          </ClientOnly>
         </div>
       </div>
-    </UContainer>
+    </div>
   </header>
 </template>
 
@@ -53,12 +78,16 @@ const authStore = useAuthStore()
 const cityKeys = ['minsk', 'gomel', 'vitebsk', 'grodno', 'brest', 'mogilev']
 const selectedCity = useState('selectedCity', () => cityKeys[0])
 
-const cityOptions = computed(() =>
-    cityKeys.map(key => ({
+const cityOptions = computed(() => {
+  try {
+    return cityKeys.map(key => ({
       label: t(`cities.${ key }`),
       value: key
     }))
-)
+  } catch {
+    return []
+  }
+})
 
 const localeOptions = computed(() => {
   if (!locales.value || locales.value.length === 0) {
@@ -70,12 +99,12 @@ const localeOptions = computed(() => {
 const accountMenuItems = computed(() => {
   const role = authStore.currentUser?.role
   const user = authStore.currentUser
-  
+
   const mainMenuItems = [
     {
       label: t('header.menu.account'),
       icon: 'i-lucide-user',
-      to: '/account'
+      to: '/account/profile'
     },
     {
       label: t('header.menu.bookings'),

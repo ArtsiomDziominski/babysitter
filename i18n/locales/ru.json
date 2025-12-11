@@ -139,6 +139,58 @@
     "resetPasswordSuccess": "Запрос отправлен",
     "resetPasswordEmailSent": "Инструкции по восстановлению пароля отправлены на ваш email",
     "rememberPassword": "Вспомнили пароль?"
+  },
+  "account": {
+    "title": "Аккаунт",
+    "welcome": "Добро пожаловать, {name}!",
+    "email": "Email",
+    "phone": "Телефон",
+    "editProfile": "Редактировать профиль",
+    "messages": "Сообщения",
+    "orders": "Заказы",
+    "profile": "Профиль",
+    "sections": {
+      "basicData": "Основные данные",
+      "yourDogs": "Ваши собаки",
+      "account": "Аккаунт",
+      "notificationSettings": "Настройки оповещений",
+      "bookingData": "Данные для бронирования"
+    },
+    "basicData": {
+      "title": "Основные данные",
+      "name": "Имя",
+      "surname": "Фамилия",
+      "surnamePlaceholder": "Ваша фамилия",
+      "surnamePrivacy": "Необходимо указать реальную фамилию. В целях приватности ваша фамилия не будет отображаться на Вашей странице на сайте.",
+      "mobilePhone": "Мобильный телефон",
+      "city": "Город",
+      "uploadPhoto": "Загрузить фото",
+      "save": "Сохранить"
+    },
+    "role": {
+      "nanny": "Бебиситтер",
+      "parent": "Родитель"
+    },
+    "parent": {
+      "dashboard": "Панель родителя",
+      "activeBookings": "Активные бронирования",
+      "favoriteNannies": "Избранные бебиситтеры",
+      "messages": "Сообщения",
+      "reviews": "Отзывы",
+      "quickActions": "Быстрые действия",
+      "bookNanny": "Забронировать бебиситтера",
+      "findNanny": "Найти бебиситтера"
+    },
+    "nanny": {
+      "dashboard": "Панель бебиситтера",
+      "activeBookings": "Активные бронирования",
+      "clients": "Клиенты",
+      "messages": "Сообщения",
+      "rating": "Рейтинг",
+      "quickActions": "Быстрые действия",
+      "editProfile": "Редактировать профиль",
+      "manageSchedule": "Управление расписанием"
+    }
   }
 }
 
