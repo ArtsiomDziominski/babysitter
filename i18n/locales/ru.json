@@ -99,6 +99,40 @@
       "cookies": "Политика cookies",
       "offer": "Публичная оферта"
     }
+  },
+  "auth": {
+    "login": "Вход",
+    "register": "Регистрация",
+    "loginDescription": "Введите ваши данные для входа в аккаунт",
+    "registerDescription": "Создайте аккаунт, чтобы начать пользоваться сервисом",
+    "email": "Email",
+    "emailPlaceholder": "Введите ваш email",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "confirmPasswordPlaceholder": "Повторите пароль",
+    "name": "Имя",
+    "namePlaceholder": "Введите ваше имя",
+    "surname": "Фамилия",
+    "surnamePlaceholder": "Введите вашу фамилию",
+    "rememberMe": "Запомнить меня",
+    "agreeToTerms": "Я согласен с условиями использования",
+    "noAccount": "Нет аккаунта?",
+    "haveAccount": "Уже есть аккаунт?",
+    "invalidEmail": "Неверный email",
+    "passwordMinLength": "Пароль должен содержать минимум 8 символов",
+    "nameMinLength": "Имя должно содержать минимум 2 символа",
+    "surnameMinLength": "Фамилия должна содержать минимум 2 символа",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "mustAgree": "Необходимо согласиться с условиями",
+    "loginSuccess": "Вход выполнен успешно",
+    "registerSuccess": "Регистрация выполнена успешно",
+    "loginWithGoogle": "Вход через Google",
+    "loginWithYandex": "Вход через Яндекс",
+    "loginWithVK": "Вход через VK",
+    "registerWithGoogle": "Регистрация через Google",
+    "registerWithYandex": "Регистрация через Яндекс",
+    "registerWithVK": "Регистрация через VK"
   }
 }
 

@@ -38,7 +38,7 @@
           />
 
           <template v-if="!isAuthenticated">
-            <UButton color="primary" @click="handleLogin">
+            <UButton color="primary" to="/login">
               {{ $t('header.login') }}
             </UButton>
           </template>
@@ -81,10 +81,6 @@ const navLinks = [
   { to: '/bookings', label: 'header.bookings' },
   { to: '/messages', label: 'header.messages' }
 ]
-
-const handleLogin = () => {
-  isAuthenticated.value = true
-}
 
 const handleLogout = () => {
   isAuthenticated.value = false

@@ -99,6 +99,38 @@
       "cookies": "Cookie Policy",
       "offer": "Public Offer"
     }
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "loginDescription": "Enter your credentials to access your account",
+    "registerDescription": "Create an account to start using the service",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "surname": "Surname",
+    "surnamePlaceholder": "Enter your surname",
+    "rememberMe": "Remember me",
+    "agreeToTerms": "I agree to the terms of use",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "invalidEmail": "Invalid email",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "nameMinLength": "Name must be at least 2 characters",
+    "surnameMinLength": "Surname must be at least 2 characters",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "mustAgree": "You must agree to the terms",
+    "loginSuccess": "Login successful",
+    "registerSuccess": "Registration successful",
+    "loginWithGoogle": "Login with Google",
+    "loginWithGitHub": "Login with GitHub",
+    "registerWithGoogle": "Register with Google",
+    "registerWithGitHub": "Register with GitHub"
   }
 }
 

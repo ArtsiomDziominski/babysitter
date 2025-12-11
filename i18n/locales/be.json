@@ -99,6 +99,40 @@
       "cookies": "Палітыка cookies",
       "offer": "Публічная аферта"
     }
+  },
+  "auth": {
+    "login": "Уваход",
+    "register": "Рэгістрацыя",
+    "loginDescription": "Увядзіце вашыя даныя для ўваходу ў акаўнт",
+    "registerDescription": "Стварыце акаўнт, каб пачаць карыстацца сэрвісам",
+    "email": "Email",
+    "emailPlaceholder": "Увядзіце ваш email",
+    "password": "Пароль",
+    "passwordPlaceholder": "Увядзіце пароль",
+    "confirmPassword": "Пацвердзіце пароль",
+    "confirmPasswordPlaceholder": "Паўтарыце пароль",
+    "name": "Імя",
+    "namePlaceholder": "Увядзіце ваша імя",
+    "surname": "Прозвішча",
+    "surnamePlaceholder": "Увядзіце ваша прозвішча",
+    "rememberMe": "Запомніць мяне",
+    "agreeToTerms": "Я згодзен з умовамі выкарыстання",
+    "noAccount": "Няма акаўнта?",
+    "haveAccount": "Ужо ёсць акаўнт?",
+    "invalidEmail": "Няверны email",
+    "passwordMinLength": "Пароль павінен змяшчаць мінімум 8 сімвалаў",
+    "nameMinLength": "Імя павінна змяшчаць мінімум 2 сімвалы",
+    "surnameMinLength": "Прозвішча павінна змяшчаць мінімум 2 сімвалы",
+    "passwordsDoNotMatch": "Паролі не супадаюць",
+    "mustAgree": "Неабходна згадзіцца з умовамі",
+    "loginSuccess": "Уваход выкананы паспяхова",
+    "registerSuccess": "Рэгістрацыя выканана паспяхова",
+    "loginWithGoogle": "Уваход праз Google",
+    "loginWithYandex": "Уваход праз Яндекс",
+    "loginWithVK": "Уваход праз VK",
+    "registerWithGoogle": "Рэгістрацыя праз Google",
+    "registerWithYandex": "Рэгістрацыя праз Яндекс",
+    "registerWithVK": "Рэгістрацыя праз VK"
   }
 }
 

@@ -1,0 +1,91 @@
+<script setup lang="ts">
+import * as z from 'zod'
+import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
+
+const { t } = useI18n()
+const toast = useToast()
+
+const fields: AuthFormField[] = [
+  {
+    name: 'email',
+    type: 'email',
+    label: t('auth.email'),
+    placeholder: t('auth.emailPlaceholder'),
+    required: true
+  },
+  {
+    name: 'password',
+    label: t('auth.password'),
+    type: 'password',
+    placeholder: t('auth.passwordPlaceholder'),
+    required: true
+  },
+  {
+    name: 'remember',
+    label: t('auth.rememberMe'),
+    type: 'checkbox'
+  }
+]
+
+const providers = [
+  {
+    label: 'Google',
+    icon: 'i-simple-icons-google',
+    onClick: () => {
+      toast.add({ title: 'Google', description: t('auth.loginWithGoogle') })
+    }
+  },
+  {
+    label: 'Яндекс',
+    icon: 'i-lucide-yandex',
+    onClick: () => {
+      toast.add({ title: 'Яндекс', description: t('auth.loginWithYandex') })
+    }
+  },
+  {
+    label: 'VK',
+    icon: 'i-simple-icons-vk',
+    onClick: () => {
+      toast.add({ title: 'VK', description: t('auth.loginWithVK') })
+    }
+  }
+]
+
+const schema = z.object({
+  email: z.string().email(t('auth.invalidEmail')),
+  password: z.string().min(8, t('auth.passwordMinLength'))
+})
+
+type Schema = z.output<typeof schema>
+
+function onSubmit(payload: FormSubmitEvent<Schema>) {
+  console.log('Login submitted', payload)
+  toast.add({ title: t('auth.loginSuccess'), color: 'success' })
+}
+</script>
+
+<template>
+  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-8">
+    <UPageCard class="w-full max-w-md">
+      <UAuthForm
+        :schema="schema"
+        :title="t('auth.login')"
+        :description="t('auth.loginDescription')"
+        icon="i-lucide-user"
+        :fields="fields"
+        :providers="providers"
+        @submit="onSubmit"
+      >
+        <template #footer>
+          <div class="text-center text-sm text-muted mt-4">
+            {{ t('auth.noAccount') }}
+            <ULink to="/register" class="font-medium">
+              {{ t('auth.register') }}
+            </ULink>
+          </div>
+        </template>
+      </UAuthForm>
+    </UPageCard>
+  </div>
+</template>
+
