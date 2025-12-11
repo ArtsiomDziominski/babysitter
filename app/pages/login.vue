@@ -77,11 +77,18 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         @submit="onSubmit"
       >
         <template #footer>
-          <div class="text-center text-sm text-muted mt-4">
-            {{ t('auth.noAccount') }}
-            <ULink to="/register" class="font-medium">
-              {{ t('auth.register') }}
-            </ULink>
+          <div class="text-center text-sm text-muted mt-4 space-y-2">
+            <div>
+              {{ t('auth.noAccount') }}
+              <ULink to="/register" class="font-medium">
+                {{ t('auth.register') }}
+              </ULink>
+            </div>
+            <div>
+              <ULink to="/forgot-password" class="font-medium">
+                {{ t('auth.forgotPassword') }}
+              </ULink>
+            </div>
           </div>
         </template>
       </UAuthForm>

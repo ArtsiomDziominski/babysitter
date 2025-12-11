@@ -130,7 +130,13 @@
     "loginWithGoogle": "Login with Google",
     "loginWithGitHub": "Login with GitHub",
     "registerWithGoogle": "Register with Google",
-    "registerWithGitHub": "Register with GitHub"
+    "registerWithGitHub": "Register with GitHub",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset Password",
+    "resetPasswordDescription": "Enter your email and we'll send you instructions to reset your password",
+    "resetPasswordSuccess": "Request sent",
+    "resetPasswordEmailSent": "Password reset instructions have been sent to your email",
+    "rememberPassword": "Remember your password?"
   }
 }
 

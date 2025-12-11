@@ -132,7 +132,13 @@
     "loginWithVK": "Вход через VK",
     "registerWithGoogle": "Регистрация через Google",
     "registerWithYandex": "Регистрация через Яндекс",
-    "registerWithVK": "Регистрация через VK"
+    "registerWithVK": "Регистрация через VK",
+    "forgotPassword": "Забыли пароль?",
+    "resetPassword": "Восстановление пароля",
+    "resetPasswordDescription": "Введите ваш email, и мы отправим вам инструкции по восстановлению пароля",
+    "resetPasswordSuccess": "Запрос отправлен",
+    "resetPasswordEmailSent": "Инструкции по восстановлению пароля отправлены на ваш email",
+    "rememberPassword": "Вспомнили пароль?"
   }
 }
 
