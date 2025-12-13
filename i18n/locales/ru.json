@@ -151,8 +151,8 @@
     "profile": "Профиль",
     "sections": {
       "basicData": "Основные данные",
-      "yourDogs": "Ваши собаки",
-      "account": "Аккаунт",
+      "yourDogs": "Ваши дети",
+      "security": "Безопасность",
       "notificationSettings": "Настройки оповещений",
       "bookingData": "Данные для бронирования"
     },
@@ -166,6 +166,41 @@
       "city": "Город",
       "uploadPhoto": "Загрузить фото",
       "save": "Сохранить"
+    },
+    "children": {
+      "title": "Ваши дети",
+      "name": "Имя ребенка",
+      "namePlaceholder": "Введите имя ребенка",
+      "age": "Возраст",
+      "agePlaceholder": "Укажите возраст",
+      "gender": "Пол",
+      "genderMale": "Мальчик",
+      "genderFemale": "Девочка",
+      "notes": "Особенности",
+      "notesPlaceholder": "Аллергии, особенности питания, медицинские показания и т.д.",
+      "addChild": "Добавить ребенка",
+      "removeChild": "Удалить",
+      "noChildren": "У вас пока нет добавленных детей"
+    },
+    "security": {
+      "title": "Безопасность",
+      "changeEmail": "Изменить почтовый адрес",
+      "currentEmail": "Текущий email",
+      "newEmail": "Новый email",
+      "confirmEmail": "Подтвердите новый email",
+      "confirmEmailPlaceholder": "Повторите новый email",
+      "saveEmail": "Сохранить email",
+      "verificationCode": "Код подтверждения",
+      "verificationCodePlaceholder": "Введите код подтверждения",
+      "verificationCodeHint": "Код отправлен на новый email адрес",
+      "verifyCode": "Подтвердить",
+      "cancel": "Отмена",
+      "changePassword": "Изменить пароль",
+      "currentPassword": "Текущий пароль",
+      "currentPasswordPlaceholder": "Введите текущий пароль",
+      "newPassword": "Новый пароль",
+      "newPasswordPlaceholder": "Введите новый пароль",
+      "savePassword": "Сохранить пароль"
     },
     "role": {
       "nanny": "Бебиситтер",

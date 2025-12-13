@@ -9,5 +9,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div></div>
+  <NuxtPage />
 </template>

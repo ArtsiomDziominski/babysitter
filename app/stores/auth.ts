@@ -10,6 +10,12 @@ export interface User {
     city?: string
     avatar?: string
     role: 'nanny' | 'parent'
+    children?: Array<{
+        name: string
+        age: string
+        gender: string
+        notes: string
+    }>
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -45,7 +51,8 @@ export const useAuthStore = defineStore('auth', () => {
             email: '',
             phone: '',
             city: '',
-            role: 'parent'
+            role: 'parent',
+            children: []
         }
     }
 

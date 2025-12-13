@@ -14,7 +14,8 @@ const activeTab = computed(() => {
 })
 
 const activeSection = computed(() => {
-  if (route.path.includes('/dogs')) return 'dogs'
+  if (route.path.includes('/profile/kids') || route.path.includes('/dogs')) return 'dogs'
+  if (route.path.includes('/profile/security')) return 'security'
   if (route.path.includes('/account') && route.path !== '/account' && !route.path.includes('/account/profile')) return 'account'
   if (route.path.includes('/notifications')) return 'notifications'
   if (route.path.includes('/booking')) return 'booking'
@@ -82,7 +83,7 @@ const activeSection = computed(() => {
               {{ $t('account.sections.basicData') }}
             </NuxtLink>
             <NuxtLink
-              to="/account/dogs"
+              to="/account/profile/kids"
               class="block px-4 py-3 text-sm font-medium rounded-lg transition-colors"
               :class="activeSection === 'dogs'
                 ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
@@ -91,13 +92,13 @@ const activeSection = computed(() => {
               {{ $t('account.sections.yourDogs') }}
             </NuxtLink>
             <NuxtLink
-              to="/account/account"
+              to="/account/profile/security"
               class="block px-4 py-3 text-sm font-medium rounded-lg transition-colors"
-              :class="activeSection === 'account'
+              :class="activeSection === 'security'
                 ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'"
             >
-              {{ $t('account.sections.account') }}
+              {{ $t('account.sections.security') }}
             </NuxtLink>
             <NuxtLink
               to="/account/notifications"
