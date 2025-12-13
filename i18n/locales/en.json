@@ -137,6 +137,45 @@
     "resetPasswordSuccess": "Request sent",
     "resetPasswordEmailSent": "Password reset instructions have been sent to your email",
     "rememberPassword": "Remember your password?"
+  },
+  "account": {
+    "title": "Account",
+    "welcome": "Welcome, {name}!",
+    "email": "Email",
+    "phone": "Phone",
+    "editProfile": "Edit profile",
+    "messages": "Messages",
+    "orders": "Orders",
+    "profile": "Profile",
+    "sections": {
+      "basicData": "Basic Data",
+      "yourDogs": "Your Children",
+      "security": "Security",
+      "notificationSettings": "Notification Settings",
+      "bookingData": "Booking Data"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "emailNotifications": "Email Notifications",
+      "pushNotifications": "Push Notifications",
+      "smsNotifications": "SMS Notifications",
+      "otherSettings": "Other Settings",
+      "newMessages": "New Messages",
+      "newMessagesDesc": "Receive notifications about new messages",
+      "bookingUpdates": "Booking Updates",
+      "bookingUpdatesDesc": "Notifications about booking changes",
+      "newReviews": "New Reviews",
+      "newReviewsDesc": "Notifications about new reviews",
+      "reminders": "Reminders",
+      "remindersDesc": "Reminders about upcoming meetings",
+      "bookingConfirmations": "Booking Confirmations",
+      "bookingConfirmationsDesc": "SMS confirmations for bookings",
+      "importantUpdates": "Important Updates",
+      "importantUpdatesDesc": "Critical notifications via SMS",
+      "marketing": "Marketing Communications",
+      "marketingDesc": "Receive information about special offers and promotions",
+      "save": "Save"
+    }
   }
 }
 

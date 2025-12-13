@@ -139,6 +139,45 @@
     "resetPasswordSuccess": "Запыт адпраўлены",
     "resetPasswordEmailSent": "Інструкцыі па аднаўленні пароля адпраўлены на ваш email",
     "rememberPassword": "Успомнілі пароль?"
+  },
+  "account": {
+    "title": "Акаўнт",
+    "welcome": "Сардэчна запрашаем, {name}!",
+    "email": "Email",
+    "phone": "Тэлефон",
+    "editProfile": "Рэдагаваць профіль",
+    "messages": "Паведамленні",
+    "orders": "Заказы",
+    "profile": "Профіль",
+    "sections": {
+      "basicData": "Асноўныя даныя",
+      "yourDogs": "Вашыя дзеці",
+      "security": "Бяспека",
+      "notificationSettings": "Налады апавяшчэнняў",
+      "bookingData": "Даныя для браніравання"
+    },
+    "notifications": {
+      "title": "Налады апавяшчэнняў",
+      "emailNotifications": "Email апавяшчэнні",
+      "pushNotifications": "Push апавяшчэнні",
+      "smsNotifications": "SMS апавяшчэнні",
+      "otherSettings": "Іншыя налады",
+      "newMessages": "Новыя паведамленні",
+      "newMessagesDesc": "Атрымліваць апавяшчэнні пра новыя паведамленні",
+      "bookingUpdates": "Абнаўленні браніраванняў",
+      "bookingUpdatesDesc": "Апавяшчэнні пра змены ў браніраваннях",
+      "newReviews": "Новыя водгукі",
+      "newReviewsDesc": "Апавяшчэнні пра новыя водгукі",
+      "reminders": "Напамінкі",
+      "remindersDesc": "Напамінкі пра будучыя сустрэчы",
+      "bookingConfirmations": "Пацвярджэнні браніраванняў",
+      "bookingConfirmationsDesc": "SMS пацвярджэнні пра браніраванні",
+      "importantUpdates": "Важныя абнаўленні",
+      "importantUpdatesDesc": "Крытычна важныя апавяшчэнні па SMS",
+      "marketing": "Маркетынгавыя рассылкі",
+      "marketingDesc": "Атрымліваць інфармацыю пра спецыяльныя прапановы і акцыі",
+      "save": "Захаваць"
+    }
   }
 }
 

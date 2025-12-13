@@ -202,6 +202,28 @@
       "newPasswordPlaceholder": "Введите новый пароль",
       "savePassword": "Сохранить пароль"
     },
+    "notifications": {
+      "title": "Настройки оповещений",
+      "emailNotifications": "Email уведомления",
+      "pushNotifications": "Push уведомления",
+      "smsNotifications": "SMS уведомления",
+      "otherSettings": "Другие настройки",
+      "newMessages": "Новые сообщения",
+      "newMessagesDesc": "Получать уведомления о новых сообщениях",
+      "bookingUpdates": "Обновления бронирований",
+      "bookingUpdatesDesc": "Уведомления об изменениях в бронированиях",
+      "newReviews": "Новые отзывы",
+      "newReviewsDesc": "Уведомления о новых отзывах",
+      "reminders": "Напоминания",
+      "remindersDesc": "Напоминания о предстоящих встречах",
+      "bookingConfirmations": "Подтверждения бронирований",
+      "bookingConfirmationsDesc": "SMS подтверждения о бронированиях",
+      "importantUpdates": "Важные обновления",
+      "importantUpdatesDesc": "Критически важные уведомления по SMS",
+      "marketing": "Маркетинговые рассылки",
+      "marketingDesc": "Получать информацию о специальных предложениях и акциях",
+      "save": "Сохранить"
+    },
     "role": {
       "nanny": "Бебиситтер",
       "parent": "Родитель"
