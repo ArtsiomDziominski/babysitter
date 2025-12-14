@@ -147,7 +147,28 @@
     "phone": "Телефон",
     "editProfile": "Редактировать профиль",
     "messages": "Сообщения",
-    "orders": "Заказы",
+    "orders": {
+      "title": "Заказы",
+      "empty": "У вас пока нет заказов",
+      "date": "Дата",
+      "time": "Время",
+      "children": "Дети",
+      "status": {
+        "pending": "Ожидает подтверждения",
+        "confirmed": "Подтвержден",
+        "in_progress": "В процессе",
+        "completed": "Завершен",
+        "cancelled": "Отменен",
+        "rejected": "Отклонен"
+      },
+      "actions": {
+        "cancel": "Отменить",
+        "contact": "Связаться",
+        "review": "Оставить отзыв",
+        "repeat": "Повторить заказ",
+        "findAnother": "Найти другого"
+      }
+    },
     "profile": "Профиль",
     "sections": {
       "basicData": "Основные данные",

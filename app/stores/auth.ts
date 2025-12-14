@@ -42,6 +42,10 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = newUser
     }
 
+    function setRole(role: 'nanny' | 'parent') {
+        user.value.role = role
+    }
+
     function logout() {
         isAuth.value = false
         user.value = {
@@ -63,6 +67,7 @@ export const useAuthStore = defineStore('auth', () => {
         currentUser,
         setAuth,
         setUser,
+        setRole,
         logout
     }
 })

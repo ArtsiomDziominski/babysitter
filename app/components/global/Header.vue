@@ -18,6 +18,28 @@
 
         <div class="header__controls">
           <ClientOnly>
+            <template v-if="authStore.isAuthenticated">
+              <div class="header__role-switcher">
+                <UButtonGroup>
+                  <UButton
+                    :variant="authStore.currentUser?.role === 'parent' ? 'solid' : 'outline'"
+                    :color="authStore.currentUser?.role === 'parent' ? 'primary' : 'gray'"
+                    size="sm"
+                    @click="authStore.setRole('parent')"
+                  >
+                    {{ $t('account.role.parent') }}
+                  </UButton>
+                  <UButton
+                    :variant="authStore.currentUser?.role === 'nanny' ? 'solid' : 'outline'"
+                    :color="authStore.currentUser?.role === 'nanny' ? 'primary' : 'gray'"
+                    size="sm"
+                    @click="authStore.setRole('nanny')"
+                  >
+                    {{ $t('account.role.nanny') }}
+                  </UButton>
+                </UButtonGroup>
+              </div>
+            </template>
             <template v-if="cityOptions.length > 0 && localeOptions.length > 0">
               <div class="header__selects">
                 <USelect

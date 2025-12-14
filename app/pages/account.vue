@@ -45,7 +45,7 @@ const activeSection = computed(() => {
               ? 'text-primary-500 border-b-2 border-primary-500' 
               : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
           >
-            {{ $t('account.orders') }}
+            {{ $t('account.orders.title') }}
           </NuxtLink>
           <NuxtLink
             to="/account/profile"

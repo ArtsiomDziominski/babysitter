@@ -147,7 +147,28 @@
     "phone": "Тэлефон",
     "editProfile": "Рэдагаваць профіль",
     "messages": "Паведамленні",
-    "orders": "Заказы",
+    "orders": {
+      "title": "Заказы",
+      "empty": "У вас пакуль няма заказаў",
+      "date": "Дата",
+      "time": "Час",
+      "children": "Дзеці",
+      "status": {
+        "pending": "Чакае пацвярджэння",
+        "confirmed": "Пацверджаны",
+        "in_progress": "У працэсе",
+        "completed": "Завершаны",
+        "cancelled": "Адменены",
+        "rejected": "Адхілены"
+      },
+      "actions": {
+        "cancel": "Адмяніць",
+        "contact": "Звязацца",
+        "review": "Пакінуць водгук",
+        "repeat": "Паўтарыць заказ",
+        "findAnother": "Знайсці іншага"
+      }
+    },
     "profile": "Профіль",
     "sections": {
       "basicData": "Асноўныя даныя",

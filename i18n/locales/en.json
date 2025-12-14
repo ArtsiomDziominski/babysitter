@@ -145,7 +145,28 @@
     "phone": "Phone",
     "editProfile": "Edit profile",
     "messages": "Messages",
-    "orders": "Orders",
+    "orders": {
+      "title": "Orders",
+      "empty": "You have no orders yet",
+      "date": "Date",
+      "time": "Time",
+      "children": "Children",
+      "status": {
+        "pending": "Pending confirmation",
+        "confirmed": "Confirmed",
+        "in_progress": "In progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "rejected": "Rejected"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "contact": "Contact",
+        "review": "Leave review",
+        "repeat": "Repeat order",
+        "findAnother": "Find another"
+      }
+    },
     "profile": "Profile",
     "sections": {
       "basicData": "Basic Data",
