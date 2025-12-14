@@ -1,31 +1,26 @@
 <template>
-  <div class="flex gap-6">
-    <ProfileSidebar />
+  <div class="flex-1">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+        {{ $t('account.booking.title') }}
+      </h1>
 
-    <!-- Основной контент -->
-    <div class="flex-1">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-          {{ $t('account.booking.title') }}
-        </h1>
+      <form @submit.prevent="handleSave" class="space-y-8">
+        <ContractTemplatesSection/>
+        <PersonalDataSection v-model="formData.personalData"/>
+        <TrustedPersonSection v-model="formData.trustedPerson"/>
 
-    <form @submit.prevent="handleSave" class="space-y-8">
-      <ContractTemplatesSection />
-      <PersonalDataSection v-model="formData.personalData" />
-      <TrustedPersonSection v-model="formData.trustedPerson" />
-
-      <div class="flex justify-center pt-6">
-        <UButton
-          type="submit"
-          color="primary"
-          size="lg"
-          :loading="isSaving"
-        >
-          {{ $t('account.booking.save') }}
-        </UButton>
-      </div>
-    </form>
-      </div>
+        <div class="flex justify-center pt-6">
+          <UButton
+              type="submit"
+              color="primary"
+              size="lg"
+              :loading="isSaving"
+          >
+            {{ $t('account.booking.save') }}
+          </UButton>
+        </div>
+      </form>
     </div>
   </div>
 </template>
