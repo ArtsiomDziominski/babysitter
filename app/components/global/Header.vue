@@ -8,7 +8,7 @@
         </NuxtLink>
 
         <nav v-if="authStore.isAuthenticated" class="header__nav">
-          <NuxtLink to="/account/bookings" class="header__nav-link">
+          <NuxtLink to="/search" class="header__nav-link">
             {{ $t('header.bookings') }}
           </NuxtLink>
           <NuxtLink to="/account/messages" class="header__nav-link">

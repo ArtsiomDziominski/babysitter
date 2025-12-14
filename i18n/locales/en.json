@@ -4,7 +4,15 @@
     "logout": "Logout",
     "profile": "Profile",
     "bookings": "Bookings",
-    "messages": "Messages"
+    "messages": "Messages",
+    "menu": {
+      "account": "Account",
+      "bookings": "Bookings",
+      "messages": "Messages",
+      "favorites": "Favorites",
+      "schedule": "Schedule",
+      "settings": "Settings"
+    }
   },
   "cities": {
     "minsk": "Minsk",
@@ -13,6 +21,11 @@
     "grodno": "Grodno",
     "brest": "Brest",
     "mogilev": "Mogilev"
+  },
+  "languages": {
+    "ru": "Русский",
+    "en": "English",
+    "be": "Беларуская"
   },
   "home": {
     "hero": {
@@ -229,6 +242,83 @@
         "phone": "Phone number",
         "phonePlaceholder": "+7_______"
       }
+    }
+  },
+  "bookings": {
+    "title": "Find babysitter",
+    "search": {
+      "city": "City, address",
+      "date": "Order date",
+      "timeStart": "Start",
+      "timeEnd": "End",
+      "submit": "Find"
+    },
+    "filters": {
+      "title": "Filters",
+      "onlyAvailable": "Show only available sitters",
+      "onlyOnline": "Only online sitters",
+      "priceRange": "Price per hour",
+      "priceFrom": "From",
+      "priceTo": "To",
+      "childrenCount": "Number of children",
+      "advantages": {
+        "title": "Sitter advantages",
+        "main": {
+          "title": "Main",
+          "kidsoutSchool": "Kidsout School",
+          "infants": "Sits with infants",
+          "specialNeeds": "Sits with special needs children"
+        },
+        "additional": {
+          "title": "Additional",
+          "homework": "Homework help",
+          "french": "French language",
+          "music": "Music education",
+          "active": "Active sitter",
+          "permanent": "Looking for permanent family",
+          "pedagogical": "Pedagogical education",
+          "weather": "Walks in any weather",
+          "housework": "Housework help",
+          "english": "English language",
+          "driver": "Driver's license",
+          "night": "Night orders",
+          "relocation": "Willing to relocate",
+          "medical": "Medical education",
+          "firstAid": "First aid courses",
+          "sculpting": "Sculpting",
+          "sick": "Will care for sick child",
+          "painting": "Painting",
+          "psychology": "Psychology education",
+          "singing": "Singing",
+          "schoolPrep": "School preparation",
+          "speechTherapist": "Speech therapist",
+          "autism": "Works with children with ASD"
+        }
+      }
+    },
+    "sort": {
+      "title": "Sort",
+      "recommended": "Kidsout Recommendations",
+      "priceAsc": "Price: ascending",
+      "priceDesc": "Price: descending",
+      "rating": "By rating",
+      "newest": "Newest"
+    },
+    "view": {
+      "list": "List",
+      "map": "On map"
+    },
+    "found": "Found",
+    "empty": "No sitters found. Try changing search parameters.",
+    "mapPlaceholder": "Map will be here",
+    "sitter": {
+      "new": "New babysitter",
+      "orders": "Orders",
+      "hours": "Hours with children",
+      "returned": "Returned",
+      "returnedPlural": "Returned",
+      "book": "Book",
+      "perHour": "/hour"
     }
   }
 }
