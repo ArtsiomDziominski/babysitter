@@ -149,7 +149,14 @@
     "resetPasswordDescription": "Enter your email and we'll send you instructions to reset your password",
     "resetPasswordSuccess": "Request sent",
     "resetPasswordEmailSent": "Password reset instructions have been sent to your email",
-    "rememberPassword": "Remember your password?"
+    "rememberPassword": "Remember your password?",
+    "phone": "Phone",
+    "phonePlaceholder": "+1234567890",
+    "phoneMinLength": "Phone must be at least 10 characters",
+    "role": "Role",
+    "orContinueWith": "Or continue with",
+    "loginError": "Login error",
+    "registerError": "Registration error"
   },
   "account": {
     "title": "Account",

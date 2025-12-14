@@ -151,7 +151,14 @@
     "resetPasswordDescription": "Введите ваш email, и мы отправим вам инструкции по восстановлению пароля",
     "resetPasswordSuccess": "Запрос отправлен",
     "resetPasswordEmailSent": "Инструкции по восстановлению пароля отправлены на ваш email",
-    "rememberPassword": "Вспомнили пароль?"
+    "rememberPassword": "Вспомнили пароль?",
+    "phone": "Телефон",
+    "phonePlaceholder": "+79001234567",
+    "phoneMinLength": "Телефон должен быть не менее 10 символов",
+    "role": "Роль",
+    "orContinueWith": "Или продолжить с",
+    "loginError": "Ошибка при входе",
+    "registerError": "Ошибка при регистрации"
   },
   "account": {
     "title": "Аккаунт",

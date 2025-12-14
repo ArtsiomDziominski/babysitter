@@ -4,6 +4,13 @@ import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 const { t } = useI18n()
 const toast = useToast()
+const authStore = useAuthStore()
+const router = useRouter()
+
+const roleOptions = [
+  { label: t('account.role.parent'), value: 'parent' },
+  { label: t('account.role.nanny'), value: 'nanny' }
+]
 
 const fields: AuthFormField[] = [
   {
@@ -25,6 +32,13 @@ const fields: AuthFormField[] = [
     type: 'email',
     label: t('auth.email'),
     placeholder: t('auth.emailPlaceholder'),
+    required: true
+  },
+  {
+    name: 'phone',
+    type: 'text',
+    label: t('auth.phone'),
+    placeholder: t('auth.phonePlaceholder'),
     required: true
   },
   {
@@ -77,6 +91,7 @@ const schema = z.object({
   name: z.string().min(2, t('auth.nameMinLength')),
   surname: z.string().min(2, t('auth.surnameMinLength')),
   email: z.string().email(t('auth.invalidEmail')),
+  phone: z.string().min(10, t('auth.phoneMinLength')),
   password: z.string().min(8, t('auth.passwordMinLength')),
   confirmPassword: z.string(),
   agree: z.boolean().refine(val => val === true, t('auth.mustAgree'))
@@ -87,15 +102,45 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Register submitted', payload)
-  toast.add({ title: t('auth.registerSuccess'), color: 'success' })
+const isLoading = ref(false)
+const role = ref<'parent' | 'nanny'>('parent')
+
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+  isLoading.value = true
+  try {
+    await authStore.register({
+      firstName: payload.data.name,
+      lastName: payload.data.surname,
+      email: payload.data.email,
+      phone: payload.data.phone,
+      password: payload.data.password,
+      role: role.value || 'parent'
+    })
+    toast.add({ 
+      title: t('auth.registerSuccess'), 
+      color: 'success' 
+    })
+    await router.push('/account/profile')
+  } catch (error: any) {
+    const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.registerError')
+    toast.add({ 
+      title: errorMessage, 
+      color: 'error' 
+    })
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-8">
     <UPageCard class="w-full max-w-md">
+      <div class="mb-4">
+        <UFormGroup :label="t('auth.role')">
+          <URadioGroup v-model="role" :options="roleOptions" />
+        </UFormGroup>
+      </div>
       <UAuthForm
         :schema="schema"
         :title="t('auth.register')"
@@ -103,6 +148,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user-plus"
         :fields="fields"
         :providers="providers"
+        :loading="isLoading"
         @submit="onSubmit"
       >
         <template #footer>

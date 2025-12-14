@@ -27,5 +27,10 @@ export default defineNuxtConfig({
             // @ts-ignore optimizeTranslationDirective support depends on module version
             optimizeTranslationDirective: false
         }
+    },
+    runtimeConfig: {
+        public: {
+            apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3003'
+        }
     }
 })

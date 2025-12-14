@@ -4,6 +4,8 @@ import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 const { t } = useI18n()
 const toast = useToast()
+const authStore = useAuthStore()
+const router = useRouter()
 
 const fields: AuthFormField[] = [
   {
@@ -58,9 +60,26 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Login submitted', payload)
-  toast.add({ title: t('auth.loginSuccess'), color: 'success' })
+const isLoading = ref(false)
+
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+  isLoading.value = true
+  try {
+    await authStore.login(payload.data.email, payload.data.password)
+    toast.add({ 
+      title: t('auth.loginSuccess'), 
+      color: 'success' 
+    })
+    await router.push('/account/profile')
+  } catch (error: any) {
+    const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.loginError')
+    toast.add({ 
+      title: errorMessage, 
+      color: 'error' 
+    })
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -74,6 +93,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user"
         :fields="fields"
         :providers="providers"
+        :loading="isLoading"
         @submit="onSubmit"
       >
         <template #footer>
