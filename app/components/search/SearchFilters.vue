@@ -1,5 +1,5 @@
 <template>
-  <div class="w-80 border-r border-gray-200 dark:border-gray-700 p-6 overflow-y-auto max-h-[calc(100vh-20rem)]">
+  <div class="w-80 border-r border-gray-200 dark:border-gray-700 p-6 overflow-y-auto">
     <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
       {{ $t('bookings.filters.title') }}
     </h2>

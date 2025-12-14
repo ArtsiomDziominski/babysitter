@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <SearchSitterCard
+    <SitterCard
       v-for="sitter in sitters"
       :key="sitter.id"
       :sitter="sitter"
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
+import SitterCard from './SitterCard.vue'
 
 defineProps<{
   sitters: Sitter[]
