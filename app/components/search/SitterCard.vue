@@ -3,12 +3,11 @@
     class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow"
   >
     <div class="flex gap-6">
-      <div class="flex-shrink-0">
-        <UAvatar
+      <div class="flex-shrink-0 flex flex-col">
+        <img
           :src="sitter.avatar"
           :alt="sitter.name"
-          size="xl"
-          class="border-2 border-gray-200 dark:border-gray-700"
+          class="w-[140px] h-[140px] object-cover rounded-xl border-2 border-gray-200 dark:border-gray-700"
         />
         <div
           v-if="sitter.isNew"
