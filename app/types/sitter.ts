@@ -10,8 +10,35 @@ export interface Sitter {
   tags: string[]
   isNew?: boolean
   isOnline?: boolean
+  lastSeenOnline?: string
   isAvailable?: boolean
   advantages: string[]
+  age?: number
+  registeredAt?: string
+  detailedDescription?: string
+  education?: string
+  experience?: string
+  preferences?: string
+  responseTime?: string
+  returningClients?: number
+  reviews?: Review[]
+  paymentMethods?: string[]
+  schedule?: ScheduleSlot[]
+  workConditions?: string
+  safetyInfo?: string
+}
+
+export interface Review {
+  id: string
+  author: string
+  rating: number
+  text: string
+  date: string
+}
+
+export interface ScheduleSlot {
+  day: string
+  timeSlots: string[]
 }
 
 export interface SearchForm {

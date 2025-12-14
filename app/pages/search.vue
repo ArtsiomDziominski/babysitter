@@ -152,7 +152,9 @@ const handleSearch = () => {
   console.log('Search:', searchForm.value)
 }
 
+const router = useRouter()
+
 const handleBook = (sitterId: string) => {
-  console.log('Book sitter:', sitterId)
+  router.push(`/sitter/${sitterId}`)
 }
 </script>
