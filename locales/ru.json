@@ -82,6 +82,10 @@
       "quickActions": "Быстрые действия",
       "editProfile": "Редактировать профиль",
       "manageSchedule": "Управление расписанием"
+    },
+    "messages": {
+      "aiAssistant": "AI Помощник",
+      "admin": "Администратор"
     }
   }
 }

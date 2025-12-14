@@ -1,5 +1,10 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+  <div class="flex gap-6">
+    <ProfileSidebar />
+
+    <!-- Основной контент -->
+    <div class="flex-1">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
     <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
       {{ $t('account.security.title') }}
     </h1>
@@ -10,7 +15,7 @@
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
           {{ $t('account.security.changeEmail') }}
         </h2>
-        
+
         <form @submit.prevent="handleEmailChange" class="space-y-4 max-w-md">
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -86,7 +91,7 @@
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
           {{ $t('account.security.changePassword') }}
         </h2>
-        
+
         <form @submit.prevent="handlePasswordChange" class="space-y-4 max-w-md">
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -133,6 +138,8 @@
             {{ $t('account.security.savePassword') }}
           </UButton>
         </form>
+      </div>
+    </div>
       </div>
     </div>
   </div>

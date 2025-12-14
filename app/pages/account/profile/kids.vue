@@ -1,5 +1,10 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+  <div class="flex gap-6">
+    <ProfileSidebar />
+
+    <!-- Основной контент -->
+    <div class="flex-1">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
     <div class="flex items-center justify-between mb-8">
       <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
         {{ $t('account.children.title') }}
@@ -104,6 +109,8 @@
       >
         {{ $t('account.basicData.save') }}
       </UButton>
+    </div>
+      </div>
     </div>
   </div>
 </template>

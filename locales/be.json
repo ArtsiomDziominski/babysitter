@@ -82,6 +82,10 @@
       "quickActions": "Хуткія дзеянні",
       "editProfile": "Рэдагаваць профіль",
       "manageSchedule": "Кіраванне раскладам"
+    },
+    "messages": {
+      "aiAssistant": "AI Дапаможнік",
+      "admin": "Адміністратар"
     }
   }
 }

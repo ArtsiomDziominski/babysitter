@@ -1,8 +1,13 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-      {{ $t('account.booking.title') }}
-    </h1>
+  <div class="flex gap-6">
+    <ProfileSidebar />
+
+    <!-- Основной контент -->
+    <div class="flex-1">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+          {{ $t('account.booking.title') }}
+        </h1>
 
     <form @submit.prevent="handleSave" class="space-y-8">
       <ContractTemplatesSection />
@@ -20,13 +25,15 @@
         </UButton>
       </div>
     </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ContractTemplatesSection from '@/components/page/account/booking/ContractTemplatesSection.vue'
-import PersonalDataSection from '@/components/page/account/booking/PersonalDataSection.vue'
-import TrustedPersonSection from '@/components/page/account/booking/TrustedPersonSection.vue'
+import ContractTemplatesSection from '~/components/page/account/booking/ContractTemplatesSection.vue'
+import PersonalDataSection from '~/components/page/account/booking/PersonalDataSection.vue'
+import TrustedPersonSection from '~/components/page/account/booking/TrustedPersonSection.vue'
 
 const authStore = useAuthStore()
 

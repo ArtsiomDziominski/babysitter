@@ -1,8 +1,13 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
-      {{ $t('account.basicData.title') }}
-    </h1>
+  <div class="flex gap-6">
+    <ProfileSidebar />
+
+    <!-- Основной контент -->
+    <div class="flex-1">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+          {{ $t('account.basicData.title') }}
+        </h1>
 
     <form @submit.prevent="handleSave" class="space-y-6">
       <div class="flex gap-8">
@@ -96,6 +101,8 @@
         </UButton>
       </div>
     </form>
+      </div>
+    </div>
   </div>
 </template>
 

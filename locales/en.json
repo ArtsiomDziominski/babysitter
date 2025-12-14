@@ -82,6 +82,10 @@
       "quickActions": "Quick Actions",
       "editProfile": "Edit Profile",
       "manageSchedule": "Manage Schedule"
+    },
+    "messages": {
+      "aiAssistant": "AI Assistant",
+      "admin": "Administrator"
     }
   }
 }
