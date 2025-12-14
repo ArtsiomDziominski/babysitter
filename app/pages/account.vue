@@ -14,11 +14,11 @@ const activeTab = computed(() => {
 })
 
 const activeSection = computed(() => {
-  if (route.path.includes('/profile/kids') || route.path.includes('/dogs')) return 'dogs'
+  if (route.path.includes('/profile/kids')) return 'kids'
   if (route.path.includes('/profile/security')) return 'security'
-  if (route.path.includes('/account') && route.path !== '/account' && !route.path.includes('/account/profile')) return 'account'
   if (route.path.includes('/notifications')) return 'notifications'
   if (route.path.includes('/booking')) return 'booking'
+  if (route.path.includes('/account') && route.path !== '/account' && !route.path.includes('/account/profile')) return 'account'
   return 'basicData'
 })
 </script>
@@ -85,11 +85,11 @@ const activeSection = computed(() => {
             <NuxtLink
               to="/account/profile/kids"
               class="block px-4 py-3 text-sm font-medium rounded-lg transition-colors"
-              :class="activeSection === 'dogs'
+              :class="activeSection === 'kids'
                 ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
                 : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'"
             >
-              {{ $t('account.sections.yourDogs') }}
+              {{ $t('account.sections.kids') }}
             </NuxtLink>
             <NuxtLink
               to="/account/profile/security"

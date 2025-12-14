@@ -149,7 +149,7 @@
     "profile": "Profile",
     "sections": {
       "basicData": "Basic Data",
-      "yourDogs": "Your Children",
+      "kids": "Your Children",
       "security": "Security",
       "notificationSettings": "Notification Settings",
       "bookingData": "Booking Data"
@@ -175,6 +175,39 @@
       "marketing": "Marketing Communications",
       "marketingDesc": "Receive information about special offers and promotions",
       "save": "Save"
+    },
+    "booking": {
+      "title": "Booking Data",
+      "save": "Save",
+      "contractData": {
+        "title": "Data for forming a contract for your orders",
+        "description": "Upon confirmation of booking by the babysitter, an online contract will be formed.",
+        "templateBoarding": "Contract template for child boarding.",
+        "templateDaycare": "Contract template for daycare.",
+        "templateDayNanny": "Contract template for day nanny service."
+      },
+      "personalData": {
+        "title": "Your personal data",
+        "description": "To process the booking and form a service contract, you need to fill in your personal data.",
+        "lastName": "Last name",
+        "lastNamePlaceholder": "Ivanov",
+        "firstName": "First name",
+        "firstNamePlaceholder": "Sergey",
+        "middleName": "Middle name",
+        "middleNamePlaceholder": "Petrovich"
+      },
+      "trustedPerson": {
+        "title": "Your trusted person",
+        "description": "Indicate a trusted person for the time of your absence (mandatory for boarding orders). This contact will be used only in case of an emergency if you are unavailable.",
+        "lastName": "Last name",
+        "lastNamePlaceholder": "Ivanov",
+        "firstName": "First name",
+        "firstNamePlaceholder": "Sergey",
+        "middleName": "Middle name",
+        "middleNamePlaceholder": "Petrovich",
+        "phone": "Phone number",
+        "phonePlaceholder": "+7_______"
+      }
     }
   }
 }

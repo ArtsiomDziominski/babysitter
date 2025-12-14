@@ -151,7 +151,7 @@
     "profile": "Профиль",
     "sections": {
       "basicData": "Основные данные",
-      "yourDogs": "Ваши дети",
+      "kids": "Ваши дети",
       "security": "Безопасность",
       "notificationSettings": "Настройки оповещений",
       "bookingData": "Данные для бронирования"
@@ -247,6 +247,39 @@
       "quickActions": "Быстрые действия",
       "editProfile": "Редактировать профиль",
       "manageSchedule": "Управление расписанием"
+    },
+    "booking": {
+      "title": "Данные для бронирования",
+      "save": "Сохранить",
+      "contractData": {
+        "title": "Данные для формирования договора по вашим заказам",
+        "description": "При подтверждении бронирования бебиситтером будет сформирован онлайн договор.",
+        "templateBoarding": "Шаблон договора на передержку ребенка.",
+        "templateDaycare": "Шаблон договора на дневной уход.",
+        "templateDayNanny": "Шаблон договора на услугу дневной няни."
+      },
+      "personalData": {
+        "title": "Ваши личные данные",
+        "description": "Для оформления бронирования и формирования договора по услуге, необходимо заполнить личные данные.",
+        "lastName": "Фамилия",
+        "lastNamePlaceholder": "Иванов",
+        "firstName": "Имя",
+        "firstNamePlaceholder": "Сергей",
+        "middleName": "Отчество",
+        "middleNamePlaceholder": "Петрович"
+      },
+      "trustedPerson": {
+        "title": "Ваше доверенное лицо",
+        "description": "Укажите доверенное лицо на время вашего отсутствия. Этот контакт будет использоваться только в случае экстренной ситуации, если вы недоступны.",
+        "lastName": "Фамилия",
+        "lastNamePlaceholder": "Иванов",
+        "firstName": "Имя",
+        "firstNamePlaceholder": "Сергей",
+        "middleName": "Отчество",
+        "middleNamePlaceholder": "Петрович",
+        "phone": "Номер телефона",
+        "phonePlaceholder": "+7_______"
+      }
     }
   }
 }
