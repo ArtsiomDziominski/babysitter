@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import type { ApiUser } from '~/composables/useApi'
 
 export interface User {
     id: number
@@ -16,15 +17,6 @@ export interface User {
         gender: string
         notes: string
     }>
-}
-
-interface ApiUser {
-    id: number
-    email: string
-    role: 'parent' | 'babysitter'
-    firstName: string
-    lastName: string
-    phone?: string
 }
 
 function mapApiRoleToFrontend(apiRole: 'parent' | 'babysitter'): 'nanny' | 'parent' {
@@ -47,7 +39,14 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
 }
 
 export const useAuthStore = defineStore('auth', () => {
-    const accessToken = ref<string | null>(null)
+    const tokenCookie = useCookie<string | null>('access_token', {
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: false
+    })
+
+    const accessToken = ref<string | null>(tokenCookie.value)
     const isAuth = ref(false)
     const user = ref<User>({
         id: 0,
@@ -58,25 +57,12 @@ export const useAuthStore = defineStore('auth', () => {
         role: 'parent',
     })
 
-    if (process.client) {
-        const savedToken = localStorage.getItem('access_token')
-        if (savedToken) {
-            accessToken.value = savedToken
-        }
-    }
-
     const isAuthenticated = computed(() => isAuth.value && !!accessToken.value)
     const currentUser = computed(() => user.value)
 
     function setToken(token: string | null) {
         accessToken.value = token
-        if (process.client) {
-            if (token) {
-                localStorage.setItem('access_token', token)
-            } else {
-                localStorage.removeItem('access_token')
-            }
-        }
+        tokenCookie.value = token
     }
 
     function setAuth(value: boolean) {
@@ -89,6 +75,33 @@ export const useAuthStore = defineStore('auth', () => {
 
     function setRole(role: 'nanny' | 'parent') {
         user.value.role = role
+    }
+
+    async function fetchProfile() {
+        const api = useApi()
+        try {
+            const response = await api.getProfile()
+            const mappedUser = mapApiUserToFrontend(response.data as ApiUser)
+            setUser(mappedUser)
+            setAuth(true)
+            return mappedUser
+        } catch (error) {
+            setToken(null)
+            setAuth(false)
+            throw error
+        }
+    }
+
+    async function restoreAuth() {
+        if (!accessToken.value) {
+            return false
+        }
+        try {
+            await fetchProfile()
+            return true
+        } catch (error) {
+            return false
+        }
     }
 
     async function login(email: string, password: string) {
@@ -158,6 +171,8 @@ export const useAuthStore = defineStore('auth', () => {
         setUser,
         setRole,
         setToken,
+        fetchProfile,
+        restoreAuth,
         login,
         register,
         logout

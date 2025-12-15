@@ -38,15 +38,31 @@ interface ApiAuthResponse {
   statusCode: number
 }
 
+export interface ApiUser {
+  id: number
+  email: string
+  password?: string
+  role: 'parent' | 'babysitter'
+  firstName: string
+  lastName: string
+  phone?: string
+  twoFactorSecret?: string | null
+  twoFactorEnabled?: boolean
+  backupCodes?: string | null
+  isActive?: boolean
+  createdAt?: string
+  updatedAt?: string
+  babysitter?: any | null
+  children?: any[]
+}
+
 export const useApi = () => {
   const config = useRuntimeConfig()
   const apiBaseUrl = config.public.apiBaseUrl
 
   const getAuthToken = (): string | null => {
-    if (process.client) {
-      return localStorage.getItem('access_token')
-    }
-    return null
+    const tokenCookie = useCookie<string | null>('access_token')
+    return tokenCookie.value
   }
 
   const request = async <T>(
@@ -54,9 +70,9 @@ export const useApi = () => {
     options: RequestInit = {}
   ): Promise<T> => {
     const token = getAuthToken()
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(options.headers as Record<string, string>),
     }
 
     if (token) {
@@ -71,13 +87,12 @@ export const useApi = () => {
     const data = await response.json()
 
     if (!response.ok) {
-      const error: ApiError = {
-        statusCode: response.status,
-        message: data.message || 'Произошла ошибка',
-        error: data.error,
-        details: data.details,
+        throw {
+          statusCode: response.status,
+          message: data.message || 'Произошла ошибка',
+          error: data.error,
+          details: data.details,
       }
-      throw error
     }
 
     return data as T
@@ -99,10 +114,16 @@ export const useApi = () => {
     return response.data
   }
 
+  const getProfile = async (): Promise<{ data: ApiUser }> => {
+      return await request<{ data: ApiUser }>('/users/profile', {
+        method: 'GET',
+    })
+  }
+
   return {
-    request,
     login,
     register,
+    getProfile,
     getAuthToken,
   }
 }
