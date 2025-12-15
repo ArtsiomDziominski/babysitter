@@ -45,18 +45,18 @@
               />
             </div>
 
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                {{ $t('account.basicData.city') }}
-              </label>
-              <USelect
-                  v-model="formData.city"
-                  :items="cityOptions"
-                  labelKey="label"
-                  valueKey="value"
-                  size="lg"
-              />
-            </div>
+<!--            <div>-->
+<!--              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">-->
+<!--                {{ $t('account.basicData.city') }}-->
+<!--              </label>-->
+<!--              <USelect-->
+<!--                  v-model="formData.city"-->
+<!--                  :items="cityOptions"-->
+<!--                  labelKey="label"-->
+<!--                  valueKey="value"-->
+<!--                  size="lg"-->
+<!--              />-->
+<!--            </div>-->
           </div>
 
           <!-- Правая колонка с фото -->
