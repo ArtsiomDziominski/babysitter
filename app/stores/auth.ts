@@ -10,7 +10,7 @@ export interface User {
     phone: string
     city?: string
     avatar?: string
-    role: 'nanny' | 'parent'
+    role: 'nanny' | 'parent' | null
     children?: Array<{
         name: string
         age: string
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth', () => {
         surname: '',
         email: '',
         phone: '',
-        role: 'parent',
+        role: null,
     })
 
     const isAuthenticated = computed(() => isAuth.value && !!accessToken.value)
