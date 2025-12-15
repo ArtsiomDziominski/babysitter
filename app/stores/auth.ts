@@ -82,7 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
         try {
             const response = await api.getProfile()
             console.log(response)
-            const mappedUser = mapApiUserToFrontend(response.data as ApiUser)
+            const mappedUser = mapApiUserToFrontend(response as ApiUser)
             setUser(mappedUser)
             setAuth(true)
             return mappedUser
@@ -109,6 +109,7 @@ export const useAuthStore = defineStore('auth', () => {
         const api = useApi()
         try {
             const response = await api.login({ email, password })
+            console.log(response)
             setToken(response.access_token)
             const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
             setUser(mappedUser)

@@ -33,11 +33,6 @@ interface AuthResponseData {
   }
 }
 
-interface ApiAuthResponse {
-  data: AuthResponseData
-  statusCode: number
-}
-
 export interface ApiUser {
   id: number
   email: string
@@ -95,27 +90,25 @@ export const useApi = () => {
       }
     }
 
-    return data as T
+    return data?.data || data as T
   }
 
   const login = async (credentials: LoginRequest): Promise<AuthResponseData> => {
-    const response = await request<ApiAuthResponse>('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
+      return await request<AuthResponseData>('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(credentials),
     })
-    return response.data
   }
 
   const register = async (data: RegisterRequest): Promise<AuthResponseData> => {
-    const response = await request<ApiAuthResponse>('/auth/register', {
-      method: 'POST',
-      body: JSON.stringify(data),
+      return await request<AuthResponseData>('/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(data),
     })
-    return response.data
   }
 
-  const getProfile = async (): Promise<{ data: ApiUser }> => {
-      return await request<{ data: ApiUser }>('/users/profile', {
+  const getProfile = async (): Promise<ApiUser> => {
+      return await request<ApiUser>('/users/profile', {
         method: 'GET',
     })
   }
