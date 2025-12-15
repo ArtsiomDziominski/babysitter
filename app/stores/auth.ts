@@ -81,6 +81,7 @@ export const useAuthStore = defineStore('auth', () => {
         const api = useApi()
         try {
             const response = await api.getProfile()
+            console.log(response)
             const mappedUser = mapApiUserToFrontend(response.data as ApiUser)
             setUser(mappedUser)
             setAuth(true)
