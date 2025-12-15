@@ -143,15 +143,15 @@ const handleFileSelect = (event: Event) => {
 const handleSave = async () => {
   isSaving.value = true
   try {
-    authStore.setUser({
-      ...authStore.currentUser!,
-      name: formData.value.name,
-      surname: formData.value.surname,
+    const api = useApi()
+    await api.updateProfile({
+      firstName: formData.value.name,
+      lastName: formData.value.surname,
       phone: formData.value.phone,
-      city: formData.value.city,
-      avatar: avatarPreview.value || authStore.currentUser?.avatar
     })
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await authStore.fetchProfile()
+  } catch (error) {
+    console.error('Ошибка при обновлении профиля:', error)
   } finally {
     isSaving.value = false
   }

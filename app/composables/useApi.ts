@@ -22,6 +22,12 @@ interface RegisterRequest {
   phone: string
 }
 
+interface UpdateProfileRequest {
+  firstName: string
+  lastName: string
+  phone: string
+}
+
 interface AuthResponseData {
   access_token: string
   user: {
@@ -31,6 +37,11 @@ interface AuthResponseData {
     firstName: string
     lastName: string
   }
+}
+
+interface ApiAuthResponse {
+  data: AuthResponseData
+  statusCode: number
 }
 
 export interface ApiUser {
@@ -82,34 +93,44 @@ export const useApi = () => {
     const data = await response.json()
 
     if (!response.ok) {
-        throw {
-          statusCode: response.status,
-          message: data.message || 'Произошла ошибка',
-          error: data.error,
-          details: data.details,
+      const error: ApiError = {
+        statusCode: response.status,
+        message: data.message || 'Произошла ошибка',
+        error: data.error,
+        details: data.details,
       }
+      throw error
     }
 
-    return data?.data || data as T
+    return data as T
   }
 
   const login = async (credentials: LoginRequest): Promise<AuthResponseData> => {
-      return await request<AuthResponseData>('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(credentials),
+    const response = await request<ApiAuthResponse>('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
     })
+    return response.data
   }
 
   const register = async (data: RegisterRequest): Promise<AuthResponseData> => {
-      return await request<AuthResponseData>('/auth/register', {
-        method: 'POST',
-        body: JSON.stringify(data),
+    const response = await request<ApiAuthResponse>('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+    return response.data
+  }
+
+  const getProfile = async (): Promise<{ data: ApiUser }> => {
+      return await request<{ data: ApiUser }>('/users/profile', {
+        method: 'GET',
     })
   }
 
-  const getProfile = async (): Promise<ApiUser> => {
-      return await request<ApiUser>('/users/profile', {
-        method: 'GET',
+  const updateProfile = async (data: UpdateProfileRequest): Promise<ApiUser> => {
+    return await request<ApiUser>('/users/profile', {
+      method: 'PUT',
+      body: JSON.stringify(data),
     })
   }
 
@@ -117,6 +138,7 @@ export const useApi = () => {
     login,
     register,
     getProfile,
+    updateProfile,
     getAuthToken,
   }
 }
