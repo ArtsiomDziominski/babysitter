@@ -195,6 +195,23 @@
       "notificationSettings": "Notification Settings",
       "bookingData": "Booking Data"
     },
+    "basicData": {
+      "title": "Basic Data",
+      "name": "Name",
+      "surname": "Surname",
+      "surnamePlaceholder": "Your surname",
+      "surnamePrivacy": "You must provide your real surname. For privacy purposes, your surname will not be displayed on your page on the site.",
+      "mobilePhone": "Mobile phone",
+      "city": "City",
+      "uploadPhoto": "Upload photo",
+      "save": "Save",
+      "errors": {
+        "title": "Error",
+        "invalidFormat": "Invalid file format. Allowed: jpg, jpeg, png, webp",
+        "fileTooLarge": "File size exceeds 5MB",
+        "uploadFailed": "Failed to upload photo. Please try again."
+      }
+    },
     "notifications": {
       "title": "Notification Settings",
       "emailNotifications": "Email Notifications",

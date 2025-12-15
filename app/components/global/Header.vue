@@ -100,6 +100,10 @@ const authStore = useAuthStore()
 const cityKeys = ['minsk', 'gomel', 'vitebsk', 'grodno', 'brest', 'mogilev']
 const selectedCity = useState('selectedCity', () => cityKeys[0])
 
+onMounted(() => {
+  authStore.loadAvatarUrl()
+})
+
 const cityOptions = computed(() => {
   try {
     return cityKeys.map(key => ({

@@ -52,6 +52,7 @@ export interface ApiUser {
   firstName: string
   lastName: string
   phone?: string
+  avatar?: string
   twoFactorSecret?: string | null
   twoFactorEnabled?: boolean
   backupCodes?: string | null
@@ -134,11 +135,77 @@ export const useApi = () => {
     })
   }
 
+  const uploadAvatar = async (file: File): Promise<ApiUser> => {
+    const token = getAuthToken()
+    const config = useRuntimeConfig()
+    const apiBaseUrl = config.public.apiBaseUrl
+
+    const formData = new FormData()
+    formData.append('avatar', file)
+
+    const headers: Record<string, string> = {}
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`
+    }
+
+    const response = await fetch(`${apiBaseUrl}/users/profile/avatar`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+        throw {
+          statusCode: response.status,
+          message: data.message || 'Произошла ошибка',
+          error: data.error,
+          details: data.details,
+      }
+    }
+
+    return data as ApiUser
+  }
+
+  const getAvatarUrl = async (token?: string | null): Promise<string | null> => {
+    const authToken = token ?? getAuthToken()
+    const config = useRuntimeConfig()
+    const apiBaseUrl = config.public.apiBaseUrl
+
+    const headers: Record<string, string> = {}
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`
+    }
+
+    const response = await fetch(`${apiBaseUrl}/users/profile/avatar`, {
+      method: 'GET',
+      headers,
+      redirect: 'follow',
+    })
+
+    if (response.status === 404) {
+      return null
+    }
+
+    if (!response.ok) {
+        throw {
+          statusCode: response.status,
+          message: 'Ошибка при получении аватара',
+          error: 'Error',
+      }
+    }
+
+    return response.url
+  }
+
   return {
     login,
     register,
     getProfile,
     updateProfile,
+    uploadAvatar,
+    getAvatarUrl,
     getAuthToken,
   }
 }

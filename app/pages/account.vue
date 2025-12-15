@@ -23,8 +23,8 @@ const activeTab = computed(() => {
           <NuxtLink
             to="/account/messages"
             class="px-4 py-3 text-sm font-medium transition-colors"
-            :class="activeTab === 'messages' 
-              ? 'text-primary-500 border-b-2 border-primary-500' 
+            :class="activeTab === 'messages'
+              ? 'text-primary-500 border-b-2 border-primary-500'
               : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
           >
             {{ $t('account.messages') }}
@@ -32,8 +32,8 @@ const activeTab = computed(() => {
           <NuxtLink
             to="/account/orders"
             class="px-4 py-3 text-sm font-medium transition-colors"
-            :class="activeTab === 'orders' 
-              ? 'text-primary-500 border-b-2 border-primary-500' 
+            :class="activeTab === 'orders'
+              ? 'text-primary-500 border-b-2 border-primary-500'
               : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
           >
             {{ $t('account.orders.title') }}
@@ -41,8 +41,8 @@ const activeTab = computed(() => {
           <NuxtLink
             to="/account/profile"
             class="px-4 py-3 text-sm font-medium transition-colors"
-            :class="activeTab === 'profile' 
-              ? 'text-primary-500 border-b-2 border-primary-500' 
+            :class="activeTab === 'profile'
+              ? 'text-primary-500 border-b-2 border-primary-500'
               : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
           >
             {{ $t('account.profile') }}
@@ -51,11 +51,7 @@ const activeTab = computed(() => {
             <span class="text-sm font-medium text-gray-900 dark:text-white">
               {{ authStore.currentUser?.name }}
             </span>
-            <UAvatar
-              :src="authStore.currentUser?.avatar"
-              :alt="authStore.currentUser?.name"
-              size="sm"
-            />
+            <UserAvatar size="xs" />
           </div>
         </div>
       </div>
