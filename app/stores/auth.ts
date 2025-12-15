@@ -158,7 +158,7 @@ export const useAuthStore = defineStore('auth', () => {
             surname: '',
             email: '',
             phone: '',
-            role: 'parent',
+            role: null,
             children: []
         }
     }

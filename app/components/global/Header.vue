@@ -154,7 +154,7 @@ const accountMenuItems = computed(() => {
     })
   }
 
-  const items = [
+  return [
     [
       {
         label: user?.name || '',
@@ -176,12 +176,10 @@ const accountMenuItems = computed(() => {
       {
         label: t('header.logout'),
         icon: 'i-lucide-log-out',
-        click: () => handleLogout()
+        onSelect: () => handleLogout()
       }
     ]
   ]
-
-  return items
 })
 
 const handleLogout = () => {
