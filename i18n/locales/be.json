@@ -197,6 +197,23 @@
       "notificationSettings": "Налады апавяшчэнняў",
       "bookingData": "Даныя для браніравання"
     },
+    "basicData": {
+      "title": "Асноўныя даныя",
+      "name": "Імя",
+      "surname": "Прозвішча",
+      "surnamePlaceholder": "Ваша прозвішча",
+      "surnamePrivacy": "Неабходна паказаць рэальнае прозвішча. У мэтах прыватнасці ваша прозвішча не будзе адлюстроўвацца на вашай старонцы на сайце.",
+      "mobilePhone": "Мабільны тэлефон",
+      "city": "Горад",
+      "uploadPhoto": "Загрузіць фота",
+      "save": "Захаваць",
+      "errors": {
+        "title": "Памылка",
+        "invalidFormat": "Нядапушчальны фармат файла. Дазволены: jpg, jpeg, png, webp",
+        "fileTooLarge": "Памер файла перавышае 5MB",
+        "uploadFailed": "Не ўдалося загрузіць фота. Паспрабуйце яшчэ раз."
+      }
+    },
     "notifications": {
       "title": "Налады апавяшчэнняў",
       "emailNotifications": "Email апавяшчэнні",

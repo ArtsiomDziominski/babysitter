@@ -62,16 +62,17 @@
           <!-- Правая колонка с фото -->
           <div class="flex flex-col items-center">
             <div class="relative mb-4">
-              <UAvatar
-                  :src="avatarPreview || authStore.currentUser?.avatar"
-                  :alt="authStore.currentUser?.name"
-                  size="3xl"
-                  class="border-4 border-gray-200 dark:border-gray-700"
+              <UserAvatar
+                :preview="avatarPreview"
+                size="3xl"
+                class="border-4 border-gray-200 dark:border-gray-700"
+                :show-fallback="true"
               />
+              
               <input
                   ref="fileInput"
                   type="file"
-                  accept="image/*"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
                   class="hidden"
                   @change="handleFileSelect"
               />
@@ -79,6 +80,8 @@
             <UButton
                 variant="outline"
                 color="primary"
+                :loading="isUploadingAvatar"
+                :disabled="isUploadingAvatar"
                 @click="() => fileInput?.click()"
             >
               {{ $t('account.basicData.uploadPhoto') }}
@@ -104,6 +107,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const authStore = useAuthStore()
+const toast = useToast()
 
 definePageMeta({
   middleware: 'auth'
@@ -127,16 +131,65 @@ const formData = ref({
 const fileInput = ref<HTMLInputElement | null>(null)
 const avatarPreview = ref<string | null>(null)
 const isSaving = ref(false)
+const isUploadingAvatar = ref(false)
 
-const handleFileSelect = (event: Event) => {
+const ALLOWED_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']
+const MAX_FILE_SIZE = 5 * 1024 * 1024
+
+const handleFileSelect = async (event: Event) => {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
-  if (file) {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      avatarPreview.value = e.target?.result as string
-    }
-    reader.readAsDataURL(file)
+
+  if (!file) return
+
+  const fileExtension = file.name.split('.').pop()?.toLowerCase()
+  const isValidFormat = ALLOWED_FORMATS.includes(file.type) ||
+    ALLOWED_EXTENSIONS.includes(fileExtension || '')
+
+  if (!isValidFormat) {
+    toast.add({
+      title: t('account.basicData.errors.title'),
+      description: t('account.basicData.errors.invalidFormat'),
+      color: 'error'
+    })
+    target.value = ''
+    return
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    toast.add({
+      title: t('account.basicData.errors.title'),
+      description: t('account.basicData.errors.fileTooLarge'),
+      color: 'error'
+    })
+    target.value = ''
+    return
+  }
+
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    avatarPreview.value = e.target?.result as string
+  }
+  reader.readAsDataURL(file)
+
+  isUploadingAvatar.value = true
+  try {
+    const api = useApi()
+    const updatedUser = await api.uploadAvatar(file)
+    await authStore.fetchProfile()
+    avatarPreview.value = null
+  } catch (error) {
+    console.error('Ошибка при загрузке аватара:', error)
+    toast.add({
+      title: t('account.basicData.errors.title'),
+      description: t('account.basicData.errors.uploadFailed'),
+      color: 'error'
+    })
+    avatarPreview.value = null
+    target.value = ''
+  } finally {
+    isUploadingAvatar.value = false
   }
 }
 

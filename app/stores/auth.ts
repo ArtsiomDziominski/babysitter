@@ -34,6 +34,7 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         surname: apiUser.lastName,
         email: apiUser.email,
         phone: apiUser.phone || '',
+        avatar: apiUser.avatar,
         role: mapApiRoleToFrontend(apiUser.role),
     }
 }
@@ -77,6 +78,24 @@ export const useAuthStore = defineStore('auth', () => {
         user.value.role = role
     }
 
+    async function loadAvatarUrl() {
+        if (!process.client) return
+        const avatar = user.value?.avatar
+        if (!avatar || avatar.startsWith('http')) {
+            return
+        }
+
+        try {
+            const api = useApi()
+            const url = await api.getAvatarUrl(accessToken.value)
+            if (url && user.value) {
+                user.value.avatar = url
+            }
+        } catch (error) {
+            console.warn('Не удалось получить presigned URL аватара:', error)
+        }
+    }
+
     async function fetchProfile() {
         const api = useApi()
         try {
@@ -84,6 +103,7 @@ export const useAuthStore = defineStore('auth', () => {
             console.log(response)
             const mappedUser = mapApiUserToFrontend(response.data as ApiUser)
             setUser(mappedUser)
+            await loadAvatarUrl()
             setAuth(true)
             return mappedUser
         } catch (error) {
@@ -172,6 +192,7 @@ export const useAuthStore = defineStore('auth', () => {
         setUser,
         setRole,
         setToken,
+        loadAvatarUrl,
         fetchProfile,
         restoreAuth,
         login,
