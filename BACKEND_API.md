@@ -3,7 +3,7 @@
 ## Базовый URL
 
 ```
-http://localhost:3000/api
+http://localhost:3000
 ```
 
 ## Аутентификация
@@ -70,6 +70,113 @@ Authorization: Bearer <your_jwt_token>
 }
 ```
 
+### Изменение email
+
+Процесс изменения email состоит из двух шагов: запрос кода и подтверждение.
+
+#### Запрос на изменение email
+
+**POST** `/auth/change-email/request`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "newEmail": "newemail@example.com"
+}
+```
+
+**Response (200):**
+```json
+{
+  "message": "Код подтверждения отправлен на новый email"
+}
+```
+
+**Примечание:** Код подтверждения отправляется на **новый** email адрес. Код действителен 15 минут.
+
+#### Подтверждение изменения email
+
+**POST** `/auth/change-email/confirm`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "newEmail": "newemail@example.com",
+  "code": "123456"
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "email": "newemail@example.com",
+  "role": "parent",
+  "firstName": "Иван",
+  "lastName": "Иванов",
+  ...
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - неверный код или код истек
+- `400 Bad Request` - новый email уже занят
+- `400 Bad Request` - новый email совпадает с текущим
+
+### Изменение пароля
+
+Процесс изменения пароля состоит из двух шагов: запрос кода и подтверждение.
+
+#### Запрос на изменение пароля
+
+**POST** `/auth/change-password/request`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:** (пустой объект)
+
+**Response (200):**
+```json
+{
+  "message": "Код подтверждения отправлен на email"
+}
+```
+
+**Примечание:** Код подтверждения отправляется на email пользователя. Код действителен 15 минут.
+
+#### Подтверждение изменения пароля
+
+**POST** `/auth/change-password/confirm`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "code": "123456",
+  "newPassword": "newpassword123"
+}
+```
+
+**Поля:**
+- `code` (string, **обязательное**) - код подтверждения из email
+- `newPassword` (string, **обязательное**) - новый пароль (минимум 8 символов)
+
+**Response (200):**
+```json
+{
+  "message": "Пароль успешно изменен"
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - неверный код или код истек
+- `400 Bad Request` - пароль слишком короткий (меньше 8 символов)
+
 ---
 
 ## Пользователи
@@ -89,9 +196,12 @@ Authorization: Bearer <your_jwt_token>
   "firstName": "Иван",
   "lastName": "Иванов",
   "phone": "+79001234567",
+  "avatar": "avatars/1-1704067200000.jpg",
   "createdAt": "2024-01-01T00:00:00.000Z"
 }
 ```
+
+**Примечание:** Поле `avatar` содержит ключ файла в MinIO. Для получения URL используйте endpoint `GET /users/profile/avatar` или, если настроен публичный доступ, напрямую: `http://localhost:9000/{avatar}`
 
 ### Обновить профиль
 
@@ -118,6 +228,385 @@ Authorization: Bearer <your_jwt_token>
   "phone": "+79001234567"
 }
 ```
+
+### Загрузить аватар
+
+**POST** `/users/profile/avatar`
+
+**Headers:**
+- `Authorization: Bearer <token>`
+- `Content-Type: multipart/form-data`
+
+**Body (FormData):**
+```
+avatar: <File>
+```
+
+**Ограничения:**
+- Формат: `jpg`, `jpeg`, `png`, `webp`
+- Размер: до 5MB
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "email": "user@example.com",
+  "firstName": "Иван",
+  "lastName": "Иванов",
+  "avatar": "avatars/1-1704067200000.jpg",
+  ...
+}
+```
+
+### Получить аватар
+
+**GET** `/users/profile/avatar`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response:** Редирект (302) на presigned URL аватара из MinIO
+
+**Обработка ошибок:**
+- `404` - Аватар не найден
+
+**Примечание:** Presigned URL действителен 1 час. Для прямого доступа к файлу (если настроен публичный доступ в MinIO) можно использовать: `http://localhost:9000/avatars/{avatar_key}` где `avatar_key` - значение поля `avatar` из профиля пользователя.
+
+### Удалить аватар
+
+**DELETE** `/users/profile/avatar`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "email": "user@example.com",
+  "firstName": "Иван",
+  "lastName": "Иванов",
+  "avatar": null,
+  ...
+}
+```
+
+---
+
+## Доверенные лица
+
+Все endpoints для работы с доверенными лицами доступны только для авторизованных пользователей. Родитель может указать до 10 доверенных лиц, которые могут быть контактами, если родитель недоступен.
+
+### Получить список доверенных лиц
+
+**GET** `/users/trusted-contacts`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+[
+  {
+    "id": 1,
+    "parentId": 1,
+    "firstName": "Анна",
+    "lastName": "Петрова",
+    "phone": "+79001234568",
+    "relationship": "Бабушка",
+    "createdAt": "2024-01-10T12:00:00.000Z",
+    "updatedAt": "2024-01-10T12:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "parentId": 1,
+    "firstName": "Сергей",
+    "lastName": "Иванов",
+    "phone": "+79001234569",
+    "relationship": "Дедушка",
+    "createdAt": "2024-01-11T10:00:00.000Z",
+    "updatedAt": "2024-01-11T10:00:00.000Z"
+  }
+]
+```
+
+### Добавить доверенное лицо
+
+**POST** `/users/trusted-contacts`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "firstName": "Анна",
+  "lastName": "Петрова",
+  "phone": "+79001234568",
+  "relationship": "Бабушка"
+}
+```
+
+**Поля:**
+- `firstName` (string, **обязательное**) - имя доверенного лица
+- `lastName` (string, **обязательное**) - фамилия доверенного лица
+- `phone` (string, **обязательное**) - телефон в формате E.164 (например, +79001234567)
+- `relationship` (string, optional) - степень родства или связь (например, "Бабушка", "Дедушка", "Друг семьи")
+
+**Response (201):**
+```json
+{
+  "id": 1,
+  "parentId": 1,
+  "firstName": "Анна",
+  "lastName": "Петрова",
+  "phone": "+79001234568",
+  "relationship": "Бабушка",
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - если у родителя уже максимальное количество доверенных лиц (10)
+- `400 Bad Request` - если телефон невалидный
+
+### Получить детали доверенного лица
+
+**GET** `/users/trusted-contacts/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "parentId": 1,
+  "firstName": "Анна",
+  "lastName": "Петрова",
+  "phone": "+79001234568",
+  "relationship": "Бабушка",
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если доверенное лицо не найдено или не принадлежит текущему пользователю
+
+### Обновить доверенное лицо
+
+**PUT** `/users/trusted-contacts/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "firstName": "Анна",
+  "lastName": "Петрова-Иванова",
+  "phone": "+79001234570",
+  "relationship": "Бабушка"
+}
+```
+
+Все поля опциональны. Можно обновить только нужные поля.
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "parentId": 1,
+  "firstName": "Анна",
+  "lastName": "Петрова-Иванова",
+  "phone": "+79001234570",
+  "relationship": "Бабушка",
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-12T14:30:00.000Z"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если доверенное лицо не найдено или не принадлежит текущему пользователю
+- `400 Bad Request` - если телефон невалидный
+
+### Удалить доверенное лицо
+
+**DELETE** `/users/trusted-contacts/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "message": "Доверенное лицо удалено"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если доверенное лицо не найдено или не принадлежит текущему пользователю
+
+---
+
+## Дети
+
+Все endpoints для работы с детьми доступны только для пользователей с ролью `parent`.
+
+### Получить список моих детей
+
+**GET** `/children`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `parent`)
+
+**Response (200):**
+```json
+[
+  {
+    "id": 1,
+    "parentId": 1,
+    "name": "Мария",
+    "age": 5,
+    "dateOfBirth": "2019-03-15",
+    "specialNeeds": null,
+    "allergies": "Арахис",
+    "notes": "Любит рисовать",
+    "createdAt": "2024-01-10T12:00:00.000Z",
+    "updatedAt": "2024-01-10T12:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "parentId": 1,
+    "name": "Иван",
+    "age": 8,
+    "dateOfBirth": "2016-07-20",
+    "specialNeeds": null,
+    "allergies": null,
+    "notes": null,
+    "createdAt": "2024-01-11T10:00:00.000Z",
+    "updatedAt": "2024-01-11T10:00:00.000Z"
+  }
+]
+```
+
+### Добавить ребенка
+
+**POST** `/children`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `parent`)
+
+**Body:**
+```json
+{
+  "name": "Мария",
+  "age": 5,
+  "dateOfBirth": "2019-03-15",
+  "specialNeeds": null,
+  "allergies": "Арахис",
+  "notes": "Любит рисовать"
+}
+```
+
+**Поля:**
+- `name` (string, **обязательное**) - имя ребенка
+- `age` (number, optional) - возраст (0-18)
+- `dateOfBirth` (string, optional) - дата рождения в формате ISO (YYYY-MM-DD)
+- `specialNeeds` (string, optional) - особые потребности
+- `allergies` (string, optional) - аллергии
+- `notes` (string, optional) - дополнительные заметки
+
+**Response (201):**
+```json
+{
+  "id": 1,
+  "parentId": 1,
+  "name": "Мария",
+  "age": 5,
+  "dateOfBirth": "2019-03-15",
+  "specialNeeds": null,
+  "allergies": "Арахис",
+  "notes": "Любит рисовать",
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - если у родителя уже максимальное количество детей (10)
+- `400 Bad Request` - если возраст вне диапазона 0-18
+
+### Получить детали ребенка
+
+**GET** `/children/:id`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `parent`)
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "parentId": 1,
+  "name": "Мария",
+  "age": 5,
+  "dateOfBirth": "2019-03-15",
+  "specialNeeds": null,
+  "allergies": "Арахис",
+  "notes": "Любит рисовать",
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если ребенок не найден или не принадлежит текущему родителю
+
+### Обновить информацию о ребенке
+
+**PATCH** `/children/:id`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `parent`)
+
+**Body:**
+```json
+{
+  "name": "Мария Иванова",
+  "age": 6,
+  "allergies": "Арахис, молоко"
+}
+```
+
+Все поля опциональны. Можно обновить только нужные поля.
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "parentId": 1,
+  "name": "Мария Иванова",
+  "age": 6,
+  "dateOfBirth": "2019-03-15",
+  "specialNeeds": null,
+  "allergies": "Арахис, молоко",
+  "notes": "Любит рисовать",
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-12T14:30:00.000Z"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если ребенок не найден или не принадлежит текущему родителю
+- `400 Bad Request` - если возраст вне диапазона 0-18
+
+### Удалить ребенка
+
+**DELETE** `/children/:id`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `parent`)
+
+**Response (200):**
+```json
+{
+  "message": "Ребенок удален"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если ребенок не найден или не принадлежит текущему родителю
 
 ---
 
@@ -785,7 +1274,7 @@ function useBookings(token: string) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/bookings', {
+    fetch('http://localhost:3000/bookings', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -835,7 +1324,7 @@ function useNotifications(token: string) {
 Интерактивная документация API доступна по адресу:
 
 ```
-http://localhost:3000/api/docs
+http://localhost:3000/docs
 ```
 
 В Swagger UI вы можете:
