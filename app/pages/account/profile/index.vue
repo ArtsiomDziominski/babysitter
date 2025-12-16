@@ -106,8 +106,8 @@ const isSaving = ref(false)
 const handleSave = async () => {
   isSaving.value = true
   try {
-    const api = useApi()
-    await api.updateProfile({
+    const profile = useProfile()
+    await profile.updateProfile({
       firstName: formData.value.name,
       lastName: formData.value.surname,
       phone: formData.value.phone,

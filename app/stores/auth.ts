@@ -11,12 +11,7 @@ export interface User {
     city?: string
     avatar?: string
     role: 'nanny' | 'parent'
-    children?: Array<{
-        name: string
-        age: string
-        gender: string
-        notes: string
-    }>
+    children?: any[]
 }
 
 function mapApiRoleToFrontend(apiRole: 'parent' | 'babysitter'): 'nanny' | 'parent' {
@@ -36,6 +31,7 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         phone: apiUser.phone || '',
         avatar: apiUser.avatar,
         role: mapApiRoleToFrontend(apiUser.role),
+        children: apiUser.children || undefined,
     }
 }
 
@@ -78,6 +74,10 @@ export const useAuthStore = defineStore('auth', () => {
         user.value.role = role
     }
 
+    function setChildren(children: any[]) {
+        user.value.children = children
+    }
+
     async function loadAvatarUrl() {
         if (!process.client) return
         const avatar = user.value?.avatar
@@ -86,8 +86,8 @@ export const useAuthStore = defineStore('auth', () => {
         }
 
         try {
-            const api = useApi()
-            const url = await api.getAvatarUrl(accessToken.value)
+            const profile = useProfile()
+            const url = await profile.getAvatarUrl(accessToken.value)
             if (url && user.value) {
                 user.value.avatar = url
             }
@@ -97,9 +97,9 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function fetchProfile() {
-        const api = useApi()
+        const auth = useAuth()
         try {
-            const response = await api.getProfile()
+            const response = await auth.getProfile()
             console.log(response)
             const mappedUser = mapApiUserToFrontend(response.data as ApiUser)
             setUser(mappedUser)
@@ -126,9 +126,9 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function login(email: string, password: string) {
-        const api = useApi()
+        const auth = useAuth()
         try {
-            const response = await api.login({ email, password })
+            const response = await auth.login({ email, password })
             setToken(response.access_token)
             const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
             setUser(mappedUser)
@@ -147,10 +147,10 @@ export const useAuthStore = defineStore('auth', () => {
         phone: string
         role: 'nanny' | 'parent'
     }) {
-        const api = useApi()
+        const auth = useAuth()
         try {
             const apiRole = mapFrontendRoleToApi(data.role)
-            const response = await api.register({
+            const response = await auth.register({
                 email: data.email,
                 password: data.password,
                 firstName: data.firstName,
@@ -192,6 +192,7 @@ export const useAuthStore = defineStore('auth', () => {
         setUser,
         setRole,
         setToken,
+        setChildren,
         loadAvatarUrl,
         fetchProfile,
         restoreAuth,

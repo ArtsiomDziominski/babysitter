@@ -215,6 +215,33 @@
         "uploadFailed": "Failed to upload photo. Please try again."
       }
     },
+    "children": {
+      "title": "Your Children",
+      "name": "Child's Name",
+      "namePlaceholder": "Enter child's name",
+      "age": "Age",
+      "agePlaceholder": "Enter age",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "genderMale": "Boy",
+      "genderFemale": "Girl",
+      "allergies": "Allergies",
+      "allergiesPlaceholder": "Specify child's allergies",
+      "specialNeeds": "Special Needs",
+      "specialNeedsPlaceholder": "Specify special needs if any",
+      "notes": "Additional Notes",
+      "notesPlaceholder": "Additional information about the child",
+      "addChild": "Add Child",
+      "removeChild": "Remove",
+      "noChildren": "You don't have any children added yet",
+      "childNumber": "Child {number}",
+      "deleteSuccess": "Child deleted successfully",
+      "deleteError": "Delete error",
+      "deleteErrorMessage": "Failed to delete child. Please try again",
+      "confirmDeleteTitle": "Confirm deletion",
+      "confirmDeleteMessage": "Are you sure you want to delete data about child \"{name}\"?",
+      "confirmDelete": "Delete"
+    },
     "notifications": {
       "title": "Notification Settings",
       "emailNotifications": "Email Notifications",
