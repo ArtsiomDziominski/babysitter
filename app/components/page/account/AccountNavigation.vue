@@ -28,7 +28,7 @@ defineProps<{
         {{ $t('account.orders.title') }}
       </NuxtLink>
       <NuxtLink
-        to="/account/booking/trusted"
+        to="/account/booking/kids"
         class="px-4 py-3 text-sm font-medium transition-colors"
         :class="activeTab === 'booking'
           ? 'text-primary-500 border-b-2 border-primary-500'

@@ -5,7 +5,18 @@ definePageMeta({
   middleware: 'auth'
 })
 
+onMounted(() => {
+  if (route.path === '/account/booking') {
+    navigateTo('/account/booking/kids', { replace: true })
+  }
+})
+
 const menuItems = [
+  {
+    to: '/account/booking/kids',
+    label: 'account.sections.kids',
+    section: 'kids'
+  },
   {
     to: '/account/booking/trusted',
     label: 'account.booking.trustedPerson.title',
@@ -14,8 +25,9 @@ const menuItems = [
 ]
 
 const activeSection = computed(() => {
+  if (route.path.includes('/booking/kids')) return 'kids'
   if (route.path.includes('/booking/trusted')) return 'trusted'
-  return 'trusted'
+  return 'kids'
 })
 </script>
 
