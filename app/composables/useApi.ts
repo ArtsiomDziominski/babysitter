@@ -168,6 +168,12 @@ export const useApi = () => {
     return data as ApiUser
   }
 
+  const deleteAvatar = async (): Promise<ApiUser> => {
+    return await request<ApiUser>('/users/profile/avatar', {
+      method: 'DELETE',
+    })
+  }
+
   const getAvatarUrl = async (token?: string | null): Promise<string | null> => {
     const authToken = token ?? getAuthToken()
     const config = useRuntimeConfig()
@@ -205,6 +211,7 @@ export const useApi = () => {
     getProfile,
     updateProfile,
     uploadAvatar,
+    deleteAvatar,
     getAvatarUrl,
     getAuthToken,
   }

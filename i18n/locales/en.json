@@ -204,6 +204,9 @@
       "mobilePhone": "Mobile phone",
       "city": "City",
       "uploadPhoto": "Upload photo",
+      "deletePhoto": "Delete photo",
+      "cropPhoto": "Crop photo",
+      "savePhoto": "Save photo",
       "save": "Save",
       "errors": {
         "title": "Error",
@@ -344,6 +347,9 @@
       "book": "Book",
       "perHour": "/hour"
     }
+  },
+  "common": {
+    "cancel": "Cancel"
   }
 }
 
