@@ -217,6 +217,33 @@
         "uploadFailed": "Не ўдалося загрузіць фота. Паспрабуйце яшчэ раз."
       }
     },
+    "children": {
+      "title": "Вашыя дзеці",
+      "name": "Імя дзіцяці",
+      "namePlaceholder": "Увядзіце імя дзіцяці",
+      "age": "Узрост",
+      "agePlaceholder": "Пазначце ўзрост",
+      "dateOfBirth": "Дата нараджэння",
+      "gender": "Пол",
+      "genderMale": "Хлопчык",
+      "genderFemale": "Дзяўчынка",
+      "allergies": "Алергіі",
+      "allergiesPlaceholder": "Пазначце алергіі дзіцяці",
+      "specialNeeds": "Асобыя патрэбы",
+      "specialNeedsPlaceholder": "Пазначце асобыя патрэбы, калі ёсць",
+      "notes": "Дадатковыя заўвагі",
+      "notesPlaceholder": "Дадатковая інфармацыя пра дзіця",
+      "addChild": "Дадаць дзіця",
+      "removeChild": "Выдаліць",
+      "noChildren": "У вас пакуль няма дададзеных дзяцей",
+      "childNumber": "Дзіця {number}",
+      "deleteSuccess": "Дзіця паспяхова выдалена",
+      "deleteError": "Памылка пры выдаленні",
+      "deleteErrorMessage": "Не ўдалося выдаліць дзіця. Паспрабуйце яшчэ раз",
+      "confirmDeleteTitle": "Пацвярджэнне выдалення",
+      "confirmDeleteMessage": "Вы ўпэўнены, што хочаце выдаліць даныя пра дзіця \"{name}\"?",
+      "confirmDelete": "Выдаліць"
+    },
     "notifications": {
       "title": "Налады апавяшчэнняў",
       "emailNotifications": "Email апавяшчэнні",

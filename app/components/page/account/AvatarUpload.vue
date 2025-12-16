@@ -96,8 +96,8 @@ const handleFileSelect = async (event: Event) => {
 
   isUploadingAvatar.value = true
   try {
-    const api = useApi()
-    await api.uploadAvatar(file)
+    const profile = useProfile()
+    await profile.uploadAvatar(file)
     await authStore.fetchProfile()
     avatarPreview.value = null
   } catch (error) {
@@ -117,8 +117,8 @@ const handleFileSelect = async (event: Event) => {
 const handleDeleteAvatar = async () => {
   isDeletingAvatar.value = true
   try {
-    const api = useApi()
-    await api.deleteAvatar()
+    const profile = useProfile()
+    await profile.deleteAvatar()
     await authStore.fetchProfile()
     avatarPreview.value = null
     if (fileInput.value) {
