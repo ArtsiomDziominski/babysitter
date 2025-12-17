@@ -8,38 +8,18 @@
         </NuxtLink>
 
         <nav v-if="authStore.isAuthenticated" class="header__nav">
-          <NuxtLink to="/search" class="header__nav-link">
-            {{ $t('header.bookings') }}
-          </NuxtLink>
-          <NuxtLink to="/account/messages" class="header__nav-link">
-            {{ $t('header.messages') }}
+          <NuxtLink
+            v-for="item in navLinks"
+            :key="item.to"
+            :to="item.to"
+            class="header__nav-link"
+          >
+            {{ item.label }}
           </NuxtLink>
         </nav>
 
         <div class="header__controls">
           <ClientOnly>
-            <template v-if="authStore.isAuthenticated">
-              <div class="header__role-switcher">
-                <UButtonGroup>
-                  <UButton
-                    :variant="authStore.currentUser?.role === 'parent' ? 'solid' : 'outline'"
-                    :color="authStore.currentUser?.role === 'parent' ? 'primary' : 'gray'"
-                    size="sm"
-                    @click="authStore.setRole('parent')"
-                  >
-                    {{ $t('account.role.parent') }}
-                  </UButton>
-                  <UButton
-                    :variant="authStore.currentUser?.role === 'nanny' ? 'solid' : 'outline'"
-                    :color="authStore.currentUser?.role === 'nanny' ? 'primary' : 'gray'"
-                    size="sm"
-                    @click="authStore.setRole('nanny')"
-                  >
-                    {{ $t('account.role.nanny') }}
-                  </UButton>
-                </UButtonGroup>
-              </div>
-            </template>
             <template v-if="cityOptions.length > 0 && localeOptions.length > 0">
               <div class="header__selects">
                 <USelect
@@ -96,6 +76,11 @@
 <script setup lang="ts">
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
+
+const navLinks = computed(() => [
+  { to: '/search', label: t('header.bookings') },
+  { to: '/account/messages', label: t('header.messages') }
+])
 
 const cityKeys = ['minsk', 'gomel', 'vitebsk', 'grodno', 'brest', 'mogilev']
 const selectedCity = useState('selectedCity', () => cityKeys[0])
