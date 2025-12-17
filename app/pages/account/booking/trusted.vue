@@ -68,7 +68,7 @@ const { createTrustedContact, deleteTrustedContact, getTrustedContacts, updateTr
 const toast = useToast()
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: ['auth', 'parent-only']
 })
 
 const contacts = ref<TrustedContact[]>([])

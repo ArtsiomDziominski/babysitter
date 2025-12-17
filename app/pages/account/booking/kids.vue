@@ -65,7 +65,7 @@ const { createChild, deleteChild, getChildren, updateChild } = useChildren()
 const toast = useToast()
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: ['auth', 'parent-only']
 })
 
 const children = ref<Child[]>([])
