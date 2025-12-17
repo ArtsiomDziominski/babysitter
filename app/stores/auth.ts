@@ -12,6 +12,7 @@ export interface User {
     avatar?: string
     role: 'nanny' | 'parent' | null
     children?: any[]
+    babysitter?: any | null
 }
 
 function mapApiRoleToFrontend(apiRole?: 'parent' | 'babysitter' | null): 'nanny' | 'parent' | null {
@@ -34,6 +35,7 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         avatar: apiUser.avatar,
         role: mapApiRoleToFrontend(apiUser.role),
         children: apiUser.children || undefined,
+        babysitter: apiUser.babysitter ?? null,
     }
 }
 
@@ -54,6 +56,8 @@ export const useAuthStore = defineStore('auth', () => {
         email: '',
         phone: '',
         role: null,
+        children: [],
+        babysitter: null,
     })
 
     const isAuthenticated = computed(() => isAuth.value && !!accessToken.value)
@@ -194,7 +198,8 @@ export const useAuthStore = defineStore('auth', () => {
             email: '',
             phone: '',
             role: null,
-            children: []
+            children: [],
+            babysitter: null,
         }
     }
 
