@@ -7,11 +7,6 @@ const toast = useToast()
 const authStore = useAuthStore()
 const router = useRouter()
 
-const roleOptions = [
-  { label: t('account.role.parent'), value: 'parent' },
-  { label: t('account.role.nanny'), value: 'nanny' }
-]
-
 const fields: AuthFormField[] = [
   {
     name: 'name',
@@ -103,7 +98,6 @@ const schema = z.object({
 type Schema = z.output<typeof schema>
 
 const isLoading = ref(false)
-const role = ref<'parent' | 'nanny'>('parent')
 
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
   isLoading.value = true
@@ -113,14 +107,13 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       lastName: payload.data.surname,
       email: payload.data.email,
       phone: payload.data.phone,
-      password: payload.data.password,
-      role: role.value || 'parent'
+      password: payload.data.password
     })
     toast.add({ 
       title: t('auth.registerSuccess'), 
       color: 'success' 
     })
-    await router.push('/account/profile')
+    await router.push('/choose-role')
   } catch (error: any) {
     const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.registerError')
     toast.add({ 
@@ -136,11 +129,6 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
 <template>
   <div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-8">
     <UPageCard class="w-full max-w-md">
-      <div class="mb-4">
-        <UFormGroup :label="t('auth.role')">
-          <URadioGroup v-model="role" :options="roleOptions" />
-        </UFormGroup>
-      </div>
       <UAuthForm
         :schema="schema"
         :title="t('auth.register')"

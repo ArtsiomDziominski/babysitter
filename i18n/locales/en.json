@@ -158,6 +158,23 @@
     "loginError": "Login error",
     "registerError": "Registration error"
   },
+  "roleSelection": {
+    "title": "Choose your role",
+    "subtitle": "You must choose a role to use the site",
+    "parent": {
+      "title": "I'm a parent",
+      "description": "Find a nanny"
+    },
+    "nanny": {
+      "title": "I'm a babysitter",
+      "description": "Find jobs"
+    },
+    "selected": "Selected",
+    "continue": "Continue",
+    "selectPrompt": "Select a role",
+    "saved": "Role saved",
+    "saveErrorDefault": "Failed to save role"
+  },
   "account": {
     "title": "Account",
     "welcome": "Welcome, {name}!",

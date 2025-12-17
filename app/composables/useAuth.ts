@@ -8,7 +8,7 @@ interface LoginRequest {
 interface RegisterRequest {
   email: string
   password: string
-  role: 'parent' | 'babysitter'
+  role?: 'parent' | 'babysitter' | null
   firstName: string
   lastName: string
   phone: string
@@ -19,7 +19,7 @@ interface AuthResponseData {
   user: {
     id: number
     email: string
-    role: 'parent' | 'babysitter'
+    role?: 'parent' | 'babysitter' | null
     firstName: string
     lastName: string
   }

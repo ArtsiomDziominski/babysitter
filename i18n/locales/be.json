@@ -160,6 +160,23 @@
     "loginError": "Памылка пры ўваходзе",
     "registerError": "Памылка пры рэгістрацыі"
   },
+  "roleSelection": {
+    "title": "Абярыце ролю",
+    "subtitle": "Без ролі сайт недаступны, абярыце адзін варыянт",
+    "parent": {
+      "title": "Я бацька/маці",
+      "description": "Знайсці няню"
+    },
+    "nanny": {
+      "title": "Я няня",
+      "description": "Знайсці заказы"
+    },
+    "selected": "Абрана",
+    "continue": "Працягнуць",
+    "selectPrompt": "Абярыце ролю",
+    "saved": "Роля захавана",
+    "saveErrorDefault": "Не ўдалося захаваць ролю"
+  },
   "account": {
     "title": "Акаўнт",
     "welcome": "Сардэчна запрашаем, {name}!",

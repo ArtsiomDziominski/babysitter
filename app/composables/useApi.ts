@@ -12,7 +12,7 @@ export interface ApiUser {
   id: number
   email: string
   password?: string
-  role: 'parent' | 'babysitter'
+  role?: 'parent' | 'babysitter' | null
   firstName: string
   lastName: string
   phone?: string
