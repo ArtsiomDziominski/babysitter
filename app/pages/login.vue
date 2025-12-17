@@ -66,11 +66,13 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
   isLoading.value = true
   try {
     await authStore.login(payload.data.email, payload.data.password)
+    const role = authStore.user.role
+    const target = role ? (role === 'parent' ? '/search' : '/account/profile') : '/choose-role'
     toast.add({ 
       title: t('auth.loginSuccess'), 
       color: 'success' 
     })
-    await router.push('/account/profile')
+    await router.push(target)
   } catch (error: any) {
     const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.loginError')
     toast.add({ 

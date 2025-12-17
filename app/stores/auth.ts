@@ -10,15 +10,17 @@ export interface User {
     phone: string
     city?: string
     avatar?: string
-    role: 'nanny' | 'parent'
+    role: 'nanny' | 'parent' | null
     children?: any[]
 }
 
-function mapApiRoleToFrontend(apiRole: 'parent' | 'babysitter'): 'nanny' | 'parent' {
+function mapApiRoleToFrontend(apiRole?: 'parent' | 'babysitter' | null): 'nanny' | 'parent' | null {
+    if (!apiRole) return null
     return apiRole === 'babysitter' ? 'nanny' : apiRole
 }
 
-function mapFrontendRoleToApi(frontendRole: 'nanny' | 'parent'): 'parent' | 'babysitter' {
+function mapFrontendRoleToApi(frontendRole?: 'nanny' | 'parent' | null): 'parent' | 'babysitter' | null {
+    if (!frontendRole) return null
     return frontendRole === 'nanny' ? 'babysitter' : frontendRole
 }
 
@@ -51,7 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
         surname: '',
         email: '',
         phone: '',
-        role: 'parent',
+        role: null,
     })
 
     const isAuthenticated = computed(() => isAuth.value && !!accessToken.value)
@@ -70,7 +72,7 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = newUser
     }
 
-    function setRole(role: 'nanny' | 'parent') {
+    function setRole(role: 'nanny' | 'parent' | null) {
         user.value.role = role
     }
 
@@ -145,7 +147,7 @@ export const useAuthStore = defineStore('auth', () => {
         firstName: string
         lastName: string
         phone: string
-        role: 'nanny' | 'parent'
+        role?: 'nanny' | 'parent' | null
     }) {
         const auth = useAuth()
         try {
@@ -156,7 +158,7 @@ export const useAuthStore = defineStore('auth', () => {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 phone: data.phone,
-                role: apiRole,
+                ...(apiRole ? { role: apiRole } : {}),
             })
             setToken(response.access_token)
             const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
@@ -168,6 +170,20 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    async function saveRole(role: 'nanny' | 'parent') {
+        const profile = useProfile()
+        const apiRole = mapFrontendRoleToApi(role)
+        if (!apiRole) {
+            throw new Error('Role is required')
+        }
+
+        const updatedUser = await profile.updateRole(apiRole)
+        const mappedUser = mapApiUserToFrontend(updatedUser as ApiUser)
+        setUser(mappedUser)
+        setAuth(true)
+        return mappedUser
+    }
+
     function logout() {
         setToken(null)
         setAuth(false)
@@ -177,7 +193,7 @@ export const useAuthStore = defineStore('auth', () => {
             surname: '',
             email: '',
             phone: '',
-            role: 'parent',
+            role: null,
             children: []
         }
     }
@@ -198,6 +214,7 @@ export const useAuthStore = defineStore('auth', () => {
         restoreAuth,
         login,
         register,
+        saveRole,
         logout
     }
 })

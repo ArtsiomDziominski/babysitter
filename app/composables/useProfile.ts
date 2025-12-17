@@ -19,6 +19,13 @@ export const useProfile = () => {
     })
   }
 
+  const updateRole = async (role: 'parent' | 'babysitter'): Promise<ApiUser> => {
+    return await api.request<ApiUser>('/users/profile/role', {
+      method: 'PATCH',
+      body: JSON.stringify({ role }),
+    })
+  }
+
   const uploadAvatar = async (file: File): Promise<ApiUser> => {
     const token = auth.getAuthToken()
     const formData = new FormData()
@@ -86,6 +93,7 @@ export const useProfile = () => {
 
   return {
     updateProfile,
+    updateRole,
     uploadAvatar,
     deleteAvatar,
     getAvatarUrl,

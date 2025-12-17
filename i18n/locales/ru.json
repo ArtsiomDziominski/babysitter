@@ -160,6 +160,23 @@
     "loginError": "Ошибка при входе",
     "registerError": "Ошибка при регистрации"
   },
+  "roleSelection": {
+    "title": "Выберите роль",
+    "subtitle": "Без роли сайт недоступен, выберите один вариант",
+    "parent": {
+      "title": "Я родитель",
+      "description": "Найти няню"
+    },
+    "nanny": {
+      "title": "Я няня",
+      "description": "Найти заказы"
+    },
+    "selected": "Выбрано",
+    "continue": "Продолжить",
+    "selectPrompt": "Выберите роль",
+    "saved": "Роль сохранена",
+    "saveErrorDefault": "Не удалось сохранить роль"
+  },
   "account": {
     "title": "Аккаунт",
     "welcome": "Добро пожаловать, {name}!",
