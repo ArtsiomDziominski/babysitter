@@ -23,12 +23,13 @@ Authorization: Bearer <your_jwt_token>
 {
   "email": "user@example.com",
   "password": "password123",
-  "role": "parent" | "babysitter",
   "firstName": "Иван",
   "lastName": "Иванов",
   "phone": "+79001234567"
 }
 ```
+
+**Примечание:** Роль в запросе не передается (по умолчанию `null`). Чтобы выбрать `parent` или `babysitter`, используйте endpoint `PATCH /users/profile/role`.
 
 **Response (201):**
 ```json
@@ -37,7 +38,7 @@ Authorization: Bearer <your_jwt_token>
   "user": {
     "id": 1,
     "email": "user@example.com",
-    "role": "parent",
+    "role": null,
     "firstName": "Иван",
     "lastName": "Иванов"
   }
@@ -229,11 +230,40 @@ Authorization: Bearer <your_jwt_token>
 }
 ```
 
+### Установить роль пользователя
+
+**PATCH** `/users/profile/role`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "role": "parent" | "babysitter"
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "email": "user@example.com",
+  "role": "babysitter",
+  "firstName": "Иван",
+  "lastName": "Иванов",
+  "phone": "+79001234567"
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - роль должна быть `parent` или `babysitter`
+- `401 Unauthorized` - отсутствует/невалидный токен
+
 ### Загрузить аватар
 
 **POST** `/users/profile/avatar`
 
-**Headers:**
+**Headers:** 
 - `Authorization: Bearer <token>`
 - `Content-Type: multipart/form-data`
 
@@ -634,9 +664,22 @@ avatar: <File>
       "userId": 2,
       "age": 25,
       "experience": 3,
-      "hourlyRate": 1000,
       "certifications": ["CPR", "First Aid"],
       "bio": "Опытная няня с 3 годами стажа",
+      "cardPaymentAvailable": true,
+      "minOrderAmount": "1000",
+      "priceOneChild": "700",
+      "priceTwoChildren": "1200",
+      "priceThreeChildren": "1500",
+      "priceFourChildren": "1800",
+      "priceFiveChildren": "2000",
+      "onlineLesson": "800",
+      "cancellationPolicy": "Отмена за 24 часа без штрафа",
+      "infantCare": true,
+      "specialNeedsCare": true,
+      "petAttitude": "Комфортно с животными",
+      "advantages": ["Мед образование", "Английский"],
+      "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
       "user": {
@@ -666,9 +709,22 @@ avatar: <File>
   "userId": 2,
   "age": 25,
   "experience": 3,
-  "hourlyRate": 1000,
   "certifications": ["CPR", "First Aid"],
   "bio": "Опытная няня с 3 годами стажа",
+  "cardPaymentAvailable": true,
+  "minOrderAmount": "1000",
+  "priceOneChild": "700",
+  "priceTwoChildren": "1200",
+  "priceThreeChildren": "1500",
+  "priceFourChildren": "1800",
+  "priceFiveChildren": "2000",
+  "onlineLesson": "800",
+  "cancellationPolicy": "Отмена за 24 часа без штрафа",
+  "infantCare": true,
+  "specialNeedsCare": true,
+  "petAttitude": "Комфортно с животными",
+  "advantages": ["Мед образование", "Английский"],
+  "birthDate": "1999-05-01",
   "rating": 4.8,
   "reviewsCount": 15,
   "available": true,
@@ -681,9 +737,37 @@ avatar: <File>
   },
   "schedules": [
     {
-      "dayOfWeek": 1,
-      "startTime": "09:00",
-      "endTime": "18:00"
+      "mode": "weekly",
+      "schedules": [
+        {
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "everyday",
+      "schedules": [
+        {
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "schedules": [
+        {
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
     }
   ]
 }
@@ -696,14 +780,97 @@ avatar: <File>
 
 **Headers:** `Authorization: Bearer <token>` (требуется роль `babysitter`)
 
+Поле `schedules` — массив блоков расписания. Каждый блок содержит:
+- `mode`: `weekly` | `everyday` | `allDays`
+- `schedules`: массив интервалов:
+  - для `weekly` — элементы с `dayOfWeek` (0—6, где 0 — воскресенье) и `intervals` (список `{ "startTime": "HH:MM", "endTime": "HH:MM" }`)
+  - для `everyday` — элементы с `date` в формате `YYYY-MM-DD` и `intervals`
+  - для `allDays` — общий список интервалов без `dayOfWeek`/`date` (применяется ко всем дням)
+
+Во всех режимах можно указывать несколько интервалов в день.
+
+Поля запроса:
+- `firstName` — имя (обновляет профиль пользователя).
+- `lastName` — фамилия (обновляет профиль пользователя).
+- `age` — возраст (число).
+- `experience` — стаж в годах (число).
+- `certifications` — массив сертификатов.
+- `bio` — краткое описание.
+- `cardPaymentAvailable` — принимает оплату на карту (`true`/`false`).
+- `minOrderAmount` — минимальная сумма заказа (строка с числом).
+- `priceOneChild` ... `priceFiveChildren` — цена для 1–5 детей (строки с числом).
+- `onlineLesson` — цена онлайн-занятия (строка с числом).
+- `cancellationPolicy` — правила отмен/опозданий.
+- `infantCare` — берёт младенцев (`true`/`false`).
+- `specialNeedsCare` — берёт особенных детей (`true`/`false`).
+- `petAttitude` — отношение к животным.
+- `advantages` — массив преимуществ.
+- `birthDate` — дата рождения в формате `YYYY-MM-DD`.
+
 **Body:**
 ```json
 {
   "age": 25,
   "experience": 3,
-  "hourlyRate": 1000,
   "certifications": ["CPR", "First Aid"],
-  "bio": "Опытная няня с 3 годами стажа"
+  "bio": "Опытная няня с 3 годами стажа",
+  "firstName": "Мария",
+  "lastName": "Петрова",
+  "cardPaymentAvailable": true,
+  "minOrderAmount": "1000",
+  "priceOneChild": "700",
+  "priceTwoChildren": "1200",
+  "priceThreeChildren": "1500",
+  "priceFourChildren": "1800",
+  "priceFiveChildren": "2000",
+  "onlineLesson": "800",
+  "cancellationPolicy": "Отмена за 24 часа без штрафа",
+  "infantCare": true,
+  "specialNeedsCare": true,
+  "petAttitude": "Комфортно с животными",
+  "advantages": ["Мед образование", "Английский"],
+  "birthDate": "1999-05-01",
+  "schedules": [
+    {
+      "mode": "weekly",
+      "schedules": [
+        {
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ]
+        },
+        {
+          "dayOfWeek": 3,
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "everyday",
+      "schedules": [
+        {
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "schedules": [
+        {
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -713,9 +880,63 @@ avatar: <File>
   "id": 1,
   "age": 25,
   "experience": 3,
-  "hourlyRate": 1000,
   "certifications": ["CPR", "First Aid"],
-  "bio": "Опытная няня с 3 годами стажа"
+  "bio": "Опытная няня с 3 годами стажа",
+  "cardPaymentAvailable": true,
+  "minOrderAmount": "1000",
+  "priceOneChild": "700",
+  "priceTwoChildren": "1200",
+  "priceThreeChildren": "1500",
+  "priceFourChildren": "1800",
+  "priceFiveChildren": "2000",
+  "onlineLesson": "800",
+  "cancellationPolicy": "Отмена за 24 часа без штрафа",
+  "infantCare": true,
+  "specialNeedsCare": true,
+  "petAttitude": "Комфортно с животными",
+  "advantages": ["Мед образование", "Английский"],
+  "birthDate": "1999-05-01",
+  "schedules": [
+    {
+      "mode": "weekly",
+      "schedules": [
+        {
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ]
+        },
+        {
+          "dayOfWeek": 3,
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "everyday",
+      "schedules": [
+        {
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "schedules": [
+        {
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -881,22 +1102,56 @@ avatar: <File>
   "babysitterId": 1,
   "schedules": [
     {
-      "id": 1,
-      "dayOfWeek": 1,
-      "startTime": "09:00",
-      "endTime": "18:00"
+      "mode": "weekly",
+      "schedules": [
+        {
+          "id": 1,
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ]
+        },
+        {
+          "id": 2,
+          "dayOfWeek": 2,
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
     },
     {
-      "id": 2,
-      "dayOfWeek": 2,
-      "startTime": "09:00",
-      "endTime": "18:00"
+      "mode": "everyday",
+      "schedules": [
+        {
+          "id": 3,
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "schedules": [
+        {
+          "id": 4,
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
     }
   ]
 }
 ```
 
-**Примечание:** `dayOfWeek` - число от 0 (воскресенье) до 6 (суббота)
+**Примечание:**  
+- `mode`: `weekly` | `everyday` | `allDays`  
+- для `weekly` используйте `dayOfWeek` 0–6 (0 — воскресенье); для `everyday` — `date` в формате `YYYY-MM-DD`; для `allDays` интервалы без `dayOfWeek`/`date` применяются ко всем дням.  
+- время в интервалах — `HH:MM`.
 
 ### Добавить/обновить доступность
 
@@ -908,20 +1163,86 @@ avatar: <File>
 **Body:**
 ```json
 {
-  "dayOfWeek": 1,
-  "startTime": "09:00",
-  "endTime": "18:00"
+  "schedules": [
+    {
+      "mode": "weekly",
+      "schedules": [
+        {
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "everyday",
+      "schedules": [
+        {
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "schedules": [
+        {
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
 **Response (200/201):**
 ```json
 {
-  "id": 1,
   "babysitterId": 1,
-  "dayOfWeek": 1,
-  "startTime": "09:00",
-  "endTime": "18:00"
+  "schedules": [
+    {
+      "mode": "weekly",
+      "schedules": [
+        {
+          "id": 1,
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "everyday",
+      "schedules": [
+        {
+          "id": 3,
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "schedules": [
+        {
+          "id": 4,
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
