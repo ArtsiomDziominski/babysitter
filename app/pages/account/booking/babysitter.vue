@@ -8,33 +8,24 @@
             {{ t('account.nannyForm.subtitle') }}
           </p>
         </div>
-        <div class="flex gap-3">
-          <UButton
-              variant="outline"
-              :disabled="isSaving || isLoading"
-              @click="resetForm"
-          >
-            {{ t('account.nannyForm.reset') }}
-          </UButton>
-          <UButton
-              color="primary"
-              :loading="isSaving"
-              :disabled="isLoading"
-              @click="handleSubmit"
-          >
-            {{ hasProfile ? t('account.nannyForm.update') : t('account.nannyForm.create') }}
-          </UButton>
-        </div>
       </div>
 
       <div v-if="isLoading" class="flex items-center justify-center py-12">
-        <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 text-primary animate-spin" />
+        <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 text-primary animate-spin"/>
       </div>
 
       <div v-else class="space-y-10">
-        <PageAccountBookingBabysitterProfileFormFields
+        <PageAccountBookingBabysitterPersonalInfoFields
+            :form="form"
+        />
+
+        <PageAccountBookingBabysitterPaymentFields
             :form="form"
             :price-fields="priceFields"
+        />
+
+        <PageAccountBookingBabysitterExtraFields
+            :form="form"
             :new-certification="newCertification"
             :new-advantage="newAdvantage"
             @update:new-certification="newCertification = $event"
@@ -54,6 +45,24 @@
             :handle-calendar-month-change="handleCalendarMonthChange"
             :handle-calendar-view-mode-change="handleCalendarViewModeChange"
         />
+
+        <div class="flex gap-3">
+          <UButton
+              variant="outline"
+              :disabled="isSaving || isLoading"
+              @click="resetForm"
+          >
+            {{ t('account.nannyForm.reset') }}
+          </UButton>
+          <UButton
+              color="primary"
+              :loading="isSaving"
+              :disabled="isLoading"
+              @click="handleSubmit"
+          >
+            {{ hasProfile ? t('account.nannyForm.update') : t('account.nannyForm.create') }}
+          </UButton>
+        </div>
       </div>
     </div>
   </div>

@@ -245,6 +245,10 @@
       "advantagesPlaceholder": "Напрыклад: Мед адукацыя",
       "advantagesEmpty": "Дадайце перавагі",
       "add": "Дадаць",
+      "paymentTitle": "Аплата і ўмовы",
+      "paymentSubtitle": "Запоўніце кошты і ўмовы працы.",
+      "extraTitle": "Дадатковая інфармацыя",
+      "extraSubtitle": "Дадайце дадатковыя пажаданні і ўмовы.",
       "price": {
         "one": "1 дзіця",
         "two": "2 дзяцей",

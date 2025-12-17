@@ -243,6 +243,10 @@
       "advantagesPlaceholder": "e.g., Medical background",
       "advantagesEmpty": "Add advantages",
       "add": "Add",
+      "paymentTitle": "Payment & terms",
+      "paymentSubtitle": "Fill in rates and working conditions.",
+      "extraTitle": "Additional info",
+      "extraSubtitle": "Add any extra preferences and conditions.",
       "price": {
         "one": "1 child",
         "two": "2 children",
