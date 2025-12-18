@@ -1,4 +1,5 @@
 import type { BabysitterScheduleBlock, BabysitterSchedule, TimeInterval } from './useBabysitter'
+import { ScheduleMode } from '~/const/schedule'
 
 export type DateIntervalsMap = Record<string, TimeInterval[]>
 
@@ -72,18 +73,18 @@ export const buildDateMapFromBlocks = (
     blocks.forEach(block => {
       if (!block.schedules?.length) return
 
-      if (block.mode === 'allDays') {
+      if (block.mode === ScheduleMode.ALL_DAYS) {
         mergeIntervals(result, dateKey, block.schedules[0]?.intervals)
         return
       }
 
-      if (block.mode === 'weekly') {
+      if (block.mode === ScheduleMode.WEEKLY) {
         const match = block.schedules.find(schedule => schedule.dayOfWeek === dayOfWeek)
         if (match) mergeIntervals(result, dateKey, match.intervals)
         return
       }
 
-      if (block.mode === 'everyday') {
+      if (block.mode === ScheduleMode.EVERYDAY) {
         const match = block.schedules.find(schedule => schedule.date === dateKey)
         if (match) mergeIntervals(result, dateKey, match.intervals)
       }

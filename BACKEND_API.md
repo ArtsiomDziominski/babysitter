@@ -682,6 +682,7 @@ avatar: <File>
       "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
+      "showInSearch": true,
       "user": {
         "firstName": "Мария",
         "lastName": "Петрова",
@@ -728,6 +729,7 @@ avatar: <File>
   "rating": 4.8,
   "reviewsCount": 15,
   "available": true,
+  "showInSearch": true,
   "user": {
     "id": 2,
     "firstName": "Мария",
@@ -806,6 +808,7 @@ avatar: <File>
 - `petAttitude` — отношение к животным.
 - `advantages` — массив преимуществ.
 - `birthDate` — дата рождения в формате `YYYY-MM-DD`.
+- `showInSearch` (boolean, optional) — показывать профиль в поиске (по умолчанию `false`).
 
 **Body:**
 ```json
@@ -830,6 +833,7 @@ avatar: <File>
   "petAttitude": "Комфортно с животными",
   "advantages": ["Мед образование", "Английский"],
   "birthDate": "1999-05-01",
+  "showInSearch": true,
   "schedules": [
     {
       "mode": "weekly",
@@ -896,6 +900,7 @@ avatar: <File>
   "petAttitude": "Комфортно с животными",
   "advantages": ["Мед образование", "Английский"],
   "birthDate": "1999-05-01",
+  "showInSearch": true,
   "schedules": [
     {
       "mode": "weekly",
@@ -939,6 +944,61 @@ avatar: <File>
   ]
 }
 ```
+
+### Удалить профиль няни
+
+**DELETE** `/babysitters`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `babysitter`)
+
+**Response (200):**
+```json
+{
+  "message": "Профиль няни успешно удален"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если профиль няни не найден
+- `401 Unauthorized` - отсутствует/невалидный токен
+- `403 Forbidden` - недостаточно прав (требуется роль `babysitter`)
+
+**Примечание:** При удалении профиля няни также удаляются все связанные расписания (schedules), а роль пользователя сбрасывается на `null`.
+
+### Активировать/деактивировать профиль в поиске
+
+**PATCH** `/babysitters/search-visibility`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `babysitter`)
+
+**Body:**
+```json
+{
+  "showInSearch": true
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "userId": 2,
+  "showInSearch": true,
+  "available": true,
+  "rating": 4.8,
+  "reviewsCount": 15,
+  ...
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - если профиль няни не найден
+- `401 Unauthorized` - отсутствует/невалидный токен
+- `403 Forbidden` - недостаточно прав (требуется роль `babysitter`)
+
+**Примечание:** 
+- Если `showInSearch = false`, профиль не будет отображаться в результатах поиска (`GET /babysitters`)
+- Если `showInSearch = true`, профиль будет виден в поиске (при условии, что `available = true`)
 
 ---
 

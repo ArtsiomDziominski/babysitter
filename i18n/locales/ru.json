@@ -220,6 +220,14 @@
       "reset": "Сбросить",
       "create": "Создать",
       "update": "Обновить",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "cancel": "Отмена",
+      "confirmDeleteTitle": "Подтверждение удаления",
+      "confirmDeleteMessage": "Вы действительно хотите удалить профиль? Не волнуйтесь - вы всегда сможете создать новый профиль в любое время.",
+      "deleteSuccess": "Профиль удален",
+      "deleteError": "Ошибка при удалении",
+      "deleteErrorMessage": "Не удалось удалить профиль. Попробуйте еще раз.",
       "firstName": "Имя",
       "lastName": "Фамилия",
       "birthDate": "Дата рождения",
@@ -229,12 +237,19 @@
       "aboutPlaceholder": "Кратко опишите опыт и сильные стороны",
       "minOrder": "Минимальный заказ (BYN)",
       "minOrderPlaceholder": "1000",
+      "minOrderHint": "Минимальная сумма относится только к выезду няни, не относится к онлайн",
       "cancellationPolicy": "Политика отмены",
       "cancellationPolicyPlaceholder": "Отмена за 24 часа без штрафа",
       "onlineLesson": "Онлайн-занятие (BYN)",
       "onlineLessonPlaceholder": "800",
       "petAttitude": "Отношение к животным",
       "petAttitudePlaceholder": "Комфортно с животными",
+      "showInSearch": "Показывать в поиске",
+      "showInSearchTitle": "Профиль в поиске. Ждите заказы",
+      "hideFromSearch": "Убрать из поиска",
+      "showInSearchSuccess": "Профиль добавлен в поиск",
+      "hideFromSearchSuccess": "Профиль убран из поиска",
+      "toggleSearchVisibilityError": "Ошибка изменения видимости в поиске",
       "cardPayment": "Оплата картой",
       "infantCare": "Готова к младенцам",
       "specialNeedsCare": "Опыт с особыми детьми",
@@ -255,7 +270,11 @@
         "three": "3 ребенка",
         "four": "4 ребенка",
         "fivePlus": "5 детей и более"
-      }
+      },
+      "loadError": "Не удалось загрузить профиль",
+      "tryLater": "Попробуйте позже",
+      "saveSuccess": "Профиль сохранен",
+      "saveError": "Ошибка сохранения"
     },
     "basicData": {
       "title": "Основные данные",
@@ -497,6 +516,8 @@
           "title": "Дополнительные",
           "homework": "Помощь с уроками",
           "french": "Французский язык",
+          "georgian": "Грузинский язык",
+          "russian": "Русский язык",
           "music": "Музыкальное образование",
           "active": "Активный ситтер",
           "permanent": "Ищу постоянную семью",
@@ -516,7 +537,8 @@
           "singing": "Пение",
           "schoolPrep": "Подготовка к школе",
           "speechTherapist": "Логопед",
-          "autism": "Работаю с детьми с РАС"
+          "autism": "Работаю с детьми с РАС",
+          "medicalBook": "Медкнижка"
         }
       }
     },

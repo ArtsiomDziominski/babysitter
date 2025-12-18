@@ -8,51 +8,58 @@
             {{ t('account.nannyForm.subtitle') }}
           </p>
         </div>
+        <PageAccountBookingBabysitterActionButtons
+            :has-profile="hasProfile"
+            :is-editing="isEditing"
+            :is-loading="isLoading"
+            :show-in-search="form.showInSearch ?? false"
+            @edit="isEditing = true"
+            @deleted="handleDeleted"
+            @update:show-in-search="form.showInSearch = $event"
+        />
       </div>
 
       <div v-if="isLoading" class="flex items-center justify-center py-12">
         <UIcon name="i-heroicons-arrow-path" class="w-8 h-8 text-primary animate-spin"/>
       </div>
 
-      <div v-else class="space-y-10">
-        <PageAccountBookingBabysitterPersonalInfoFields
-            :form="form"
+      <div v-else-if="hasProfile && !isEditing" class="space-y-10">
+        <PageAccountBookingBabysitterShowInSearchBadge
+            v-if="form.showInSearch"
+            variant="top"
         />
+        <PageAccountBookingBabysitterProfileView
+            :profile="form"
+            :price-fields="priceFields"
+        />
+      </div>
+
+      <div v-else class="space-y-10">
+        <PageAccountBookingBabysitterPersonalInfoFields />
 
         <PageAccountBookingBabysitterPaymentFields
             :form="form"
             :price-fields="priceFields"
         />
 
-        <PageAccountBookingBabysitterExtraFields
-            :form="form"
-            :new-certification="newCertification"
-            :new-advantage="newAdvantage"
-            @update:new-certification="newCertification = $event"
-            @update:new-advantage="newAdvantage = $event"
-            @add-certification="addCertification"
-            @remove-certification="removeCertification"
-            @add-advantage="addAdvantage"
-            @remove-advantage="removeAdvantage"
-        />
+        <PageAccountBookingBabysitterExtraFields />
 
-        <PageAccountBookingBabysitterScheduleSection
-            :calendar-custom-map="calendarCustomMap"
-            :calendar-display-map="calendarDisplayMap"
-            :calendar-month-value="calendarMonthValue"
-            :calendar-view-mode="calendarViewMode"
-            :handle-calendar-change="handleCalendarChange"
-            :handle-calendar-month-change="handleCalendarMonthChange"
-            :handle-calendar-view-mode-change="handleCalendarViewModeChange"
-        />
+        <PageAccountBookingBabysitterScheduleSection />
+
+        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+          <label class="flex items-center gap-3 text-sm font-medium text-green-700 dark:text-green-400 cursor-pointer">
+            <UCheckbox v-model="form.showInSearch"/>
+            <span>{{ t('account.nannyForm.showInSearch') }}</span>
+          </label>
+        </div>
 
         <div class="flex gap-3">
           <UButton
               variant="outline"
               :disabled="isSaving || isLoading"
-              @click="resetForm"
+              @click="handleCancelEdit"
           >
-            {{ t('account.nannyForm.reset') }}
+            {{ hasProfile ? t('account.nannyForm.cancel') : t('account.nannyForm.reset') }}
           </UButton>
           <UButton
               color="primary"
@@ -64,6 +71,7 @@
           </UButton>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -71,21 +79,17 @@
 <script setup lang="ts">
 import type {
   BabysitterProfilePayload,
-  BabysitterScheduleBlock,
   BabysitterSchedule,
-  TimeInterval,
-  ScheduleMode
+  BabysitterScheduleBlock,
+  TimeInterval
 } from '~/composables/useBabysitter'
 import {
-  buildDateMapFromBlocks,
-  endOfMonth,
-  formatDateKey,
   mapEverydaySchedules,
   mapToEverydaySchedules,
   startOfMonth
 } from '~/composables/useScheduleTransform'
+import { ScheduleMode } from '~/const/schedule'
 import { useI18n } from '#imports'
-import { ScheduleViewMode } from '~/const/schedule'
 
 definePageMeta({
   middleware: ['auth', 'nanny-only']
@@ -95,10 +99,6 @@ const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
 const toast = useToast()
 const { t } = useI18n()
-
-function createInterval(): TimeInterval {
-  return { startTime: '', endTime: '' }
-}
 
 function buildDefaultForm(user?: { name?: string; surname?: string }): BabysitterProfilePayload {
   return {
@@ -121,6 +121,7 @@ function buildDefaultForm(user?: { name?: string; surname?: string }): Babysitte
     petAttitude: '',
     advantages: [],
     birthDate: '',
+    showInSearch: false,
     schedules: [],
   }
 }
@@ -142,21 +143,18 @@ const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value))
 const isLoading = ref(true)
 const isSaving = ref(false)
 const hasProfile = ref(false)
+const isEditing = ref(false)
 const form = ref<BabysitterProfilePayload>(buildDefaultForm(authStore.currentUser))
 const loadedSnapshot = ref<BabysitterProfilePayload | null>(null)
 
 const calendarMonth = ref<Date>(startOfMonth(new Date()))
-const calendarViewMode = ref<ScheduleViewMode>(ScheduleViewMode.WEEK)
 const calendarCustomMap = ref<Record<string, TimeInterval[]>>({})
 
-const scheduleMode = ref<ScheduleMode>('allDays')
+const scheduleMode = ref<ScheduleMode>(ScheduleMode.ALL_DAYS)
 
 const weeklySchedules = ref<BabysitterSchedule[]>([])
 const allDaysIntervals = ref<TimeInterval[]>([])
 const dateSchedules = ref<BabysitterSchedule[]>([])
-
-const newCertification = ref('')
-const newAdvantage = ref('')
 
 const priceFields: Array<{
   model: keyof Pick<BabysitterProfilePayload, 'priceOneChild' | 'priceTwoChildren' | 'priceThreeChildren' | 'priceFourChildren' | 'priceFiveChildren'>
@@ -166,16 +164,7 @@ const priceFields: Array<{
   { model: 'priceOneChild', label: t('account.nannyForm.price.one'), placeholder: '700' },
   { model: 'priceTwoChildren', label: t('account.nannyForm.price.two'), placeholder: '1200' },
   { model: 'priceThreeChildren', label: t('account.nannyForm.price.three'), placeholder: '1500' },
-  { model: 'priceFourChildren', label: t('account.nannyForm.price.four'), placeholder: '1800' },
-  { model: 'priceFiveChildren', label: t('account.nannyForm.price.fivePlus'), placeholder: '2000' },
 ]
-
-const calendarDisplayMap = computed(() => {
-  const blocks = getCurrentScheduleBlocks()
-  return buildDateMapFromBlocks(blocks, startOfMonth(calendarMonth.value), endOfMonth(calendarMonth.value))
-})
-
-const calendarMonthValue = computed(() => formatDateKey(calendarMonth.value))
 
 const normalizeInterval = (interval: TimeInterval): TimeInterval => ({
   startTime: interval?.startTime || '',
@@ -217,31 +206,29 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
   const blocks: BabysitterScheduleBlock[] = []
 
   const weekly = getNormalizedWeeklySchedules()
-  if (scheduleMode.value === 'weekly' && weekly.length) {
+  if (weekly.length) {
     blocks.push({
-      mode: 'weekly',
+      mode: ScheduleMode.WEEKLY,
       schedules: weekly,
     })
   }
 
-  if (scheduleMode.value === 'allDays') {
-    const intervals = getNormalizedAllDayIntervals()
-    if (intervals.length) {
-      blocks.push({
-        mode: 'allDays',
-        schedules: [
-          {
-            intervals,
-          },
-        ],
-      })
-    }
+  const intervals = getNormalizedAllDayIntervals()
+  if (intervals.length) {
+    blocks.push({
+      mode: ScheduleMode.ALL_DAYS,
+      schedules: [
+        {
+          intervals,
+        },
+      ],
+    })
   }
 
   const everydaySchedules = getEverydaySchedules()
-  if (everydaySchedules.length && (scheduleMode.value === 'everyday' || Object.keys(calendarCustomMap.value).length)) {
+  if (everydaySchedules.length) {
     blocks.push({
-      mode: 'everyday',
+      mode: ScheduleMode.EVERYDAY,
       schedules: everydaySchedules,
     })
   }
@@ -249,37 +236,15 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
   return blocks
 }
 
-const handleCalendarChange = (value: Record<string, TimeInterval[]>) => {
-  calendarCustomMap.value = value
-  const schedules = mapToEverydaySchedules(calendarCustomMap.value)
-  dateSchedules.value = schedules.length ? schedules.map(item => ({ ...item })) : []
-}
-
-const handleCalendarMonthChange = (value: string) => {
-  const parsed = new Date(value)
-  if (!isNaN(parsed.getTime())) {
-    calendarMonth.value = startOfMonth(parsed)
-  }
-}
-
-const handleCalendarViewModeChange = (mode: 'month' | 'week') => {
-  calendarViewMode.value = mode as ScheduleViewMode
-}
-
-const syncCalendarFromDates = () => {
-  if (scheduleMode.value !== 'everyday') return
-  calendarCustomMap.value = mapEverydaySchedules(dateSchedules.value)
-}
-
 watch(scheduleMode, (mode) => {
-  if (mode === 'everyday') {
+  if (mode === ScheduleMode.EVERYDAY) {
     calendarCustomMap.value = mapEverydaySchedules(dateSchedules.value)
   }
 })
 
 const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
   if (!blocks || !blocks.length) {
-    scheduleMode.value = 'allDays'
+    scheduleMode.value = ScheduleMode.ALL_DAYS
     weeklySchedules.value = []
     allDaysIntervals.value = []
     dateSchedules.value = []
@@ -287,14 +252,14 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
     return
   }
 
-  const weekly = blocks.find(block => block.mode === 'weekly')
-  const allDays = blocks.find(block => block.mode === 'allDays')
-  const everyday = blocks.find(block => block.mode === 'everyday')
+  const weekly = blocks.find(block => block.mode === ScheduleMode.WEEKLY)
+  const allDays = blocks.find(block => block.mode === ScheduleMode.ALL_DAYS)
+  const everyday = blocks.find(block => block.mode === ScheduleMode.EVERYDAY)
 
   calendarCustomMap.value = mapEverydaySchedules(everyday?.schedules)
 
   if (weekly) {
-    scheduleMode.value = 'weekly'
+    scheduleMode.value = ScheduleMode.WEEKLY
     weeklySchedules.value = (weekly.schedules || []).map(item => ({
       dayOfWeek: item.dayOfWeek ?? 1,
       intervals: (item.intervals && item.intervals.length ? item.intervals : []).map(normalizeInterval),
@@ -303,7 +268,7 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
 
   if (allDays) {
     if (!weekly) {
-      scheduleMode.value = 'allDays'
+      scheduleMode.value = ScheduleMode.ALL_DAYS
     }
     const intervals = allDays.schedules?.[0]?.intervals || []
     allDaysIntervals.value = (intervals.length ? intervals : []).map(normalizeInterval)
@@ -311,7 +276,7 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
 
   if (everyday) {
     if (!weekly && !allDays) {
-      scheduleMode.value = 'everyday'
+      scheduleMode.value = ScheduleMode.EVERYDAY
     }
     dateSchedules.value = (everyday.schedules || []).map(item => ({
       date: item.date || '',
@@ -320,7 +285,7 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
     return
   }
 
-  scheduleMode.value = 'allDays'
+  scheduleMode.value = ScheduleMode.ALL_DAYS
   allDaysIntervals.value = []
 }
 
@@ -333,99 +298,15 @@ const resetForm = () => {
 
   form.value = buildDefaultForm(authStore.currentUser)
   hasProfile.value = false
-  scheduleMode.value = 'allDays'
+  scheduleMode.value = ScheduleMode.ALL_DAYS
   weeklySchedules.value = []
   allDaysIntervals.value = []
   dateSchedules.value = []
-  calendarCustomMap.value = {}
-}
-
-const addWeeklyDay = () => {
-  weeklySchedules.value.push({ dayOfWeek: 1, intervals: [createInterval()] })
-}
-
-const removeWeeklyDay = (index: number) => {
-  if (weeklySchedules.value.length === 1) return
-  weeklySchedules.value.splice(index, 1)
-}
-
-const addWeeklyInterval = (dayIndex: number) => {
-  const day = weeklySchedules.value[dayIndex]
-  if (!day) return
-  day.intervals.push(createInterval())
-}
-
-const removeWeeklyInterval = (dayIndex: number, intervalIndex: number) => {
-  const day = weeklySchedules.value[dayIndex]
-  if (!day) return
-  if (day.intervals.length === 1) return
-  day.intervals.splice(intervalIndex, 1)
-}
-
-const addAllDayInterval = () => {
-  allDaysIntervals.value.push(createInterval())
-}
-
-const removeAllDayInterval = (index: number) => {
-  if (allDaysIntervals.value.length === 1) return
-  allDaysIntervals.value.splice(index, 1)
-}
-
-const addDateSchedule = () => {
-  dateSchedules.value.push({ date: '', intervals: [] })
-  syncCalendarFromDates()
-}
-
-const removeDateSchedule = (index: number) => {
-  if (dateSchedules.value.length === 1) return
-  dateSchedules.value.splice(index, 1)
-  syncCalendarFromDates()
-}
-
-const addDateInterval = (scheduleIndex: number) => {
-  const schedule = dateSchedules.value[scheduleIndex]
-  if (!schedule) return
-  schedule.intervals.push(createInterval())
-  syncCalendarFromDates()
-}
-
-const removeDateInterval = (scheduleIndex: number, intervalIndex: number) => {
-  const schedule = dateSchedules.value[scheduleIndex]
-  if (!schedule) return
-  if (schedule.intervals.length === 1) return
-  schedule.intervals.splice(intervalIndex, 1)
-  syncCalendarFromDates()
-}
-
-const addCertification = () => {
-  const value = newCertification.value.trim()
-  if (!value) return
-  form.value.certifications = [...(form.value.certifications || []), value]
-  newCertification.value = ''
-}
-
-const removeCertification = (index: number) => {
-  form.value.certifications = (form.value.certifications || []).filter((_, i) => i !== index)
-}
-
-const addAdvantage = () => {
-  const value = newAdvantage.value.trim()
-  if (!value) return
-  form.value.advantages = [...(form.value.advantages || []), value]
-  newAdvantage.value = ''
-}
-
-const removeAdvantage = (index: number) => {
-  form.value.advantages = (form.value.advantages || []).filter((_, i) => i !== index)
-}
-
-const buildSchedulesPayload = (): BabysitterScheduleBlock[] => {
-  const blocks = getCurrentScheduleBlocks()
-  return blocks
+  calendarCustomMap.value = {  }
 }
 
 const buildPayload = (): BabysitterProfilePayload => {
-  const payload: BabysitterProfilePayload = {
+  return {
     experience: normalizeNumber(form.value.experience),
     firstName: normalizeString(form.value.firstName),
     lastName: normalizeString(form.value.lastName),
@@ -445,10 +326,9 @@ const buildPayload = (): BabysitterProfilePayload => {
     petAttitude: normalizeString(form.value.petAttitude),
     advantages: (form.value.advantages || []).map(item => item.trim()).filter(Boolean),
     birthDate: normalizeString(form.value.birthDate),
-    schedules: buildSchedulesPayload(),
+    showInSearch: !!form.value.showInSearch,
+    schedules: getCurrentScheduleBlocks(),
   }
-
-  return payload
 }
 
 const loadProfile = async () => {
@@ -458,6 +338,7 @@ const loadProfile = async () => {
 
     if (profile) {
       hasProfile.value = true
+      isEditing.value = false
       form.value = {
         ...buildDefaultForm(authStore.currentUser),
         ...profile,
@@ -477,6 +358,7 @@ const loadProfile = async () => {
         birthDate: profile.birthDate ?? '',
         certifications: profile.certifications || [],
         advantages: profile.advantages || [],
+        showInSearch: profile.showInSearch ?? false,
         schedules: profile.schedules || [],
       }
       loadedSnapshot.value = clone(form.value)
@@ -486,8 +368,8 @@ const loadProfile = async () => {
     }
   } catch (error: any) {
     toast.add({
-      title: 'Не удалось загрузить профиль',
-      description: error.message || 'Попробуйте позже',
+      title: t('account.nannyForm.loadError'),
+      description: error.message || t('account.nannyForm.tryLater'),
       color: 'error',
     })
     resetForm()
@@ -511,21 +393,45 @@ const handleSubmit = async () => {
     }
     loadedSnapshot.value = clone(form.value)
     hasProfile.value = true
+    isEditing.value = false
     toast.add({
-      title: 'Профиль сохранен',
+      title: t('account.nannyForm.saveSuccess'),
       color: 'success',
     })
     await authStore.fetchProfile()
   } catch (error: any) {
     toast.add({
-      title: 'Ошибка сохранения',
-      description: error.message || 'Попробуйте позже',
+      title: t('account.nannyForm.saveError'),
+      description: error.message || t('account.nannyForm.tryLater'),
       color: 'error',
     })
   } finally {
     isSaving.value = false
   }
 }
+
+const handleCancelEdit = () => {
+  if (hasProfile.value && loadedSnapshot.value) {
+    form.value = clone(loadedSnapshot.value)
+    applySchedules(loadedSnapshot.value.schedules)
+    isEditing.value = false
+  } else {
+    resetForm()
+  }
+}
+
+const handleDeleted = () => {
+  hasProfile.value = false
+  isEditing.value = false
+  resetForm()
+}
+
+provide('babysitterForm', form)
+provide('babysitterIsSaving', isSaving)
+provide('babysitterIsLoading', isLoading)
+provide('babysitterDateSchedules', dateSchedules)
+provide('babysitterCalendarCustomMap', calendarCustomMap)
+provide('babysitterCalendarMonth', calendarMonth)
 
 onMounted(() => {
   loadProfile()

@@ -229,12 +229,15 @@
       "aboutPlaceholder": "Каротка апішыце досвед і моцныя бакі",
       "minOrder": "Мінімальны заказ (BYN)",
       "minOrderPlaceholder": "1000",
+      "minOrderHint": "Мінімальная сума адносіцца толькі да выезду няні, не адносіцца да анлайн",
       "cancellationPolicy": "Палітыка адмены",
       "cancellationPolicyPlaceholder": "Адмена за 24 гадз. без штрафу",
       "onlineLesson": "Анлайн-занятак (BYN)",
       "onlineLessonPlaceholder": "800",
       "petAttitude": "Адносіны да жывёл",
       "petAttitudePlaceholder": "Камфортна з жывёламі",
+      "showInSearch": "Паказваць у пошуку",
+      "showInSearchTitle": "Профіль у пошуку. Чакайце заказы",
       "cardPayment": "Аплата карткай",
       "infantCare": "Прыміц малых",
       "specialNeedsCare": "Досвед з асобыми дзецьмі",
@@ -255,7 +258,11 @@
         "three": "3 дзяцей",
         "four": "4 дзяцей",
         "fivePlus": "5 і больш дзяцей"
-      }
+      },
+      "loadError": "Не атрымалася загрузіць профіль",
+      "tryLater": "Паспрабуйце пазней",
+      "saveSuccess": "Профіль захаваны",
+      "saveError": "Памылка захавання"
     },
     "nannySchedule": {
       "title": "Расклад",
@@ -413,6 +420,8 @@
           "title": "Дадатковыя",
           "homework": "Дапамога з урокамі",
           "french": "Французская мова",
+          "georgian": "Грузінская мова",
+          "russian": "Русская мова",
           "music": "Музычная адукацыя",
           "active": "Актыўны сітэр",
           "permanent": "Шукаю пастаянную сям'ю",
@@ -432,7 +441,8 @@
           "singing": "Спевы",
           "schoolPrep": "Падрыхтоўка да школы",
           "speechTherapist": "Лагапед",
-          "autism": "Працую з дзецьмі з РАС"
+          "autism": "Працую з дзецьмі з РАС",
+          "medicalBook": "Медкніжка"
         }
       }
     },

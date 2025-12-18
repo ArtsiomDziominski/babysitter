@@ -227,12 +227,15 @@
       "aboutPlaceholder": "Briefly describe your experience and strengths",
       "minOrder": "Minimum order (BYN)",
       "minOrderPlaceholder": "1000",
+      "minOrderHint": "Minimum amount applies only to nanny visits, not to online",
       "cancellationPolicy": "Cancellation policy",
       "cancellationPolicyPlaceholder": "Cancel 24h in advance without fee",
       "onlineLesson": "Online lesson (BYN)",
       "onlineLessonPlaceholder": "800",
       "petAttitude": "Pet attitude",
       "petAttitudePlaceholder": "Comfortable with pets",
+      "showInSearch": "Show in search",
+      "showInSearchTitle": "Profile in search. Waiting for orders",
       "cardPayment": "Card payment",
       "infantCare": "Takes infants",
       "specialNeedsCare": "Special needs experience",
@@ -253,7 +256,11 @@
         "three": "3 children",
         "four": "4 children",
         "fivePlus": "5+ children"
-      }
+      },
+      "loadError": "Failed to load profile",
+      "tryLater": "Please try again later",
+      "saveSuccess": "Profile saved",
+      "saveError": "Save error"
     },
     "nannySchedule": {
       "title": "Schedule",
@@ -411,6 +418,8 @@
           "title": "Additional",
           "homework": "Homework help",
           "french": "French language",
+          "georgian": "Georgian language",
+          "russian": "Russian language",
           "music": "Music education",
           "active": "Active sitter",
           "permanent": "Looking for permanent family",
@@ -430,7 +439,8 @@
           "singing": "Singing",
           "schoolPrep": "School preparation",
           "speechTherapist": "Speech therapist",
-          "autism": "Works with children with ASD"
+          "autism": "Works with children with ASD",
+          "medicalBook": "Medical record book"
         }
       }
     },

@@ -3,3 +3,9 @@ export enum ScheduleViewMode {
   WEEK = 'week',
 }
 
+export enum ScheduleMode {
+  WEEKLY = 'weekly',
+  EVERYDAY = 'everyday',
+  ALL_DAYS = 'allDays',
+}
+

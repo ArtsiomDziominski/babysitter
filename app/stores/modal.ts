@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed } from 'vue'
+import { ref } from 'vue'
 
 export interface ModalAction {
   label: string

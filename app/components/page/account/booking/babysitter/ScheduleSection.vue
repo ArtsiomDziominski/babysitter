@@ -112,31 +112,48 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useI18n } from '#imports'
-import { addDays, endOfMonth, formatDateKey, startOfMonth } from '~/composables/useScheduleTransform'
+import { addDays, endOfMonth, formatDateKey, startOfMonth, mapToEverydaySchedules } from '~/composables/useScheduleTransform'
 import type { TimeInterval } from '~/composables/useBabysitter'
-
-const props = defineProps<{
-  calendarCustomMap: Record<string, TimeInterval[]>
-  calendarDisplayMap: Record<string, TimeInterval[]>
-  calendarMonthValue: string
-  calendarViewMode: 'month' | 'week'
-  handleCalendarChange: (value: Record<string, TimeInterval[]>) => void
-  handleCalendarMonthChange: (value: string) => void
-  handleCalendarViewModeChange: (mode: 'month' | 'week') => void
-}>()
+import { ScheduleViewMode } from '~/const/schedule'
 
 const { t } = useI18n()
 
-const displayMap = computed(() => props.calendarDisplayMap || props.calendarCustomMap || {})
+const calendarMonth = inject<Ref<Date>>('babysitterCalendarMonth')
+const calendarCustomMap = inject<Ref<Record<string, TimeInterval[]>>>('babysitterCalendarCustomMap')
+const dateSchedules = inject<Ref<any[]>>('babysitterDateSchedules')
 
-const parsedMonth = computed(() => {
-  const parsed = new Date(props.calendarMonthValue)
-  return isNaN(parsed.getTime()) ? startOfMonth(new Date()) : parsed
-})
+if (!calendarMonth || !calendarCustomMap || !dateSchedules) {
+  throw new Error('Required calendar state is not provided')
+}
+
+const calendarViewMode = ref<ScheduleViewMode>(ScheduleViewMode.WEEK)
+
+const handleCalendarChange = (value: Record<string, TimeInterval[]>) => {
+  calendarCustomMap.value = value
+  const schedules = mapToEverydaySchedules(calendarCustomMap.value)
+  dateSchedules.value = schedules.length ? schedules.map(item => ({ ...item })) : []
+}
+
+const handleCalendarMonthChange = (value: string) => {
+  const parsed = new Date(value)
+  if (!isNaN(parsed.getTime())) {
+    calendarMonth.value = startOfMonth(parsed)
+  }
+}
+
+const handleCalendarViewModeChange = (mode: 'month' | 'week') => {
+  calendarViewMode.value = mode as ScheduleViewMode
+}
+
+const displayMap = computed(() => calendarCustomMap.value || {})
+
+const parsedMonth = computed(() => calendarMonth.value)
 
 const monthLabel = computed(() =>
     parsedMonth.value.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
 )
+
+const calendarMonthValue = computed(() => formatDateKey(calendarMonth.value))
 
 const weekdayLabels = computed(() => {
   const raw = t('account.nannySchedule.weekdaysShort') as string
@@ -192,7 +209,7 @@ const selectedDateLabel = computed(() => {
 
 const openEditor = (dateKey: string) => {
   selectedDateKey.value = dateKey
-  const source = props.calendarCustomMap?.[dateKey] || displayMap.value[dateKey] || []
+  const source = calendarCustomMap.value?.[dateKey] || displayMap.value[dateKey] || []
   draftIntervals.value = source.map(interval => ({ ...interval }))
   if (!draftIntervals.value.length) {
     draftIntervals.value = [{ startTime: '', endTime: '' }]
@@ -224,38 +241,38 @@ const saveDraft = () => {
       }))
       .filter(interval => interval.startTime && interval.endTime)
 
-  const next = { ...(props.calendarCustomMap || {}) }
+  const next = { ...calendarCustomMap.value }
   if (clean.length) {
     next[selectedDateKey.value] = clean
   } else {
     delete next[selectedDateKey.value]
   }
 
-  props.handleCalendarChange(next)
+  handleCalendarChange(next)
   closeModal()
 }
 
 const setViewMode = (mode: 'month' | 'week') => {
-  props.handleCalendarViewModeChange(mode)
+  handleCalendarViewModeChange(mode)
 }
 
 const goPrev = () => {
-  if (props.calendarViewMode === 'month') {
+  if (calendarViewMode.value === 'month') {
     const next = new Date(parsedMonth.value.getFullYear(), parsedMonth.value.getMonth() - 1, 1)
-    props.handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
+    handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
   } else {
     const next = addDays(parsedMonth.value, -7)
-    props.handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
+    handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
   }
 }
 
 const goNext = () => {
-  if (props.calendarViewMode === 'month') {
+  if (calendarViewMode.value === 'month') {
     const next = new Date(parsedMonth.value.getFullYear(), parsedMonth.value.getMonth() + 1, 1)
-    props.handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
+    handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
   } else {
     const next = addDays(parsedMonth.value, 7)
-    props.handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
+    handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
   }
 }
 </script>

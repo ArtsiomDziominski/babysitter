@@ -54,9 +54,10 @@
 import { useI18n } from '#imports'
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
 
-defineProps<{
-  form: BabysitterProfilePayload
-}>()
+const form = inject<Ref<BabysitterProfilePayload>>('babysitterForm')
+if (!form) {
+  throw new Error('babysitterForm is not provided')
+}
 
 const { t } = useI18n()
 </script>

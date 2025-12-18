@@ -1,7 +1,8 @@
 import { useApi } from './useApi'
 import { useAuth } from './useAuth'
+import type { ScheduleMode } from '~/const/schedule'
 
-export type ScheduleMode = 'weekly' | 'everyday' | 'allDays'
+export type { ScheduleMode }
 
 export interface TimeInterval {
   startTime: string
@@ -40,6 +41,7 @@ export interface BabysitterProfilePayload {
   petAttitude?: string | null
   advantages?: string[]
   birthDate?: string | null
+  showInSearch?: boolean
   schedules?: BabysitterScheduleBlock[]
 }
 
@@ -66,10 +68,25 @@ export const useBabysitter = () => {
     })
   }
 
+  const deleteBabysitter = async (): Promise<void> => {
+    return await api.request<void>('/babysitters', {
+      method: 'DELETE',
+    })
+  }
+
+  const toggleSearchVisibility = async (showInSearch: boolean): Promise<BabysitterProfilePayload> => {
+    return await api.request<BabysitterProfilePayload>('/babysitters/search-visibility', {
+      method: 'PATCH',
+      body: JSON.stringify({ showInSearch }),
+    })
+  }
+
   return {
     fetchMyBabysitter,
     createBabysitter,
     updateBabysitter,
+    deleteBabysitter,
+    toggleSearchVisibility,
   }
 }
 

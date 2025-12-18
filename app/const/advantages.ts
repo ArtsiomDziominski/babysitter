@@ -1,0 +1,30 @@
+export enum AdvantageKey {
+    GEORGIAN = 'georgian',
+    RUSSIAN = 'russian',
+    ENGLISH = 'english',
+    FRENCH = 'french',
+    HOMEWORK = 'homework',
+    MUSIC = 'music',
+    ACTIVE = 'active',
+    PERMANENT = 'permanent',
+    PEDAGOGICAL = 'pedagogical',
+    WEATHER = 'weather',
+    HOUSEWORK = 'housework',
+    DRIVER = 'driver',
+    NIGHT = 'night',
+    RELOCATION = 'relocation',
+    MEDICAL = 'medical',
+    FIRST_AID = 'firstAid',
+    SCULPTING = 'sculpting',
+    SICK = 'sick',
+    PAINTING = 'painting',
+    PSYCHOLOGY = 'psychology',
+    SINGING = 'singing',
+    SCHOOL_PREP = 'schoolPrep',
+    SPEECH_THERAPIST = 'speechTherapist',
+    AUTISM = 'autism',
+    MEDICAL_BOOK = 'medicalBook',
+}
+
+export const ADVANTAGE_KEYS = Object.values(AdvantageKey)
+
