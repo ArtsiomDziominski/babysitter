@@ -280,6 +280,9 @@
       "save": "Save",
       "cancel": "Cancel",
       "weekdaysShort": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+      "applyToAllDays": "Apply to all days of the week",
+      "applyToWeekdays": "Apply to weekdays",
+      "applyToDayOfWeek": "Apply only to this day of the week",
       "modes": {
         "allDays": "All days",
         "weekly": "Weekly",

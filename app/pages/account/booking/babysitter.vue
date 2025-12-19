@@ -154,6 +154,7 @@ const scheduleMode = ref<ScheduleMode>(ScheduleMode.ALL_DAYS)
 
 const weeklySchedules = ref<BabysitterSchedule[]>([])
 const allDaysIntervals = ref<TimeInterval[]>([])
+const isRecurringAllDays = ref(false)
 const dateSchedules = ref<BabysitterSchedule[]>([])
 
 const priceFields: Array<{
@@ -178,6 +179,7 @@ const getNormalizedWeeklySchedules = () => {
         intervals: item.intervals
             .map(normalizeInterval)
             .filter(interval => interval.startTime && interval.endTime),
+        isRecurring: item.isRecurring,
       }))
       .filter(item => item.dayOfWeek !== undefined && item.intervals.length)
 }
@@ -207,10 +209,23 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
 
   const weekly = getNormalizedWeeklySchedules()
   if (weekly.length) {
-    blocks.push({
-      mode: ScheduleMode.WEEKLY,
-      schedules: weekly,
-    })
+    const recurringWeekly = weekly.filter(s => s.isRecurring)
+    const nonRecurringWeekly = weekly.filter(s => !s.isRecurring)
+    
+    if (recurringWeekly.length) {
+      blocks.push({
+        mode: ScheduleMode.WEEKLY,
+        schedules: recurringWeekly,
+        isRecurring: true,
+      })
+    }
+    
+    if (nonRecurringWeekly.length) {
+      blocks.push({
+        mode: ScheduleMode.WEEKLY,
+        schedules: nonRecurringWeekly,
+      })
+    }
   }
 
   const intervals = getNormalizedAllDayIntervals()
@@ -222,6 +237,7 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
           intervals,
         },
       ],
+      isRecurring: isRecurringAllDays.value,
     })
   }
 
@@ -233,6 +249,7 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
     })
   }
 
+  console.log(blocks)
   return blocks
 }
 
@@ -247,6 +264,7 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
     scheduleMode.value = ScheduleMode.ALL_DAYS
     weeklySchedules.value = []
     allDaysIntervals.value = []
+    isRecurringAllDays.value = false
     dateSchedules.value = []
     calendarCustomMap.value = {}
     return
@@ -263,6 +281,7 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
     weeklySchedules.value = (weekly.schedules || []).map(item => ({
       dayOfWeek: item.dayOfWeek ?? 1,
       intervals: (item.intervals && item.intervals.length ? item.intervals : []).map(normalizeInterval),
+      isRecurring: item.isRecurring ?? weekly.isRecurring ?? false,
     }))
   }
 
@@ -272,6 +291,7 @@ const applySchedules = (blocks?: BabysitterScheduleBlock[]) => {
     }
     const intervals = allDays.schedules?.[0]?.intervals || []
     allDaysIntervals.value = (intervals.length ? intervals : []).map(normalizeInterval)
+    isRecurringAllDays.value = allDays.isRecurring ?? false
   }
 
   if (everyday) {
@@ -301,6 +321,7 @@ const resetForm = () => {
   scheduleMode.value = ScheduleMode.ALL_DAYS
   weeklySchedules.value = []
   allDaysIntervals.value = []
+  isRecurringAllDays.value = false
   dateSchedules.value = []
   calendarCustomMap.value = {  }
 }
@@ -432,6 +453,9 @@ provide('babysitterIsLoading', isLoading)
 provide('babysitterDateSchedules', dateSchedules)
 provide('babysitterCalendarCustomMap', calendarCustomMap)
 provide('babysitterCalendarMonth', calendarMonth)
+provide('babysitterWeeklySchedules', weeklySchedules)
+provide('babysitterAllDaysIntervals', allDaysIntervals)
+provide('babysitterIsRecurringAllDays', isRecurringAllDays)
 
 onMounted(() => {
   loadProfile()

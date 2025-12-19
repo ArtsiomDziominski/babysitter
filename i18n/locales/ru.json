@@ -429,6 +429,9 @@
       "save": "Сохранить",
       "cancel": "Отмена",
       "weekdaysShort": "Пн,Вт,Ср,Чт,Пт,Сб,Вс",
+      "applyToAllDays": "Применить ко всем дням недели",
+      "applyToWeekdays": "Применить к будним дням",
+      "applyToDayOfWeek": "Применить только ко дню недели этой",
       "modes": {
         "allDays": "Все дни",
         "weekly": "Еженедельно",

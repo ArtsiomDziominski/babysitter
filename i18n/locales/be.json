@@ -282,6 +282,9 @@
       "save": "Захаваць",
       "cancel": "Адмена",
       "weekdaysShort": "Пн,Аў,Ср,Чц,Пт,Сб,Нд",
+      "applyToAllDays": "Прымяніць да ўсіх дзён тыдня",
+      "applyToWeekdays": "Прымяніць да будніх дзён",
+      "applyToDayOfWeek": "Прымяніць толькі да дня тыдня гэтай",
       "modes": {
         "allDays": "Усе дні",
         "weekly": "Штотыдзень",

@@ -198,11 +198,31 @@ Authorization: Bearer <your_jwt_token>
   "lastName": "Иванов",
   "phone": "+79001234567",
   "avatar": "avatars/1-1704067200000.jpg",
-  "createdAt": "2024-01-01T00:00:00.000Z"
+  "twoFactorEnabled": false,
+  "isActive": true,
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "children": [
+    {
+      "id": 1,
+      "parentId": 1,
+      "name": "Мария",
+      "age": 5,
+      "dateOfBirth": "2019-01-15",
+      "specialNeeds": null,
+      "allergies": "Орехи",
+      "notes": null,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ]
 }
 ```
 
-**Примечание:** Поле `avatar` содержит ключ файла в MinIO. Для получения URL используйте endpoint `GET /users/profile/avatar` или, если настроен публичный доступ, напрямую: `http://localhost:9000/{avatar}`
+**Примечания:**
+- Поле `avatar` содержит ключ файла в MinIO. Для получения URL используйте endpoint `GET /users/profile/avatar` или, если настроен публичный доступ, напрямую: `http://localhost:9000/{avatar}`
+- Поле `role` может быть `null`, `"parent"`, `"babysitter"` или `"admin"`
+- Поле `children` - массив детей пользователя (заполняется только для роли `parent`)
 
 ### Обновить профиль
 
@@ -698,6 +718,91 @@ avatar: <File>
   }
 }
 ```
+
+### Получить свой профиль няни
+
+**GET** `/babysitters/profile`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `babysitter`)
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "userId": 2,
+  "birthDate": "1999-05-01",
+  "experience": 3,
+  "hourlyRate": 700,
+  "certifications": ["CPR", "First Aid"],
+  "bio": "Опытная няня с 3 годами стажа",
+  "rating": 4.8,
+  "reviewsCount": 15,
+  "available": true,
+  "showInSearch": true,
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z",
+  "user": {
+    "id": 2,
+    "email": "maria@example.com",
+    "role": "babysitter",
+    "firstName": "Мария",
+    "lastName": "Петрова",
+    "phone": "+79001234568",
+    "avatar": "avatars/2-1704067200000.jpg",
+    "twoFactorEnabled": false,
+    "isActive": true,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  "schedules": [
+    {
+      "mode": "weekly",
+      "isRecurring": true,
+      "schedules": [
+        {
+          "dayOfWeek": 1,
+          "intervals": [
+            { "startTime": "09:00", "endTime": "12:00" },
+            { "startTime": "14:00", "endTime": "18:00" }
+          ],
+          "isRecurring": true
+        }
+      ]
+    },
+    {
+      "mode": "everyday",
+      "schedules": [
+        {
+          "date": "2024-05-01",
+          "intervals": [
+            { "startTime": "10:00", "endTime": "16:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "allDays",
+      "isRecurring": false,
+      "schedules": [
+        {
+          "intervals": [
+            { "startTime": "08:00", "endTime": "20:00" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - профиль няни не найден
+- `401 Unauthorized` - отсутствует/невалидный токен
+- `403 Forbidden` - недостаточно прав (требуется роль `babysitter`)
+
+**Примечания:**
+- Эндпоинт возвращает полный профиль няни с информацией о пользователе и расписанием
+- Поле `schedules` содержит отформатированное расписание в виде блоков с разными режимами (`weekly`, `everyday`, `allDays`)
 
 ### Получить детали няни
 

@@ -11,20 +11,28 @@
           v-for="slot in monthGrid"
           :key="slot.key"
           :class="[
-            'rounded-lg border p-2 min-h-[110px] bg-white dark:bg-gray-800 cursor-pointer transition-colors',
-            slot.intervals.length
-              ? 'border-green-200 dark:border-green-700 hover:border-green-300 dark:hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20'
-              : 'border-gray-200 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-600 hover:bg-green-50 dark:hover:bg-green-900/20'
+            'rounded-lg border p-2 min-h-[110px] transition-colors',
+            slot.isPast
+              ? 'bg-gray-100 dark:bg-gray-900 border-gray-300 dark:border-gray-600 opacity-60 cursor-not-allowed'
+              : slot.intervals.length
+                ? 'bg-white dark:bg-gray-800 border-green-200 dark:border-green-700 hover:border-green-300 dark:hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 cursor-pointer'
+                : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-green-200 dark:hover:border-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 cursor-pointer'
           ]"
-          @click="$emit('edit', slot.key)"
+          @click="!slot.isPast && $emit('edit', slot.key)"
       >
         <div class="flex items-center justify-between mb-2">
           <span
-              class="text-sm font-medium text-gray-900 dark:text-white hover:text-green-600 dark:hover:text-green-300 cursor-pointer"
+              :class="[
+                'text-sm font-medium',
+                slot.isPast
+                  ? 'text-gray-400 dark:text-gray-600'
+                  : 'text-gray-900 dark:text-white hover:text-green-600 dark:hover:text-green-300 cursor-pointer'
+              ]"
           >
             {{ slot.day }}
           </span>
           <UButton
+              v-if="!slot.isPast"
               icon="i-heroicons-pencil-square"
               variant="ghost"
               size="xs"
@@ -60,6 +68,7 @@ interface MonthSlot {
   key: string
   day: number
   intervals: TimeInterval[]
+  isPast: boolean
 }
 
 defineProps<{

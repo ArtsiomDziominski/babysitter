@@ -4,19 +4,40 @@
         v-for="day in weekGrid"
         :key="day.key"
         :class="[
-          'rounded-lg border p-3 bg-white dark:bg-gray-800 cursor-pointer',
-          day.intervals.length
-            ? 'border-green-200 dark:border-green-700'
-            : 'border-gray-200 dark:border-gray-700'
+          'rounded-lg border p-3 transition-colors',
+          day.isPast
+            ? 'bg-gray-100 dark:bg-gray-900 border-gray-300 dark:border-gray-600 opacity-60 cursor-not-allowed'
+            : day.intervals.length
+              ? 'bg-white dark:bg-gray-800 border-green-200 dark:border-green-700 cursor-pointer'
+              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 cursor-pointer'
         ]"
-        @click="$emit('edit', day.key)"
+        @click="!day.isPast && $emit('edit', day.key)"
     >
       <div class="flex items-center justify-between mb-2">
         <div class="flex items-center gap-2">
-          <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ day.label }}</span>
-          <span class="text-xs text-gray-500 dark:text-gray-400">{{ day.dateLabel }}</span>
+          <span
+              :class="[
+                'text-sm font-semibold',
+                day.isPast
+                  ? 'text-gray-400 dark:text-gray-600'
+                  : 'text-gray-900 dark:text-white'
+              ]"
+          >
+            {{ day.label }}
+          </span>
+          <span
+              :class="[
+                'text-xs',
+                day.isPast
+                  ? 'text-gray-400 dark:text-gray-600'
+                  : 'text-gray-500 dark:text-gray-400'
+              ]"
+          >
+            {{ day.dateLabel }}
+          </span>
         </div>
         <UButton
+            v-if="!day.isPast"
             icon="i-heroicons-pencil-square"
             variant="ghost"
             size="md"
@@ -52,6 +73,7 @@ interface WeekSlot {
   label: string
   dateLabel: string
   intervals: TimeInterval[]
+  isPast: boolean
 }
 
 defineProps<{

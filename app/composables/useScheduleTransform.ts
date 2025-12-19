@@ -57,6 +57,17 @@ export const mapToEverydaySchedules = (map: DateIntervalsMap): BabysitterSchedul
     }))
 }
 
+const setIntervals = (target: DateIntervalsMap, dateKey: string, intervals?: TimeInterval[]) => {
+  if (!intervals || !intervals.length) return
+  const normalized = intervals
+    .map(normalizeInterval)
+    .filter(interval => interval.startTime && interval.endTime)
+
+  if (!normalized.length) return
+
+  target[dateKey] = normalized
+}
+
 export const buildDateMapFromBlocks = (
   blocks: BabysitterScheduleBlock[] | undefined,
   start: Date,
@@ -65,10 +76,31 @@ export const buildDateMapFromBlocks = (
   const result: DateIntervalsMap = {}
   if (!blocks?.length) return result
 
+  const everydayDates = new Set<string>()
+  const everydayMap: DateIntervalsMap = {}
+
+  blocks.forEach(block => {
+    if (!block.schedules?.length) return
+
+    if (block.mode === ScheduleMode.EVERYDAY) {
+      block.schedules.forEach(schedule => {
+        if (schedule.date) {
+          everydayDates.add(schedule.date)
+          setIntervals(everydayMap, schedule.date, schedule.intervals)
+        }
+      })
+    }
+  })
+
   const endTime = end.getTime()
   for (let current = new Date(start); current.getTime() <= endTime; current = addDays(current, 1)) {
     const dateKey = formatDateKey(current)
     const dayOfWeek = current.getDay()
+
+    if (everydayDates.has(dateKey)) {
+      result[dateKey] = [...(everydayMap[dateKey] || [])]
+      continue
+    }
 
     blocks.forEach(block => {
       if (!block.schedules?.length) return
@@ -80,12 +112,6 @@ export const buildDateMapFromBlocks = (
 
       if (block.mode === ScheduleMode.WEEKLY) {
         const match = block.schedules.find(schedule => schedule.dayOfWeek === dayOfWeek)
-        if (match) mergeIntervals(result, dateKey, match.intervals)
-        return
-      }
-
-      if (block.mode === ScheduleMode.EVERYDAY) {
-        const match = block.schedules.find(schedule => schedule.date === dateKey)
         if (match) mergeIntervals(result, dateKey, match.intervals)
       }
     })

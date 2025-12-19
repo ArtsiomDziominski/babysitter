@@ -13,11 +13,13 @@ export interface BabysitterSchedule {
   dayOfWeek?: number
   date?: string
   intervals: TimeInterval[]
+  isRecurring?: boolean
 }
 
 export interface BabysitterScheduleBlock {
   mode: ScheduleMode
   schedules: BabysitterSchedule[]
+  isRecurring?: boolean
 }
 
 export interface BabysitterProfilePayload {
