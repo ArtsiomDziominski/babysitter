@@ -14,46 +14,57 @@
       />
     </div>
     <div class="flex items-center gap-2">
-      <UButton
-        :variant="viewMode === 'list' ? 'solid' : 'outline'"
-        color="primary"
-        size="sm"
-        @click="$emit('update:viewMode', 'list')"
-      >
-        <Icon name="i-lucide-list" />
-      </UButton>
-      <UButton
-        :variant="viewMode === 'card' ? 'solid' : 'outline'"
-        color="primary"
-        size="sm"
-        @click="$emit('update:viewMode', 'card')"
-      >
-        <Icon name="i-lucide-grid" />
-      </UButton>
-      <UButton
-        :variant="viewMode === 'map' ? 'solid' : 'outline'"
-        color="primary"
-        size="sm"
-        @click="$emit('update:viewMode', 'map')"
-      >
-        <Icon name="i-lucide-map" />
-      </UButton>
+      <UTooltip :text="$t('bookings.view.tooltip.list')">
+        <UButton
+          :variant="viewMode === SearchViewMode.LIST ? 'solid' : 'outline'"
+          :class="viewMode === SearchViewMode.LIST ? '' : 'cursor-pointer'"
+          color="primary"
+          size="sm"
+          @click="$emit('update:viewMode', SearchViewMode.LIST)"
+        >
+          <Icon name="i-lucide-list" />
+        </UButton>
+      </UTooltip>
+      <UTooltip :text="$t('bookings.view.tooltip.card')">
+        <UButton
+          :variant="viewMode === SearchViewMode.CARD ? 'solid' : 'outline'"
+          :class="viewMode === SearchViewMode.CARD ? '' : 'cursor-pointer'"
+          color="primary"
+          size="sm"
+          @click="$emit('update:viewMode', SearchViewMode.CARD)"
+        >
+          <Icon name="i-lucide-grid" />
+        </UButton>
+      </UTooltip>
+      <UTooltip :text="$t('bookings.view.tooltip.map')">
+        <UButton
+          :variant="viewMode === SearchViewMode.MAP ? 'solid' : 'outline'"
+          :class="viewMode === SearchViewMode.MAP ? '' : 'cursor-pointer'"
+          color="primary"
+          size="sm"
+          @click="$emit('update:viewMode', SearchViewMode.MAP)"
+        >
+          <Icon name="i-lucide-map" />
+        </UButton>
+      </UTooltip>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { SearchViewMode, type SearchViewModeType } from '~/const/viewMode'
+
 const { t } = useI18n()
 
 defineProps<{
   count: number
   sortBy: string
-  viewMode: 'list' | 'card' | 'map'
+  viewMode: SearchViewModeType
 }>()
 
 defineEmits<{
   'update:sortBy': [value: string]
-  'update:viewMode': [value: 'list' | 'card' | 'map']
+  'update:viewMode': [value: SearchViewModeType]
 }>()
 
 const sortOptions = computed(() => {

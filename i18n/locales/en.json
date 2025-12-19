@@ -413,7 +413,7 @@
         "title": "Sitter advantages",
         "main": {
           "title": "Main",
-          "kidsoutSchool": "Kidsout School",
+          "kidsoutSchool": "School",
           "infants": "Sits with infants",
           "specialNeeds": "Sits with special needs children"
         },
@@ -449,7 +449,7 @@
     },
     "sort": {
       "title": "Sort",
-      "recommended": "Kidsout Recommendations",
+      "recommended": "Recommendations",
       "priceAsc": "Price: ascending",
       "priceDesc": "Price: descending",
       "rating": "By rating",
@@ -457,10 +457,18 @@
     },
     "view": {
       "list": "List",
-      "map": "On map"
+      "card": "Cards",
+      "map": "On map",
+      "tooltip": {
+        "list": "Show list",
+        "card": "Show cards",
+        "map": "Show on map"
+      }
     },
     "found": "Found",
+    "loading": "Loading...",
     "empty": "No sitters found. Try changing search parameters.",
+    "emptyShort": "No sitters found",
     "mapPlaceholder": "Map will be here",
     "sitter": {
       "new": "New babysitter",
@@ -469,7 +477,8 @@
       "returned": "Returned",
       "returnedPlural": "Returned",
       "book": "Book",
-      "perHour": "/hour"
+      "perHour": "/hour",
+      "details": "Details"
     }
   },
   "common": {

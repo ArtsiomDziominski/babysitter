@@ -46,6 +46,61 @@ export interface BabysitterProfilePayload {
   schedules?: BabysitterScheduleBlock[]
 }
 
+export interface BabysitterListItem {
+  id: number
+  userId: number
+  firstName: string
+  lastName: string
+  age?: number
+  experience?: number
+  certifications?: string[]
+  bio?: string
+  cardPaymentAvailable?: boolean
+  minOrderAmount?: string
+  priceOneChild?: string
+  priceTwoChildren?: string
+  priceThreeChildren?: string
+  priceFourChildren?: string
+  priceFiveChildren?: string
+  onlineLesson?: string
+  cancellationPolicy?: string
+  infantCare?: boolean
+  specialNeedsCare?: boolean
+  petAttitude?: string
+  advantages?: string[]
+  birthDate?: string
+  rating?: string
+  reviewsCount?: number
+  showInSearch?: boolean
+  available?: boolean
+  hourlyRate?: number | null
+  createdAt?: string
+  updatedAt?: string
+}
+
+export interface BabysittersListResponse {
+  data: {
+    data: BabysitterListItem[]
+    meta: {
+      page: number
+      limit: number
+      total: number
+      totalPages: number
+    }
+  }
+  statusCode: number
+}
+
+export interface FetchBabysittersParams {
+  page?: number
+  limit?: number
+  minAge?: number
+  maxAge?: number
+  minRate?: number
+  maxRate?: number
+  search?: string
+}
+
 export const useBabysitter = () => {
   const api = useApi()
 
@@ -84,12 +139,32 @@ export const useBabysitter = () => {
     })
   }
 
+  const fetchBabysitters = async (params?: FetchBabysittersParams): Promise<BabysittersListResponse> => {
+    const queryParams = new URLSearchParams()
+
+    if (params?.page) queryParams.append('page', params.page.toString())
+    if (params?.limit) queryParams.append('limit', params.limit.toString())
+    if (params?.minAge) queryParams.append('minAge', params.minAge.toString())
+    if (params?.maxAge) queryParams.append('maxAge', params.maxAge.toString())
+    if (params?.minRate) queryParams.append('minRate', params.minRate.toString())
+    if (params?.maxRate) queryParams.append('maxRate', params.maxRate.toString())
+    if (params?.search) queryParams.append('search', params.search)
+
+    const queryString = queryParams.toString()
+    const endpoint = `/babysitters${queryString ? `?${queryString}` : ''}`
+
+    return await api.request<BabysittersListResponse>(endpoint, {
+        method: 'GET',
+    })
+  }
+
   return {
     fetchMyBabysitter,
     createBabysitter,
     updateBabysitter,
     deleteBabysitter,
     toggleSearchVisibility,
+    fetchBabysitters,
   }
 }
 
