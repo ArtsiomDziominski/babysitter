@@ -682,6 +682,8 @@ avatar: <File>
     {
       "id": 1,
       "userId": 2,
+      "firstName": "Мария",
+      "lastName": "Петрова",
       "age": 25,
       "experience": 3,
       "certifications": ["CPR", "First Aid"],
@@ -702,12 +704,7 @@ avatar: <File>
       "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
-      "showInSearch": true,
-      "user": {
-        "firstName": "Мария",
-        "lastName": "Петрова",
-        "phone": "+79001234568"
-      }
+      "showInSearch": true
     }
   ],
   "meta": {
@@ -730,6 +727,8 @@ avatar: <File>
 {
   "id": 1,
   "userId": 2,
+  "firstName": "Мария",
+  "lastName": "Петрова",
   "birthDate": "1999-05-01",
   "experience": 3,
   "hourlyRate": 700,
@@ -741,19 +740,6 @@ avatar: <File>
   "showInSearch": true,
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z",
-  "user": {
-    "id": 2,
-    "email": "maria@example.com",
-    "role": "babysitter",
-    "firstName": "Мария",
-    "lastName": "Петрова",
-    "phone": "+79001234568",
-    "avatar": "avatars/2-1704067200000.jpg",
-    "twoFactorEnabled": false,
-    "isActive": true,
-    "createdAt": "2024-01-01T00:00:00.000Z",
-    "updatedAt": "2024-01-01T00:00:00.000Z"
-  },
   "schedules": [
     {
       "mode": "weekly",
@@ -813,6 +799,8 @@ avatar: <File>
 {
   "id": 1,
   "userId": 2,
+  "firstName": "Мария",
+  "lastName": "Петрова",
   "age": 25,
   "experience": 3,
   "certifications": ["CPR", "First Aid"],
@@ -835,13 +823,6 @@ avatar: <File>
   "reviewsCount": 15,
   "available": true,
   "showInSearch": true,
-  "user": {
-    "id": 2,
-    "firstName": "Мария",
-    "lastName": "Петрова",
-    "phone": "+79001234568",
-    "email": "maria@example.com"
-  },
   "schedules": [
     {
       "mode": "weekly",
