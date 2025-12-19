@@ -23,7 +23,6 @@ export interface ApiUser {
   isActive?: boolean
   createdAt?: string
   updatedAt?: string
-  babysitter?: any | null
   children?: any[]
 }
 

@@ -35,7 +35,6 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         avatar: apiUser.avatar,
         role: mapApiRoleToFrontend(apiUser.role),
         children: apiUser.children || undefined,
-        babysitter: apiUser.babysitter ?? null,
     }
 }
 

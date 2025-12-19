@@ -211,7 +211,7 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
   if (weekly.length) {
     const recurringWeekly = weekly.filter(s => s.isRecurring)
     const nonRecurringWeekly = weekly.filter(s => !s.isRecurring)
-    
+
     if (recurringWeekly.length) {
       blocks.push({
         mode: ScheduleMode.WEEKLY,
@@ -219,7 +219,7 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
         isRecurring: true,
       })
     }
-    
+
     if (nonRecurringWeekly.length) {
       blocks.push({
         mode: ScheduleMode.WEEKLY,
@@ -360,28 +360,7 @@ const loadProfile = async () => {
     if (profile) {
       hasProfile.value = true
       isEditing.value = false
-      form.value = {
-        ...buildDefaultForm(authStore.currentUser),
-        ...profile,
-        experience: profile.experience ?? null,
-        firstName: authStore.currentUser?.name ?? '',
-        lastName: authStore.currentUser?.surname ?? '',
-        bio: profile.bio ?? '',
-        minOrderAmount: profile.minOrderAmount ?? '',
-        priceOneChild: profile.priceOneChild ?? '',
-        priceTwoChildren: profile.priceTwoChildren ?? '',
-        priceThreeChildren: profile.priceThreeChildren ?? '',
-        priceFourChildren: profile.priceFourChildren ?? '',
-        priceFiveChildren: profile.priceFiveChildren ?? '',
-        onlineLesson: profile.onlineLesson ?? '',
-        cancellationPolicy: profile.cancellationPolicy ?? '',
-        petAttitude: profile.petAttitude ?? '',
-        birthDate: profile.birthDate ?? '',
-        certifications: profile.certifications || [],
-        advantages: profile.advantages || [],
-        showInSearch: profile.showInSearch ?? false,
-        schedules: profile.schedules || [],
-      }
+      form.value = { ...profile }
       loadedSnapshot.value = clone(form.value)
       applySchedules(profile.schedules)
     } else {

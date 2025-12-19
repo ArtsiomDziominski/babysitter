@@ -1,5 +1,4 @@
 import { useApi } from './useApi'
-import { useAuth } from './useAuth'
 import type { ScheduleMode } from '~/const/schedule'
 
 export type { ScheduleMode }
@@ -49,11 +48,13 @@ export interface BabysitterProfilePayload {
 
 export const useBabysitter = () => {
   const api = useApi()
-  const auth = useAuth()
 
   const fetchMyBabysitter = async (): Promise<BabysitterProfilePayload | null> => {
-    const profile = await auth.getProfile()
-    return (profile.data as any).babysitter ?? null
+      const response =  await api.request<{ data: BabysitterProfilePayload | null }>('/babysitters/profile', {
+        method: 'GET',
+    })
+
+      return response.data
   }
 
   const createBabysitter = async (data: BabysitterProfilePayload): Promise<BabysitterProfilePayload> => {
