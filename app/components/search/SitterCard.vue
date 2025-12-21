@@ -39,12 +39,14 @@
             </div>
           </div>
           <div class="text-right">
-            <div class="text-2xl font-bold text-gray-900 dark:text-white">
-              {{ sitter.priceOneChild ? parseFloat(sitter.priceOneChild) : 0 }} ₽
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                {{ $t('bookings.sitter.perHour') }}
-              </span>
-            </div>
+            <SearchPriceMenu
+                :price-one-child="sitter.priceOneChild"
+                :price-two-children="sitter.priceTwoChildren"
+                :price-three-children="sitter.priceThreeChildren"
+                :online-lesson="sitter.onlineLesson"
+                :min-order-amount="sitter.minOrderAmount"
+                @click.stop="$emit('book', sitter.id.toString())"
+            />
           </div>
         </div>
 
