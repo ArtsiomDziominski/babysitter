@@ -26,6 +26,11 @@ export interface Sitter {
   schedule?: ScheduleSlot[]
   workConditions?: string
   safetyInfo?: string
+  priceOneChild?: string
+  priceTwoChildren?: string
+  priceThreeChildren?: string
+  onlineLesson?: string
+  minOrderAmount?: string
 }
 
 export interface Review {
@@ -39,6 +44,9 @@ export interface Review {
 export interface ScheduleSlot {
   day: string
   timeSlots: string[]
+  dayOfWeek?: number
+  date?: string
+  isRecurring?: boolean
 }
 
 export interface SearchForm {

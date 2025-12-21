@@ -232,7 +232,12 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
             const timeSlots = scheduleItem.intervals.map(
               interval => `${interval.startTime} - ${interval.endTime}`
             )
-            schedule.push({ day: dayName, timeSlots })
+            schedule.push({ 
+              day: dayName, 
+              timeSlots,
+              dayOfWeek: scheduleItem.dayOfWeek,
+              isRecurring: scheduleItem.isRecurring || block.isRecurring
+            })
           }
         }
       } else if (block.mode === ScheduleMode.ALL_DAYS) {
@@ -240,7 +245,11 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
           const timeSlots = scheduleItem.intervals.map(
             interval => `${interval.startTime} - ${interval.endTime}`
           )
-          schedule.push({ day: 'Все дни', timeSlots })
+          schedule.push({ 
+            day: 'Все дни', 
+            timeSlots,
+            isRecurring: scheduleItem.isRecurring || block.isRecurring
+          })
         }
       } else if (block.mode === ScheduleMode.EVERYDAY) {
         for (const scheduleItem of block.schedules) {
@@ -250,7 +259,12 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
             const timeSlots = scheduleItem.intervals.map(
               interval => `${interval.startTime} - ${interval.endTime}`
             )
-            schedule.push({ day: dayName, timeSlots })
+            schedule.push({ 
+              day: dayName, 
+              timeSlots,
+              date: scheduleItem.date,
+              isRecurring: scheduleItem.isRecurring || block.isRecurring
+            })
           }
         }
       }
@@ -262,6 +276,23 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     paymentMethods.push('Банковская карта')
   }
   paymentMethods.push('Наличные')
+
+  const calculateAge = (birthDate?: string): number | undefined => {
+    if (!birthDate) return data.age
+    try {
+      const birth = new Date(birthDate)
+      if (isNaN(birth.getTime())) return data.age
+      const today = new Date()
+      let age = today.getFullYear() - birth.getFullYear()
+      const monthDiff = today.getMonth() - birth.getMonth()
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--
+      }
+      return age
+    } catch {
+      return data.age
+    }
+  }
 
   return {
     id: data.id?.toString() || '0',
@@ -275,13 +306,18 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     isOnline: data.isOnline,
     isAvailable: data.available,
     advantages: data.advantages || [],
-    age: data.age,
-    registeredAt: data.birthDate,
+    age: calculateAge(data.birthDate),
+    registeredAt: data.createdAt || data.updatedAt,
     detailedDescription: data.bio,
     experience: data.experience?.toString(),
     workConditions: data.cancellationPolicy,
     schedule: schedule.length > 0 ? schedule : undefined,
     paymentMethods: paymentMethods.length > 0 ? paymentMethods : undefined,
+    priceOneChild: data.priceOneChild,
+    priceTwoChildren: data.priceTwoChildren,
+    priceThreeChildren: data.priceThreeChildren,
+    onlineLesson: data.onlineLesson,
+    minOrderAmount: data.minOrderAmount,
   }
 }
 
