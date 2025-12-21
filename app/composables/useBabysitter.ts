@@ -1,5 +1,6 @@
 import { useApi } from './useApi'
-import type { ScheduleMode } from '~/const/schedule'
+import { ScheduleMode } from '~/const/schedule'
+import type { Sitter, ScheduleSlot } from '~/types/sitter'
 
 export type { ScheduleMode }
 
@@ -102,6 +103,37 @@ export interface FetchBabysittersParams {
   search?: string
 }
 
+export interface BabysitterDetailResponse {
+  id: number
+  userId: number
+  firstName: string
+  lastName: string
+  age?: number
+  experience?: number
+  certifications?: string[]
+  bio?: string
+  cardPaymentAvailable?: boolean
+  minOrderAmount?: string
+  priceOneChild?: string
+  priceTwoChildren?: string
+  priceThreeChildren?: string
+  priceFourChildren?: string
+  priceFiveChildren?: string
+  onlineLesson?: string
+  cancellationPolicy?: string
+  infantCare?: boolean
+  specialNeedsCare?: boolean
+  petAttitude?: string
+  advantages?: string[]
+  birthDate?: string
+  rating?: number
+  reviewsCount?: number
+  available?: boolean
+  showInSearch?: boolean
+  isOnline?: boolean
+  schedules?: BabysitterScheduleBlock[]
+}
+
 export const useBabysitter = () => {
   const api = useApi()
 
@@ -159,6 +191,18 @@ export const useBabysitter = () => {
     })
   }
 
+  const fetchBabysitterById = async (id: number): Promise<BabysitterDetailResponse> => {
+    const response = await api.request<BabysitterDetailResponse | { data: BabysitterDetailResponse }>(`/babysitters/${id}`, {
+      method: 'GET',
+    })
+    
+    if ('data' in response && response.data) {
+      return response.data
+    }
+    
+    return response as BabysitterDetailResponse
+  }
+
   return {
     fetchMyBabysitter,
     createBabysitter,
@@ -166,6 +210,78 @@ export const useBabysitter = () => {
     deleteBabysitter,
     toggleSearchVisibility,
     fetchBabysitters,
+    fetchBabysitterById,
+  }
+}
+
+const dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+
+export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | undefined): Sitter => {
+  if (!data) {
+    throw new Error('Данные ситтера отсутствуют')
+  }
+  
+  const schedule: ScheduleSlot[] = []
+  
+  if (data.schedules) {
+    for (const block of data.schedules) {
+      if (block.mode === ScheduleMode.WEEKLY) {
+        for (const scheduleItem of block.schedules) {
+          if (scheduleItem.dayOfWeek !== undefined) {
+            const dayName = dayNames[scheduleItem.dayOfWeek] || `День ${scheduleItem.dayOfWeek}`
+            const timeSlots = scheduleItem.intervals.map(
+              interval => `${interval.startTime} - ${interval.endTime}`
+            )
+            schedule.push({ day: dayName, timeSlots })
+          }
+        }
+      } else if (block.mode === ScheduleMode.ALL_DAYS) {
+        for (const scheduleItem of block.schedules) {
+          const timeSlots = scheduleItem.intervals.map(
+            interval => `${interval.startTime} - ${interval.endTime}`
+          )
+          schedule.push({ day: 'Все дни', timeSlots })
+        }
+      } else if (block.mode === ScheduleMode.EVERYDAY) {
+        for (const scheduleItem of block.schedules) {
+          if (scheduleItem.date) {
+            const date = new Date(scheduleItem.date)
+            const dayName = date.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })
+            const timeSlots = scheduleItem.intervals.map(
+              interval => `${interval.startTime} - ${interval.endTime}`
+            )
+            schedule.push({ day: dayName, timeSlots })
+          }
+        }
+      }
+    }
+  }
+
+  const paymentMethods: string[] = []
+  if (data.cardPaymentAvailable) {
+    paymentMethods.push('Банковская карта')
+  }
+  paymentMethods.push('Наличные')
+
+  return {
+    id: data.id?.toString() || '0',
+    name: `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'Без имени',
+    rating: data.rating || 0,
+    orders: data.reviewsCount || 0,
+    hours: 0,
+    price: data.priceOneChild ? parseFloat(data.priceOneChild) : 0,
+    description: data.bio || '',
+    tags: data.certifications || [],
+    isOnline: data.isOnline,
+    isAvailable: data.available,
+    advantages: data.advantages || [],
+    age: data.age,
+    registeredAt: data.birthDate,
+    detailedDescription: data.bio,
+    experience: data.experience?.toString(),
+    workConditions: data.cancellationPolicy,
+    schedule: schedule.length > 0 ? schedule : undefined,
+    paymentMethods: paymentMethods.length > 0 ? paymentMethods : undefined,
   }
 }
 

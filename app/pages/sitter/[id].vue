@@ -29,6 +29,16 @@
         </div>
       </div>
 
+      <div v-else-if="pending" class="text-center py-12">
+        <p class="text-gray-500 dark:text-gray-400">
+          Загрузка...
+        </p>
+      </div>
+      <div v-else-if="error" class="text-center py-12">
+        <p class="text-red-500 dark:text-red-400">
+          Ошибка загрузки данных
+        </p>
+      </div>
       <div v-else class="text-center py-12">
         <p class="text-gray-500 dark:text-gray-400">
           Ситтер не найден
@@ -40,13 +50,34 @@
 
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
+import { useBabysitter, mapBabysitterToSitter } from '~/composables/useBabysitter'
 
 const route = useRoute()
 const sitterId = route.params.id as string
+const babysitterApi = useBabysitter()
 
 const activeTab = ref('about')
 const isFavorite = ref(false)
-const sitter = ref<Sitter | null>(null)
+
+const { data: sitter, pending, error } = await useAsyncData<Sitter | null>(
+  `sitter-${sitterId}`,
+  async () => {
+    try {
+      const id = parseInt(sitterId)
+      if (isNaN(id)) {
+        return null
+      }
+      const babysitterData = await babysitterApi.fetchBabysitterById(id)
+      if (!babysitterData) {
+        return null
+      }
+      return mapBabysitterToSitter(babysitterData)
+    } catch (err) {
+      console.error('Ошибка загрузки ситтера:', err)
+      return null
+    }
+  }
+)
 
 const breadcrumbItems = computed(() => [
   {
