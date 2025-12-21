@@ -13,6 +13,13 @@
           >
             <Icon name="i-lucide-user" size="48" />
           </div>
+          <div
+              v-if="sitter.isOnline"
+              class="absolute top-2 right-2 flex items-center gap-1.5"
+          >
+            <span class="w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></span>
+            <span class="text-xs text-green-600 dark:text-green-400 font-medium">Онлайн</span>
+          </div>
         </div>
       </div>
 

@@ -73,6 +73,7 @@ export interface BabysitterListItem {
   reviewsCount?: number
   showInSearch?: boolean
   available?: boolean
+  isOnline?: boolean
   hourlyRate?: number | null
   createdAt?: string
   updatedAt?: string

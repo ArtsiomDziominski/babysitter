@@ -704,7 +704,8 @@ avatar: <File>
       "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
-      "showInSearch": true
+      "showInSearch": true,
+      "isOnline": true
     }
   ],
   "meta": {
@@ -738,6 +739,7 @@ avatar: <File>
   "reviewsCount": 15,
   "available": true,
   "showInSearch": true,
+  "isOnline": true,
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z",
   "schedules": [
@@ -823,6 +825,7 @@ avatar: <File>
   "reviewsCount": 15,
   "available": true,
   "showInSearch": true,
+  "isOnline": true,
   "schedules": [
     {
       "mode": "weekly",
@@ -1070,6 +1073,7 @@ avatar: <File>
   "id": 1,
   "userId": 2,
   "showInSearch": true,
+  "isOnline": true,
   "available": true,
   "rating": 4.8,
   "reviewsCount": 15,

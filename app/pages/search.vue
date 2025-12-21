@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SearchForm, SearchFilters } from '~/types/sitter'
+import type { SearchFilters, SearchForm } from '~/types/sitter'
 import type { BabysitterListItem, FetchBabysittersParams } from '~/composables/useBabysitter'
 import { SearchViewMode, type SearchViewModeType } from '~/const/viewMode'
 
@@ -83,17 +83,12 @@ const filters = ref<SearchFilters>({
 
 const sortBy = ref('recommended')
 
-const getInitialViewMode = (): SearchViewModeType => {
-  if (process.client) {
-    const saved = localStorage.getItem('searchViewMode')
-    if (saved && Object.values(SearchViewMode).includes(saved as SearchViewMode)) {
-      return saved as SearchViewModeType
-    }
-  }
-  return SearchViewMode.LIST
+const setInitialViewMode = () => {
+  const saved = localStorage.getItem('searchViewMode')
+  viewMode.value = (saved as SearchViewMode) || SearchViewMode.LIST
 }
 
-const viewMode = ref<SearchViewModeType>(getInitialViewMode())
+const viewMode = ref<SearchViewModeType>(SearchViewMode.LIST)
 
 const handleViewModeUpdate = (newValue: SearchViewModeType) => {
   viewMode.value = newValue
@@ -130,6 +125,8 @@ const filteredSitters = computed(() => {
   if (filters.value.onlyAvailable) {
     result = result.filter(s => s.showInSearch)
   }
+
+  if (filters.value.onlyOnline) result = result.filter(s => s.isOnline)
 
   if (filters.value.priceMin !== undefined) {
     result = result.filter(s => {
@@ -182,6 +179,7 @@ const handleSearch = () => {
 
 onMounted(() => {
   loadBabysitters()
+  setInitialViewMode()
 })
 
 const router = useRouter()

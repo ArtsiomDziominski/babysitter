@@ -5,10 +5,17 @@
     <div class="flex gap-6">
       <div class="flex-shrink-0 flex flex-col">
         <div
-            class="w-[140px] h-[140px] bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer"
+            class="relative w-[140px] h-[140px] bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer"
              @click="$emit('book', sitter.id.toString())"
         >
           <Icon name="i-lucide-user" size="48" class="text-gray-400"/>
+          <div
+              v-if="sitter.isOnline"
+              class="absolute top-2 left-2 flex items-center gap-1.5"
+          >
+            <span class="w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></span>
+            <span class="text-xs text-green-600 dark:text-green-400 font-medium">Онлайн</span>
+          </div>
         </div>
       </div>
 
@@ -103,7 +110,7 @@ const yearWord = computed(() => {
   const years = props.sitter.experience || 0
   const mod10 = years % 10
   const mod100 = years % 100
-  
+
   if (mod10 === 1 && mod100 !== 11) {
     return 'год'
   } else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) {
