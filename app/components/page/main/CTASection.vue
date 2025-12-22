@@ -8,7 +8,7 @@
         <p class="text-xl text-primary-100">
           {{ $t('home.cta.subtitle') }}
         </p>
-        <UButton size="xl" variant="solid" class="px-8 py-6 text-lg bg-white text-primary-600 hover:bg-gray-100">
+        <UButton to="/search" size="xl" variant="solid" class="px-8 py-6 text-lg bg-white text-primary-600 hover:bg-gray-100">
           {{ $t('home.hero.cta') }}
         </UButton>
       </div>

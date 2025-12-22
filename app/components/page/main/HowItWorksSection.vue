@@ -2,8 +2,7 @@
 const steps = [
   { key: 'step1', icon: 'mdi:account-search' },
   { key: 'step2', icon: 'mdi:calendar-check' },
-  { key: 'step3', icon: 'mdi:handshake' },
-  { key: 'step4', icon: 'mdi:heart' }
+  { key: 'step4', icon: 'mdi:star-check' }
 ]
 </script>
 
@@ -13,7 +12,7 @@ const steps = [
       <h2 class="text-3xl lg:text-4xl font-bold text-center text-gray-900 dark:text-white mb-16">
         {{ $t('home.howItWorks.title') }}
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div v-for="(step, index) in steps" :key="step.key" class="text-center space-y-4">
           <div class="relative inline-flex items-center justify-center">
             <div class="w-20 h-20 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
