@@ -26,6 +26,20 @@ export interface BookingStatusChangedData {
   }
 }
 
+export interface BookingUpdatedData {
+  booking: {
+    id: number
+    status: string
+    startTime: string
+    endTime: string
+    childrenCount?: number
+    bookingType?: string
+    notes?: string
+    totalPrice: number
+  }
+  message: string
+}
+
 export interface NotificationData {
   id: number
   type: 'booking' | 'message' | 'system'
@@ -42,6 +56,7 @@ export interface UserConnectionData {
 
 type BookingCreatedCallback = (data: BookingCreatedData) => void
 type BookingStatusChangedCallback = (data: BookingStatusChangedData) => void
+type BookingUpdatedCallback = (data: BookingUpdatedData) => void
 type NotificationCallback = (notification: NotificationData) => void
 type UserConnectionCallback = (data: UserConnectionData) => void
 
@@ -126,6 +141,20 @@ export const useWebSocket = () => {
     }
   }
 
+  const onBookingUpdated = (callback: BookingUpdatedCallback) => {
+    if (!socket.value) return
+    socket.value.on('booking:updated', callback)
+  }
+
+  const offBookingUpdated = (callback?: BookingUpdatedCallback) => {
+    if (!socket.value) return
+    if (callback) {
+      socket.value.off('booking:updated', callback)
+    } else {
+      socket.value.off('booking:updated')
+    }
+  }
+
   const onNotification = (callback: NotificationCallback) => {
     if (!socket.value) return
     socket.value.on('notification:new', callback)
@@ -197,6 +226,8 @@ export const useWebSocket = () => {
     offBookingCreated,
     onBookingStatusChanged,
     offBookingStatusChanged,
+    onBookingUpdated,
+    offBookingUpdated,
     onNotification,
     offNotification,
     onUserConnected,

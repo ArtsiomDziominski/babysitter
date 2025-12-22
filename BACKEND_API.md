@@ -1103,31 +1103,60 @@ avatar: <File>
 **Body:**
 ```json
 {
-  "babysitterId": 1,
-  "startTime": "2024-01-15T10:00:00.000Z",
-  "endTime": "2024-01-15T14:00:00.000Z",
-  "childrenCount": 2,
-  "childrenAges": [5, 8],
-  "notes": "Дети любят играть на улице"
+  "babysitterId": 9,
+  "startTime": "2025-12-23T06:00:00.000Z",
+  "endTime": "2025-12-23T10:00:00.000Z",
+  "childrenCount": 1,
+  "childrenAges": [5],
+  "bookingType": "offline",
+  "childIsSick": false,
+  "hasSpecialNeedsChild": false,
+  "needsHelpWithHomework": true,
+  "needsOutdoorActivities": true,
+  "needsCarTransportation": true,
+  "needsWalking": false,
+  "notes": "Нужна помощь с уроками, Нужны прогулки на улице, Нужно свозить на машине (в кружок, секцию и т.д.). Хороший реб"
 }
 ```
+
+**Поля:**
+- `babysitterId` (number, **обязательное**) - ID няни
+- `startTime` (string, **обязательное**) - время начала в формате ISO 8601
+- `endTime` (string, **обязательное**) - время окончания в формате ISO 8601
+- `childrenCount` (number, optional) - количество детей (по умолчанию: 1)
+- `childrenAges` (number[], optional) - массив возрастов детей
+- `bookingType` (string, optional) - тип бронирования: `"offline"` или `"online"` (по умолчанию: `"offline"`)
+- `childIsSick` (boolean, optional) - ребенок болен (по умолчанию: `false`)
+- `hasSpecialNeedsChild` (boolean, optional) - есть ребенок с особыми потребностями (по умолчанию: `false`)
+- `needsHelpWithHomework` (boolean, optional) - нужна помощь с уроками (по умолчанию: `false`)
+- `needsOutdoorActivities` (boolean, optional) - нужны прогулки на улице (по умолчанию: `false`)
+- `needsCarTransportation` (boolean, optional) - нужна перевозка на машине (по умолчанию: `false`)
+- `needsWalking` (boolean, optional) - нужны прогулки пешком (по умолчанию: `false`)
+- `notes` (string, optional) - дополнительные заметки
 
 **Response (201):**
 ```json
 {
   "id": 1,
   "parentId": 1,
-  "babysitterId": 1,
-  "startTime": "2024-01-15T10:00:00.000Z",
-  "endTime": "2024-01-15T14:00:00.000Z",
+  "babysitterId": 9,
+  "startTime": "2025-12-23T06:00:00.000Z",
+  "endTime": "2025-12-23T10:00:00.000Z",
   "status": "pending",
-  "childrenCount": 2,
-  "childrenAges": [5, 8],
-  "notes": "Дети любят играть на улице",
+  "childrenCount": 1,
+  "childrenAges": [5],
+  "bookingType": "offline",
+  "childIsSick": false,
+  "hasSpecialNeedsChild": false,
+  "needsHelpWithHomework": true,
+  "needsOutdoorActivities": true,
+  "needsCarTransportation": true,
+  "needsWalking": false,
+  "notes": "Нужна помощь с уроками, Нужны прогулки на улице, Нужно свозить на машине (в кружок, секцию и т.д.). Хороший реб",
   "totalPrice": 4000,
   "createdAt": "2024-01-10T12:00:00.000Z",
   "babysitter": {
-    "id": 1,
+    "id": 9,
     "user": {
       "firstName": "Мария",
       "lastName": "Петрова"
@@ -1143,7 +1172,7 @@ avatar: <File>
 **Headers:** `Authorization: Bearer <token>`
 
 **Query Parameters:**
-- `status` (string, optional) - фильтр по статусу: `pending`, `confirmed`, `completed`, `cancelled`
+- `status` (string, optional) - фильтр по статусу: `pending`, `confirmed`, `in_progress`, `completed`, `cancelled`
 - `page` (number, optional)
 - `limit` (number, optional)
 
@@ -1153,28 +1182,47 @@ avatar: <File>
   "data": [
     {
       "id": 1,
-      "parentId": 1,
-      "babysitterId": 1,
-      "startTime": "2024-01-15T10:00:00.000Z",
-      "endTime": "2024-01-15T14:00:00.000Z",
+      "customer": {
+        "name": "Мария Петрова",
+        "phone": "+79001234567"
+      },
+      "date": "2024-01-15",
+      "time": "10:00 - 14:00",
+      "children": ["Мария", "Иван"],
       "status": "pending",
       "totalPrice": 4000,
-      "babysitter": {
-        "id": 1,
-        "user": {
-          "firstName": "Мария",
-          "lastName": "Петрова"
-        }
-      }
+      "startTime": "2024-01-15T10:00:00.000Z",
+      "endTime": "2024-01-15T14:00:00.000Z",
+      "childrenCount": 2,
+      "childrenAges": [5, 8],
+      "bookingType": "offline",
+      "childIsSick": false,
+      "hasSpecialNeedsChild": false,
+      "needsHelpWithHomework": true,
+      "needsOutdoorActivities": true,
+      "needsCarTransportation": false,
+      "needsWalking": false,
+      "notes": "Дети любят играть на улице",
+      "createdAt": "2024-01-10T12:00:00.000Z"
     }
   ],
   "meta": {
     "page": 1,
     "limit": 10,
-    "total": 5
+    "total": 5,
+    "totalPages": 1
   }
 }
 ```
+
+**Примечания:**
+- Поле `customer` содержит информацию о контрагенте:
+  - Для родителя (`parent`) - данные няни
+  - Для няни (`babysitter`) - данные родителя
+- Поле `date` - дата в формате YYYY-MM-DD
+- Поле `time` - время в формате "HH:MM - HH:MM"
+- Поле `children` - массив имен детей
+- Все новые поля бронирования включены в ответ
 
 ### Получить детали бронирования
 
@@ -1193,6 +1241,13 @@ avatar: <File>
   "status": "pending",
   "childrenCount": 2,
   "childrenAges": [5, 8],
+  "bookingType": "offline",
+  "childIsSick": false,
+  "hasSpecialNeedsChild": false,
+  "needsHelpWithHomework": true,
+  "needsOutdoorActivities": true,
+  "needsCarTransportation": false,
+  "needsWalking": false,
   "notes": "Дети любят играть на улице",
   "totalPrice": 4000,
   "createdAt": "2024-01-10T12:00:00.000Z",
@@ -1215,7 +1270,7 @@ avatar: <File>
 
 ### Обновить статус бронирования
 
-**PUT** `/bookings/:id`
+**PATCH** `/bookings/:id`
 
 **Headers:** `Authorization: Bearer <token>`
 
@@ -1621,7 +1676,10 @@ socket.on('booking:created', (data) => {
     "id": 1,
     "status": "confirmed",
     "startTime": "2024-01-15T10:00:00.000Z",
-    "endTime": "2024-01-15T14:00:00.000Z"
+    "endTime": "2024-01-15T14:00:00.000Z",
+    "childrenCount": 2,
+    "bookingType": "offline",
+    "totalPrice": 4000
   }
 }
 ```
@@ -1631,6 +1689,37 @@ socket.on('booking:created', (data) => {
 socket.on('booking:status_changed', (data) => {
   console.log(`Бронирование ${data.bookingId} изменило статус с ${data.oldStatus} на ${data.newStatus}`);
   // Обновить UI
+});
+```
+
+#### Обновление бронирования
+
+**Событие:** `booking:updated`
+
+**Данные:**
+```json
+{
+  "booking": {
+    "id": 1,
+    "status": "confirmed",
+    "startTime": "2024-01-15T10:00:00.000Z",
+    "endTime": "2024-01-15T14:00:00.000Z",
+    "childrenCount": 2,
+    "bookingType": "offline",
+    "notes": "Обновленные заметки",
+    "totalPrice": 4000
+  },
+  "message": "Бронирование было обновлено"
+}
+```
+
+**Примечание:** Это событие отправляется при любых изменениях в бронировании, кроме изменения статуса (для изменения статуса используется `booking:status_changed`).
+
+**Пример использования:**
+```javascript
+socket.on('booking:updated', (data) => {
+  console.log('Бронирование обновлено:', data.booking);
+  // Обновить UI с новыми данными
 });
 ```
 
@@ -1818,6 +1907,7 @@ http://localhost:3000/docs
 
 - `pending` - ожидает подтверждения
 - `confirmed` - подтверждено
+- `in_progress` - в процессе выполнения
 - `completed` - завершено
 - `cancelled` - отменено
 

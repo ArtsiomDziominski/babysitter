@@ -187,9 +187,17 @@
     "orders": {
       "title": "Заказы",
       "empty": "У вас пакуль няма заказаў",
+      "loading": "Загрузка заказаў...",
+      "retry": "Паўтарыць",
+      "loadError": "Памылка загрузкі",
+      "loadErrorMessage": "Не атрымалася загрузіць заказы. Паспрабуйце яшчэ раз.",
       "date": "Дата",
       "time": "Час",
       "children": "Дзеці",
+      "createdAt": "Дата стварэння",
+      "tabs": {
+        "all": "Усе"
+      },
       "status": {
         "pending": "Чакае пацвярджэння",
         "confirmed": "Пацверджаны",
@@ -199,11 +207,58 @@
         "rejected": "Адхілены"
       },
       "actions": {
+        "details": "Падрабязна",
+        "confirm": "Пацвердзіць",
         "cancel": "Адмяніць",
         "contact": "Звязацца",
         "review": "Пакінуць водгук",
         "repeat": "Паўтарыць заказ",
-        "findAnother": "Знайсці іншага"
+        "findAnother": "Знайсці іншага",
+        "confirmSuccess": "Заказ пацверджаны",
+        "confirmError": "Памылка пацвярджэння",
+        "confirmErrorMessage": "Не атрымалася пацвердзіць заказ. Паспрабуйце яшчэ раз.",
+        "cancelConfirmTitle": "Пацвярджэнне адмены",
+        "cancelConfirmMessage": "Вы сапраўды хочаце адмяніць гэты заказ?",
+        "cancelConfirmCancel": "Не",
+        "cancelSuccess": "Заказ адменены",
+        "cancelError": "Памылка адмены",
+        "cancelErrorMessage": "Не атрымалася адмяніць заказ. Паспрабуйце яшчэ раз."
+      },
+      "details": {
+        "title": "Дэталі заказа",
+        "status": "Статус",
+        "totalPrice": "Сума",
+        "date": "Дата",
+        "time": "Час",
+        "childrenCount": "Колькасць дзяцей",
+        "years": "гадоў",
+        "bookingType": "Тып браніравання",
+        "offline": "Офлайн",
+        "online": "Онлайн",
+        "notes": "Заўвагі",
+        "customer": "Кліент",
+        "babysitter": "Няня",
+        "parent": "Бацька",
+        "needsHelpWithHomework": "Дапамога з хатнім заданнем",
+        "needsOutdoorActivities": "Актыўнасці на вуліцы",
+        "needsCarTransportation": "Транспарціроўка на машыне",
+        "needsWalking": "Прагулкі",
+        "childIsSick": "Дзіця хворае",
+        "hasSpecialNeedsChild": "Дзіця з асаблівымі патрэбамі",
+        "createdAt": "Дата стварэння",
+        "completedAt": "Дата завяршэння",
+        "error": "Не атрымалася загрузіць дэталі заказа",
+        "loadError": "Памылка загрузкі",
+        "loadErrorMessage": "Не атрымалася загрузіць дэталі заказа. Паспрабуйце яшчэ раз."
+      },
+      "notifications": {
+        "newBooking": "Новае браніраванне",
+        "newBookingMessage": "У вас новае браніраванне",
+        "statusChanged": "Статус заказа зменены",
+        "statusChangedFrom": "з",
+        "statusChangedTo": "на",
+        "bookingUpdated": "Заказ абноўлены",
+        "bookingUpdatedMessage": "Браніраванне было абноўлена"
       }
     },
     "profile": "Профіль",

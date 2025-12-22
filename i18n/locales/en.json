@@ -185,9 +185,17 @@
     "orders": {
       "title": "Orders",
       "empty": "You have no orders yet",
+      "loading": "Loading orders...",
+      "retry": "Retry",
+      "loadError": "Loading error",
+      "loadErrorMessage": "Failed to load orders. Please try again.",
       "date": "Date",
       "time": "Time",
       "children": "Children",
+      "createdAt": "Created at",
+      "tabs": {
+        "all": "All"
+      },
       "status": {
         "pending": "Pending confirmation",
         "confirmed": "Confirmed",
@@ -197,11 +205,58 @@
         "rejected": "Rejected"
       },
       "actions": {
+        "details": "Details",
+        "confirm": "Confirm",
         "cancel": "Cancel",
         "contact": "Contact",
         "review": "Leave review",
         "repeat": "Repeat order",
-        "findAnother": "Find another"
+        "findAnother": "Find another",
+        "confirmSuccess": "Order confirmed",
+        "confirmError": "Confirmation error",
+        "confirmErrorMessage": "Failed to confirm order. Please try again.",
+        "cancelConfirmTitle": "Confirm cancellation",
+        "cancelConfirmMessage": "Are you sure you want to cancel this order?",
+        "cancelConfirmCancel": "No",
+        "cancelSuccess": "Order cancelled",
+        "cancelError": "Cancellation error",
+        "cancelErrorMessage": "Failed to cancel order. Please try again."
+      },
+      "details": {
+        "title": "Order details",
+        "status": "Status",
+        "totalPrice": "Total",
+        "date": "Date",
+        "time": "Time",
+        "childrenCount": "Number of children",
+        "years": "years",
+        "bookingType": "Booking type",
+        "offline": "Offline",
+        "online": "Online",
+        "notes": "Notes",
+        "customer": "Customer",
+        "babysitter": "Babysitter",
+        "parent": "Parent",
+        "needsHelpWithHomework": "Help with homework",
+        "needsOutdoorActivities": "Outdoor activities",
+        "needsCarTransportation": "Car transportation",
+        "needsWalking": "Walking",
+        "childIsSick": "Child is sick",
+        "hasSpecialNeedsChild": "Child with special needs",
+        "createdAt": "Created at",
+        "completedAt": "Completed at",
+        "error": "Failed to load order details",
+        "loadError": "Loading error",
+        "loadErrorMessage": "Failed to load order details. Please try again."
+      },
+      "notifications": {
+        "newBooking": "New booking",
+        "newBookingMessage": "You have a new booking",
+        "statusChanged": "Order status changed",
+        "statusChangedFrom": "from",
+        "statusChangedTo": "to",
+        "bookingUpdated": "Order updated",
+        "bookingUpdatedMessage": "Booking has been updated"
       }
     },
     "profile": "Profile",

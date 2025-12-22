@@ -16,18 +16,62 @@ export interface CreateBookingRequest {
   notes?: string
 }
 
-export interface Booking {
+export interface BookingListItem {
+  id: number
+  customer: {
+    name: string
+    phone: string
+  }
+  date: string
+  time: string
+  children: string[]
+  status: 'pending' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled'
+  totalPrice: string | number
+  startTime: string
+  endTime: string
+  childrenCount: number
+  childrenAges: string[] | number[]
+  bookingType: 'offline' | 'online'
+  childIsSick: boolean
+  hasSpecialNeedsChild: boolean
+  needsHelpWithHomework: boolean
+  needsOutdoorActivities: boolean
+  needsCarTransportation: boolean
+  needsWalking: boolean
+  notes?: string
+  createdAt: string
+  babysitterId?: number
+}
+
+export interface BookingDetails {
   id: number
   parentId: number
   babysitterId: number
   startTime: string
   endTime: string
-  status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+  status: 'pending' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled'
   childrenCount: number
-  childrenAges: number[]
+  childrenAges: string[] | number[]
+  bookingType: 'offline' | 'online'
+  childIsSick: boolean
+  hasSpecialNeedsChild: boolean
+  needsHelpWithHomework: boolean
+  needsOutdoorActivities: boolean
+  needsCarTransportation: boolean
+  needsWalking: boolean
   notes?: string
-  totalPrice: number
+  totalPrice: string | number
   createdAt: string
+  updatedAt?: string
+  parent?: {
+    id: number
+    firstName?: string
+    lastName?: string
+    user?: {
+      firstName: string
+      lastName: string
+    }
+  }
   babysitter?: {
     id: number
     user: {
@@ -37,17 +81,25 @@ export interface Booking {
   }
 }
 
+export interface Booking extends BookingListItem {}
+
 export interface BookingsListResponse {
-  data: Booking[]
+  data: BookingListItem[]
   meta: {
     page: number
     limit: number
     total: number
+    totalPages: number
   }
 }
 
+export interface BookingsListApiResponse {
+  data: BookingsListResponse
+  statusCode: number
+}
+
 export interface FetchBookingsParams {
-  status?: 'pending' | 'confirmed' | 'completed' | 'cancelled'
+  status?: 'pending' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled'
   page?: number
   limit?: number
 }
@@ -72,21 +124,49 @@ export const useBookings = () => {
     const queryString = queryParams.toString()
     const endpoint = `/bookings${queryString ? `?${queryString}` : ''}`
 
-    return await api.request<BookingsListResponse>(endpoint, {
+    const response = await api.request<BookingsListApiResponse | BookingsListResponse>(endpoint, {
       method: 'GET',
     })
+
+    if ('data' in response && 'statusCode' in response) {
+      return response.data
+    }
+
+    return response as BookingsListResponse
   }
 
-  const getBookingById = async (id: number): Promise<Booking> => {
-    return await api.request<Booking>(`/bookings/${id}`, {
+  const getBookingById = async (id: number): Promise<BookingDetails> => {
+    const response = await api.request<BookingDetails | { data: BookingDetails; statusCode: number }>(`/bookings/${id}`, {
       method: 'GET',
     })
+
+    console.log('Ответ getBookingById:', response)
+
+    if ('data' in response && 'statusCode' in response) {
+      return response.data
+    }
+
+    return response as BookingDetails
+  }
+
+  const updateBookingStatus = async (id: number, status: 'confirmed' | 'cancelled'): Promise<BookingDetails> => {
+    const response = await api.request<BookingDetails | { data: BookingDetails; statusCode: number }>(`/bookings/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    })
+
+    if ('data' in response && 'statusCode' in response) {
+      return response.data
+    }
+
+    return response as BookingDetails
   }
 
   return {
     createBooking,
     getBookings,
     getBookingById,
+    updateBookingStatus,
   }
 }
 
