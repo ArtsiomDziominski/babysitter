@@ -134,8 +134,8 @@ const toggleFavorite = () => {
 }
 
 const handleContact = () => {
-  // TODO: Implement contact functionality
-  console.log('Contact clicked')
+  const router = useRouter()
+  router.push(`/sitter/${sitterId}/book`)
 }
 
 const handleMessage = () => {

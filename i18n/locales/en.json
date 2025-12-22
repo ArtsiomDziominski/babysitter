@@ -361,6 +361,54 @@
     "booking": {
       "title": "Booking Data",
       "save": "Save",
+      "create": {
+        "title": "Create Booking",
+        "subtitle": "Book time with {name}",
+        "startDateTime": "Start date and time",
+        "endDateTime": "End date and time",
+        "childrenCount": "Number of children",
+        "childAge": "Child {index} age",
+        "notes": "Additional notes",
+        "notesPlaceholder": "For example, special needs of children, preferences, etc.",
+        "estimatedPrice": "Estimated cost:",
+        "cancel": "Cancel",
+        "submit": "Create Booking",
+        "loading": "Loading...",
+        "loadError": "Error loading data",
+        "notFound": "Sitter not found",
+        "backToSearch": "Back to search",
+        "validation": {
+          "endTimeBeforeStart": "End time must be later than start time"
+        },
+        "success": {
+          "title": "Success",
+          "message": "Booking created"
+        },
+        "error": {
+          "title": "Error",
+          "message": "Failed to create booking"
+        },
+        "agePlaceholder": "Enter age",
+        "bookingType": {
+          "offline": {
+            "title": "Sitter at home",
+            "subtitle": "Will come to you"
+          },
+          "online": {
+            "title": "Sitter online",
+            "subtitle": "Communication via video link"
+          }
+        },
+        "specialConditions": {
+          "title": "Special Conditions",
+          "childIsSick": "Child or children are unwell",
+          "hasSpecialNeedsChild": "Has special needs child",
+          "needsHelpWithHomework": "Needs help with homework",
+          "needsOutdoorActivities": "Needs outdoor activities",
+          "needsCarTransportation": "Needs car transportation (to classes, activities, etc.)",
+          "needsWalking": "Needs to be taken (to classes, activities, etc.)"
+        }
+      },
       "contractData": {
         "title": "Data for forming a contract for your orders",
         "description": "Upon confirmation of booking by the babysitter, an online contract will be formed.",
@@ -501,7 +549,11 @@
     }
   },
   "common": {
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "home": "Home",
+    "search": "Search",
+    "sitter": "Sitter",
+    "booking": "Booking"
   }
 }
 
