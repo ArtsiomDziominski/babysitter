@@ -584,6 +584,17 @@
         "returned": "Вернулись",
         "response": "Ответ",
         "responseTimeDefault": "В течение дня"
+      },
+      "priceCard": {
+        "pricesByChildrenCount": "Цены по количеству детей",
+        "oneChild": "1 ребенок",
+        "twoChildren": "2 ребенка",
+        "threeChildren": "3 ребенка",
+        "onlineLesson": "Онлайн-занятие",
+        "minOrder": "Минимальный заказ",
+        "paymentMethods": "Способы оплаты",
+        "perHour": "₽/час",
+        "currency": "₽"
       }
     }
   },

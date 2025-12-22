@@ -486,6 +486,17 @@
         "returned": "Returned",
         "response": "Response",
         "responseTimeDefault": "Within a day"
+      },
+      "priceCard": {
+        "pricesByChildrenCount": "Prices by number of children",
+        "oneChild": "1 child",
+        "twoChildren": "2 children",
+        "threeChildren": "3 children",
+        "onlineLesson": "Online lesson",
+        "minOrder": "Minimum order",
+        "paymentMethods": "Payment methods",
+        "perHour": "₽/hour",
+        "currency": "₽"
       }
     }
   },

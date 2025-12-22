@@ -2,21 +2,21 @@
   <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
     <div class="space-y-4 mb-6">
       <div v-if="sitter.priceOneChild || sitter.priceTwoChildren || sitter.priceThreeChildren">
-        <div class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-          Цены по количеству детей
+        <div class="text-sd font-semibold text-gray-900 dark:text-white mb-3">
+          {{ $t('bookings.sitter.priceCard.pricesByChildrenCount') }}
         </div>
         <div class="space-y-2">
           <div v-if="sitter.priceOneChild" class="flex justify-between items-center text-sm">
-            <span class="text-gray-600 dark:text-gray-400">1 ребенок</span>
-            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceOneChild) }} ₽/час</span>
+            <span class="text-gray-600 dark:text-gray-400">{{ $t('bookings.sitter.priceCard.oneChild') }}</span>
+            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceOneChild) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
           </div>
           <div v-if="sitter.priceTwoChildren" class="flex justify-between items-center text-sm">
-            <span class="text-gray-600 dark:text-gray-400">2 ребенка</span>
-            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceTwoChildren) }} ₽/час</span>
+            <span class="text-gray-600 dark:text-gray-400">{{ $t('bookings.sitter.priceCard.twoChildren') }}</span>
+            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceTwoChildren) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
           </div>
           <div v-if="sitter.priceThreeChildren" class="flex justify-between items-center text-sm">
-            <span class="text-gray-600 dark:text-gray-400">3 ребенка</span>
-            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceThreeChildren) }} ₽/час</span>
+            <span class="text-gray-600 dark:text-gray-400">{{ $t('bookings.sitter.priceCard.threeChildren') }}</span>
+            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceThreeChildren) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
           </div>
         </div>
       </div>
@@ -25,9 +25,9 @@
         <div class="flex justify-between items-center">
           <div class="flex items-center gap-2">
             <Icon name="i-lucide-monitor" size="18" class="text-primary-500" />
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">Онлайн-занятие</span>
+            <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $t('bookings.sitter.priceCard.onlineLesson') }}</span>
           </div>
-          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.onlineLesson) }} ₽/час</span>
+          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.onlineLesson) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
         </div>
       </div>
 
@@ -35,16 +35,16 @@
         <div class="flex justify-between items-center">
           <div class="flex items-center gap-2">
             <Icon name="i-lucide-wallet" size="18" class="text-primary-500" />
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">Минимальный заказ</span>
+            <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $t('bookings.sitter.priceCard.minOrder') }}</span>
           </div>
-          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.minOrderAmount) }} ₽</span>
+          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.minOrderAmount) }} {{ $t('bookings.sitter.priceCard.currency') }}</span>
         </div>
       </div>
     </div>
 
     <div v-if="sitter.paymentMethods && sitter.paymentMethods.length > 0" class="pt-6 border-t border-gray-200 dark:border-gray-700">
       <div class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-        Способы оплаты
+        {{ $t('bookings.sitter.priceCard.paymentMethods') }}
       </div>
       <div class="flex flex-wrap gap-2">
         <span
