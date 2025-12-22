@@ -576,7 +576,15 @@
       "returnedPlural": "Вернулись",
       "book": "Заказать",
       "perHour": "/час",
-      "details": "Подробнее"
+      "details": "Подробнее",
+      "stats": {
+        "title": "Статистика",
+        "orders": "Заказов",
+        "hours": "Часов",
+        "returned": "Вернулись",
+        "response": "Ответ",
+        "responseTimeDefault": "В течение дня"
+      }
     }
   },
   "common": {

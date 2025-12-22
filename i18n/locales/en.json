@@ -478,7 +478,15 @@
       "returnedPlural": "Returned",
       "book": "Book",
       "perHour": "/hour",
-      "details": "Details"
+      "details": "Details",
+      "stats": {
+        "title": "Statistics",
+        "orders": "Orders",
+        "hours": "Hours",
+        "returned": "Returned",
+        "response": "Response",
+        "responseTimeDefault": "Within a day"
+      }
     }
   },
   "common": {

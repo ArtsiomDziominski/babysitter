@@ -480,7 +480,15 @@
       "returnedPlural": "Вярнуліся",
       "book": "Заказаць",
       "perHour": "/гадзіну",
-      "details": "Падрабязна"
+      "details": "Падрабязна",
+      "stats": {
+        "title": "Статыстыка",
+        "orders": "Заказаў",
+        "hours": "Гадзін",
+        "returned": "Вярнуліся",
+        "response": "Адказ",
+        "responseTimeDefault": "На працягу дня"
+      }
     }
   },
   "common": {

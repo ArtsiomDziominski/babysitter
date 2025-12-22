@@ -132,6 +132,8 @@ export interface BabysitterDetailResponse {
   showInSearch?: boolean
   isOnline?: boolean
   schedules?: BabysitterScheduleBlock[]
+  returningClients?: number
+  responseTime?: string
 }
 
 export const useBabysitter = () => {
@@ -318,6 +320,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     priceThreeChildren: data.priceThreeChildren,
     onlineLesson: data.onlineLesson,
     minOrderAmount: data.minOrderAmount,
+    returningClients: data.returningClients,
+    responseTime: data.responseTime,
   }
 }
 
