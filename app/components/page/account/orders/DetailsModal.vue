@@ -150,6 +150,16 @@
             </p>
           </div>
         </div>
+
+        <div v-if="details" class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <PageAccountOrdersOrderActions
+            :order-id="details.id"
+            :status="details.status"
+            :end-time="details.endTime"
+            :user-role="userRole"
+            @action="handleAction"
+          />
+        </div>
       </div>
       <div v-else class="text-center py-8">
         <p class="text-gray-500 dark:text-gray-400">
@@ -162,8 +172,10 @@
 
 <script setup lang="ts">
 import type { BookingDetails } from '~/composables/useBookings'
+import { UserRole } from '~/const/roles'
 
 const { t } = useI18n()
+const authStore = useAuthStore()
 
 const props = defineProps<{
   isOpen: boolean
@@ -173,7 +185,14 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'update:isOpen': [value: boolean]
+  action: [id: number, action: string]
 }>()
+
+const userRole = computed(() => authStore.currentUser?.role)
+
+const handleAction = (id: number, action: string) => {
+  emit('action', id, action)
+}
 
 const isOpen = computed({
   get: () => props.isOpen,

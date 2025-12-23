@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
+import { UserRole } from '~/const/roles'
 
 const { t } = useI18n()
 const toast = useToast()
@@ -67,7 +68,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
   try {
     await authStore.login(payload.data.email, payload.data.password)
     const role = authStore.user.role
-    const target = role ? (role === 'parent' ? '/search' : '/account/profile') : '/choose-role'
+    const target = role ? (role === UserRole.PARENT ? '/search' : '/account/profile') : '/choose-role'
     toast.add({ 
       title: t('auth.loginSuccess'), 
       color: 'success' 

@@ -222,7 +222,9 @@
         "cancelConfirmCancel": "Не",
         "cancelSuccess": "Заказ адменены",
         "cancelError": "Памылка адмены",
-        "cancelErrorMessage": "Не атрымалася адмяніць заказ. Паспрабуйце яшчэ раз."
+        "cancelErrorMessage": "Не атрымалася адмяніць заказ. Паспрабуйце яшчэ раз.",
+        "repeatError": "Памылка",
+        "repeatErrorMessage": "Не атрымалася знайсці інфармацыю пра сітэра. Паспрабуйце яшчэ раз."
       },
       "review": {
         "title": "Пакінуць водгук",

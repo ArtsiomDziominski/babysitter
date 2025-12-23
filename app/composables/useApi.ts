@@ -1,3 +1,5 @@
+import { UserRole, type Role } from '~/const/roles'
+
 interface ApiError {
   statusCode: number
   message: string
@@ -12,7 +14,7 @@ export interface ApiUser {
   id: number
   email: string
   password?: string
-  role?: 'parent' | 'babysitter' | null
+  role?: Role
   firstName: string
   lastName: string
   phone?: string

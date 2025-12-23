@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UserRole } from '~/const/roles'
+
 const route = useRoute()
 const authStore = useAuthStore()
 
@@ -12,7 +14,7 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const isParent = computed(() => authStore.user.role === 'parent')
+const isParent = computed(() => authStore.user.role === UserRole.PARENT)
 
 const defaultPath = computed(() =>
     isParent.value ? '/account/booking/kids' : '/account/booking/babysitter'

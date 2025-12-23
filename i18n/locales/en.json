@@ -220,7 +220,9 @@
         "cancelConfirmCancel": "No",
         "cancelSuccess": "Order cancelled",
         "cancelError": "Cancellation error",
-        "cancelErrorMessage": "Failed to cancel order. Please try again."
+        "cancelErrorMessage": "Failed to cancel order. Please try again.",
+        "repeatError": "Error",
+        "repeatErrorMessage": "Failed to find sitter information. Please try again."
       },
       "review": {
         "title": "Leave review",

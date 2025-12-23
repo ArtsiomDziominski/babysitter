@@ -222,7 +222,9 @@
         "cancelConfirmCancel": "Нет",
         "cancelSuccess": "Заказ отменен",
         "cancelError": "Ошибка отмены",
-        "cancelErrorMessage": "Не удалось отменить заказ. Попробуйте еще раз."
+        "cancelErrorMessage": "Не удалось отменить заказ. Попробуйте еще раз.",
+        "repeatError": "Ошибка",
+        "repeatErrorMessage": "Не удалось найти информацию о ситтере. Попробуйте еще раз."
       },
       "review": {
         "title": "Оставить отзыв",

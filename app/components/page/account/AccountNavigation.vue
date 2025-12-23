@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ROLES } from '~/const/roles'
+import { UserRole } from '~/const/roles'
 
 const authStore = useAuthStore()
 
@@ -30,7 +30,7 @@ defineProps<{
         {{ $t('account.orders.title') }}
       </NuxtLink>
       <NuxtLink
-        :to="authStore.user.role === ROLES.PARENT ? '/account/booking/kids' : '/account/booking/babysitter'"
+        :to="authStore.user.role === UserRole.PARENT ? '/account/booking/kids' : '/account/booking/babysitter'"
         class="px-4 py-3 text-sm font-medium transition-colors"
         :class="activeTab === 'booking'
           ? 'text-primary-500 border-b-2 border-primary-500'

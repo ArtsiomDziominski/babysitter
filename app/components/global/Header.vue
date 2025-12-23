@@ -74,6 +74,8 @@
 </template>
 
 <script setup lang="ts">
+import { UserRole } from '~/const/roles'
+
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
 
@@ -129,13 +131,13 @@ const accountMenuItems = computed(() => {
     }
   ]
 
-  if (role === 'parent') {
+  if (role === UserRole.PARENT) {
     mainMenuItems.push({
       label: t('header.menu.favorites'),
       icon: 'i-lucide-heart',
       to: '/account/favorites'
     })
-  } else if (role === 'nanny') {
+  } else if (role === UserRole.BABYSITTER) {
     mainMenuItems.push({
       label: t('header.menu.schedule'),
       icon: 'i-lucide-calendar-clock',

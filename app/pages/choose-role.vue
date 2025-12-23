@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UserRole, type Role } from '~/const/roles'
+
 definePageMeta({
   layout: 'role',
   middleware: 'auth'
@@ -9,17 +11,17 @@ const authStore = useAuthStore()
 const router = useRouter()
 const toast = useToast()
 
-type RoleOption = { label: string; value: 'parent' | 'nanny'; description: string }
+type RoleOption = { label: string; value: UserRole; description: string }
 
 const options = computed<RoleOption[]>(() => [
-  { label: t('roleSelection.parent.title'), value: 'parent', description: t('roleSelection.parent.description') },
-  { label: t('roleSelection.nanny.title'), value: 'nanny', description: t('roleSelection.nanny.description') }
+  { label: t('roleSelection.parent.title'), value: UserRole.PARENT, description: t('roleSelection.parent.description') },
+  { label: t('roleSelection.nanny.title'), value: UserRole.BABYSITTER, description: t('roleSelection.nanny.description') }
 ])
 
-const selectedRole = ref<'parent' | 'nanny'>(authStore.user.role ?? 'parent')
+const selectedRole = ref<UserRole>(authStore.user.role ?? UserRole.PARENT)
 const isSubmitting = ref(false)
 
-const redirectByRole = (role: 'parent' | 'nanny') => (role === 'parent' ? '/search' : '/account/profile')
+const redirectByRole = (role: UserRole) => (role === UserRole.PARENT ? '/search' : '/account/profile')
 
 onMounted(() => {
   if (authStore.user.role) {
@@ -27,7 +29,7 @@ onMounted(() => {
   }
 })
 
-const onSelect = async (role: 'parent' | 'nanny') => {
+const onSelect = async (role: UserRole) => {
   selectedRole.value = role
 }
 

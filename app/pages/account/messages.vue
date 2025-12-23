@@ -65,7 +65,7 @@
               v-if="activeChat.type === 'user'"
               class="text-sm text-gray-500 dark:text-gray-400"
             >
-              {{ activeChat.role === 'nanny' ? $t('account.role.nanny') : $t('account.role.parent') }}
+              {{ activeChat.role === UserRole.BABYSITTER ? $t('account.role.nanny') : $t('account.role.parent') }}
             </p>
           </div>
         </div>
@@ -125,6 +125,8 @@
 </template>
 
 <script setup lang="ts">
+import { UserRole } from '~/const/roles'
+
 definePageMeta({
   middleware: 'auth'
 })
@@ -149,7 +151,7 @@ interface Chat {
   type: 'ai' | 'admin' | 'user'
   avatar?: string
   icon?: string
-  role?: 'nanny' | 'parent'
+  role?: UserRole
   lastMessage?: string
   unreadCount: number
   messages: UIMessage[]
@@ -207,7 +209,7 @@ const chatsData = ref<Omit<Chat, 'name'>[]>([
     name: 'Анна Петрова',
     type: 'user',
     avatar: 'https://github.com/benjamincanac.png',
-    role: 'nanny',
+    role: UserRole.BABYSITTER,
     unreadCount: 0,
     messages: [
       {
@@ -228,7 +230,7 @@ const chatsData = ref<Omit<Chat, 'name'>[]>([
     type: 'user',
     avatar: undefined,
     icon: 'i-lucide-user',
-    role: 'parent',
+    role: UserRole.PARENT,
     unreadCount: 1,
     messages: []
   }

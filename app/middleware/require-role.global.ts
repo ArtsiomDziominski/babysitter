@@ -1,3 +1,5 @@
+import { UserRole } from '~/const/roles'
+
 export default defineNuxtRouteMiddleware((to) => {
   const authStore = useAuthStore()
 
@@ -12,7 +14,7 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   const hasRole = !!authStore.user?.role
-  const targetByRole = authStore.user?.role === 'parent' ? '/search' : '/account/profile'
+  const targetByRole = authStore.user?.role === UserRole.PARENT ? '/search' : '/account/profile'
 
   if (!hasRole && !isChooseRolePage) {
     return navigateTo('/choose-role')

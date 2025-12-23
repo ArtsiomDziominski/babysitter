@@ -7,7 +7,7 @@
             #{{ order.id }}
           </span>
           <NuxtLink
-            v-if="sitterId && userRole === 'parent'"
+            v-if="sitterId && userRole === UserRole.PARENT"
             :to="`/sitter/${sitterId}`"
             class="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
           >
@@ -53,71 +53,13 @@
     </div>
 
     <div class="flex items-center justify-between gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-      <div class="flex gap-2">
-        <template v-if="order.status === 'pending'">
-          <UButton
-            v-if="userRole === 'nanny'"
-            size="sm"
-            color="primary"
-            class="cursor-pointer"
-            @click="$emit('action', order.id, 'confirm')"
-          >
-            {{ $t('account.orders.actions.confirm') }}
-          </UButton>
-          <UButton
-            v-else
-            size="sm"
-            color="error"
-            variant="outline"
-            class="cursor-pointer"
-            @click="$emit('action', order.id, 'cancel')"
-          >
-            {{ $t('account.orders.actions.cancel') }}
-          </UButton>
-        </template>
-
-        <UButton
-          v-if="order.status === 'confirmed' || order.status === 'in_progress'"
-          size="sm"
-          color="error"
-          variant="outline"
-          class="cursor-pointer"
-          @click="$emit('action', order.id, 'cancel')"
-        >
-          {{ $t('account.orders.actions.cancel') }}
-        </UButton>
-
-        <template v-if="order.status === 'completed'">
-          <UButton
-            v-if="canLeaveReview"
-            size="sm"
-            variant="outline"
-            class="cursor-pointer"
-            @click="$emit('action', order.id, 'review')"
-          >
-            {{ $t('account.orders.actions.review') }}
-          </UButton>
-          <UButton
-            v-if="userRole !== 'nanny'"
-            size="sm"
-            color="primary"
-            class="cursor-pointer"
-            @click="$emit('action', order.id, 'repeat')"
-          >
-            {{ $t('account.orders.actions.repeat') }}
-          </UButton>
-        </template>
-
-        <UButton
-          v-if="order.status === 'cancelled' && userRole !== 'nanny'"
-          size="sm"
-          color="primary"
-          class="cursor-pointer"
-          @click="$emit('action', order.id, 'repeat')"
-        >
-          {{ $t('account.orders.actions.repeat') }}
-        </UButton>
-      </div>
+      <PageAccountOrdersOrderActions
+        :order-id="order.id"
+        :status="order.status"
+        :end-time="order.endTime"
+        :user-role="userRole"
+        @action="$emit('action', $event[0], $event[1])"
+      />
 
       <div class="flex gap-2">
         <UButton
@@ -128,16 +70,6 @@
         >
           {{ $t('account.orders.actions.details') }}
         </UButton>
-
-        <UButton
-          v-if="order.status === 'confirmed' || order.status === 'in_progress'"
-          size="sm"
-          color="primary"
-          class="cursor-pointer"
-          :to="'/account/messages'"
-        >
-          {{ $t('account.orders.actions.contact') }}
-        </UButton>
       </div>
     </div>
   </div>
@@ -145,6 +77,7 @@
 
 <script setup lang="ts">
 import type { BookingListItem } from '~/composables/useBookings'
+import { UserRole } from '~/const/roles'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -164,18 +97,6 @@ defineEmits<{
 }>()
 
 const userRole = computed(() => authStore.currentUser?.role)
-
-const canLeaveReview = computed(() => {
-  if (props.order.status !== 'completed') return false
-  if (!props.order.endTime) return true
-
-  const endTime = new Date(props.order.endTime)
-  const now = new Date()
-  const weekInMs = 7 * 24 * 60 * 60 * 1000
-  const timeDiff = now.getTime() - endTime.getTime()
-
-  return timeDiff <= weekInMs
-})
 
 const getStatusClass = (status: BookingListItem['status']) => {
   const classes = {
@@ -221,9 +142,4 @@ const formatDateTime = (dateString: string | undefined) => {
 }
 </script>
 
-<style scoped>
-:deep(.ui-button:not(:disabled)) {
-  cursor: pointer;
-}
-</style>
 

@@ -1,7 +1,7 @@
-export const ROLES = {
-  PARENT: 'parent',
-  NANNY: 'nanny',
-} as const
+export enum UserRole {
+  PARENT = 'parent',
+  BABYSITTER = 'babysitter',
+}
 
-export type Role = (typeof ROLES)[keyof typeof ROLES]
+export type Role = UserRole | null
 

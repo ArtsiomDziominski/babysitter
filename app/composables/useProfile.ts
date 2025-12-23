@@ -1,4 +1,5 @@
 import type { ApiUser } from './useApi'
+import { UserRole } from '~/const/roles'
 
 interface UpdateProfileRequest {
   firstName: string
@@ -19,7 +20,7 @@ export const useProfile = () => {
     })
   }
 
-  const updateRole = async (role: 'parent' | 'babysitter'): Promise<ApiUser> => {
+  const updateRole = async (role: UserRole): Promise<ApiUser> => {
     return await api.request<ApiUser>('/users/profile/role', {
       method: 'PATCH',
       body: JSON.stringify({ role }),

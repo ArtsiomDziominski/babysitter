@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { ApiUser } from '~/composables/useApi'
+import { UserRole, type Role } from '~/const/roles'
 
 export interface User {
     id: number
@@ -10,19 +11,9 @@ export interface User {
     phone: string
     city?: string
     avatar?: string
-    role: 'nanny' | 'parent' | null
+    role: Role
     children?: any[]
     babysitter?: any | null
-}
-
-function mapApiRoleToFrontend(apiRole?: 'parent' | 'babysitter' | null): 'nanny' | 'parent' | null {
-    if (!apiRole) return null
-    return apiRole === 'babysitter' ? 'nanny' : apiRole
-}
-
-function mapFrontendRoleToApi(frontendRole?: 'nanny' | 'parent' | null): 'parent' | 'babysitter' | null {
-    if (!frontendRole) return null
-    return frontendRole === 'nanny' ? 'babysitter' : frontendRole
 }
 
 function mapApiUserToFrontend(apiUser: ApiUser): User {
@@ -33,7 +24,7 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         email: apiUser.email,
         phone: apiUser.phone || '',
         avatar: apiUser.avatar,
-        role: mapApiRoleToFrontend(apiUser.role),
+        role: apiUser.role === UserRole.PARENT ? UserRole.PARENT : apiUser.role === UserRole.BABYSITTER ? UserRole.BABYSITTER : null,
         children: apiUser.children || undefined,
     }
 }
@@ -75,7 +66,7 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = newUser
     }
 
-    function setRole(role: 'nanny' | 'parent' | null) {
+    function setRole(role: Role) {
         user.value.role = role
     }
 
@@ -150,18 +141,17 @@ export const useAuthStore = defineStore('auth', () => {
         firstName: string
         lastName: string
         phone: string
-        role?: 'nanny' | 'parent' | null
+        role?: Role
     }) {
         const auth = useAuth()
         try {
-            const apiRole = mapFrontendRoleToApi(data.role)
             const response = await auth.register({
                 email: data.email,
                 password: data.password,
                 firstName: data.firstName,
                 lastName: data.lastName,
                 phone: data.phone,
-                ...(apiRole ? { role: apiRole } : {}),
+                ...(data.role ? { role: data.role } : {}),
             })
             setToken(response.access_token)
             const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
@@ -173,14 +163,13 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    async function saveRole(role: 'nanny' | 'parent') {
+    async function saveRole(role: UserRole) {
         const profile = useProfile()
-        const apiRole = mapFrontendRoleToApi(role)
-        if (!apiRole) {
+        if (!role) {
             throw new Error('Role is required')
         }
 
-        const updatedUser = await profile.updateRole(apiRole)
+        const updatedUser = await profile.updateRole(role)
         const mappedUser = mapApiUserToFrontend(updatedUser as ApiUser)
         setUser(mappedUser)
         setAuth(true)

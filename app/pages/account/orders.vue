@@ -48,6 +48,7 @@
       v-model:is-open="isDetailsModalOpen"
       :is-loading="isLoadingDetails"
       :details="bookingDetails"
+      @action="handleAction"
     />
 
     <PageAccountOrdersReviewModal
@@ -205,6 +206,8 @@ const openDetailsModal = async (id: number) => {
   }
 }
 
+const router = useRouter()
+
 const handleAction = async (orderId: number, action: string) => {
   if (action === 'cancel') {
     modalStore.open({
@@ -267,6 +270,37 @@ const handleAction = async (orderId: number, action: string) => {
       toast.add({
         title: t('account.orders.review.loadError'),
         description: err.message || t('account.orders.review.loadErrorMessage'),
+        color: 'error'
+      })
+    }
+  } else if (action === 'repeat') {
+    try {
+      let sitterId = bookingDetails.value?.babysitterId || 
+                     orders.value.find(o => o.id === orderId)?.babysitterId || 
+                     babysitterIdMap.value[orderId]
+      
+      if (!sitterId) {
+        const details = await bookingsApi.getBookingById(orderId)
+        sitterId = details.babysitterId
+        if (sitterId) {
+          babysitterIdMap.value[orderId] = sitterId
+        }
+      }
+      
+      if (sitterId) {
+        router.push(`/sitter/${sitterId}/book`)
+      } else {
+        toast.add({
+          title: t('account.orders.actions.repeatError'),
+          description: t('account.orders.actions.repeatErrorMessage'),
+          color: 'error'
+        })
+      }
+    } catch (err: any) {
+      console.error('Ошибка при повторении заказа:', err)
+      toast.add({
+        title: t('account.orders.actions.repeatError'),
+        description: err.message || t('account.orders.actions.repeatErrorMessage'),
         color: 'error'
       })
     }
