@@ -268,7 +268,11 @@
         "date": "Date",
         "time": "Time",
         "childrenCount": "Number of children",
+        "child": "Child",
+        "children": "Children",
         "years": "years",
+        "year": "year",
+        "years2": "years",
         "bookingType": "Booking type",
         "offline": "Offline",
         "online": "Online",
@@ -284,6 +288,9 @@
         "hasSpecialNeedsChild": "Child with special needs",
         "createdAt": "Created at",
         "completedAt": "Completed at",
+        "duration": "Duration",
+        "hours": "h",
+        "minutes": "min",
         "error": "Failed to load order details",
         "loadError": "Loading error",
         "loadErrorMessage": "Failed to load order details. Please try again."
@@ -483,6 +490,15 @@
           "message": "Failed to create booking"
         },
         "agePlaceholder": "Enter age",
+        "selectChildrenFromProfile": "Select children from profile",
+        "selectedChildren": "Selected children",
+        "noChildrenSelected": "No children selected. Select children from profile or add a new one.",
+        "noChildrenInProfile": "You don't have any children added yet. Add children in your profile.",
+        "addChildFromProfile": "Add from profile",
+        "removeChild": "Remove",
+        "addNewChild": "Add another child",
+        "addChild": "Add child",
+        "newChild": "New child",
         "bookingType": {
           "offline": {
             "title": "Sitter at home",

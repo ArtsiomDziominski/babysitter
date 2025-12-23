@@ -1,11 +1,18 @@
 import { useApi } from './useApi'
 
+export interface BookingChild {
+  name: string
+  age: number
+  description?: string
+}
+
 export interface CreateBookingRequest {
   babysitterId: number
   startTime: string
   endTime: string
-  childrenCount: number
-  childrenAges: number[]
+  childrenCount?: number
+  children?: BookingChild[]
+  childrenAges?: number[]
   bookingType: 'offline' | 'online'
   childIsSick?: boolean
   hasSpecialNeedsChild?: boolean
@@ -24,13 +31,13 @@ export interface BookingListItem {
   }
   date: string
   time: string
-  children: string[]
+  children: string[] | BookingChild[]
   status: 'pending' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled'
   totalPrice: string | number
   startTime: string
   endTime: string
   childrenCount: number
-  childrenAges: string[] | number[]
+  childrenAges?: string[] | number[] | null
   bookingType: 'offline' | 'online'
   childIsSick: boolean
   hasSpecialNeedsChild: boolean
@@ -53,7 +60,8 @@ export interface BookingDetails {
   endTime: string
   status: 'pending' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled'
   childrenCount: number
-  childrenAges: string[] | number[]
+  childrenAges?: string[] | number[] | null
+  children?: BookingChild[]
   bookingType: 'offline' | 'online'
   childIsSick: boolean
   hasSpecialNeedsChild: boolean

@@ -1107,7 +1107,13 @@ avatar: <File>
   "startTime": "2025-12-23T06:00:00.000Z",
   "endTime": "2025-12-23T10:00:00.000Z",
   "childrenCount": 1,
-  "childrenAges": [5],
+  "children": [
+    {
+      "name": "Мария",
+      "age": 5,
+      "description": "Любит рисовать"
+    }
+  ],
   "bookingType": "offline",
   "childIsSick": false,
   "hasSpecialNeedsChild": false,
@@ -1123,8 +1129,11 @@ avatar: <File>
 - `babysitterId` (number, **обязательное**) - ID няни
 - `startTime` (string, **обязательное**) - время начала в формате ISO 8601
 - `endTime` (string, **обязательное**) - время окончания в формате ISO 8601
-- `childrenCount` (number, optional) - количество детей (по умолчанию: 1)
-- `childrenAges` (number[], optional) - массив возрастов детей
+- `childrenCount` (number, optional) - количество детей (по умолчанию: 1). Если передано поле `children`, то `childrenCount` вычисляется автоматически как длина массива `children`
+- `children` (array, optional) - массив объектов с информацией о детях. Каждый объект содержит:
+  - `name` (string, **обязательное**) - имя ребенка
+  - `age` (number, **обязательное**) - возраст ребенка (0-18)
+  - `description` (string, optional) - описание/заметки о ребенке
 - `bookingType` (string, optional) - тип бронирования: `"offline"` или `"online"` (по умолчанию: `"offline"`)
 - `childIsSick` (boolean, optional) - ребенок болен (по умолчанию: `false`)
 - `hasSpecialNeedsChild` (boolean, optional) - есть ребенок с особыми потребностями (по умолчанию: `false`)
@@ -1144,7 +1153,13 @@ avatar: <File>
   "endTime": "2025-12-23T10:00:00.000Z",
   "status": "pending",
   "childrenCount": 1,
-  "childrenAges": [5],
+  "children": [
+    {
+      "name": "Мария",
+      "age": 5,
+      "description": "Любит рисовать"
+    }
+  ],
   "bookingType": "offline",
   "childIsSick": false,
   "hasSpecialNeedsChild": false,
@@ -1194,7 +1209,17 @@ avatar: <File>
       "startTime": "2024-01-15T10:00:00.000Z",
       "endTime": "2024-01-15T14:00:00.000Z",
       "childrenCount": 2,
-      "childrenAges": [5, 8],
+      "children": [
+        {
+          "name": "Мария",
+          "age": 5,
+          "description": "Любит играть на улице"
+        },
+        {
+          "name": "Иван",
+          "age": 8
+        }
+      ],
       "bookingType": "offline",
       "childIsSick": false,
       "hasSpecialNeedsChild": false,
@@ -1227,7 +1252,7 @@ avatar: <File>
   - Для няни (`babysitter`) - данные родителя
 - Поле `date` - дата в формате YYYY-MM-DD
 - Поле `time` - время в формате "HH:MM - HH:MM"
-- Поле `children` - массив имен детей
+- Поле `children` - массив объектов с информацией о детях (name, age, description) или массив имен детей (для обратной совместимости)
 - Все новые поля бронирования включены в ответ
 
 ### Получить детали бронирования
@@ -1246,7 +1271,17 @@ avatar: <File>
   "endTime": "2024-01-15T14:00:00.000Z",
   "status": "pending",
   "childrenCount": 2,
-  "childrenAges": [5, 8],
+  "children": [
+    {
+      "name": "Мария",
+      "age": 5,
+      "description": "Любит играть на улице"
+    },
+    {
+      "name": "Иван",
+      "age": 8
+    }
+  ],
   "bookingType": "offline",
   "childIsSick": false,
   "hasSpecialNeedsChild": false,

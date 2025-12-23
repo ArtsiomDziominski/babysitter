@@ -270,7 +270,11 @@
         "date": "Дата",
         "time": "Час",
         "childrenCount": "Колькасць дзяцей",
+        "child": "Дзіця",
+        "children": "Дзеці",
         "years": "гадоў",
+        "year": "год",
+        "years2": "гады",
         "bookingType": "Тып браніравання",
         "offline": "Офлайн",
         "online": "Онлайн",
@@ -286,6 +290,9 @@
         "hasSpecialNeedsChild": "Дзіця з асаблівымі патрэбамі",
         "createdAt": "Дата стварэння",
         "completedAt": "Дата завяршэння",
+        "duration": "Працягласць",
+        "hours": "г",
+        "minutes": "хв",
         "error": "Не атрымалася загрузіць дэталі заказа",
         "loadError": "Памылка загрузкі",
         "loadErrorMessage": "Не атрымалася загрузіць дэталі заказа. Паспрабуйце яшчэ раз."
@@ -485,6 +492,15 @@
           "message": "Не ўдалося стварыць браніраванне"
         },
         "agePlaceholder": "Пазначце ўзрост",
+        "selectChildrenFromProfile": "Выбраць дзяцей з профілю",
+        "selectedChildren": "Абраныя дзеці",
+        "noChildrenSelected": "Дзеці не абраны. Выберыце дзяцей з профілю або дадайце новага.",
+        "noChildrenInProfile": "У вас пакуль няма дададзеных дзяцей. Дадайце дзяцей у профілі.",
+        "addChildFromProfile": "Дадаць з профілю",
+        "removeChild": "Выдаліць",
+        "addNewChild": "Дадаць яшчэ дзіця",
+        "addChild": "Дадаць дзіця",
+        "newChild": "Новае дзіця",
         "bookingType": {
           "offline": {
             "title": "Сітэр дадому",

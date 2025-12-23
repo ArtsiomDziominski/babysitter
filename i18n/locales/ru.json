@@ -270,7 +270,11 @@
         "date": "Дата",
         "time": "Время",
         "childrenCount": "Количество детей",
+        "child": "Ребенок",
+        "children": "Дети",
         "years": "лет",
+        "year": "год",
+        "years2": "года",
         "bookingType": "Тип бронирования",
         "offline": "Офлайн",
         "online": "Онлайн",
@@ -286,6 +290,9 @@
         "hasSpecialNeedsChild": "Ребенок с особыми потребностями",
         "createdAt": "Дата создания",
         "completedAt": "Дата завершения",
+        "duration": "Длительность",
+        "hours": "ч",
+        "minutes": "мин",
         "error": "Не удалось загрузить детали заказа",
         "loadError": "Ошибка загрузки",
         "loadErrorMessage": "Не удалось загрузить детали заказа. Попробуйте еще раз."
@@ -563,6 +570,15 @@
           "message": "Не удалось создать бронирование"
         },
         "agePlaceholder": "Укажите возраст",
+        "selectChildrenFromProfile": "Выбрать детей из профиля",
+        "selectedChildren": "Выбранные дети",
+        "noChildrenSelected": "Дети не выбраны. Выберите детей из профиля или добавьте нового.",
+        "noChildrenInProfile": "У вас пока нет добавленных детей. Добавьте детей в профиле.",
+        "addChildFromProfile": "Добавить из профиля",
+        "removeChild": "Удалить",
+        "addNewChild": "Добавить еще ребенка",
+        "addChild": "Добавить ребенка",
+        "newChild": "Новый ребенок",
         "bookingType": {
           "offline": {
             "title": "Ситтер домой",

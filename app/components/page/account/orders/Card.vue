@@ -35,9 +35,16 @@
             <span class="font-medium">{{ $t('account.orders.time') }}:</span>
             {{ order.time }}
           </p>
-          <p v-if="order.children.length > 0">
-            <span class="font-medium">{{ $t('account.orders.children') }}:</span>
-            {{ order.children.join(', ') }}
+          <p v-if="order.childrenCount > 0">
+            <span class="font-medium mr-2">{{ $t('account.orders.details.childrenCount') }}:</span>
+            <UTooltip v-if="childrenTooltipText" :text="childrenTooltipText">
+              <span class="cursor-help">
+                {{ order.childrenCount }}
+              </span>
+            </UTooltip>
+            <span v-else>
+              {{ order.childrenCount }}
+            </span>
           </p>
           <p>
             <span class="font-medium">{{ $t('account.orders.createdAt') }}:</span>
@@ -140,6 +147,49 @@ const formatDateTime = (dateString: string | undefined) => {
     minute: '2-digit'
   })
 }
+
+const getAgeWord = (age: number): string => {
+  const ageNum = Math.floor(age)
+  const lastDigit = ageNum % 10
+  const lastTwoDigits = ageNum % 100
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+    return t('account.orders.details.years')
+  }
+
+  if (lastDigit === 1) {
+    return t('account.orders.details.year')
+  }
+
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return t('account.orders.details.years2')
+  }
+
+  return t('account.orders.details.years')
+}
+
+const childrenTooltipText = computed((): string | undefined => {
+  if (!props.order.children || props.order.children.length === 0) {
+    return undefined
+  }
+
+  const children = props.order.children
+  
+  if (typeof children[0] === 'string') {
+    return (children as string[]).join(', ')
+  }
+
+  return (children as any[]).map((child: any) => {
+    if (child.name && child.age) {
+      return `${child.name} (${child.age} ${getAgeWord(child.age)})`
+    } else if (child.name) {
+      return child.name
+    } else if (child.age) {
+      return `${child.age} ${getAgeWord(child.age)}`
+    }
+    return ''
+  }).filter(Boolean).join(', ')
+})
 </script>
 
 

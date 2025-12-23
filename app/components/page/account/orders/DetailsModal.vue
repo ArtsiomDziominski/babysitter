@@ -27,47 +27,106 @@
           </div>
         </div>
 
-        <div>
-          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-            {{ $t('account.orders.details.date') }}
-          </p>
-          <p class="text-gray-900 dark:text-white">
-            {{ formatDate(details.startTime) }}
-          </p>
+        <div class="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30">
+              <Icon name="i-lucide-calendar" size="20" class="text-primary-600 dark:text-primary-400" />
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-0.5">
+                {{ $t('account.orders.details.date') }}
+              </p>
+              <p class="text-base font-semibold text-gray-900 dark:text-white">
+                {{ formatDate(details.startTime) }}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30">
+              <Icon name="i-lucide-clock" size="20" class="text-primary-600 dark:text-primary-400" />
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-0.5">
+                {{ $t('account.orders.details.time') }}
+              </p>
+              <p class="text-base font-semibold text-gray-900 dark:text-white">
+                {{ formatTimeRange(details.startTime, details.endTime) }}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30">
+              <Icon name="i-lucide-hourglass" size="20" class="text-primary-600 dark:text-primary-400" />
+            </div>
+            <div class="flex-1">
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-0.5">
+                {{ $t('account.orders.details.duration') }}
+              </p>
+              <p class="text-base font-semibold text-gray-900 dark:text-white">
+                {{ formatDuration(details.startTime, details.endTime) }}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div>
-          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-            {{ $t('account.orders.details.time') }}
+          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+            {{ details.childrenCount === 1 ? $t('account.orders.details.child') : `${$t('account.orders.details.children')} (${details.childrenCount})` }}
           </p>
-          <p class="text-gray-900 dark:text-white">
-            {{ formatTimeRange(details.startTime, details.endTime) }}
+          <div v-if="details.children && details.children.length > 0" class="flex flex-wrap gap-2">
+            <div
+              v-for="(child, index) in details.children"
+              :key="index"
+              class="inline-flex flex-col gap-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg"
+            >
+              <div class="flex items-center gap-2">
+                <Icon name="i-lucide-baby" size="16" class="text-primary-500" />
+                <span class="text-sm font-medium text-gray-900 dark:text-white">{{ child.name }}</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">{{ child.age }} {{ getAgeWord(child.age) }}</span>
+              </div>
+              <p v-if="child.description" class="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                {{ child.description }}
+              </p>
+            </div>
+          </div>
+          <div v-else-if="details.childrenAges && details.childrenAges.length > 0" class="flex flex-wrap gap-2">
+            <div
+              v-for="(age, index) in details.childrenAges"
+              :key="index"
+              class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-700 rounded-lg"
+            >
+              <Icon name="i-lucide-baby" size="16" class="text-primary-500" />
+              <span class="text-sm text-gray-900 dark:text-white">{{ age }} {{ getAgeWord(Number(age)) }}</span>
+            </div>
+          </div>
+          <p v-else class="text-gray-900 dark:text-white">
+            {{ details.childrenCount }}
           </p>
         </div>
 
-        <div>
-          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-            {{ $t('account.orders.details.childrenCount') }}
-          </p>
-          <p class="text-gray-900 dark:text-white">
-            {{ details.childrenCount }} ({{ details.childrenAges.map(age => String(age)).join(', ') }} {{ $t('account.orders.details.years') }})
-          </p>
+        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30">
+            <Icon 
+              :name="details.bookingType === 'offline' ? 'i-lucide-home' : 'i-lucide-video'" 
+              size="20" 
+              class="text-primary-600 dark:text-primary-400" 
+            />
+          </div>
+          <div class="flex-1">
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-0.5">
+              {{ $t('account.orders.details.bookingType') }}
+            </p>
+            <p class="text-base font-semibold text-gray-900 dark:text-white">
+              {{ details.bookingType === 'offline' ? $t('account.orders.details.offline') : $t('account.orders.details.online') }}
+            </p>
+          </div>
         </div>
 
-        <div>
-          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-            {{ $t('account.orders.details.bookingType') }}
-          </p>
-          <p class="text-gray-900 dark:text-white">
-            {{ details.bookingType === 'offline' ? $t('account.orders.details.offline') : $t('account.orders.details.online') }}
-          </p>
-        </div>
-
-        <div v-if="details.notes">
-          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+        <div v-if="details.notes" class="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
             {{ $t('account.orders.details.notes') }}
           </p>
-          <p class="text-gray-900 dark:text-white">
+          <p class="text-sm text-gray-900 dark:text-white whitespace-pre-line">
             {{ details.notes }}
           </p>
         </div>
@@ -118,36 +177,47 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <div v-if="details.needsHelpWithHomework">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ $t('account.orders.details.needsHelpWithHomework') }}
-            </p>
-          </div>
-          <div v-if="details.needsOutdoorActivities">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ $t('account.orders.details.needsOutdoorActivities') }}
-            </p>
-          </div>
-          <div v-if="details.needsCarTransportation">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ $t('account.orders.details.needsCarTransportation') }}
-            </p>
-          </div>
-          <div v-if="details.needsWalking">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ $t('account.orders.details.needsWalking') }}
-            </p>
-          </div>
-          <div v-if="details.childIsSick">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ $t('account.orders.details.childIsSick') }}
-            </p>
-          </div>
-          <div v-if="details.hasSpecialNeedsChild">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              {{ $t('account.orders.details.hasSpecialNeedsChild') }}
-            </p>
+        <div v-if="hasSpecialConditions" class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+            {{ $t('account.booking.create.specialConditions.title') }}
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div v-if="details.needsHelpWithHomework" class="flex items-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <Icon name="i-lucide-book-open" size="16" class="text-blue-600 dark:text-blue-400" />
+              <p class="text-sm text-gray-900 dark:text-white">
+                {{ $t('account.orders.details.needsHelpWithHomework') }}
+              </p>
+            </div>
+            <div v-if="details.needsOutdoorActivities" class="flex items-center gap-2 px-3 py-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <Icon name="i-lucide-tree-pine" size="16" class="text-green-600 dark:text-green-400" />
+              <p class="text-sm text-gray-900 dark:text-white">
+                {{ $t('account.orders.details.needsOutdoorActivities') }}
+              </p>
+            </div>
+            <div v-if="details.needsCarTransportation" class="flex items-center gap-2 px-3 py-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+              <Icon name="i-lucide-car" size="16" class="text-purple-600 dark:text-purple-400" />
+              <p class="text-sm text-gray-900 dark:text-white">
+                {{ $t('account.orders.details.needsCarTransportation') }}
+              </p>
+            </div>
+            <div v-if="details.needsWalking" class="flex items-center gap-2 px-3 py-2 bg-cyan-50 dark:bg-cyan-900/20 rounded-lg">
+              <Icon name="i-lucide-footprints" size="16" class="text-cyan-600 dark:text-cyan-400" />
+              <p class="text-sm text-gray-900 dark:text-white">
+                {{ $t('account.orders.details.needsWalking') }}
+              </p>
+            </div>
+            <div v-if="details.childIsSick" class="flex items-center gap-2 px-3 py-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+              <Icon name="i-lucide-alert-circle" size="16" class="text-orange-600 dark:text-orange-400" />
+              <p class="text-sm text-gray-900 dark:text-white">
+                {{ $t('account.orders.details.childIsSick') }}
+              </p>
+            </div>
+            <div v-if="details.hasSpecialNeedsChild" class="flex items-center gap-2 px-3 py-2 bg-pink-50 dark:bg-pink-900/20 rounded-lg">
+              <Icon name="i-lucide-heart-handshake" size="16" class="text-pink-600 dark:text-pink-400" />
+              <p class="text-sm text-gray-900 dark:text-white">
+                {{ $t('account.orders.details.hasSpecialNeedsChild') }}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -240,6 +310,34 @@ const formatTimeRange = (startTime: string, endTime: string) => {
   return `${startStr} - ${endStr}`
 }
 
+const formatDuration = (startTime: string, endTime: string) => {
+  const start = new Date(startTime)
+  const end = new Date(endTime)
+  const diffMs = end.getTime() - start.getTime()
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+  const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
+  
+  const parts: string[] = []
+  if (diffHours > 0) {
+    parts.push(`${diffHours} ${t('account.orders.details.hours')}`)
+  }
+  if (diffMinutes > 0) {
+    parts.push(`${diffMinutes} ${t('account.orders.details.minutes')}`)
+  }
+  
+  return parts.length > 0 ? parts.join(' ') : `0 ${t('account.orders.details.minutes')}`
+}
+
+const hasSpecialConditions = computed(() => {
+  if (!props.details) return false
+  return props.details.needsHelpWithHomework ||
+    props.details.needsOutdoorActivities ||
+    props.details.needsCarTransportation ||
+    props.details.needsWalking ||
+    props.details.childIsSick ||
+    props.details.hasSpecialNeedsChild
+})
+
 const formatDateTime = (dateString: string | undefined) => {
   if (!dateString) return ''
   const date = new Date(dateString)
@@ -269,6 +367,26 @@ const getParentName = (details: BookingDetails) => {
     }
   }
   return ''
+}
+
+const getAgeWord = (age: number): string => {
+  const ageNum = Math.floor(age)
+  const lastDigit = ageNum % 10
+  const lastTwoDigits = ageNum % 100
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+    return t('account.orders.details.years')
+  }
+
+  if (lastDigit === 1) {
+    return t('account.orders.details.year')
+  }
+
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return t('account.orders.details.years2')
+  }
+
+  return t('account.orders.details.years')
 }
 </script>
 

@@ -24,8 +24,7 @@
         />
 
         <BookingChildrenFields
-          v-model:children-count="form.childrenCount"
-          v-model:children-ages="form.childrenAges"
+          v-model:selected-children="form.selectedChildren"
         />
 
         <BookingSpecialConditions
@@ -90,6 +89,7 @@
 
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
+import type { BookingChild } from '~/composables/useBookings'
 import { useBabysitter, mapBabysitterToSitter } from '~/composables/useBabysitter'
 import { useBookings } from '~/composables/useBookings'
 import { useBookingPrice } from '~/composables/useBookingPrice'
@@ -115,8 +115,7 @@ const form = ref({
   startTime: '',
   endDate: '',
   endTime: '',
-  childrenCount: 1,
-  childrenAges: [0] as number[],
+  selectedChildren: [] as BookingChild[],
   childIsSick: false,
   hasSpecialNeedsChild: false,
   needsHelpWithHomework: false,
@@ -161,10 +160,11 @@ watch(pending, (val) => {
 }, { immediate: true })
 
 const calculatedPrice = computed(() => {
+  const childrenCount = form.value.selectedChildren.filter(child => child.age > 0).length || 1
   return calculatePrice(
     sitter.value ?? null,
     bookingType.value,
-    form.value.childrenCount,
+    childrenCount,
     form.value.startDate,
     form.value.startTime,
     form.value.endDate,
@@ -173,14 +173,13 @@ const calculatedPrice = computed(() => {
 })
 
 const isFormValid = computed(() => {
+  const validChildren = form.value.selectedChildren.filter(child => child.age > 0 && child.age <= 18)
   return (
     form.value.startDate &&
     form.value.startTime &&
     form.value.endDate &&
     form.value.endTime &&
-    form.value.childrenCount > 0 &&
-    form.value.childrenAges.length === form.value.childrenCount &&
-    form.value.childrenAges.every(age => age > 0 && age <= 18)
+    validChildren.length > 0
   )
 })
 
@@ -269,17 +268,20 @@ const handleSubmit = async () => {
       throw new Error('Неверный ID няни')
     }
 
-    const validAges = form.value.childrenAges.filter(age => age > 0 && age <= 18)
-    if (validAges.length !== form.value.childrenCount) {
-      throw new Error('Неверные возрасты детей')
+    const validChildren = form.value.selectedChildren.filter(child => child.age > 0 && child.age <= 18)
+    if (validChildren.length === 0) {
+      throw new Error('Необходимо указать хотя бы одного ребенка с корректным возрастом')
     }
 
     const bookingData: any = {
       babysitterId: babysitterIdNum,
       startTime: startDateTime.toISOString(),
       endTime: endDateTime.toISOString(),
-      childrenCount: form.value.childrenCount,
-      childrenAges: validAges,
+      children: validChildren.map(child => ({
+        name: child.name || '',
+        age: child.age,
+        ...(child.description ? { description: child.description } : {})
+      })),
       bookingType: bookingType.value,
     }
 
@@ -296,8 +298,6 @@ const handleSubmit = async () => {
     if (notes) {
       bookingData.notes = notes
     }
-
-    console.log('Отправка данных бронирования:', JSON.stringify(bookingData, null, 2))
 
     await bookingsApi.createBooking(bookingData)
 
