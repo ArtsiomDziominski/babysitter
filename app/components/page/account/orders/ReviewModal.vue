@@ -125,6 +125,7 @@
 import type { BookingDetails } from '~/composables/useBookings'
 import { useReviews } from '~/composables/useReviews'
 import { useAuthStore } from '~/stores/auth'
+import { UserRole } from '~/const/roles'
 
 const props = defineProps<{
   isOpen: boolean
@@ -150,7 +151,7 @@ const quickReactions = ['👍', '❤️', '😊', '🌟', '💯', '🎉', '✨',
 
 const reviewTemplates = computed(() => {
   const userRole = authStore.currentUser?.role
-  if (userRole === 'parent') {
+  if (userRole === UserRole.PARENT) {
     return [
       t('account.orders.review.templates.excellent'),
       t('account.orders.review.templates.responsible'),
@@ -172,8 +173,8 @@ const reviewTemplates = computed(() => {
 const targetName = computed(() => {
   if (!props.booking) return ''
   const userRole = authStore.currentUser?.role
-  if (userRole === 'parent' && props.booking.babysitter) return getBabysitterName(props.booking)
-  if (userRole === 'nanny' && props.booking.parent) return getParentName(props.booking)
+  if (userRole === UserRole.PARENT && props.booking.babysitter) return getBabysitterName(props.booking)
+  if (userRole === UserRole.BABYSITTER && props.booking.parent) return getParentName(props.booking)
   return ''
 })
 
@@ -237,9 +238,9 @@ const submitReview = async () => {
     const userRole = authStore.currentUser?.role
     let targetId: number | undefined
 
-    targetId = userRole === 'parent' ? props.booking.babysitter?.user?.id : props.booking.parentId
+    targetId = userRole === UserRole.PARENT ? props.booking.babysitter?.user?.id : props.booking.parentId
 
-    const targetType = userRole === 'parent' ? 'babysitter' : 'parent'
+    const targetType = userRole === UserRole.PARENT ? UserRole.BABYSITTER : UserRole.PARENT
 
     if (!targetId) {
       throw new Error('Не удалось определить получателя отзыва')
@@ -307,8 +308,8 @@ const loadExistingReview = async () => {
     const userRole = authStore.currentUser.role
     const currentUserId = authStore.currentUser.id
 
-    const targetType = userRole === 'parent' ? 'babysitter' : 'parent'
-    const targetId = userRole === 'parent'
+    const targetType = userRole === UserRole.PARENT ? UserRole.BABYSITTER : UserRole.PARENT
+    const targetId = userRole === UserRole.PARENT
       ? props.booking.babysitter?.user?.id
       : props.booking.parentId
 
