@@ -49,11 +49,17 @@
       :is-loading="isLoadingDetails"
       :details="bookingDetails"
     />
+
+    <PageAccountOrdersReviewModal
+      v-model:is-open="isReviewModalOpen"
+      :booking="reviewBooking"
+      @success="loadBookings"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { BookingListItem, BookingDetails } from '~/composables/useBookings'
+import type { BookingDetails, BookingListItem } from '~/composables/useBookings'
 
 definePageMeta({
   middleware: 'auth'
@@ -74,6 +80,8 @@ const isDetailsModalOpen = ref(false)
 const bookingDetails = ref<BookingDetails | null>(null)
 const isLoadingDetails = ref(false)
 const babysitterIdMap = ref<Record<number, number>>({})
+const isReviewModalOpen = ref(false)
+const reviewBooking = ref<BookingDetails | null>(null)
 
 const loadBookings = async () => {
   isLoading.value = true
@@ -250,8 +258,18 @@ const handleAction = async (orderId: number, action: string) => {
         color: 'error'
       })
     }
-  } else {
-    console.log(`Action ${action} for order ${orderId}`)
+  } else if (action === 'review') {
+    try {
+      reviewBooking.value = await bookingsApi.getBookingById(orderId)
+      isReviewModalOpen.value = true
+    } catch (err: any) {
+      console.error('Ошибка загрузки деталей заказа для отзыва:', err)
+      toast.add({
+        title: t('account.orders.review.loadError'),
+        description: err.message || t('account.orders.review.loadErrorMessage'),
+        color: 'error'
+      })
+    }
   }
 }
 </script>

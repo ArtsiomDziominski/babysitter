@@ -1203,7 +1203,9 @@ avatar: <File>
       "needsCarTransportation": false,
       "needsWalking": false,
       "notes": "Дети любят играть на улице",
-      "createdAt": "2024-01-10T12:00:00.000Z"
+      "createdAt": "2024-01-10T12:00:00.000Z",
+      "parentReviewId": 1,
+      "babysitterReviewId": null
     }
   ],
   "meta": {
@@ -1214,6 +1216,10 @@ avatar: <File>
   }
 }
 ```
+
+**Поля отзывов:**
+- `parentReviewId` (number | null) - ID отзыва от родителя о няне, или `null`, если отзыв не оставлен
+- `babysitterReviewId` (number | null) - ID отзыва от няни о родителе, или `null`, если отзыв не оставлен
 
 **Примечания:**
 - Поле `customer` содержит информацию о контрагенте:
@@ -1277,7 +1283,259 @@ avatar: <File>
 **Body:**
 ```json
 {
-  "status": "confirmed" | "cancelled"
+  "status": "confirmed" | "in_progress" | "completed" | "cancelled"
+}
+```
+
+**Права доступа:**
+- **Родитель** (`parent`) может только отменить бронирование: `"status": "cancelled"` (если статус не `completed`)
+- **Няня** (`babysitter`) может выполнять следующие переходы:
+  - `pending` → `confirmed` (подтвердить)
+  - `pending` → `cancelled` (отменить)
+  - `confirmed` → `cancelled` (отменить)
+  - `confirmed` → `in_progress` (начать работу)
+  - `in_progress` → `completed` (завершить)
+  - `in_progress` → `cancelled` (отменить)
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "status": "in_progress",
+  "updatedAt": "2024-01-11T10:00:00.000Z"
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - недопустимое изменение статуса (например, попытка перевести `pending` сразу в `completed`)
+- `403 Forbidden` - недостаточно прав (например, родитель пытается установить статус `in_progress`)
+
+---
+
+## Отзывы
+
+### Создать или обновить отзыв (upsert)
+
+**POST** `/reviews`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "bookingId": 1,
+  "targetId": 2,
+  "targetType": "babysitter" | "parent",
+  "rating": 5,
+  "comment": "Отличная няня! Очень ответственная и внимательная."
+}
+```
+
+**Response (200 или 201):**
+```json
+{
+  "id": 1,
+  "bookingId": 1,
+  "authorId": 1,
+  "targetId": 2,
+  "targetType": "babysitter",
+  "rating": 5,
+  "comment": "Отличная няня! Очень ответственная и внимательная.",
+  "createdAt": "2024-01-15T10:00:00.000Z",
+  "updatedAt": "2024-01-15T10:00:00.000Z",
+  "author": {
+    "id": 1,
+    "firstName": "Иван",
+    "lastName": "Иванов",
+    "avatar": "https://..."
+  },
+  "target": {
+    "id": 2,
+    "firstName": "Мария",
+    "lastName": "Петрова"
+  }
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - бронирование не найдено
+- `400 Bad Request` - бронирование не завершено, неверный targetId или targetType
+- `401 Unauthorized` - отсутствует/невалидный токен
+- `403 Forbidden` - вы не можете оставить отзыв для этого бронирования
+
+**Примечания:**
+- Отзыв можно оставить только для завершенного бронирования (status = `completed`)
+- Нельзя оставить отзыв, если прошло больше недели с момента завершения бронирования
+- Родитель может оставить отзыв только о няне (`targetType: "babysitter"`)
+- Няня может оставить отзыв только о родителе (`targetType: "parent"`)
+- Если отзыв от этого автора для этого бронирования уже существует - он будет обновлен
+- Для каждого бронирования можно редактировать отзыв не более 3 раз
+- Рейтинг должен быть от 1 до 5
+- Комментарий опционален
+
+### Получить список отзывов
+
+**GET** `/reviews`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Query параметры:**
+- `targetId` (опционально) - ID цели отзыва (няня или родитель)
+- `targetType` (опционально) - тип цели: `babysitter` | `parent`
+- `bookingId` (опционально) - ID бронирования
+- `authorId` (опционально) - ID автора отзыва
+- `page` (опционально, по умолчанию 1) - номер страницы
+- `limit` (опционально, по умолчанию 10) - количество на странице
+
+**Response (200):**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "bookingId": 1,
+      "authorId": 1,
+      "targetId": 2,
+      "targetType": "babysitter",
+      "rating": 5,
+      "comment": "Отличная няня!",
+      "createdAt": "2024-01-15T10:00:00.000Z",
+      "updatedAt": "2024-01-15T10:00:00.000Z",
+      "author": {
+        "id": 1,
+        "firstName": "Иван",
+        "lastName": "Иванов",
+        "avatar": "https://..."
+      },
+      "target": {
+        "id": 2,
+        "firstName": "Мария",
+        "lastName": "Петрова"
+      }
+    }
+  ],
+  "total": 1,
+  "page": 1,
+  "limit": 10,
+  "totalPages": 1
+}
+```
+
+**Примеры запросов:**
+- Получить все отзывы о няне: `GET /reviews?targetId=2&targetType=babysitter`
+- Получить все отзывы родителя: `GET /reviews?targetId=1&targetType=parent`
+- Получить отзывы по бронированию: `GET /reviews?bookingId=1`
+
+### Получить детали отзыва
+
+**GET** `/reviews/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "bookingId": 1,
+  "authorId": 1,
+  "targetId": 2,
+  "targetType": "babysitter",
+  "rating": 5,
+  "comment": "Отличная няня!",
+  "createdAt": "2024-01-15T10:00:00.000Z",
+  "updatedAt": "2024-01-15T10:00:00.000Z",
+  "author": {
+    "id": 1,
+    "firstName": "Иван",
+    "lastName": "Иванов",
+    "avatar": "https://..."
+  },
+  "target": {
+    "id": 2,
+    "firstName": "Мария",
+    "lastName": "Петрова"
+  },
+  "booking": {
+    "id": 1,
+    "startTime": "2024-01-15T10:00:00.000Z",
+    "endTime": "2024-01-15T14:00:00.000Z",
+    "status": "completed"
+  }
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - отзыв не найден
+- `401 Unauthorized` - отсутствует/невалидный токен
+
+### Получить отзывы по бронированию
+
+**GET** `/reviews/booking/:bookingId`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+[
+  {
+    "id": 1,
+    "bookingId": 1,
+    "authorId": 1,
+    "targetId": 2,
+    "targetType": "babysitter",
+    "rating": 5,
+    "comment": "Отличная няня!",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-15T10:00:00.000Z",
+    "author": {
+      "id": 1,
+      "firstName": "Иван",
+      "lastName": "Иванов"
+    },
+    "target": {
+      "id": 2,
+      "firstName": "Мария",
+      "lastName": "Петрова"
+    }
+  },
+  {
+    "id": 2,
+    "bookingId": 1,
+    "authorId": 2,
+    "targetId": 1,
+    "targetType": "parent",
+    "rating": 5,
+    "comment": "Отличный родитель!",
+    "createdAt": "2024-01-15T11:00:00.000Z",
+    "updatedAt": "2024-01-15T11:00:00.000Z",
+    "author": {
+      "id": 2,
+      "firstName": "Мария",
+      "lastName": "Петрова"
+    },
+    "target": {
+      "id": 1,
+      "firstName": "Иван",
+      "lastName": "Иванов"
+    }
+  }
+]
+```
+
+**Ошибки:**
+- `401 Unauthorized` - отсутствует/невалидный токен
+
+### Обновить отзыв
+
+**PATCH** `/reviews/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "rating": 4,
+  "comment": "Обновленный комментарий"
 }
 ```
 
@@ -1285,10 +1543,52 @@ avatar: <File>
 ```json
 {
   "id": 1,
-  "status": "confirmed",
-  "updatedAt": "2024-01-11T10:00:00.000Z"
+  "bookingId": 1,
+  "authorId": 1,
+  "targetId": 2,
+  "targetType": "babysitter",
+  "rating": 4,
+  "comment": "Обновленный комментарий",
+  "createdAt": "2024-01-15T10:00:00.000Z",
+  "updatedAt": "2024-01-15T12:00:00.000Z"
 }
 ```
+
+**Ошибки:**
+- `404 Not Found` - отзыв не найден
+- `400 Bad Request` - неверный рейтинг (должен быть от 1 до 5)
+- `401 Unauthorized` - отсутствует/невалидный токен
+- `403 Forbidden` - вы можете редактировать только свои отзывы
+
+**Примечания:**
+- Можно обновить только свой отзыв
+- Можно обновить только `rating` и/или `comment`
+- Можно редактировать отзыв не более 3 раз для одного бронирования
+- Нельзя редактировать отзыв, если прошло больше недели с момента завершения бронирования
+- При изменении рейтинга автоматически пересчитывается средний рейтинг цели отзыва
+- Для каждого нового бронирования счетчик редактирований обнуляется (независимый для каждого заказа)
+
+### Удалить отзыв
+
+**DELETE** `/reviews/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "message": "Отзыв удален"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - отзыв не найден
+- `401 Unauthorized` - отсутствует/невалидный токен
+- `403 Forbidden` - вы можете удалять только свои отзывы
+
+**Примечания:**
+- Можно удалить только свой отзыв
+- После удаления автоматически пересчитывается средний рейтинг цели отзыва
 
 ---
 
@@ -1910,6 +2210,11 @@ http://localhost:3000/docs
 - `in_progress` - в процессе выполнения
 - `completed` - завершено
 - `cancelled` - отменено
+
+### Типы целей отзывов
+
+- `babysitter` - отзыв о няне
+- `parent` - отзыв о родителе
 
 ### Дни недели (dayOfWeek)
 

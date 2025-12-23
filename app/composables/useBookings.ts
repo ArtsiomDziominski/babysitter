@@ -41,6 +41,8 @@ export interface BookingListItem {
   notes?: string
   createdAt: string
   babysitterId?: number
+  parentReviewId?: number | null
+  babysitterReviewId?: number | null
 }
 
 export interface BookingDetails {
@@ -75,10 +77,13 @@ export interface BookingDetails {
   babysitter?: {
     id: number
     user: {
+      id: number
       firstName: string
       lastName: string
     }
   }
+  parentReviewId?: number | null
+  babysitterReviewId?: number | null
 }
 
 export interface Booking extends BookingListItem {}

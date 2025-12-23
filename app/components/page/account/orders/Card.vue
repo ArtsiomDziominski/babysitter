@@ -89,6 +89,7 @@
 
         <template v-if="order.status === 'completed'">
           <UButton
+            v-if="canLeaveReview"
             size="sm"
             variant="outline"
             class="cursor-pointer"
@@ -163,6 +164,18 @@ defineEmits<{
 }>()
 
 const userRole = computed(() => authStore.currentUser?.role)
+
+const canLeaveReview = computed(() => {
+  if (props.order.status !== 'completed') return false
+  if (!props.order.endTime) return true
+
+  const endTime = new Date(props.order.endTime)
+  const now = new Date()
+  const weekInMs = 7 * 24 * 60 * 60 * 1000
+  const timeDiff = now.getTime() - endTime.getTime()
+
+  return timeDiff <= weekInMs
+})
 
 const getStatusClass = (status: BookingListItem['status']) => {
   const classes = {
