@@ -58,7 +58,7 @@
         :status="order.status"
         :end-time="order.endTime"
         :user-role="userRole"
-        @action="$emit('action', $event[0], $event[1])"
+        @action="(id, action) => $emit('action', id, action)"
       />
 
       <div class="flex gap-2">
