@@ -822,9 +822,10 @@ avatar: <File>
   "specialNeedsCare": true,
   "petAttitude": "Комфортно с животными",
   "advantages": ["Мед образование", "Английский"],
-  "birthDate": "1999-05-01",
+      "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
+      "returningCount": 5,
       "available": true,
       "showInSearch": true,
       "isOnline": true,
@@ -1885,9 +1886,407 @@ avatar: <File>
 
 ---
 
+## Чат
+
+### Получить список моих чатов
+
+**GET** `/chat/conversations`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+[
+  {
+    "id": 1,
+    "user1Id": 1,
+    "user2Id": 2,
+    "user1": {
+      "id": 1,
+      "firstName": "Иван",
+      "lastName": "Иванов",
+      "avatar": "avatars/1-1704067200000.jpg"
+    },
+    "user2": {
+      "id": 2,
+      "firstName": "Мария",
+      "lastName": "Петрова",
+      "avatar": "avatars/2-1704067200000.jpg"
+    },
+    "bookingId": null,
+    "isAdminChat": false,
+    "unreadCountUser1": 0,
+    "unreadCountUser2": 2,
+    "lastMessageId": 10,
+    "createdAt": "2024-01-10T12:00:00.000Z",
+    "updatedAt": "2024-01-15T14:30:00.000Z"
+  }
+]
+```
+
+### Создать чат
+
+**POST** `/chat/conversations`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "userId": 2,
+  "bookingId": 1
+}
+```
+
+**Поля:**
+- `userId` (number, **обязательное**) - ID пользователя, с которым создается чат
+- `bookingId` (number, optional) - ID бронирования, связанного с чатом
+
+**Response (200/201):**
+```json
+{
+  "id": 1,
+  "user1Id": 1,
+  "user2Id": 2,
+  "bookingId": 1,
+  "isAdminChat": false,
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+### Создать чат с админом
+
+**POST** `/chat/conversations/admin`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200/201):**
+```json
+{
+  "id": 5,
+  "user1Id": 1,
+  "user2Id": 10,
+  "isAdminChat": true,
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+**Примечание:** Если чат с админом уже существует, возвращается существующий чат.
+
+### Получить детали чата
+
+**GET** `/chat/conversations/:id`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "user1Id": 1,
+  "user2Id": 2,
+  "user1": {
+    "id": 1,
+    "firstName": "Иван",
+    "lastName": "Иванов"
+  },
+  "user2": {
+    "id": 2,
+    "firstName": "Мария",
+    "lastName": "Петрова"
+  },
+  "booking": {
+    "id": 1,
+    "status": "confirmed"
+  },
+  "isAdminChat": false,
+  "unreadCountUser1": 0,
+  "unreadCountUser2": 2,
+  "lastMessageId": 10,
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-15T14:30:00.000Z"
+}
+```
+
+### Получить сообщения в чате
+
+**GET** `/chat/conversations/:id/messages?page=1&limit=50`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Query Parameters:**
+- `page` (number, optional) - номер страницы (по умолчанию: 1)
+- `limit` (number, optional) - количество на странице (по умолчанию: 50)
+
+**Response (200):**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "conversationId": 1,
+      "senderId": 1,
+      "sender": {
+        "id": 1,
+        "firstName": "Иван",
+        "lastName": "Иванов",
+        "avatar": "avatars/1-1704067200000.jpg"
+      },
+      "content": "Привет! Как дела?",
+      "attachments": null,
+      "readAt": "2024-01-15T14:30:00.000Z",
+      "editedAt": null,
+      "deletedAt": null,
+      "isEdited": false,
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "conversationId": 1,
+      "senderId": 2,
+      "sender": {
+        "id": 2,
+        "firstName": "Мария",
+        "lastName": "Петрова"
+      },
+      "content": "",
+      "attachments": ["chat-attachments/1/1704067200000-image.jpg"],
+      "readAt": null,
+      "editedAt": null,
+      "deletedAt": null,
+      "isEdited": false,
+      "createdAt": "2024-01-15T10:05:00.000Z"
+    }
+  ],
+  "meta": {
+    "total": 25,
+    "page": 1,
+    "limit": 50,
+    "totalPages": 1
+  }
+}
+```
+
+**Примечания:**
+- Сообщения возвращаются в порядке от старых к новым (ASC)
+- Удаленные сообщения не возвращаются (фильтруются по `deletedAt IS NULL`)
+- Поле `attachments` содержит массив URL изображений
+
+### Отправить сообщение
+
+**POST** `/chat/messages`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "conversationId": 1,
+  "content": "Привет! Как дела?",
+  "attachments": ["https://example.com/image.jpg"]
+}
+```
+
+**Поля:**
+- `conversationId` (number, **обязательное**) - ID чата
+- `content` (string, **обязательное**, минимум 1 символ) - текст сообщения
+- `attachments` (array of strings, optional) - массив URL изображений
+
+**Response (201):**
+```json
+{
+  "id": 1,
+  "conversationId": 1,
+  "senderId": 1,
+  "sender": {
+    "id": 1,
+    "firstName": "Иван",
+    "lastName": "Иванов"
+  },
+  "content": "Привет! Как дела?",
+  "attachments": null,
+  "readAt": null,
+  "editedAt": null,
+  "deletedAt": null,
+  "isEdited": false,
+  "createdAt": "2024-01-15T10:00:00.000Z"
+}
+```
+
+### Загрузить изображение в чат
+
+**POST** `/chat/conversations/:id/upload-image`
+
+**Headers:** 
+- `Authorization: Bearer <token>`
+- `Content-Type: multipart/form-data`
+
+**Body (FormData):**
+```
+image: <File>
+```
+
+**Ограничения:**
+- Формат: `jpg`, `jpeg`, `png`, `gif`, `webp`
+- Размер: до 5MB
+
+**Response (200):**
+```json
+{
+  "message": {
+    "id": 2,
+    "conversationId": 1,
+    "senderId": 1,
+    "content": "",
+    "attachments": ["chat-attachments/1/1704067200000-image.jpg"],
+    "createdAt": "2024-01-15T10:05:00.000Z"
+  },
+  "imageUrl": "https://minio.example.com/avatars/chat-attachments/1/1704067200000-image.jpg?X-Amz-Algorithm=..."
+}
+```
+
+**Ошибки:**
+- `400 Bad Request` - неверный формат файла или размер превышает 5MB
+
+### Поиск по сообщениям
+
+**GET** `/chat/messages/search?q=привет&conversationId=1&page=1&limit=50`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Query Parameters:**
+- `q` (string, **обязательное**) - поисковый запрос
+- `conversationId` (number, optional) - фильтр по конкретному чату
+- `page` (number, optional) - номер страницы (по умолчанию: 1)
+- `limit` (number, optional) - количество на странице (по умолчанию: 50)
+
+**Response (200):**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "conversationId": 1,
+      "senderId": 1,
+      "sender": {
+        "id": 1,
+        "firstName": "Иван",
+        "lastName": "Иванов"
+      },
+      "content": "Привет! Как дела?",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "page": 1,
+    "limit": 50,
+    "totalPages": 1
+  }
+}
+```
+
+**Примечание:** Поиск выполняется только по сообщениям текущего пользователя (или всех сообщений для админа/модератора).
+
+### Проверить онлайн статус пользователя
+
+**GET** `/chat/users/:id/online-status`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Response (200):**
+```json
+{
+  "isOnline": true
+}
+```
+
+### Редактировать сообщение (только админ/модератор)
+
+**PATCH** `/chat/messages/:id`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `admin` или `moderator`)
+
+**Body:**
+```json
+{
+  "content": "Исправленный текст сообщения"
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "conversationId": 1,
+  "senderId": 1,
+  "content": "Исправленный текст сообщения",
+  "editedAt": "2024-01-15T15:00:00.000Z",
+  "isEdited": true,
+  "createdAt": "2024-01-15T10:00:00.000Z"
+}
+```
+
+**Ошибки:**
+- `403 Forbidden` - недостаточно прав (требуется роль админа или модератора)
+
+### Удалить сообщение (только админ/модератор)
+
+**DELETE** `/chat/messages/:id`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `admin` или `moderator`)
+
+**Response (200):**
+```json
+{
+  "message": "Message deleted",
+  "deletedMessage": {
+    "id": 1,
+    "content": "[Сообщение удалено]",
+    "deletedAt": "2024-01-15T15:00:00.000Z"
+  }
+}
+```
+
+**Ошибки:**
+- `403 Forbidden` - недостаточно прав (требуется роль админа или модератора)
+
+**Примечание:** При удалении содержимое сообщения заменяется на "[Сообщение удалено]".
+
+### Обновить настройки уведомлений
+
+**PATCH** `/users/me/notifications`
+
+**Headers:** `Authorization: Bearer <token>`
+
+**Body:**
+```json
+{
+  "emailNotificationsEnabled": false
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "email": "user@example.com",
+  "emailNotificationsEnabled": false,
+  ...
+}
+```
+
+**Примечание:** Если `emailNotificationsEnabled = false`, email уведомления о новых сообщениях не будут отправляться.
+
+---
+
 ## Админ-панель
 
-Все админские endpoints требуют роль `admin` и токен в заголовке.
+Все админские endpoints требуют роль `admin` или `moderator` и токен в заголовке.
+
+Все админские endpoints требуют роль `admin` или `moderator` и токен в заголовке.
 
 ### Получить всех пользователей
 
@@ -2036,16 +2435,164 @@ avatar: <File>
 }
 ```
 
+### Получить все чаты с пользователями
+
+**GET** `/admin/conversations`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `admin` или `moderator`)
+
+**Response (200):**
+```json
+[
+  {
+    "id": 1,
+    "user1Id": 1,
+    "user2Id": 10,
+    "user1": {
+      "id": 1,
+      "firstName": "Иван",
+      "lastName": "Иванов"
+    },
+    "user2": {
+      "id": 10,
+      "firstName": "Админ",
+      "lastName": "Системный",
+      "role": "admin"
+    },
+    "isAdminChat": true,
+    "unreadCountUser1": 2,
+    "unreadCountUser2": 0,
+    "lastMessageId": 15,
+    "createdAt": "2024-01-10T12:00:00.000Z",
+    "updatedAt": "2024-01-15T14:30:00.000Z"
+  }
+]
+```
+
+**Примечание:** Возвращаются только чаты с админом/модератором (`isAdminChat = true`).
+
+### Получить чат с конкретным пользователем
+
+**GET** `/admin/conversations/user/:userId`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `admin` или `moderator`)
+
+**Response (200):**
+```json
+{
+  "id": 1,
+  "user1Id": 1,
+  "user2Id": 10,
+  "user1": {
+    "id": 1,
+    "firstName": "Иван",
+    "lastName": "Иванов"
+  },
+  "user2": {
+    "id": 10,
+    "firstName": "Админ",
+    "lastName": "Системный"
+  },
+  "isAdminChat": true,
+  "createdAt": "2024-01-10T12:00:00.000Z",
+  "updatedAt": "2024-01-15T14:30:00.000Z"
+}
+```
+
+**Ошибки:**
+- `404 Not Found` - чат с пользователем не найден
+
+### Получить сообщения в чате (админ)
+
+**GET** `/admin/conversations/:id/messages?page=1&limit=50`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `admin` или `moderator`)
+
+**Query Parameters:**
+- `page` (number, optional) - номер страницы (по умолчанию: 1)
+- `limit` (number, optional) - количество на странице (по умолчанию: 50)
+
+**Response (200):**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "conversationId": 1,
+      "senderId": 1,
+      "sender": {
+        "id": 1,
+        "firstName": "Иван",
+        "lastName": "Иванов"
+      },
+      "content": "Здравствуйте, у меня вопрос",
+      "createdAt": "2024-01-15T10:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "page": 1,
+    "limit": 50,
+    "totalPages": 1
+  }
+}
+```
+
+### Отправить сообщение от имени админа/модератора
+
+**POST** `/admin/conversations/:id/messages`
+
+**Headers:** `Authorization: Bearer <token>` (требуется роль `admin` или `moderator`)
+
+**Body:**
+```json
+{
+  "conversationId": 1,
+  "content": "Здравствуйте! Чем могу помочь?",
+  "attachments": null
+}
+```
+
+**Response (201):**
+```json
+{
+  "id": 2,
+  "conversationId": 1,
+  "senderId": 10,
+  "sender": {
+    "id": 10,
+    "firstName": "Админ",
+    "lastName": "Системный"
+  },
+  "content": "Здравствуйте! Чем могу помочь?",
+  "createdAt": "2024-01-15T10:05:00.000Z"
+}
+```
+
 ---
 
 ## WebSocket (Реал-тайм уведомления)
 
 ### Подключение
 
+#### Основное подключение (уведомления)
+
 ```javascript
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:3000', {
+  auth: {
+    token: 'your_jwt_token'
+  }
+});
+```
+
+#### Подключение к чату
+
+```javascript
+import io from 'socket.io-client';
+
+const chatSocket = io('http://localhost:3000/chat', {
   auth: {
     token: 'your_jwt_token'
   }
@@ -2151,11 +2698,22 @@ socket.on('booking:updated', (data) => {
 ```json
 {
   "id": 1,
-  "type": "booking" | "message" | "system",
+  "type": "booking" | "message" | "system" | "new_message",
   "title": "Новое бронирование",
   "message": "У вас новое бронирование на 15 января",
   "read": false,
   "createdAt": "2024-01-10T12:00:00.000Z"
+}
+```
+
+**Для уведомлений о новых сообщениях:**
+```json
+{
+  "type": "new_message",
+  "conversationId": 1,
+  "messageId": 10,
+  "senderId": 2,
+  "content": "Привет! Как дела?"
 }
 ```
 
@@ -2189,6 +2747,233 @@ socket.on('notification:new', (notification) => {
   "userId": 1,
   "timestamp": "2024-01-10T12:00:00.000Z"
 }
+```
+
+### События чата (namespace `/chat`)
+
+#### Присоединиться к комнате чата
+
+**Событие:** `chat:join`
+
+**Данные:**
+```json
+{
+  "conversationId": 1
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.emit('chat:join', { conversationId: 1 });
+```
+
+#### Покинуть комнату чата
+
+**Событие:** `chat:leave`
+
+**Данные:**
+```json
+{
+  "conversationId": 1
+}
+```
+
+#### Отправить сообщение
+
+**Событие:** `message:send`
+
+**Данные:**
+```json
+{
+  "conversationId": 1,
+  "content": "Привет! Как дела?"
+}
+```
+
+**Ответ:**
+```json
+{
+  "success": true,
+  "message": {
+    "id": 1,
+    "conversationId": 1,
+    "senderId": 1,
+    "content": "Привет! Как дела?",
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  }
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.emit('message:send', {
+  conversationId: 1,
+  content: 'Привет!'
+});
+```
+
+#### Новое сообщение
+
+**Событие:** `message:new`
+
+**Данные:**
+```json
+{
+  "id": 1,
+  "conversationId": 1,
+  "senderId": 1,
+  "sender": {
+    "id": 1,
+    "firstName": "Иван",
+    "lastName": "Иванов"
+  },
+  "content": "Привет! Как дела?",
+  "attachments": null,
+  "createdAt": "2024-01-15T10:00:00.000Z"
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.on('message:new', (message) => {
+  console.log('Новое сообщение:', message);
+  // Добавить сообщение в UI
+});
+```
+
+#### Сообщение отредактировано
+
+**Событие:** `message:edited`
+
+**Данные:**
+```json
+{
+  "id": 1,
+  "conversationId": 1,
+  "content": "Исправленный текст",
+  "editedAt": "2024-01-15T15:00:00.000Z",
+  "isEdited": true
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.on('message:edited', (message) => {
+  console.log('Сообщение отредактировано:', message);
+  // Обновить сообщение в UI
+});
+```
+
+#### Сообщение удалено
+
+**Событие:** `message:deleted`
+
+**Данные:**
+```json
+{
+  "id": 1,
+  "conversationId": 1,
+  "content": "[Сообщение удалено]",
+  "deletedAt": "2024-01-15T15:00:00.000Z"
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.on('message:deleted', (message) => {
+  console.log('Сообщение удалено:', message);
+  // Обновить сообщение в UI
+});
+```
+
+#### Отметить сообщения как прочитанные
+
+**Событие:** `message:read`
+
+**Данные:**
+```json
+{
+  "conversationId": 1
+}
+```
+
+**Ответ:**
+```json
+{
+  "success": true
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.emit('message:read', { conversationId: 1 });
+```
+
+#### Изменение статуса пользователя (онлайн/оффлайн)
+
+**Событие:** `user:status_changed`
+
+**Данные:**
+```json
+{
+  "userId": 1,
+  "isOnline": true
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.on('user:status_changed', (data) => {
+  console.log(`Пользователь ${data.userId} ${data.isOnline ? 'онлайн' : 'оффлайн'}`);
+  // Обновить статус в UI
+});
+```
+
+#### Индикатор печати
+
+**Событие:** `typing:start`
+
+**Данные:**
+```json
+{
+  "userId": 1,
+  "conversationId": 1
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.on('typing:start', (data) => {
+  console.log(`Пользователь ${data.userId} печатает...`);
+  // Показать индикатор печати
+});
+```
+
+**Событие:** `typing:stop`
+
+**Данные:**
+```json
+{
+  "userId": 1,
+  "conversationId": 1
+}
+```
+
+**Пример:**
+```javascript
+chatSocket.on('typing:stop', (data) => {
+  console.log(`Пользователь ${data.userId} перестал печатать`);
+  // Скрыть индикатор печати
+});
+```
+
+**Отправка индикатора печати:**
+```javascript
+// Начать печатать
+chatSocket.emit('typing:start', { conversationId: 1 });
+
+// Перестать печатать
+chatSocket.emit('typing:stop', { conversationId: 1 });
 ```
 
 ### Отправка событий (если нужно)
@@ -2322,6 +3107,7 @@ http://localhost:3000/docs
 - `parent` - родитель
 - `babysitter` - няня
 - `admin` - администратор
+- `moderator` - модератор
 
 ### Статусы бронирования
 

@@ -186,7 +186,10 @@
     "messages": {
       "title": "Сообщения",
       "aiAssistant": "AI помощник",
-      "admin": "Администратор"
+      "admin": "Администратор",
+      "loading": "Загрузка чатов...",
+      "selectChat": "Выберите чат",
+      "loadingMessages": "Загрузка сообщений..."
     },
     "orders": {
       "title": "Заказы",
