@@ -18,8 +18,8 @@
               class="cursor-pointer"
               @click="goPrev"
           />
-          <div class="font-semibold text-gray-900 dark:text-white w-[160px] text-center">
-            {{ monthLabel }}
+          <div class="font-semibold text-gray-900 dark:text-white w-[200px] text-center">
+            {{ calendarViewMode === 'week' ? weekLabel : monthLabel }}
           </div>
           <UButton
               variant="ghost"
@@ -203,6 +203,19 @@ const parsedMonth = computed(() => calendarMonth.value)
 const monthLabel = computed(() =>
     parsedMonth.value.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
 )
+
+const weekLabel = computed(() => {
+  const current = parsedMonth.value
+  const day = current.getDay()
+  const diff = (day + 6) % 7
+  const weekStart = addDays(current, -diff)
+  const weekEnd = addDays(weekStart, 6)
+  
+  const startStr = weekStart.toLocaleDateString(undefined, { day: 'numeric', month: 'short' })
+  const endStr = weekEnd.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })
+  
+  return `${startStr} – ${endStr}`
+})
 
 const calendarMonthValue = computed(() => formatDateKey(calendarMonth.value))
 
@@ -411,6 +424,11 @@ const saveDraft = () => {
 
 const setViewMode = (mode: 'month' | 'week') => {
   handleCalendarViewModeChange(mode)
+  if (mode === 'month') {
+    calendarMonth.value = startOfMonth(parsedMonth.value)
+  } else {
+    calendarMonth.value = new Date()
+  }
 }
 
 const goPrev = () => {
@@ -419,7 +437,7 @@ const goPrev = () => {
     handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
   } else {
     const next = addDays(parsedMonth.value, -7)
-    handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
+    calendarMonth.value = next
   }
 }
 
@@ -429,7 +447,7 @@ const goNext = () => {
     handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
   } else {
     const next = addDays(parsedMonth.value, 7)
-    handleCalendarMonthChange(formatDateKey(startOfMonth(next)))
+    calendarMonth.value = next
   }
 }
 </script>

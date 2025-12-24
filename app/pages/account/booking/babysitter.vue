@@ -149,7 +149,7 @@ const loadedSnapshot = ref<BabysitterProfilePayload | null>(null)
 const personalInfoRef = ref<{ validatePhoto: () => boolean } | null>(null)
 const showPhotoError = ref(false)
 
-const calendarMonth = ref<Date>(startOfMonth(new Date()))
+const calendarMonth = ref<Date>(new Date())
 const calendarCustomMap = ref<Record<string, TimeInterval[]>>({})
 
 const scheduleMode = ref<ScheduleMode>(ScheduleMode.ALL_DAYS)
