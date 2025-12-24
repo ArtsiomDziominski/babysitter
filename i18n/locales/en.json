@@ -361,7 +361,14 @@
       "loadError": "Failed to load profile",
       "tryLater": "Please try again later",
       "saveSuccess": "Profile saved",
-      "saveError": "Save error"
+      "saveError": "Save error",
+      "uploadPhoto": "Upload photo",
+      "changePhoto": "Change photo",
+      "deletePhoto": "Delete photo",
+      "photoUploadSuccess": "Photo uploaded successfully",
+      "photoDeleteSuccess": "Photo deleted successfully",
+      "photoRequired": "Photo is required",
+      "photoRequiredDescription": "You must upload a photo to save the profile"
     },
     "nannySchedule": {
       "title": "Schedule",
@@ -407,7 +414,8 @@
         "title": "Error",
         "invalidFormat": "Invalid file format. Allowed: jpg, jpeg, png, webp",
         "fileTooLarge": "File size exceeds 5MB",
-        "uploadFailed": "Failed to upload photo. Please try again."
+        "uploadFailed": "Failed to upload photo. Please try again.",
+        "deleteFailed": "Failed to delete photo. Please try again."
       }
     },
     "children": {

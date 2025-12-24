@@ -12,9 +12,6 @@
     <UButton variant="outline" @click="$emit('edit')">
       {{ t('account.nannyForm.edit') }}
     </UButton>
-    <UButton color="error" variant="outline" :disabled="isSaving" @click="handleDelete">
-      {{ t('account.nannyForm.delete') }}
-    </UButton>
   </div>
 </template>
 

@@ -1,17 +1,30 @@
 <template>
   <div class="space-y-10">
-    <div class="grid md:grid-cols-2 gap-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          {{ t('account.nannyForm.firstName') }}
-        </label>
-        <UInput v-model="form.firstName" type="text" :placeholder="t('account.nannyForm.firstName')" size="lg" />
+    <div class="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+      <div class="flex flex-col items-center gap-2">
+        <PageAccountBookingBabysitterPhotoUpload ref="photoUploadRef" />
+        <p
+          v-if="displayPhotoError"
+          class="text-sm text-error-500 dark:text-error-400 text-center"
+        >
+          {{ t('account.nannyForm.photoRequired') }}
+        </p>
       </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          {{ t('account.nannyForm.lastName') }}
-        </label>
-        <UInput v-model="form.lastName" type="text" :placeholder="t('account.nannyForm.lastName')" size="lg" />
+      <div class="flex-1 w-full space-y-6">
+        <div class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {{ t('account.nannyForm.firstName') }}
+            </label>
+            <UInput v-model="form.firstName" type="text" :placeholder="t('account.nannyForm.firstName')" size="lg" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              {{ t('account.nannyForm.lastName') }}
+            </label>
+            <UInput v-model="form.lastName" type="text" :placeholder="t('account.nannyForm.lastName')" size="lg" />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -60,5 +73,28 @@ if (!form) {
 }
 
 const { t } = useI18n()
+const authStore = useAuthStore()
+const photoUploadRef = ref<{ hasPhoto: boolean } | null>(null)
+const showPhotoError = inject<Ref<boolean>>('babysitterShowPhotoError', ref(false))
+
+const hasPhoto = computed(() => {
+  return !!authStore.currentUser?.avatar
+})
+
+const displayPhotoError = computed(() => {
+  return showPhotoError.value && !hasPhoto.value
+})
+
+watch(hasPhoto, (newValue) => {
+  if (newValue && showPhotoError.value) {
+    showPhotoError.value = false
+  }
+})
+
+defineExpose({
+  validatePhoto: () => {
+    return !!authStore.currentUser?.avatar
+  }
+})
 </script>
 

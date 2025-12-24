@@ -95,7 +95,8 @@ export const buildDateMapFromBlocks = (
   const endTime = end.getTime()
   for (let current = new Date(start); current.getTime() <= endTime; current = addDays(current, 1)) {
     const dateKey = formatDateKey(current)
-    const dayOfWeek = current.getDay()
+    const jsDayOfWeek = current.getDay()
+    const dayOfWeek = jsDayOfWeek === 0 ? 7 : jsDayOfWeek
 
     if (everydayDates.has(dateKey)) {
       result[dateKey] = [...(everydayMap[dateKey] || [])]
@@ -111,7 +112,7 @@ export const buildDateMapFromBlocks = (
       }
 
       if (block.mode === ScheduleMode.WEEKLY) {
-        const match = block.schedules.find(schedule => schedule.dayOfWeek === dayOfWeek)
+        const match = block.schedules.find(schedule => schedule.dayOfWeek === dayOfWeek || schedule.dayOfWeek === jsDayOfWeek)
         if (match) mergeIntervals(result, dateKey, match.intervals)
       }
     })

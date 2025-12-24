@@ -1,14 +1,32 @@
 <template>
   <div class="space-y-10">
     <div>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div>
-          <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('account.nannyForm.firstName') }}</div>
-          <div class="text-base text-gray-900 dark:text-white">{{ profile.firstName || '—' }}</div>
+      <div class="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+        <div class="w-[140px] h-[140px] rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 flex-shrink-0">
+          <img
+            v-if="authStore.currentUser?.avatar"
+            :src="authStore.currentUser.avatar"
+            alt="Фото профиля"
+            class="w-full h-full object-cover"
+          />
+          <div
+            v-else
+            class="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500"
+          >
+            <Icon name="mdi:account" size="64" />
+          </div>
         </div>
-        <div>
-          <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('account.nannyForm.lastName') }}</div>
-          <div class="text-base text-gray-900 dark:text-white">{{ profile.lastName || '—' }}</div>
+        <div class="flex-1 w-full">
+          <div class="grid md:grid-cols-1 gap-6">
+            <div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('account.nannyForm.firstName') }}</div>
+              <div class="text-base text-gray-900 dark:text-white">{{ profile.firstName || '—' }}</div>
+            </div>
+            <div>
+              <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('account.nannyForm.lastName') }}</div>
+              <div class="text-base text-gray-900 dark:text-white">{{ profile.lastName || '—' }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -155,6 +173,7 @@ const props = defineProps<{
 }>()
 
 const { t } = useI18n()
+const authStore = useAuthStore()
 
 const formatDate = (date?: string | null): string => {
   if (!date) return '—'

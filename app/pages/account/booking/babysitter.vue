@@ -35,7 +35,7 @@
       </div>
 
       <div v-else class="space-y-10">
-        <PageAccountBookingBabysitterPersonalInfoFields />
+        <PageAccountBookingBabysitterPersonalInfoFields ref="personalInfoRef" />
 
         <PageAccountBookingBabysitterPaymentFields
             :form="form"
@@ -146,6 +146,8 @@ const hasProfile = ref(false)
 const isEditing = ref(false)
 const form = ref<BabysitterProfilePayload>(buildDefaultForm(authStore.currentUser))
 const loadedSnapshot = ref<BabysitterProfilePayload | null>(null)
+const personalInfoRef = ref<{ validatePhoto: () => boolean } | null>(null)
+const showPhotoError = ref(false)
 
 const calendarMonth = ref<Date>(startOfMonth(new Date()))
 const calendarCustomMap = ref<Record<string, TimeInterval[]>>({})
@@ -368,6 +370,17 @@ const loadProfile = async () => {
 }
 
 const handleSubmit = async () => {
+  if (!authStore.currentUser?.avatar) {
+    showPhotoError.value = true
+    toast.add({
+      title: t('account.nannyForm.photoRequired'),
+      description: t('account.nannyForm.photoRequiredDescription'),
+      color: 'error',
+    })
+    return
+  }
+
+  showPhotoError.value = false
   isSaving.value = true
   try {
     const payload = buildPayload()
@@ -424,6 +437,7 @@ provide('babysitterCalendarMonth', calendarMonth)
 provide('babysitterWeeklySchedules', weeklySchedules)
 provide('babysitterAllDaysIntervals', allDaysIntervals)
 provide('babysitterIsRecurringAllDays', isRecurringAllDays)
+provide('babysitterShowPhotoError', showPhotoError)
 
 onMounted(() => {
   loadProfile()

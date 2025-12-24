@@ -162,20 +162,20 @@ const handleCalendarViewModeChange = (mode: 'month' | 'week') => {
 const displayMap = computed(() => {
   const blocks: BabysitterScheduleBlock[] = []
 
-  if (isRecurringAllDays.value && allDaysIntervals.value.length > 0) {
+  if (allDaysIntervals.value.length > 0) {
     blocks.push({
       mode: ScheduleMode.ALL_DAYS,
       schedules: [{ intervals: allDaysIntervals.value }],
-      isRecurring: true,
+      isRecurring: isRecurringAllDays.value,
     })
   }
 
-  const recurringWeekly = weeklySchedules.value.filter(s => s.isRecurring && s.intervals.length > 0)
-  if (recurringWeekly.length > 0) {
+  const validWeekly = weeklySchedules.value.filter(s => s.intervals.length > 0)
+  if (validWeekly.length > 0) {
     blocks.push({
       mode: ScheduleMode.WEEKLY,
-      schedules: recurringWeekly,
-      isRecurring: true,
+      schedules: validWeekly,
+      isRecurring: validWeekly.some(s => s.isRecurring),
     })
   }
 
