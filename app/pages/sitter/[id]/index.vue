@@ -32,16 +32,23 @@
 
         <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 shadow-lg z-50">
           <div class="max-w-7xl mx-auto flex gap-3">
+            <div v-if="isBabysitter" class="flex-1 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center">
+              <p class="text-xs text-gray-600 dark:text-gray-400 text-center">
+                Няни не могут бронировать других нянь
+              </p>
+            </div>
             <UButton
+              v-else
               color="primary"
               size="lg"
               class="flex-1 font-semibold"
               @click="handleContact"
             >
-              <Icon name="i-lucide-phone" size="20" class="mr-2" />
-              Позвать
+              <Icon name="i-lucide-calendar-plus" size="20" class="mr-2" />
+              Забронировать
             </UButton>
             <UButton
+              v-if="!isBabysitter"
               variant="outline"
               size="lg"
               class="flex-1 font-semibold"
@@ -85,12 +92,15 @@
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
 import { useBabysitter, mapBabysitterToSitter } from '~/composables/useBabysitter'
+import { UserRole } from '~/const/roles'
 
 const route = useRoute()
 const sitterId = route.params.id as string
 const babysitterApi = useBabysitter()
+const authStore = useAuthStore()
 
 const isFavorite = ref(false)
+const isBabysitter = computed(() => authStore.currentUser?.role === UserRole.BABYSITTER)
 
 const { data: sitter, pending, error } = await useAsyncData<Sitter | null>(
   `sitter-${sitterId}`,
