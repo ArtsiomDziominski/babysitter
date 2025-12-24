@@ -115,7 +115,19 @@ const showReviewModal = ref(false)
 const completedBookings = ref<BookingListItem[]>([])
 
 const getAuthorName = (author: Review['author']) => {
-  return `${author.firstName} ${author.lastName}`.trim() || 'Аноним'
+  const firstName = author.firstName?.trim() || ''
+  const lastName = author.lastName?.trim() || ''
+  
+  if (!firstName && !lastName) {
+    return 'Аноним'
+  }
+  
+  if (lastName) {
+    const lastNameInitial = lastName.charAt(0).toUpperCase()
+    return `${firstName} ${lastNameInitial}.`.trim()
+  }
+  
+  return firstName
 }
 
 const formatExperience = computed(() => {
