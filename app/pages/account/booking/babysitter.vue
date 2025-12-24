@@ -167,9 +167,14 @@ const priceFields: Array<{
   { model: 'priceThreeChildren', label: t('account.nannyForm.price.three'), placeholder: '1500' },
 ]
 
+const formatTimeToHHmm = (time: string): string => {
+  if (!time) return ''
+  return time.substring(0, 5)
+}
+
 const normalizeInterval = (interval: TimeInterval): TimeInterval => ({
-  startTime: interval?.startTime || '',
-  endTime: interval?.endTime || '',
+  startTime: formatTimeToHHmm(interval?.startTime || ''),
+  endTime: formatTimeToHHmm(interval?.endTime || ''),
 })
 
 const getNormalizedWeeklySchedules = () => {
@@ -179,7 +184,6 @@ const getNormalizedWeeklySchedules = () => {
         intervals: item.intervals
             .map(normalizeInterval)
             .filter(interval => interval.startTime && interval.endTime),
-        isRecurring: item.isRecurring,
       }))
       .filter(item => item.dayOfWeek !== undefined && item.intervals.length)
 }
@@ -209,23 +213,10 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
 
   const weekly = getNormalizedWeeklySchedules()
   if (weekly.length) {
-    const recurringWeekly = weekly.filter(s => s.isRecurring)
-    const nonRecurringWeekly = weekly.filter(s => !s.isRecurring)
-
-    if (recurringWeekly.length) {
-      blocks.push({
-        mode: ScheduleMode.WEEKLY,
-        schedules: recurringWeekly,
-        isRecurring: true,
-      })
-    }
-
-    if (nonRecurringWeekly.length) {
-      blocks.push({
-        mode: ScheduleMode.WEEKLY,
-        schedules: nonRecurringWeekly,
-      })
-    }
+    blocks.push({
+      mode: ScheduleMode.WEEKLY,
+      schedules: weekly,
+    })
   }
 
   const intervals = getNormalizedAllDayIntervals()
@@ -237,7 +228,6 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
           intervals,
         },
       ],
-      isRecurring: isRecurringAllDays.value,
     })
   }
 
@@ -249,7 +239,6 @@ const getCurrentScheduleBlocks = (): BabysitterScheduleBlock[] => {
     })
   }
 
-  console.log(blocks)
   return blocks
 }
 
