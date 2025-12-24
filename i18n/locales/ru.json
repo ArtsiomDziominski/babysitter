@@ -183,7 +183,11 @@
     "email": "Email",
     "phone": "Телефон",
     "editProfile": "Редактировать профиль",
-    "messages": "Сообщения",
+    "messages": {
+      "title": "Сообщения",
+      "aiAssistant": "AI помощник",
+      "admin": "Администратор"
+    },
     "orders": {
       "title": "Заказы",
       "empty": "У вас пока нет заказов с этим статусом",
@@ -376,7 +380,13 @@
       "photoUploadSuccess": "Фото успешно загружено",
       "photoDeleteSuccess": "Фото успешно удалено",
       "photoRequired": "Фото обязательно",
-      "photoRequiredDescription": "Для сохранения профиля необходимо загрузить фото"
+      "photoRequiredDescription": "Для сохранения профиля необходимо загрузить фото",
+      "delete": "Удалить",
+      "confirmDeleteTitle": "Подтверждение удаления",
+      "confirmDeleteMessage": "Вы точно хотите удалить профиль? Для удаления профиля необходимо обратиться к администратору в сообщениях.",
+      "deleteSuccess": "Профиль удален",
+      "deleteError": "Ошибка удаления",
+      "deleteErrorMessage": "Не удалось удалить профиль. Попробуйте еще раз"
     },
     "basicData": {
       "title": "Основные данные",

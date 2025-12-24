@@ -181,7 +181,11 @@
     "email": "Email",
     "phone": "Phone",
     "editProfile": "Edit profile",
-    "messages": "Messages",
+    "messages": {
+      "title": "Messages",
+      "aiAssistant": "AI Assistant",
+      "admin": "Administrator"
+    },
     "orders": {
       "title": "Orders",
       "empty": "You have no orders yet",
@@ -368,7 +372,13 @@
       "photoUploadSuccess": "Photo uploaded successfully",
       "photoDeleteSuccess": "Photo deleted successfully",
       "photoRequired": "Photo is required",
-      "photoRequiredDescription": "You must upload a photo to save the profile"
+      "photoRequiredDescription": "You must upload a photo to save the profile",
+      "delete": "Delete",
+      "confirmDeleteTitle": "Confirm deletion",
+      "confirmDeleteMessage": "Are you sure you want to delete the profile? To delete the profile, you need to contact the administrator in messages.",
+      "deleteSuccess": "Profile deleted",
+      "deleteError": "Deletion error",
+      "deleteErrorMessage": "Failed to delete profile. Please try again"
     },
     "nannySchedule": {
       "title": "Schedule",

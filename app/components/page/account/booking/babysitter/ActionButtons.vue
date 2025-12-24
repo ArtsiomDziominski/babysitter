@@ -12,6 +12,13 @@
     <UButton variant="outline" @click="$emit('edit')">
       {{ t('account.nannyForm.edit') }}
     </UButton>
+    <UButton 
+      color="error" 
+      variant="outline"
+      @click="handleDelete"
+    >
+      {{ t('account.nannyForm.delete') }}
+    </UButton>
   </div>
 </template>
 
@@ -80,24 +87,7 @@ const handleDelete = () => {
         color: 'error',
         handler: async () => {
           modalStore.close()
-          isSaving.value = true
-          try {
-            await babysitterApi.deleteBabysitter()
-            toast.add({
-              title: t('account.nannyForm.deleteSuccess'),
-              color: 'success',
-            })
-            await authStore.fetchProfile()
-            emit('deleted')
-          } catch (error: any) {
-            toast.add({
-              title: t('account.nannyForm.deleteError'),
-              description: error.message || t('account.nannyForm.deleteErrorMessage'),
-              color: 'error',
-            })
-          } finally {
-            isSaving.value = false
-          }
+          await navigateTo('/account/messages?chat=admin')
         }
       }
     ]

@@ -18,7 +18,7 @@ defineProps<{
           ? 'text-primary-500 border-b-2 border-primary-500'
           : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
       >
-        {{ $t('account.messages') }}
+        {{ $t('account.messages.title') }}
       </NuxtLink>
       <NuxtLink
         to="/account/orders"

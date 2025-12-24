@@ -183,7 +183,11 @@
     "email": "Email",
     "phone": "Тэлефон",
     "editProfile": "Рэдагаваць профіль",
-    "messages": "Паведамленні",
+    "messages": {
+      "title": "Паведамленні",
+      "aiAssistant": "AI памочнік",
+      "admin": "Адміністратар"
+    },
     "orders": {
       "title": "Заказы",
       "empty": "У вас пакуль няма заказаў",
@@ -370,7 +374,13 @@
       "photoUploadSuccess": "Фота паспяхова загружана",
       "photoDeleteSuccess": "Фота паспяхова выдалена",
       "photoRequired": "Фота абавязкова",
-      "photoRequiredDescription": "Для захавання профілю неабходна загрузіць фота"
+      "photoRequiredDescription": "Для захавання профілю неабходна загрузіць фота",
+      "delete": "Выдаліць",
+      "confirmDeleteTitle": "Пацвярджэнне выдалення",
+      "confirmDeleteMessage": "Вы сапраўды хочаце выдаліць профіль? Для выдалення профілю неабходна звярнуцца да адміністратара ў паведамленнях.",
+      "deleteSuccess": "Профіль выдалены",
+      "deleteError": "Памылка выдалення",
+      "deleteErrorMessage": "Не атрымалася выдаліць профіль. Паспрабуйце яшчэ раз"
     },
     "nannySchedule": {
       "title": "Расклад",

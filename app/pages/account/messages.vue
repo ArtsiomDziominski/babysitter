@@ -5,7 +5,7 @@
       <div class="w-80 border-r border-gray-200 dark:border-gray-700 flex flex-col">
         <div class="px-4 py-4 border-b border-gray-200 dark:border-gray-700">
           <h1 class="text-xl font-bold text-gray-900 dark:text-white">
-            {{ $t('account.messages') }}
+            {{ $t('account.messages.title') }}
           </h1>
         </div>
         <div class="flex-1 overflow-y-auto">
@@ -159,11 +159,19 @@ interface Chat {
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const route = useRoute()
 
 const input = ref('')
 const error = ref<Error | null>(null)
 const status = ref<'submitted' | 'streaming' | 'ready' | 'error'>('ready')
 const activeChatId = ref<string>('ai')
+
+onMounted(() => {
+  const chatParam = route.query.chat
+  if (chatParam === 'admin') {
+    activeChatId.value = 'admin'
+  }
+})
 
 const chatsData = ref<Omit<Chat, 'name'>[]>([
   {
