@@ -5,10 +5,21 @@
     <div class="flex gap-6">
       <div class="flex-shrink-0 flex flex-col">
         <div
-            class="relative w-[140px] h-[140px] bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center cursor-pointer"
+            class="relative w-[140px] h-[140px] bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer"
              @click="$emit('book', sitter.id.toString())"
         >
-          <Icon name="i-lucide-user" size="48" class="text-gray-400"/>
+          <img
+            v-if="sitter.avatarUrl"
+            :src="sitter.avatarUrl"
+            :alt="getName(sitter.firstName, sitter.lastName)"
+            class="w-full h-full object-cover"
+          />
+          <Icon
+            v-else
+            name="i-lucide-user"
+            size="48"
+            class="text-gray-400 absolute inset-0 m-auto"
+          />
           <div
               v-if="sitter.isOnline"
               class="absolute top-2 left-2 flex items-center gap-1.5"

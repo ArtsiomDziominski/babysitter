@@ -8,7 +8,14 @@
     >
       <div class="relative">
         <div class="w-[246px] h-[256px] bg-gray-200 dark:bg-gray-700 overflow-hidden">
+          <img
+            v-if="sitter.avatarUrl"
+            :src="sitter.avatarUrl"
+            :alt="formatName(sitter.firstName, sitter.lastName)"
+            class="w-full h-full object-cover"
+          />
           <div
+            v-else
             class="w-[246px] h-[256px] flex items-center justify-center text-gray-400"
           >
             <Icon name="i-lucide-user" size="48" />

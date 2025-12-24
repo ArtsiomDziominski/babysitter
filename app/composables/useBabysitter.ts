@@ -75,6 +75,7 @@ export interface BabysitterListItem {
   showInSearch?: boolean
   available?: boolean
   isOnline?: boolean
+  avatarUrl?: string
   hourlyRate?: number | null
   createdAt?: string
   updatedAt?: string
@@ -131,6 +132,7 @@ export interface BabysitterDetailResponse {
   available?: boolean
   showInSearch?: boolean
   isOnline?: boolean
+  avatarUrl?: string
   schedules?: BabysitterScheduleBlock[]
   returningClients?: number
   responseTime?: string
@@ -299,6 +301,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
   return {
     id: data.id?.toString() || '0',
     name: `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'Без имени',
+    avatar: data.avatarUrl,
     rating: data.rating || 0,
     orders: data.reviewsCount || 0,
     hours: 0,
@@ -309,7 +312,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     isAvailable: data.available,
     advantages: data.advantages || [],
     age: calculateAge(data.birthDate),
-    registeredAt: data.createdAt || data.updatedAt,
+    registeredAt: undefined,
     detailedDescription: data.bio,
     experience: data.experience?.toString(),
     workConditions: data.cancellationPolicy,
