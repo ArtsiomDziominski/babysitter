@@ -23,20 +23,6 @@
       </p>
     </div>
 
-    <div v-if="sitter.experience" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 md:p-8">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="p-2 bg-primary/10 rounded-lg">
-          <Icon name="i-lucide-briefcase" size="24" class="text-primary-500" />
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-          {{ $t('bookings.sitter.sections.experience') }}
-        </h3>
-      </div>
-      <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-        {{ sitter.experience }}
-      </p>
-    </div>
-
     <div v-if="sitter.preferences" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 md:p-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="p-2 bg-primary/10 rounded-lg">

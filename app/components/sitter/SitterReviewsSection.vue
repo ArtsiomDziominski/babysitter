@@ -1,5 +1,17 @@
 <template>
   <div class="space-y-4">
+    <div v-if="sitter.experience" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-primary/10 rounded-lg">
+          <Icon name="i-lucide-briefcase" size="20" class="text-primary-500" />
+        </div>
+        <div>
+          <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $t('bookings.sitter.sections.experience') }}</div>
+          <div class="text-base font-semibold text-gray-700 dark:text-gray-300">{{ formatExperience }}</div>
+        </div>
+      </div>
+    </div>
+
     <div v-if="canLeaveReview" class="mb-4">
       <UButton
         color="primary"
@@ -105,6 +117,30 @@ const completedBookings = ref<BookingListItem[]>([])
 const getAuthorName = (author: Review['author']) => {
   return `${author.firstName} ${author.lastName}`.trim() || 'Аноним'
 }
+
+const formatExperience = computed(() => {
+  if (!props.sitter.experience) return ''
+  
+  const years = parseInt(props.sitter.experience)
+  if (isNaN(years)) return props.sitter.experience
+  
+  const lastDigit = years % 10
+  const lastTwoDigits = years % 100
+  
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+    return `${years} лет`
+  }
+  
+  if (lastDigit === 1) {
+    return `${years} год`
+  }
+  
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return `${years} года`
+  }
+  
+  return `${years} лет`
+})
 
 const canLeaveReview = computed(() => {
   if (!authStore.isAuthenticated) return false
