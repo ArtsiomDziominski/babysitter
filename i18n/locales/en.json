@@ -655,6 +655,11 @@
         "paymentMethods": "Payment methods",
         "perHour": "₽/hour",
         "currency": "₽"
+      },
+      "actions": {
+        "book": "Book",
+        "message": "Message",
+        "babysitterCannotBook": "Babysitters cannot book other babysitters"
       }
     }
   },

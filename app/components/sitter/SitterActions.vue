@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
     <div class="space-y-3">
-      <div v-if="isBabysitter" class="p-7 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div v-if="isBabysitter" class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
         <p class="text-sm text-gray-600 dark:text-gray-400 text-center">
           {{ $t('bookings.sitter.actions.babysitterCannotBook') }}
         </p>
