@@ -35,14 +35,15 @@
               <div class="font-semibold text-gray-900 dark:text-white text-lg">
                 {{ getAuthorName(review.author) }}
               </div>
-              <div class="flex items-center gap-1 mt-1">
-                <Icon
+              <div class="flex items-center gap-0.5 mt-1">
+                <span
                   v-for="i in 5"
                   :key="i"
-                  name="i-lucide-star"
-                  :class="i <= review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300 dark:text-gray-600'"
-                  size="18"
-                />
+                  class="text-lg leading-none"
+                  :class="i <= review.rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'"
+                >
+                  {{ i <= review.rating ? '★' : '☆' }}
+                </span>
               </div>
             </div>
           </div>

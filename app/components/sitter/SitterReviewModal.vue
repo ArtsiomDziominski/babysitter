@@ -24,11 +24,11 @@
               v-for="star in 5"
               :key="star"
               type="button"
-              class="text-3xl transition-colors cursor-pointer"
+              class="text-3xl transition-colors cursor-pointer leading-none"
               :class="star <= rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'"
               @click="rating = star"
             >
-              ★
+              {{ star <= rating ? '★' : '☆' }}
             </button>
           </div>
         </div>
