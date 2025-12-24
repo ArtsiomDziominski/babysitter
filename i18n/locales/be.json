@@ -681,6 +681,14 @@
         "book": "Забраніраваць",
         "message": "Напісаць",
         "babysitterCannotBook": "Бебісітэры не могуць браніраваць іншых бебісітэраў"
+      },
+      "sections": {
+        "about": "Пра сябе",
+        "education": "Адукацыя",
+        "experience": "Досвед працы",
+        "preferences": "Перавагі",
+        "advantages": "Перавагі і навыкі",
+        "petAttitude": "Адносіны да жывёл"
       }
     }
   },

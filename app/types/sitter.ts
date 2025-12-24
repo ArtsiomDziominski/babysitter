@@ -33,6 +33,7 @@ export interface Sitter {
   priceThreeChildren?: string
   onlineLesson?: string
   minOrderAmount?: string
+  petAttitude?: string
 }
 
 export interface Review {

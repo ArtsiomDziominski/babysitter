@@ -679,6 +679,14 @@
         "book": "Book",
         "message": "Message",
         "babysitterCannotBook": "Babysitters cannot book other babysitters"
+      },
+      "sections": {
+        "about": "About",
+        "education": "Education",
+        "experience": "Work Experience",
+        "preferences": "Preferences",
+        "advantages": "Advantages and Skills",
+        "petAttitude": "Pet Attitude"
       }
     }
   },

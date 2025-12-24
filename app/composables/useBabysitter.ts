@@ -330,6 +330,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     minOrderAmount: data.minOrderAmount,
     returningCount: data.returningCount,
     responseTime: data.responseTime,
+    petAttitude: data.petAttitude,
   }
 }
 
