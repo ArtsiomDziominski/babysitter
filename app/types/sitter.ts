@@ -1,5 +1,6 @@
 export interface Sitter {
   id: string
+  userId?: number
   name: string
   avatar?: string
   rating: number

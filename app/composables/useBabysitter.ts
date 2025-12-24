@@ -303,6 +303,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
 
   return {
     id: data.id?.toString() || '0',
+    userId: data.userId,
     name: `${data.firstName || ''} ${data.lastName || ''}`.trim() || 'Без имени',
     avatar: data.avatarUrl,
     rating: data.rating || 0,

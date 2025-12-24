@@ -55,9 +55,51 @@ export const useReviews = () => {
     })) as Review[]
   }
 
+  interface GetReviewsParams {
+    targetId?: number
+    targetType?: 'babysitter' | 'parent'
+    page?: number
+    limit?: number
+  }
+
+  interface ReviewsListResponse {
+    data: Review[]
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
+
+  const getReviews = async (params?: GetReviewsParams): Promise<ReviewsListResponse> => {
+    const queryParams = new URLSearchParams()
+
+    if (params?.targetId) queryParams.append('targetId', params.targetId.toString())
+    if (params?.targetType) queryParams.append('targetType', params.targetType)
+    if (params?.page) queryParams.append('page', params.page.toString())
+    if (params?.limit) queryParams.append('limit', params.limit.toString())
+
+    const queryString = queryParams.toString()
+    const endpoint = `/reviews${queryString ? `?${queryString}` : ''}`
+
+    const response = await api.request<ReviewsListResponse | { data: ReviewsListResponse; statusCode: number }>(endpoint, {
+      method: 'GET',
+    })
+
+    const result = 'data' in response && 'statusCode' in response ? response.data : response as ReviewsListResponse
+
+    return {
+      ...result,
+      data: result.data.map(review => ({
+        ...review,
+        targetType: review.targetType === 'parent' ? UserRole.PARENT : review.targetType === 'babysitter' ? UserRole.BABYSITTER : UserRole.PARENT
+      })) as Review[]
+    }
+  }
+
   return {
     createReview,
     getReviewsByBookingId,
+    getReviews,
   }
 }
 
