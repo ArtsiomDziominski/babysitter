@@ -704,6 +704,7 @@ avatar: <File>
       "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
+      "returningCount": 5,
       "showInSearch": true,
       "isOnline": true,
       "avatarUrl": "https://..."
@@ -2030,7 +2031,8 @@ avatar: <File>
   "completedBookings": 180,
   "cancelledBookings": 10,
   "totalRevenue": 500000,
-  "averageBookingPrice": 2500
+  "averageBookingPrice": 2500,
+  "returningCount": 25
 }
 ```
 

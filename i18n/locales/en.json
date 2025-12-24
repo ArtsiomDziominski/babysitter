@@ -652,6 +652,7 @@
       "hours": "Hours with children",
       "returned": "Returned",
       "returnedPlural": "Returned",
+      "showInSearch": "Visible in search",
       "book": "Book",
       "perHour": "/hour",
       "details": "Details",

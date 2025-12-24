@@ -45,7 +45,7 @@
           </div>
           <div class="flex items-center gap-1">
             <Icon name="i-lucide-repeat" size="16" />
-            <span>{{ getReturningClients(sitter.reviewsCount) }} Вернулся</span>
+            <span>{{ sitter.returningCount || 0 }} {{ $t('bookings.sitter.returned') }}</span>
           </div>
         </div>
       </div>
@@ -92,7 +92,4 @@ const getAge = (birthDate?: string) => {
   return `, ${age} ${yearWord}`
 }
 
-const getReturningClients = (reviewsCount?: number) => {
-  return Math.floor((reviewsCount || 0) * 0.1) || 1
-}
 </script>

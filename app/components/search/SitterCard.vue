@@ -47,6 +47,10 @@
               <span class="text-sm text-gray-500 dark:text-gray-400">
                 {{ sitter.reviewsCount || 0 }} {{ $t('bookings.sitter.orders') }}
               </span>
+              <span v-if="sitter.returningCount" class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <Icon name="i-lucide-repeat" size="14" />
+                {{ sitter.returningCount }} {{ $t('bookings.sitter.returned') }}
+              </span>
             </div>
           </div>
           <div class="text-right">

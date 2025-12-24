@@ -72,6 +72,7 @@ export interface BabysitterListItem {
   birthDate?: string
   rating?: string
   reviewsCount?: number
+  returningCount?: number
   showInSearch?: boolean
   available?: boolean
   isOnline?: boolean
@@ -310,6 +311,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     tags: data.certifications || [],
     isOnline: data.isOnline,
     isAvailable: data.available,
+    showInSearch: data.showInSearch,
     advantages: data.advantages || [],
     age: calculateAge(data.birthDate),
     registeredAt: undefined,

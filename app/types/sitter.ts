@@ -12,6 +12,7 @@ export interface Sitter {
   isOnline?: boolean
   lastSeenOnline?: string
   isAvailable?: boolean
+  showInSearch?: boolean
   advantages: string[]
   age?: number
   registeredAt?: string
