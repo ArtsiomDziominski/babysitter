@@ -137,6 +137,8 @@ export interface BabysitterDetailResponse {
   schedules?: BabysitterScheduleBlock[]
   returningClients?: number
   responseTime?: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 export const useBabysitter = () => {
@@ -314,7 +316,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     showInSearch: data.showInSearch,
     advantages: data.advantages || [],
     age: calculateAge(data.birthDate),
-    registeredAt: data.registeredAt,
+    registeredAt: data.createdAt,
     detailedDescription: data.bio,
     experience: data.experience?.toString(),
     workConditions: data.cancellationPolicy,
