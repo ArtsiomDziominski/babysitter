@@ -3,7 +3,7 @@
     <div class="space-y-3">
       <div v-if="isBabysitter" class="p-7 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
         <p class="text-sm text-gray-600 dark:text-gray-400 text-center">
-          Няни не могут бронировать других нянь
+          {{ $t('bookings.sitter.actions.babysitterCannotBook') }}
         </p>
       </div>
       <UButton
@@ -15,7 +15,7 @@
         @click="$emit('contact')"
       >
         <Icon name="i-lucide-calendar-plus" size="20" class="mr-2" />
-        Забронировать
+        {{ $t('bookings.sitter.actions.book') }}
       </UButton>
       <UButton
         v-if="!isBabysitter"
@@ -26,7 +26,7 @@
         @click="$emit('message')"
       >
         <Icon name="i-lucide-message-circle" size="20" class="mr-2" />
-        Написать
+        {{ $t('bookings.sitter.actions.message') }}
       </UButton>
     </div>
   </div>

@@ -34,7 +34,7 @@
           <div class="max-w-7xl mx-auto flex gap-3">
             <div v-if="isBabysitter" class="flex-1 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center">
               <p class="text-xs text-gray-600 dark:text-gray-400 text-center">
-                Няни не могут бронировать других нянь
+                {{ $t('bookings.sitter.actions.babysitterCannotBook') }}
               </p>
             </div>
             <UButton
@@ -45,7 +45,7 @@
               @click="handleContact"
             >
               <Icon name="i-lucide-calendar-plus" size="20" class="mr-2" />
-              Забронировать
+              {{ $t('bookings.sitter.actions.book') }}
             </UButton>
             <UButton
               v-if="!isBabysitter"
@@ -55,7 +55,7 @@
               @click="handleMessage"
             >
               <Icon name="i-lucide-message-circle" size="20" class="mr-2" />
-              Написать
+              {{ $t('bookings.sitter.actions.message') }}
             </UButton>
           </div>
         </div>
