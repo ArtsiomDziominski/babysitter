@@ -200,11 +200,11 @@ export const useBabysitter = () => {
     const response = await api.request<BabysitterDetailResponse | { data: BabysitterDetailResponse }>(`/babysitters/${id}`, {
       method: 'GET',
     })
-    
+
     if ('data' in response && response.data) {
       return response.data
     }
-    
+
     return response as BabysitterDetailResponse
   }
 
@@ -225,9 +225,9 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
   if (!data) {
     throw new Error('Данные ситтера отсутствуют')
   }
-  
+
   const schedule: ScheduleSlot[] = []
-  
+
   if (data.schedules) {
     for (const block of data.schedules) {
       if (block.mode === ScheduleMode.WEEKLY) {
@@ -237,8 +237,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
             const timeSlots = scheduleItem.intervals.map(
               interval => `${interval.startTime} - ${interval.endTime}`
             )
-            schedule.push({ 
-              day: dayName, 
+            schedule.push({
+              day: dayName,
               timeSlots,
               dayOfWeek: scheduleItem.dayOfWeek,
               isRecurring: scheduleItem.isRecurring || block.isRecurring
@@ -250,8 +250,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
           const timeSlots = scheduleItem.intervals.map(
             interval => `${interval.startTime} - ${interval.endTime}`
           )
-          schedule.push({ 
-            day: 'Все дни', 
+          schedule.push({
+            day: 'Все дни',
             timeSlots,
             isRecurring: scheduleItem.isRecurring || block.isRecurring
           })
@@ -264,8 +264,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
             const timeSlots = scheduleItem.intervals.map(
               interval => `${interval.startTime} - ${interval.endTime}`
             )
-            schedule.push({ 
-              day: dayName, 
+            schedule.push({
+              day: dayName,
               timeSlots,
               date: scheduleItem.date,
               isRecurring: scheduleItem.isRecurring || block.isRecurring
@@ -314,7 +314,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     showInSearch: data.showInSearch,
     advantages: data.advantages || [],
     age: calculateAge(data.birthDate),
-    registeredAt: undefined,
+    registeredAt: data.registeredAt,
     detailedDescription: data.bio,
     experience: data.experience?.toString(),
     workConditions: data.cancellationPolicy,
