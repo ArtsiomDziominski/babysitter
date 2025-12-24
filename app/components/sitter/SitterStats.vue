@@ -42,7 +42,7 @@ const stats = computed(() => [
   },
   {
     icon: 'i-lucide-repeat',
-    value: props.sitter.returningClients || 0,
+    value: props.sitter.returningCount || 0,
     label: 'Родителей вернулись'
   },
   {

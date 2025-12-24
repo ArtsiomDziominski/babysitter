@@ -76,14 +76,14 @@
           </div>
         </div>
 
-        <div v-if="sitter.returningClients" class="flex items-center justify-between">
+        <div v-if="sitter.returningCount !== undefined && sitter.returningCount !== null" class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="p-2 bg-primary/10 rounded-lg">
               <Icon name="i-lucide-repeat" size="20" class="text-primary-500" />
             </div>
             <div>
               <div class="text-sm text-gray-600 dark:text-gray-400">Вернулись</div>
-              <div class="text-lg font-bold text-gray-900 dark:text-white">{{ sitter.returningClients }}</div>
+              <div class="text-lg font-bold text-gray-900 dark:text-white">{{ sitter.returningCount }}</div>
             </div>
           </div>
         </div>

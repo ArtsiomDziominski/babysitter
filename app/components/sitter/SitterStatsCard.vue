@@ -45,7 +45,7 @@ const stats = computed(() => [
   },
   {
     icon: 'i-lucide-repeat',
-    value: props.sitter.returningClients || 0,
+    value: props.sitter.returningCount || 0,
     label: t('bookings.sitter.stats.returned'),
     textSize: 'text-2xl'
   },

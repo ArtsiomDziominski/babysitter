@@ -135,7 +135,7 @@ export interface BabysitterDetailResponse {
   isOnline?: boolean
   avatarUrl?: string
   schedules?: BabysitterScheduleBlock[]
-  returningClients?: number
+  returningCount?: number
   responseTime?: string
   createdAt?: string
   updatedAt?: string
@@ -327,7 +327,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     priceThreeChildren: data.priceThreeChildren,
     onlineLesson: data.onlineLesson,
     minOrderAmount: data.minOrderAmount,
-    returningClients: data.returningClients,
+    returningCount: data.returningCount,
     responseTime: data.responseTime,
   }
 }

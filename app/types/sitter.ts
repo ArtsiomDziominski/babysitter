@@ -21,7 +21,7 @@ export interface Sitter {
   experience?: string
   preferences?: string
   responseTime?: string
-  returningClients?: number
+  returningCount?: number
   reviews?: Review[]
   paymentMethods?: string[]
   schedule?: ScheduleSlot[]
