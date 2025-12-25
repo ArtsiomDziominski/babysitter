@@ -114,9 +114,57 @@ const props = defineProps<{
   chatName?: string
   currentUserAvatar?: string
   currentUserName?: string
+  hasMore?: boolean
+  loading?: boolean
+}>()
+
+const emit = defineEmits<{
+  loadMore: []
 }>()
 
 const messagesContainer = ref<HTMLElement | null>(null)
+let isLoadingMore = false
+
+function handleScroll() {
+  if (!messagesContainer.value || isLoadingMore || !props.hasMore || props.loading) return
+  
+  const container = messagesContainer.value
+  const scrollTop = container.scrollTop
+  const scrollHeight = container.scrollHeight
+  const clientHeight = container.clientHeight
+  
+  if (scrollTop < 200) {
+    isLoadingMore = true
+    const previousScrollHeight = scrollHeight
+    
+    emit('loadMore')
+    
+    nextTick(() => {
+      setTimeout(() => {
+        if (messagesContainer.value) {
+          const newScrollHeight = messagesContainer.value.scrollHeight
+          const heightDifference = newScrollHeight - previousScrollHeight
+          messagesContainer.value.scrollTop = scrollTop + heightDifference
+        }
+        isLoadingMore = false
+      }, 100)
+    })
+  }
+}
+
+onMounted(() => {
+  nextTick(() => {
+    if (messagesContainer.value) {
+      messagesContainer.value.addEventListener('scroll', handleScroll)
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (messagesContainer.value) {
+    messagesContainer.value.removeEventListener('scroll', handleScroll)
+  }
+})
 
 function getTextFromMessage(message: UIMessage): string {
   return message.parts

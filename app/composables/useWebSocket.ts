@@ -73,6 +73,7 @@ type UserConnectionCallback = (data: UserConnectionData) => void
 type MessageNewCallback = (message: Message) => void
 type MessageEditedCallback = (message: Partial<Message> & { id: number; conversationId: number }) => void
 type MessageDeletedCallback = (message: Partial<Message> & { id: number; conversationId: number }) => void
+type MessageReadCallback = (data: { conversationId: number; userId: number }) => void
 type UserStatusChangedCallback = (data: UserStatusChangedData) => void
 
 let socketInstance: Socket | null = null
@@ -317,6 +318,20 @@ export const useWebSocket = () => {
     }
   }
 
+  const onMessageRead = (callback: MessageReadCallback) => {
+    if (!chatSocketInstance) return
+    chatSocketInstance.on('message:read', callback)
+  }
+
+  const offMessageRead = (callback?: MessageReadCallback) => {
+    if (!chatSocketInstance) return
+    if (callback) {
+      chatSocketInstance.off('message:read', callback)
+    } else {
+      chatSocketInstance.off('message:read')
+    }
+  }
+
   const onUserStatusChanged = (callback: UserStatusChangedCallback) => {
     if (!chatSocketInstance) return
     chatSocketInstance.on('user:status_changed', callback)
@@ -387,6 +402,8 @@ export const useWebSocket = () => {
     offMessageEdited,
     onMessageDeleted,
     offMessageDeleted,
+    onMessageRead,
+    offMessageRead,
     onUserStatusChanged,
     offUserStatusChanged,
     markNotificationAsRead,

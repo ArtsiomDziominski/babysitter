@@ -29,6 +29,9 @@
             :chat-name="activeChat ? activeChat.name : undefined"
             :current-user-avatar="authStore.currentUser?.avatar"
             :current-user-name="authStore.currentUser?.name"
+            :has-more="activeChat && typeof activeChat.id === 'number' ? (messagesPagination.get(activeChat.id)?.hasMore ?? false) : false"
+            :loading="loadingMessages"
+            @load-more="handleLoadMore"
           />
 
           <ChatMessageInput
@@ -89,7 +92,6 @@ const chat = useChat()
 const websocket = useWebSocket()
 
 const input = ref('')
-const error = ref<Error | null>(null)
 const status = ref<'submitted' | 'streaming' | 'ready' | 'error'>('ready')
 const loading = ref(false)
 const loadingMessages = ref(false)
@@ -98,6 +100,7 @@ const conversations = ref<Conversation[]>([])
 const messagesMap = ref<Map<number, (Message & { isPending?: boolean })[]>>(new Map())
 const lastMessagesMap = ref<Map<number, string>>(new Map())
 const lastMessagesTimeMap = ref<Map<number, string>>(new Map())
+const messagesPagination = ref<Map<number, { page: number; totalPages: number; hasMore: boolean }>>(new Map())
 const messagesListRef = ref<{ scrollToBottom: () => void } | null>(null)
 
 const chats = computed<Chat[]>(() => {
@@ -190,7 +193,6 @@ async function loadConversations() {
     }
   } catch (err) {
     console.error('Ошибка загрузки чатов:', err)
-    error.value = err instanceof Error ? err : new Error('Ошибка загрузки чатов')
     conversations.value = []
   } finally {
     loading.value = false
@@ -212,8 +214,8 @@ async function loadLastMessage(conversationId: number) {
   }
 }
 
-async function loadMessages(conversationId: number) {
-  if (messagesMap.value.has(conversationId)) {
+async function loadMessages(conversationId: number, page = 1, prepend = false) {
+  if (!prepend && messagesMap.value.has(conversationId)) {
     await nextTick()
     setTimeout(() => scrollToBottom(), 100)
     return
@@ -221,15 +223,44 @@ async function loadMessages(conversationId: number) {
 
   loadingMessages.value = true
   try {
-    const response = await chat.getMessages(conversationId)
-    messagesMap.value.set(conversationId, response.data)
+    const response = await chat.getMessages(conversationId, page, 50)
+    
+    if (prepend) {
+      const existingMessages = messagesMap.value.get(conversationId) || []
+      messagesMap.value.set(conversationId, [...response.data, ...existingMessages])
+    } else {
+      messagesMap.value.set(conversationId, response.data)
+    }
+    
+    messagesPagination.value.set(conversationId, {
+      page: response.meta.page,
+      totalPages: response.meta.totalPages,
+      hasMore: response.meta.page < response.meta.totalPages
+    })
   } catch (err) {
     console.error('Ошибка загрузки сообщений:', err)
-    error.value = err instanceof Error ? err : new Error('Ошибка загрузки сообщений')
   } finally {
     loadingMessages.value = false
-    await nextTick()
-    setTimeout(() => scrollToBottom(), 100)
+    if (!prepend) {
+      await nextTick()
+      setTimeout(() => scrollToBottom(), 100)
+    }
+  }
+}
+
+async function loadMoreMessages(conversationId: number) {
+  const pagination = messagesPagination.value.get(conversationId)
+  if (!pagination || !pagination.hasMore || loadingMessages.value) {
+    return
+  }
+  
+  const nextPage = pagination.page + 1
+  await loadMessages(conversationId, nextPage, true)
+}
+
+function handleLoadMore() {
+  if (activeChat.value && typeof activeChat.value.id === 'number') {
+    loadMoreMessages(activeChat.value.id)
   }
 }
 
@@ -272,7 +303,6 @@ async function selectChat(chatId: number | string) {
       setTimeout(() => scrollToBottom(), 100)
     } catch (err) {
       console.error('Ошибка создания чата с админом:', err)
-      error.value = err instanceof Error ? err : new Error('Ошибка создания чата с админом')
       loadingMessages.value = false
       status.value = 'ready'
     }
@@ -339,7 +369,6 @@ async function onSubmit() {
   if (!currentUserId) return
 
   input.value = ''
-  error.value = null
   status.value = 'submitted'
 
   // Оптимистичное обновление - показываем сообщение сразу с лоадингом
@@ -403,7 +432,7 @@ async function onSubmit() {
       messagesMap.value.set(conversationId, messages)
     }
 
-    error.value = err instanceof Error ? err : new Error('Ошибка отправки сообщения')
+    console.error('Ошибка отправки сообщения:', err)
     status.value = 'error'
     input.value = messageText
   }
@@ -496,6 +525,30 @@ function handleMessageDeleted(data: Partial<Message> & { id: number; conversatio
   }
 }
 
+function handleMessageRead(data: { conversationId: number; userId: number }) {
+  const messages = messagesMap.value.get(data.conversationId) || []
+  const currentUserId = authStore.currentUser?.id
+  
+  if (!currentUserId || currentUserId === data.userId) {
+    return
+  }
+
+  const now = new Date().toISOString()
+  let updated = false
+  
+  for (let i = 0; i < messages.length; i++) {
+    const message = messages[i]
+    if (message && message.senderId === currentUserId && !message.readAt) {
+      messages[i] = { ...message, readAt: now } as Message
+      updated = true
+    }
+  }
+  
+  if (updated) {
+    messagesMap.value.set(data.conversationId, messages)
+  }
+}
+
 onMounted(async () => {
   await loadConversations()
 
@@ -521,12 +574,14 @@ onMounted(async () => {
   websocket.onMessageNew(handleNewMessage)
   websocket.onMessageEdited(handleMessageEdited)
   websocket.onMessageDeleted(handleMessageDeleted)
+  websocket.onMessageRead(handleMessageRead)
 })
 
 onUnmounted(() => {
   websocket.offMessageNew(handleNewMessage)
   websocket.offMessageEdited(handleMessageEdited)
   websocket.offMessageDeleted(handleMessageDeleted)
+  websocket.offMessageRead(handleMessageRead)
 
   if (activeChatId.value && typeof activeChatId.value === 'number') {
     websocket.leaveChatRoom(activeChatId.value)
