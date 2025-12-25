@@ -184,7 +184,11 @@
     "messages": {
       "title": "Messages",
       "aiAssistant": "AI Assistant",
-      "admin": "Administrator"
+      "admin": "Administrator",
+      "loading": "Loading chats...",
+      "selectChat": "Select a chat",
+      "loadingMessages": "Loading messages...",
+      "inputPlaceholder": "Type your message..."
     },
     "orders": {
       "title": "Orders",

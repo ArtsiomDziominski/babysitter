@@ -3,6 +3,7 @@
     <UChatPrompt
       :model-value="input"
       :disabled="disabled"
+      :placeholder="$t('account.messages.inputPlaceholder')"
       @update:model-value="$emit('update:input', $event)"
       @submit="$emit('submit')"
     >

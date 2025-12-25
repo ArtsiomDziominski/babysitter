@@ -189,7 +189,8 @@
       "admin": "Администратор",
       "loading": "Загрузка чатов...",
       "selectChat": "Выберите чат",
-      "loadingMessages": "Загрузка сообщений..."
+      "loadingMessages": "Загрузка сообщений...",
+      "inputPlaceholder": "Введите сообщение..."
     },
     "orders": {
       "title": "Заказы",

@@ -95,7 +95,7 @@ const loading = ref(false)
 const loadingMessages = ref(false)
 const activeChatId = ref<number | string | null>(null)
 const conversations = ref<Conversation[]>([])
-const messagesMap = ref<Map<number, Message[]>>(new Map())
+const messagesMap = ref<Map<number, (Message & { isPending?: boolean })[]>>(new Map())
 const lastMessagesMap = ref<Map<number, string>>(new Map())
 const lastMessagesTimeMap = ref<Map<number, string>>(new Map())
 const messagesListRef = ref<{ scrollToBottom: () => void } | null>(null)
@@ -159,6 +159,8 @@ const currentMessages = computed(() => {
 
   return messages.map(msg => {
     const isCurrentUser = msg.senderId === authStore.currentUser?.id
+    const isPending = 'isPending' in msg && msg.isPending === true
+    const isRead = !!msg.readAt
     return {
       id: msg.id.toString(),
       role: isCurrentUser ? 'user' : 'assistant',
@@ -167,11 +169,13 @@ const currentMessages = computed(() => {
           type: 'text',
           id: `${msg.id}-1`,
           text: msg.content || '',
-          state: 'done'
+          state: isPending ? 'streaming' : 'done'
         }
       ],
-      createdAt: msg.createdAt
-    } as UIMessage
+      createdAt: msg.createdAt,
+      isPending,
+      isRead
+    } as UIMessage & { isPending?: boolean; isRead?: boolean }
   })
 })
 
@@ -338,9 +342,10 @@ async function onSubmit() {
   error.value = null
   status.value = 'submitted'
 
-  // Оптимистичное обновление - показываем сообщение сразу
-  const tempMessage: Message = {
-    id: Date.now(), // временный ID
+  // Оптимистичное обновление - показываем сообщение сразу с лоадингом
+  const tempId = -Date.now() // отрицательный ID для временных сообщений
+  const tempMessage: Message & { isPending?: boolean } = {
+    id: tempId,
     conversationId,
     senderId: currentUserId,
     content: messageText,
@@ -350,6 +355,7 @@ async function onSubmit() {
     readAt: null,
     editedAt: null,
     deletedAt: null,
+    isPending: true, // флаг для отображения лоадинга
   }
 
   const messages = messagesMap.value.get(conversationId) || []
@@ -369,7 +375,7 @@ async function onSubmit() {
       content: messageText,
     })
 
-    // Заменяем временное сообщение на реальное
+    // Заменяем временное сообщение на реальное (убираем лоадинг)
     const messageIndex = messages.findIndex(m => m.id === tempMessage.id)
     if (messageIndex !== -1) {
       messages[messageIndex] = newMessage
@@ -419,27 +425,41 @@ function handleNewMessage(message: Message) {
   const conversationId = message.conversationId
   const messages = messagesMap.value.get(conversationId) || []
 
-  if (!messages.find(m => m.id === message.id)) {
+  // Проверяем, есть ли временное сообщение с таким же контентом от текущего пользователя
+  const currentUserId = authStore.currentUser?.id
+  const tempMessageIndex = messages.findIndex(m => 
+    m.senderId === currentUserId && 
+    m.content === message.content && 
+    'isPending' in m && 
+    m.isPending === true
+  )
+
+  if (tempMessageIndex !== -1) {
+    // Заменяем временное сообщение на реальное (убираем лоадинг)
+    messages[tempMessageIndex] = message
+    messagesMap.value.set(conversationId, messages)
+  } else if (!messages.find(m => m.id === message.id)) {
+    // Если временного сообщения нет, просто добавляем новое
     messages.push(message)
     messagesMap.value.set(conversationId, messages)
-    lastMessagesMap.value.set(conversationId, message.content || '')
-    lastMessagesTimeMap.value.set(conversationId, message.createdAt)
+  }
 
-    const conv = conversations.value.find(c => c.id === conversationId)
-    if (conv) {
-      const currentUserId = authStore.currentUser?.id
-      if (currentUserId && message.senderId !== currentUserId) {
-        if (conv.user1Id === currentUserId) {
-          conv.unreadCountUser1++
-        } else {
-          conv.unreadCountUser2++
-        }
+  lastMessagesMap.value.set(conversationId, message.content || '')
+  lastMessagesTimeMap.value.set(conversationId, message.createdAt)
+
+  const conv = conversations.value.find(c => c.id === conversationId)
+  if (conv) {
+    if (currentUserId && message.senderId !== currentUserId) {
+      if (conv.user1Id === currentUserId) {
+        conv.unreadCountUser1++
+      } else {
+        conv.unreadCountUser2++
       }
     }
+  }
 
-    if (activeChatId.value === conversationId) {
-      nextTick(() => scrollToBottom())
-    }
+  if (activeChatId.value === conversationId) {
+    nextTick(() => scrollToBottom())
   }
 }
 

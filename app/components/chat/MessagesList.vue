@@ -30,7 +30,7 @@
         :class="message.role === 'user' ? 'items-end' : 'items-start'"
       >
         <div
-          class="rounded-2xl px-4 py-2 shadow-sm"
+          class="rounded-2xl px-4 py-2 shadow-sm relative"
           :class="message.role === 'user'
             ? 'bg-primary-500 text-white rounded-tr-sm'
             : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-tl-sm border border-gray-200 dark:border-gray-700'"
@@ -40,10 +40,31 @@
           </div>
         </div>
         <div
-          class="text-xs text-gray-500 dark:text-gray-400 px-1"
-          :class="message.role === 'user' ? 'text-right' : 'text-left'"
+          class="text-xs px-1 flex items-center gap-1"
+          :class="message.role === 'user' 
+            ? 'text-right justify-end' 
+            : 'text-left'"
         >
-          {{ formatMessageTime(message) }}
+          <span class="text-gray-500 dark:text-gray-400">{{ formatMessageTime(message) }}</span>
+          <div
+            v-if="message.role === 'user'"
+            class="flex items-center"
+          >
+            <div
+              v-if="message.isPending"
+              class="w-3.5 h-3.5 border-2 rounded-full animate-spin border-green-400 border-t-green-600"
+            ></div>
+            <Icon
+              v-else-if="message.isRead"
+              name="i-lucide-check-check"
+              class="w-3.5 h-3.5 text-green-500"
+            />
+            <Icon
+              v-else
+              name="i-lucide-check"
+              class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -80,6 +101,8 @@ interface UIMessage {
   role: 'user' | 'assistant' | 'system'
   parts: MessagePart[]
   createdAt?: string
+  isPending?: boolean
+  isRead?: boolean
 }
 
 const props = defineProps<{
