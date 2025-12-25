@@ -331,9 +331,35 @@ async function onSubmit() {
   if (!conversationId || typeof conversationId !== 'number') return
 
   const messageText = input.value
+  const currentUserId = authStore.currentUser?.id
+  if (!currentUserId) return
+
   input.value = ''
   error.value = null
   status.value = 'submitted'
+
+  // Оптимистичное обновление - показываем сообщение сразу
+  const tempMessage: Message = {
+    id: Date.now(), // временный ID
+    conversationId,
+    senderId: currentUserId,
+    content: messageText,
+    isEdited: false,
+    createdAt: new Date().toISOString(),
+    attachments: null,
+    readAt: null,
+    editedAt: null,
+    deletedAt: null,
+  }
+
+  const messages = messagesMap.value.get(conversationId) || []
+  messages.push(tempMessage)
+  messagesMap.value.set(conversationId, messages)
+  lastMessagesMap.value.set(conversationId, messageText)
+  lastMessagesTimeMap.value.set(conversationId, tempMessage.createdAt)
+
+  await nextTick()
+  scrollToBottom()
 
   try {
     status.value = 'streaming'
@@ -343,8 +369,19 @@ async function onSubmit() {
       content: messageText,
     })
 
-    const messages = messagesMap.value.get(conversationId) || []
-    messages.push(newMessage)
+    // Заменяем временное сообщение на реальное
+    const messageIndex = messages.findIndex(m => m.id === tempMessage.id)
+    if (messageIndex !== -1) {
+      messages[messageIndex] = newMessage
+    } else {
+      // Если временное сообщение не найдено, просто добавляем новое
+      const existingIndex = messages.findIndex(m => m.id === newMessage.id)
+      if (existingIndex === -1) {
+        messages.push(newMessage)
+      } else {
+        messages[existingIndex] = newMessage
+      }
+    }
     messagesMap.value.set(conversationId, messages)
     lastMessagesMap.value.set(conversationId, messageText)
     lastMessagesTimeMap.value.set(conversationId, newMessage.createdAt)
@@ -353,6 +390,13 @@ async function onSubmit() {
     await nextTick()
     scrollToBottom()
   } catch (err) {
+    // Удаляем временное сообщение при ошибке
+    const messageIndex = messages.findIndex(m => m.id === tempMessage.id)
+    if (messageIndex !== -1) {
+      messages.splice(messageIndex, 1)
+      messagesMap.value.set(conversationId, messages)
+    }
+
     error.value = err instanceof Error ? err : new Error('Ошибка отправки сообщения')
     status.value = 'error'
     input.value = messageText

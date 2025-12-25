@@ -108,10 +108,16 @@ export const useChat = () => {
     content: string
     attachments?: string[]
   }): Promise<Message> => {
-    return await api.request<Message>('/chat/messages', {
+    const response = await api.request<{ data?: Message; statusCode?: number } | Message>('/chat/messages', {
       method: 'POST',
       body: JSON.stringify(data),
     })
+    
+    if ('data' in response && response.data) {
+      return response.data
+    }
+    
+    return response as Message
   }
 
   const uploadImage = async (
