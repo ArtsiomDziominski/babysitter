@@ -188,7 +188,9 @@
       "loading": "Loading chats...",
       "selectChat": "Select a chat",
       "loadingMessages": "Loading messages...",
-      "inputPlaceholder": "Type your message..."
+      "inputPlaceholder": "Type your message...",
+      "newMessage": "New message",
+      "defaultSender": "User"
     },
     "orders": {
       "title": "Orders",

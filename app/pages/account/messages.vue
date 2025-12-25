@@ -448,17 +448,32 @@ function handleNewMessage(message: Message) {
   lastMessagesTimeMap.value.set(conversationId, message.createdAt)
 
   const conv = conversations.value.find(c => c.id === conversationId)
+  const isActiveChat = activeChatId.value === conversationId
+
   if (conv) {
     if (currentUserId && message.senderId !== currentUserId) {
-      if (conv.user1Id === currentUserId) {
-        conv.unreadCountUser1++
+      // Если чат активен, не увеличиваем счетчик и помечаем как прочитанное
+      if (isActiveChat) {
+        // Помечаем сообщения как прочитанные
+        websocket.markMessagesAsRead(conversationId)
+        // Обнуляем счетчик непрочитанных
+        if (conv.user1Id === currentUserId) {
+          conv.unreadCountUser1 = 0
+        } else {
+          conv.unreadCountUser2 = 0
+        }
       } else {
-        conv.unreadCountUser2++
+        // Если чат не активен, увеличиваем счетчик
+        if (conv.user1Id === currentUserId) {
+          conv.unreadCountUser1++
+        } else {
+          conv.unreadCountUser2++
+        }
       }
     }
   }
 
-  if (activeChatId.value === conversationId) {
+  if (isActiveChat) {
     nextTick(() => scrollToBottom())
   }
 }

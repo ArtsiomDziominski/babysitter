@@ -51,6 +51,7 @@ export interface NotificationData {
   conversationId?: number
   messageId?: number
   senderId?: number
+  senderName?: string
   content?: string
 }
 
@@ -343,17 +344,17 @@ export const useWebSocket = () => {
         connect(newToken)
         connectChat(newToken)
       } else {
-        disconnect()
+      disconnect()
         disconnectChat()
-      }
-    }, { immediate: true })
+    }
+  }, { immediate: true })
 
-    watch(() => authStore.isAuthenticated, (isAuth) => {
+  watch(() => authStore.isAuthenticated, (isAuth) => {
       if (!isAuth) {
-        disconnect()
+      disconnect()
         disconnectChat()
-      }
-    })
+    }
+  })
   }
 
   return {

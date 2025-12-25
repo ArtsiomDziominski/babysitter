@@ -158,28 +158,18 @@ const handleBookingUpdated = (data: any) => {
   loadBookings()
 }
 
-const handleNotification = (notification: any) => {
-  toast.add({
-    title: notification.title,
-    description: notification.message,
-    color: notification.type === 'booking' ? 'info' : 'neutral'
-  })
-}
-
 onMounted(() => {
   loadBookings()
 
   websocket.onBookingCreated(handleBookingCreated)
   websocket.onBookingStatusChanged(handleBookingStatusChanged)
   websocket.onBookingUpdated(handleBookingUpdated)
-  websocket.onNotification(handleNotification)
 })
 
 onUnmounted(() => {
   websocket.offBookingCreated(handleBookingCreated)
   websocket.offBookingStatusChanged(handleBookingStatusChanged)
   websocket.offBookingUpdated(handleBookingUpdated)
-  websocket.offNotification(handleNotification)
 })
 
 const openDetailsModal = async (id: number) => {

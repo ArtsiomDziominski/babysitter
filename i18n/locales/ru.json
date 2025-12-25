@@ -190,7 +190,9 @@
       "loading": "Загрузка чатов...",
       "selectChat": "Выберите чат",
       "loadingMessages": "Загрузка сообщений...",
-      "inputPlaceholder": "Введите сообщение..."
+      "inputPlaceholder": "Введите сообщение...",
+      "newMessage": "Новое сообщение",
+      "defaultSender": "Пользователь"
     },
     "orders": {
       "title": "Заказы",

@@ -58,7 +58,13 @@ export const useChat = () => {
   const api = useApi()
 
   const getConversations = async (): Promise<Conversation[]> => {
-    return await api.request<Conversation[]>('/chat/conversations')
+    const response = await api.request<{ data?: Conversation[]; statusCode?: number } | Conversation[]>('/chat/conversations')
+    
+    if ('data' in response && response.data) {
+      return response.data
+    }
+    
+    return Array.isArray(response) ? response : []
   }
 
   const getConversation = async (id: number): Promise<Conversation> => {

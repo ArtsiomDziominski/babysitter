@@ -6,3 +6,11 @@
     <ConfirmModal />
   </UApp>
 </template>
+
+<script setup lang="ts">
+const notifications = useNotifications()
+
+onMounted(() => {
+  notifications.init()
+})
+</script>
