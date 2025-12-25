@@ -1,12 +1,12 @@
 <template>
   <div
     ref="messagesContainer"
-    class="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+    class="flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 space-y-3 w-full min-w-0 max-w-full"
   >
     <div
       v-for="(message, index) in messages"
       :key="message.id"
-      class="flex gap-2"
+      class="flex gap-2 w-full min-w-0"
       :class="message.role === 'user' ? 'justify-end' : 'justify-start'"
     >
       <div
@@ -26,16 +26,18 @@
         class="flex-shrink-0 w-6"
       />
       <div
-        class="max-w-[70%] flex flex-col gap-1"
+        class="flex flex-col gap-1"
         :class="message.role === 'user' ? 'items-end' : 'items-start'"
+        style="max-width: 70%; min-width: 0; flex-shrink: 1;"
       >
         <div
           class="rounded-2xl px-4 py-2 shadow-sm relative"
           :class="message.role === 'user'
             ? 'bg-primary-500 text-white rounded-tr-sm'
             : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-tl-sm border border-gray-200 dark:border-gray-700'"
+          style="max-width: 100%; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; box-sizing: border-box;"
         >
-          <div class="text-sm whitespace-pre-wrap break-words">
+          <div class="text-sm whitespace-pre-wrap" style="word-break: break-word; overflow-wrap: anywhere; word-wrap: break-word;">
             {{ getTextFromMessage(message) }}
           </div>
         </div>
