@@ -4,10 +4,10 @@
       <div class="py-12 space-y-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <NuxtLink to="/" class="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              <Icon name="mdi:account-child" size="32"/>
-              <span>Babysitter</span>
-            </NuxtLink>
+              <NuxtLink to="/" class="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                <img :src="siteConfig.logo" :alt="siteConfig.name" class="w-10 h-10 object-contain"/>
+                <span>{{ siteConfig.name }}</span>
+              </NuxtLink>
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
               {{ $t('footer.description') }}
             </p>
@@ -92,6 +92,7 @@
 </template>
 
 <script setup lang="ts">
+const siteConfig = useSiteConfig()
 const currentYear = new Date().getFullYear()
 
 const serviceLinks = [
