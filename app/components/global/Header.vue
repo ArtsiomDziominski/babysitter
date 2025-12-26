@@ -3,7 +3,7 @@
     <div class="header__container">
       <div class="header__content">
         <NuxtLink to="/" class="header__logo">
-          <Icon name="mdi:account-child" size="32" class="header__logo-icon"/>
+          <img src="/logo.jpg" alt="Babysitter" class="header__logo-icon"/>
           <span class="header__logo-text">Babysitter</span>
         </NuxtLink>
 
