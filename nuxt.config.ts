@@ -1,5 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import siteConfig from './app/config/site/babysitters'
+const siteConfigFile = process.env.SITE_CONFIG || 'babysitters'
+let siteConfig: any
+
+try {
+    siteConfig = require(`./app/config/site/${siteConfigFile}`).default
+} catch (error) {
+    console.warn(`Site config file "${siteConfigFile}" not found, falling back to "babysitters"`)
+    siteConfig = require('./app/config/site/babysitters').default
+}
 
 export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
@@ -12,15 +20,9 @@ export default defineNuxtConfig({
         }
     },
     i18n: {
-        locales: [
-            { code: 'ka', iso: 'ka-GE', file: 'ka.json', name: 'ქართული' },
-            { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
-            { code: 'ru', iso: 'ru-RU', file: 'ru.json', name: 'Русский' },
-            // { code: 'be', iso: 'be-BY', file: 'be.json', name: 'Беларуская' },
-            { code: 'uk', iso: 'uk-UA', file: 'uk.json', name: 'Українська' }
-        ],
-        langDir: 'locales',
-        defaultLocale: 'en', // ru
+        locales: [...siteConfig.locales],
+        langDir: siteConfig.langDir,
+        defaultLocale: siteConfig.defaultLocale,
         strategy: 'no_prefix',
         detectBrowserLanguage: {
             useCookie: true,
