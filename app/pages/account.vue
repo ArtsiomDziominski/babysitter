@@ -5,6 +5,10 @@ definePageMeta({
   middleware: 'auth'
 })
 
+useSeoMeta({
+  robots: 'noindex, nofollow'
+})
+
 const activeTab = computed(() => {
   if (route.path.includes('/messages')) return 'messages'
   if (route.path.includes('/orders')) return 'orders'

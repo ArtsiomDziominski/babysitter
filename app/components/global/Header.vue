@@ -3,8 +3,8 @@
     <div class="header__container">
       <div class="header__content">
         <NuxtLink to="/" class="header__logo">
-          <img src="/logo.jpg" alt="Babysitter" class="header__logo-icon"/>
-          <span class="header__logo-text">Babysitter</span>
+          <img :src="siteConfig.logo" :alt="siteConfig.name" class="header__logo-icon"/>
+          <span class="header__logo-text">{{ siteConfig.name }}</span>
         </NuxtLink>
 
         <nav v-if="authStore.isAuthenticated" class="header__nav">
@@ -79,6 +79,7 @@ import { CITY_KEYS, City } from '~/const/cities'
 
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
+const siteConfig = useSiteConfig()
 
 const navLinks = computed(() => [
   { to: '/search', label: t('header.bookings') },

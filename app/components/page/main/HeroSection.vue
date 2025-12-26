@@ -13,9 +13,9 @@
             <UButton size="xl" color="primary" class="px-8 py-6 text-lg" to="/search">
               {{ $t('home.hero.cta') }}
             </UButton>
-            <UButton size="xl" variant="outline" color="primary" class="px-8 py-6 text-lg">
+            <!-- <UButton size="xl" variant="outline" color="primary" class="px-8 py-6 text-lg">
               {{ $t('home.hero.ctaSecondary') }}
-            </UButton>
+            </UButton> -->
           </div>
         </div>
       </div>

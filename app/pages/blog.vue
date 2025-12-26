@@ -73,6 +73,33 @@
 <script setup lang="ts">
 import type { BlogPost, BlogFilters } from '~/types/blog'
 
+const { t, locale } = useI18n()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('seo.blog.title'),
+  description: () => t('seo.blog.description'),
+  ogTitle: () => t('seo.blog.title'),
+  ogDescription: () => t('seo.blog.description'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('seo.blog.title'),
+  twitterDescription: () => t('seo.blog.description'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
+
 const filters = ref<BlogFilters>({
   selectedTags: [],
   selectedCategory: null,

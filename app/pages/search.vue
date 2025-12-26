@@ -53,6 +53,33 @@ import type { SearchFilters, SearchForm } from '~/types/sitter'
 import type { BabysitterListItem, FetchBabysittersParams } from '~/composables/useBabysitter'
 import { SearchViewMode, type SearchViewModeType } from '~/const/viewMode'
 
+const { t, locale } = useI18n()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('seo.search.title'),
+  description: () => t('seo.search.description'),
+  ogTitle: () => t('seo.search.title'),
+  ogDescription: () => t('seo.search.description'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('seo.search.title'),
+  twitterDescription: () => t('seo.search.description'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
+
 const searchForm = ref<SearchForm>({
   address: '',
   date: '',

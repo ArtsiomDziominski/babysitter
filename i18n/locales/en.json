@@ -710,6 +710,38 @@
     "search": "Search",
     "sitter": "Sitter",
     "booking": "Booking"
+  },
+  "seo": {
+    "home": {
+      "title": "Find a verified babysitter near you",
+      "description": "Thousands of happy parents have already found reliable help for their children. Verified babysitters, safety and flexible schedule."
+    },
+    "search": {
+      "title": "Search for babysitters",
+      "description": "Find the perfect babysitter for your child. Filters by price, experience, skills and availability."
+    },
+    "blog": {
+      "title": "Blog about parenting and babysitting",
+      "description": "Useful articles about parenting, babysitting, safety and child development."
+    },
+    "sitter": {
+      "title": "{name} - Babysitter profile",
+      "description": "Babysitter profile {name}. Work experience, reviews, schedule and prices.",
+      "defaultTitle": "Babysitter profile",
+      "defaultDescription": "View babysitter profile with reviews, schedule and prices."
+    },
+    "login": {
+      "title": "Login",
+      "description": "Sign in to your account to access bookings and messages."
+    },
+    "register": {
+      "title": "Register",
+      "description": "Create an account and start using babysitter services."
+    },
+    "forgotPassword": {
+      "title": "Password recovery",
+      "description": "Restore access to your account."
+    }
   }
 }
 

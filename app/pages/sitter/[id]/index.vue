@@ -98,6 +98,10 @@ const route = useRoute()
 const sitterId = route.params.id as string
 const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
+const { t, locale } = useI18n()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
 
 const isFavorite = ref(false)
 const isBabysitter = computed(() => authStore.currentUser?.role === UserRole.BABYSITTER)
@@ -121,6 +125,47 @@ const { data: sitter, pending, error } = await useAsyncData<Sitter | null>(
     }
   }
 )
+
+const seoTitle = computed(() => {
+  if (sitter.value) {
+    return t('seo.sitter.title', { name: sitter.value.name })
+  }
+  return t('seo.sitter.defaultTitle')
+})
+
+const seoDescription = computed(() => {
+  if (sitter.value) {
+    return sitter.value.about 
+      ? `${sitter.value.about.substring(0, 160)}...` 
+      : t('seo.sitter.description', { name: sitter.value.name })
+  }
+  return t('seo.sitter.defaultDescription')
+})
+
+const seoImage = computed(() => {
+  return sitter.value?.photo || `${siteConfig.url}${siteConfig.logo}`
+})
+
+useSeoMeta({
+  title: seoTitle,
+  description: seoDescription,
+  ogTitle: seoTitle,
+  ogDescription: seoDescription,
+  ogImage: seoImage,
+  ogUrl: currentUrl,
+  ogType: () => sitter.value ? 'profile' : 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: seoTitle,
+  twitterDescription: seoDescription,
+  twitterImage: seoImage
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
 
 const breadcrumbItems = computed(() => [
   {

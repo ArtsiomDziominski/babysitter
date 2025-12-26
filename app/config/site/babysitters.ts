@@ -1,0 +1,15 @@
+export default {
+    name: 'Babysitters',
+    url: 'https://babysitters.com',
+    logo: '/logo.jpg',
+    description: 'Babysitters is a platform for finding babysitters near you',
+    keywords: ['babysitters', 'babysitter', 'babysitting', 'babysitter near me', 'babysitter near you', 'babysitter near my location'],
+    author: 'Babysitters',
+    authorUrl: 'https://babysitters.com',
+    authorEmail: 'info@babysitters.com',
+    authorPhone: '+1234567890',
+    authorAddress: '123 Main St, Anytown, USA',
+    authorCity: 'Anytown',
+    authorState: 'CA',
+    authorZip: '12345', 
+} as const

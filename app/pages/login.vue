@@ -3,10 +3,32 @@ import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 import { UserRole } from '~/const/roles'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const toast = useToast()
 const authStore = useAuthStore()
 const router = useRouter()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('seo.login.title'),
+  description: () => t('seo.login.description'),
+  robots: 'noindex, nofollow',
+  ogTitle: () => t('seo.login.title'),
+  ogDescription: () => t('seo.login.description'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
 
 const fields: AuthFormField[] = [
   {
