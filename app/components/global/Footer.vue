@@ -112,7 +112,7 @@ const legalLinks = [
   { to: '/privacy', label: 'footer.legal.privacy' },
   { to: '/terms', label: 'footer.legal.terms' },
   { to: '/cookies', label: 'footer.legal.cookies' },
-  { to: '/offer', label: 'footer.legal.offer' }
+  { to: '/public-offer', label: 'footer.legal.offer' }
 ]
 </script>
 
