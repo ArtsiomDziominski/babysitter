@@ -75,6 +75,7 @@
 
 <script setup lang="ts">
 import { UserRole } from '~/const/roles'
+import { CITY_KEYS, City } from '~/const/cities'
 
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
@@ -84,8 +85,8 @@ const navLinks = computed(() => [
   { to: '/account/messages', label: t('header.messages') }
 ])
 
-const cityKeys = ['minsk', 'gomel', 'vitebsk', 'grodno', 'brest', 'mogilev']
-const selectedCity = useState('selectedCity', () => cityKeys[0])
+const cityKeys = CITY_KEYS
+const selectedCity = useState('selectedCity', () => cityKeys[0] || City.TBILISI)
 
 onMounted(() => {
   authStore.loadAvatarUrl()

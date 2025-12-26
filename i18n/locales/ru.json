@@ -20,7 +20,13 @@
     "vitebsk": "Витебск",
     "grodno": "Гродно",
     "brest": "Брест",
-    "mogilev": "Могилёв"
+    "mogilev": "Могилёв",
+    "tbilisi": "Тбилиси",
+    "batumi": "Батуми",
+    "kutaisi": "Кутаиси",
+    "rustavi": "Рустави",
+    "gori": "Гори",
+    "poti": "Поти"
   },
   "languages": {
     "ru": "Русский",

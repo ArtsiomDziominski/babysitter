@@ -79,6 +79,8 @@
 </template>
 
 <script setup lang="ts">
+import { CITY_KEYS, City } from '~/const/cities'
+
 const { t } = useI18n()
 const authStore = useAuthStore()
 
@@ -86,7 +88,7 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const cityKeys = ['minsk', 'gomel', 'vitebsk', 'grodno', 'brest', 'mogilev']
+const cityKeys = CITY_KEYS
 const cityOptions = computed(() =>
     cityKeys.map(key => ({
       label: t(`cities.${ key }`),
@@ -98,7 +100,7 @@ const formData = ref({
   name: authStore.currentUser?.name || '',
   surname: authStore.currentUser?.surname || '',
   phone: authStore.currentUser?.phone || '+7',
-  city: authStore.currentUser?.city || 'minsk'
+  city: authStore.currentUser?.city || City.TBILISI
 })
 
 const isSaving = ref(false)
