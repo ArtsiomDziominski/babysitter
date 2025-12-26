@@ -1,0 +1,806 @@
+{
+  "header": {
+    "login": "შესვლა",
+    "logout": "გასვლა",
+    "profile": "პროფილი",
+    "bookings": "ბებისიტერები",
+    "messages": "შეტყობინებები",
+    "menu": {
+      "account": "ანგარიში",
+      "bookings": "დაჯავშნები",
+      "messages": "შეტყობინებები",
+      "favorites": "რჩეულები",
+      "schedule": "განრიგი",
+      "settings": "პარამეტრები"
+    }
+  },
+  "cities": {
+    "minsk": "მინსკი",
+    "gomel": "გომელი",
+    "vitebsk": "ვიტებსკი",
+    "grodno": "გროდნო",
+    "brest": "ბრესტი",
+    "mogilev": "მოგილიოვი",
+    "tbilisi": "თბილისი",
+    "batumi": "ბათუმი",
+    "kutaisi": "ქუთაისი",
+    "rustavi": "რუსთავი",
+    "gori": "გორი",
+    "poti": "ფოთი"
+  },
+  "languages": {
+    "ru": "Русский",
+    "en": "English",
+    "be": "Беларуская",
+    "ka": "ქართული"
+  },
+  "home": {
+    "hero": {
+      "title": "იპოვეთ დამოწმებული ბებისიტერი თქვენს მახლობლად",
+      "subtitle": "ათასობით კმაყოფილი მშობელი უკვე იპოვა საიმედო დახმარება თავიანთი ბავშვებისთვის",
+      "cta": "იპოვეთ ბებისიტერი",
+      "ctaSecondary": "გაიგეთ მეტი"
+    },
+    "howItWorks": {
+      "title": "როგორ მუშაობს",
+      "step1": {
+        "title": "აირჩიეთ ბებისიტერი",
+        "description": "გადახედეთ დამოწმებული ბებისიტერების ანკეტებს თქვენს ქალაქში"
+      },
+      "step2": {
+        "title": "დაჯავშნეთ დრო",
+        "description": "აირჩიეთ მოსახერხებელი თარიღი და დრო შეხვედრისთვის"
+      },
+      "step3": {
+        "title": "დაადასტურეთ დაჯავშნა",
+        "description": "დაადასტურეთ შეკვეთა და გადაიხადეთ სერვისი"
+      },
+      "step4": {
+        "title": "ისიამოვნეთ თავისუფალი დროით",
+        "description": "თქვენი ბავშვები საიმედო ხელშია, ხოლო თქვენ შეგიძლიათ დაკავდეთ საკუთარი საქმეებით"
+      }
+    },
+    "advantages": {
+      "title": "რატომ ირჩევენ ჩვენ",
+      "verified": {
+        "title": "დამოწმებული ბებისიტერები",
+        "description": "ყველა ჩვენი ბებისიტერი გადის დოკუმენტების შემოწმებასა და გასაუბრებას"
+      },
+      "safe": {
+        "title": "უსაფრთხოება",
+        "description": "დაზღვევა და გარანტიები თქვენი სიმშვიდისთვის"
+      },
+      "flexible": {
+        "title": "მოქნილი განრიგი",
+        "description": "აირჩიეთ დრო, რომელიც თქვენთვის მოსახერხებელია"
+      },
+      "support": {
+        "title": "მხარდაჭერა 24/7",
+        "description": "ჩვენი მხარდაჭერის სერვისი ყოველთვის მზადაა დაგეხმაროთ"
+      }
+    },
+    "reviews": {
+      "title": "მშობლების მიმოხილვები",
+      "more": "ყველა მიმოხილვა"
+    },
+    "stats": {
+      "sitters": "ბებისიტერი",
+      "families": "ოჯახი",
+      "bookings": "დაჯავშნა",
+      "rating": "საშუალო რეიტინგი"
+    },
+    "cta": {
+      "title": "მზად ხართ იპოვოთ იდეალური ბებისიტერი?",
+      "subtitle": "შემოუერთდით ათასობით კმაყოფილ მშობელს"
+    }
+  },
+  "footer": {
+    "description": "ყველაფრის გაკეთება ბავშვებთან ერთად — მარტივად!",
+    "services": {
+      "title": "სერვისები",
+      "findSitter": "იპოვეთ ბებისიტერი",
+      "onlineClasses": "ონლაინ გაკვეთილები",
+      "becomeSitter": "გახდით ბებისიტერი"
+    },
+    "info": {
+      "title": "ინფორმაცია",
+      "about": "ჩვენს შესახებ",
+      "faq": "ხშირი კითხვები",
+      "blog": "ბლოგი",
+      "help": "დახმარება"
+    },
+    "contact": {
+      "title": "კონტაქტები",
+      "hours": "ყოველდღე 9:00-დან 22:00-მდე"
+    },
+    "legal": {
+      "privacy": "კონფიდენციალურობის პოლიტიკა",
+      "terms": "გამოყენების პირობები",
+      "cookies": "Cookies პოლიტიკა",
+      "offer": "საჯარო შეთავაზება"
+    }
+  },
+  "auth": {
+    "login": "შესვლა",
+    "register": "რეგისტრაცია",
+    "loginDescription": "შეიყვანეთ თქვენი მონაცემები ანგარიშში შესასვლელად",
+    "registerDescription": "შექმენით ანგარიში სერვისის გამოსაყენებლად",
+    "email": "Email",
+    "emailPlaceholder": "შეიყვანეთ თქვენი email",
+    "password": "პაროლი",
+    "passwordPlaceholder": "შეიყვანეთ პაროლი",
+    "confirmPassword": "დაადასტურეთ პაროლი",
+    "confirmPasswordPlaceholder": "გაიმეორეთ პაროლი",
+    "name": "სახელი",
+    "namePlaceholder": "შეიყვანეთ თქვენი სახელი",
+    "surname": "გვარი",
+    "surnamePlaceholder": "შეიყვანეთ თქვენი გვარი",
+    "rememberMe": "დამახსოვრება",
+    "agreeToTerms": "ვეთანხმები გამოყენების პირობებს",
+    "noAccount": "არ გაქვთ ანგარიში?",
+    "haveAccount": "უკვე გაქვთ ანგარიში?",
+    "invalidEmail": "არასწორი email",
+    "passwordMinLength": "პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
+    "nameMinLength": "სახელი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს",
+    "surnameMinLength": "გვარი უნდა შეიცავდეს მინიმუმ 2 სიმბოლოს",
+    "passwordsDoNotMatch": "პაროლები არ ემთხვევა",
+    "mustAgree": "აუცილებელია პირობებთან დათანხმება",
+    "loginSuccess": "შესვლა წარმატებით შესრულდა",
+    "registerSuccess": "რეგისტრაცია წარმატებით შესრულდა",
+    "loginWithGoogle": "შესვლა Google-ით",
+    "loginWithYandex": "შესვლა Yandex-ით",
+    "loginWithVK": "შესვლა VK-ით",
+    "registerWithGoogle": "რეგისტრაცია Google-ით",
+    "registerWithYandex": "რეგისტრაცია Yandex-ით",
+    "registerWithVK": "რეგისტრაცია VK-ით",
+    "forgotPassword": "დაგავიწყდათ პაროლი?",
+    "resetPassword": "პაროლის აღდგენა",
+    "resetPasswordDescription": "შეიყვანეთ თქვენი email და ჩვენ გამოგიგზავნით ინსტრუქციებს პაროლის აღსადგენად",
+    "resetPasswordSuccess": "მოთხოვნა გაიგზავნა",
+    "resetPasswordEmailSent": "პაროლის აღდგენის ინსტრუქციები გაიგზავნა თქვენს email-ზე",
+    "rememberPassword": "გახსოვთ პაროლი?",
+    "phone": "ტელეფონი",
+    "phonePlaceholder": "+995________",
+    "phoneMinLength": "ტელეფონი უნდა იყოს მინიმუმ 10 სიმბოლო",
+    "role": "როლი",
+    "orContinueWith": "ან გააგრძელეთ",
+    "loginError": "შესვლის შეცდომა",
+    "registerError": "რეგისტრაციის შეცდომა"
+  },
+  "roleSelection": {
+    "title": "აირჩიეთ როლი",
+    "subtitle": "როლის გარეშე საიტი მიუწვდომელია, აირჩიეთ ერთი ვარიანტი",
+    "parent": {
+      "title": "მე ვარ მშობელი",
+      "description": "იპოვეთ ბებისიტერი"
+    },
+    "nanny": {
+      "title": "მე ვარ ბებისიტერი",
+      "description": "იპოვეთ შეკვეთები"
+    },
+    "selected": "არჩეული",
+    "continue": "გაგრძელება",
+    "selectPrompt": "აირჩიეთ როლი",
+    "saved": "როლი შენახულია",
+    "saveErrorDefault": "ვერ მოხერხდა როლის შენახვა"
+  },
+  "account": {
+    "title": "ანგარიში",
+    "welcome": "კეთილი იყოს თქვენი მობრძანება, {name}!",
+    "email": "Email",
+    "phone": "ტელეფონი",
+    "editProfile": "პროფილის რედაქტირება",
+    "messages": {
+      "title": "შეტყობინებები",
+      "aiAssistant": "AI ასისტენტი",
+      "admin": "ადმინისტრატორი",
+      "loading": "ჩატების ჩატვირთვა...",
+      "selectChat": "აირჩიეთ ჩატი",
+      "loadingMessages": "შეტყობინებების ჩატვირთვა...",
+      "inputPlaceholder": "შეიყვანეთ შეტყობინება...",
+      "newMessage": "ახალი შეტყობინება",
+      "defaultSender": "მომხმარებელი"
+    },
+    "orders": {
+      "title": "შეკვეთები",
+      "empty": "თქვენ არ გაქვთ შეკვეთები ამ სტატუსით",
+      "loading": "შეკვეთების ჩატვირთვა...",
+      "retry": "ხელახლა",
+      "loadError": "ჩატვირთვის შეცდომა",
+      "loadErrorMessage": "ვერ მოხერხდა შეკვეთების ჩატვირთვა. სცადეთ კიდევ ერთხელ.",
+      "date": "თარიღი",
+      "time": "დრო",
+      "children": "ბავშვები",
+      "createdAt": "შექმნის თარიღი",
+      "tabs": {
+        "all": "ყველა"
+      },
+      "status": {
+        "pending": "ელოდება დადასტურებას",
+        "confirmed": "დადასტურებული",
+        "in_progress": "მიმდინარე",
+        "completed": "დასრულებული",
+        "cancelled": "გაუქმებული",
+        "rejected": "უარყოფილი"
+      },
+      "actions": {
+        "details": "დეტალები",
+        "confirm": "დადასტურება",
+        "cancel": "გაუქმება",
+        "contact": "კონტაქტი",
+        "review": "დატოვეთ მიმოხილვა",
+        "repeat": "გაიმეორეთ შეკვეთა",
+        "findAnother": "იპოვეთ სხვა",
+        "confirmSuccess": "შეკვეთა დადასტურებულია",
+        "confirmError": "დადასტურების შეცდომა",
+        "confirmErrorMessage": "ვერ მოხერხდა შეკვეთის დადასტურება. სცადეთ კიდევ ერთხელ.",
+        "cancelConfirmTitle": "გაუქმების დადასტურება",
+        "cancelConfirmMessage": "ნამდვილად გსურთ ამ შეკვეთის გაუქმება?",
+        "cancelConfirmCancel": "არა",
+        "cancelSuccess": "შეკვეთა გაუქმებულია",
+        "cancelError": "გაუქმების შეცდომა",
+        "cancelErrorMessage": "ვერ მოხერხდა შეკვეთის გაუქმება. სცადეთ კიდევ ერთხელ.",
+        "repeatError": "შეცდომა",
+        "repeatErrorMessage": "ვერ მოხერხდა სიტერის ინფორმაციის მოძიება. სცადეთ კიდევ ერთხელ."
+      },
+      "review": {
+        "title": "დატოვეთ მიმოხილვა",
+        "orderDetails": "შეკვეთის დეტალები",
+        "orderNumber": "შეკვეთის ნომერი",
+        "date": "თარიღი",
+        "time": "დრო",
+        "target": "მიმოხილვის მიმღები",
+        "rating": "რეიტინგი",
+        "quickReactions": "სწრაფი რეაქციები:",
+        "quickTemplates": "მზა შაბლონები:",
+        "templates": {
+          "excellent": "შესანიშნავი მუშაობა!",
+          "responsible": "ძალიან პასუხისმგებელი",
+          "attentive": "ყურადღებიანი ბავშვების მიმართ",
+          "recommend": "გირჩევთ!",
+          "thankYou": "მადლობა მუშაობისთვის!",
+          "goodParent": "კარგი მშობელი",
+          "polite": "თავაზიანი ოჯახი",
+          "punctual": "ყოველთვის დროულად",
+          "pleasant": "სასიამოვნოა მუშაობა"
+        },
+        "comment": "კომენტარი",
+        "commentPlaceholder": "დატოვეთ თქვენი მიმოხილვა (არასავალდებულო)",
+        "submit": "გაგზავნა",
+        "cancel": "გაუქმება",
+        "success": "მიმოხილვა წარმატებით გაიგზავნა",
+        "error": "მიმოხილვის გაგზავნის შეცდომა",
+        "errorMessage": "ვერ მოხერხდა მიმოხილვის გაგზავნა. სცადეთ კიდევ ერთხელ.",
+        "loadError": "ჩატვირთვის შეცდომა",
+        "loadErrorMessage": "ვერ მოხერხდა შეკვეთის მონაცემების ჩატვირთვა",
+        "alreadyExists": "თქვენ უკვე დატოვეთ მიმოხილვა. შეგიძლიათ მისი რედაქტირება.",
+        "errorWeekPassed": "დაჯავშნის დასრულებიდან ერთი კვირა გავიდა. მიმოხილვის დატოვება ან რედაქტირება აღარ შეიძლება.",
+        "errorEditLimit": "რედაქტირების ლიმიტი გადაჭარბებულია. თქვენ უკვე რედაქტირებული გაქვთ ეს მიმოხილვა მაქსიმალური რაოდენობით (3-ჯერ).",
+        "errorBadRequest": "არასწორი მოთხოვნა. შეამოწმეთ მონაცემები და სცადეთ კიდევ ერთხელ.",
+        "errorForbidden": "თქვენ არ გაქვთ უფლება ამ მოქმედების შესასრულებლად.",
+        "errorNotFound": "დაჯავშნა არ მოიძებნა."
+      },
+      "details": {
+        "title": "შეკვეთის დეტალები",
+        "status": "სტატუსი",
+        "totalPrice": "ჯამი",
+        "date": "თარიღი",
+        "time": "დრო",
+        "childrenCount": "ბავშვების რაოდენობა",
+        "child": "ბავშვი",
+        "children": "ბავშვები",
+        "years": "წელი",
+        "year": "წელი",
+        "years2": "წელი",
+        "bookingType": "დაჯავშნის ტიპი",
+        "offline": "ოფლაინ",
+        "online": "ონლაინ",
+        "notes": "შენიშვნები",
+        "customer": "კლიენტი",
+        "babysitter": "ბებისიტერი",
+        "parent": "მშობელი",
+        "needsHelpWithHomework": "დახმარება საშინაო დავალებაში",
+        "needsOutdoorActivities": "გარე აქტივობები",
+        "needsCarTransportation": "ტრანსპორტირება მანქანით",
+        "needsWalking": "გასეირნება",
+        "childIsSick": "ბავშვი ავად არის",
+        "hasSpecialNeedsChild": "ბავშვს აქვს სპეციალური საჭიროებები",
+        "createdAt": "შექმნის თარიღი",
+        "completedAt": "დასრულების თარიღი",
+        "duration": "ხანგრძლივობა",
+        "hours": "სთ",
+        "minutes": "წთ",
+        "error": "ვერ მოხერხდა შეკვეთის დეტალების ჩატვირთვა",
+        "loadError": "ჩატვირთვის შეცდომა",
+        "loadErrorMessage": "ვერ მოხერხდა შეკვეთის დეტალების ჩატვირთვა. სცადეთ კიდევ ერთხელ."
+      },
+      "notifications": {
+        "newBooking": "ახალი დაჯავშნა",
+        "newBookingMessage": "თქვენ გაქვთ ახალი დაჯავშნა",
+        "statusChanged": "შეკვეთის სტატუსი შეიცვალა",
+        "statusChangedFrom": "დან",
+        "statusChangedTo": "მდე",
+        "bookingUpdated": "შეკვეთა განახლებულია",
+        "bookingUpdatedMessage": "დაჯავშნა განახლდა"
+      }
+    },
+    "profile": "პროფილი",
+    "sections": {
+      "basicData": "ძირითადი მონაცემები",
+      "kids": "თქვენი ბავშვები",
+      "security": "უსაფრთხოება",
+      "notificationSettings": "შეტყობინებების პარამეტრები",
+      "bookingData": "დაჯავშნის მონაცემები"
+    },
+    "nannyForm": {
+      "title": "ბებისიტერის პროფილი",
+      "subtitle": "შეავსეთ მონაცემები და განრიგი, რათა გამოჩნდეთ ძიებაში.",
+      "reset": "გადატვირთვა",
+      "create": "შექმნა",
+      "update": "განახლება",
+      "edit": "რედაქტირება",
+      "cancel": "გაუქმება",
+      "firstName": "სახელი",
+      "lastName": "გვარი",
+      "birthDate": "დაბადების თარიღი",
+      "experience": "გამოცდილება (წელი)",
+      "experiencePlaceholder": "3",
+      "about": "ჩემს შესახებ",
+      "aboutPlaceholder": "მოკლედ აღწერეთ გამოცდილება და ძლიერი მხარეები",
+      "minOrder": "მინიმალური შეკვეთა (BYN)",
+      "minOrderPlaceholder": "1000",
+      "minOrderHint": "მინიმალური თანხა ეხება მხოლოდ ბებისიტერის გამოსვლას, არ ეხება ონლაინს",
+      "cancellationPolicy": "გაუქმების პოლიტიკა",
+      "cancellationPolicyPlaceholder": "გაუქმება 24 საათით ადრე ჯარიმის გარეშე",
+      "onlineLesson": "ონლაინ გაკვეთილი (BYN)",
+      "onlineLessonPlaceholder": "800",
+      "petAttitude": "ცხოველებისადმი დამოკიდებულება",
+      "petAttitudePlaceholder": "კომფორტულად ცხოველებთან",
+      "showInSearch": "ძიებაში ჩვენება",
+      "showInSearchTitle": "პროფილი ძიებაში. დაელოდეთ შეკვეთებს",
+      "hideFromSearch": "ძიებიდან ამოღება",
+      "showInSearchSuccess": "პროფილი დაემატა ძიებას",
+      "hideFromSearchSuccess": "პროფილი ამოღებულია ძიებიდან",
+      "toggleSearchVisibilityError": "ძიებაში ხილვადობის შეცვლის შეცდომა",
+      "cardPayment": "ბარათით გადახდა",
+      "infantCare": "მზად ვარ ჩვილებთან",
+      "specialNeedsCare": "გამოცდილება სპეციალურ ბავშვებთან",
+      "certificates": "სერტიფიკატები",
+      "certificatesPlaceholder": "მაგალითად: CPR",
+      "certificatesEmpty": "დაამატეთ სერტიფიკატები",
+      "advantages": "უპირატესობები",
+      "advantagesPlaceholder": "მაგალითად: სამედიცინო განათლება",
+      "advantagesEmpty": "დაამატეთ უპირატესობები",
+      "add": "დამატება",
+      "paymentTitle": "გადახდა და პირობები",
+      "paymentSubtitle": "შეავსეთ ფასები და სამუშაო პირობები.",
+      "extraTitle": "დამატებითი ინფორმაცია",
+      "extraSubtitle": "მიუთითეთ დამატებითი სურვილები და პირობები.",
+      "price": {
+        "one": "1 ბავშვი",
+        "two": "2 ბავშვი",
+        "three": "3 ბავშვი",
+        "four": "4 ბავშვი",
+        "fivePlus": "5 ბავშვი და მეტი"
+      },
+      "loadError": "ვერ მოხერხდა პროფილის ჩატვირთვა",
+      "tryLater": "სცადეთ მოგვიანებით",
+      "saveSuccess": "პროფილი შენახულია",
+      "saveError": "შენახვის შეცდომა",
+      "uploadPhoto": "ფოტოს ატვირთვა",
+      "changePhoto": "ფოტოს შეცვლა",
+      "deletePhoto": "ფოტოს წაშლა",
+      "photoUploadSuccess": "ფოტო წარმატებით აიტვირთა",
+      "photoDeleteSuccess": "ფოტო წარმატებით წაიშალა",
+      "photoRequired": "ფოტო სავალდებულოა",
+      "photoRequiredDescription": "პროფილის შესანახად აუცილებელია ფოტოს ატვირთვა",
+      "delete": "წაშლა",
+      "confirmDeleteTitle": "წაშლის დადასტურება",
+      "confirmDeleteMessage": "ნამდვილად გსურთ პროფილის წაშლა? პროფილის წასაშლელად საჭიროა დაუკავშირდეთ ადმინისტრატორს შეტყობინებებში.",
+      "deleteSuccess": "პროფილი წაიშალა",
+      "deleteError": "წაშლის შეცდომა",
+      "deleteErrorMessage": "ვერ მოხერხდა პროფილის წაშლა. სცადეთ კიდევ ერთხელ"
+    },
+    "basicData": {
+      "title": "ძირითადი მონაცემები",
+      "name": "სახელი",
+      "surname": "გვარი",
+      "surnamePlaceholder": "თქვენი გვარი",
+      "surnamePrivacy": "აუცილებელია რეალური გვარის მითითება. კონფიდენციალურობის მიზნით თქვენი გვარი არ გამოჩნდება თქვენს გვერდზე საიტზე.",
+      "mobilePhone": "მობილური ტელეფონი",
+      "city": "ქალაქი",
+      "uploadPhoto": "ფოტოს ატვირთვა",
+      "deletePhoto": "ფოტოს წაშლა",
+      "cropPhoto": "ფოტოს მოჭრა",
+      "savePhoto": "ფოტოს შენახვა",
+      "save": "შენახვა",
+      "errors": {
+        "title": "შეცდომა",
+        "invalidFormat": "დაუშვებელი ფაილის ფორმატი. დაშვებულია: jpg, jpeg, png, webp",
+        "fileTooLarge": "ფაილის ზომა აღემატება 5MB-ს",
+        "uploadFailed": "ვერ მოხერხდა ფოტოს ატვირთვა. სცადეთ კიდევ ერთხელ.",
+        "deleteFailed": "ვერ მოხერხდა ფოტოს წაშლა. სცადეთ კიდევ ერთხელ."
+      }
+    },
+    "children": {
+      "title": "თქვენი ბავშვები",
+      "name": "ბავშვის სახელი",
+      "namePlaceholder": "შეიყვანეთ ბავშვის სახელი",
+      "age": "ასაკი",
+      "agePlaceholder": "მიუთითეთ ასაკი",
+      "dateOfBirth": "დაბადების თარიღი",
+      "gender": "სქესი",
+      "genderMale": "ბიჭი",
+      "genderFemale": "გოგო",
+      "allergies": "ალერგიები",
+      "allergiesPlaceholder": "მიუთითეთ ბავშვის ალერგიები",
+      "specialNeeds": "სპეციალური საჭიროებები",
+      "specialNeedsPlaceholder": "მიუთითეთ სპეციალური საჭიროებები, თუ არის",
+      "notes": "დამატებითი შენიშვნები",
+      "notesPlaceholder": "დამატებითი ინფორმაცია ბავშვის შესახებ",
+      "addChild": "ბავშვის დამატება",
+      "editChild": "რედაქტირება",
+      "removeChild": "წაშლა",
+      "noChildren": "თქვენ არ გაქვთ დამატებული ბავშვები",
+      "childNumber": "ბავშვი {number}",
+      "deleteSuccess": "ბავშვის მონაცემები წაიშალა",
+      "deleteError": "წაშლის შეცდომა",
+      "deleteErrorMessage": "ვერ მოხერხდა ბავშვის წაშლა. სცადეთ კიდევ ერთხელ",
+      "confirmDeleteTitle": "წაშლის დადასტურება",
+      "confirmDeleteMessage": "დარწმუნებული ხართ, რომ გსურთ ბავშვის \"{name}\" მონაცემების წაშლა?",
+      "confirmDelete": "წაშლა",
+      "addSuccess": "ბავშვი წარმატებით დაემატა",
+      "addError": "დამატების შეცდომა",
+      "updateSuccess": "ბავშვის მონაცემები წარმატებით განახლდა",
+      "updateError": "განახლების შეცდომა",
+      "saveErrorMessage": "ვერ მოხერხდა მონაცემების შენახვა. სცადეთ კიდევ ერთხელ"
+    },
+    "security": {
+      "title": "უსაფრთხოება",
+      "changeEmail": "ელფოსტის მისამართის შეცვლა",
+      "currentEmail": "მიმდინარე email",
+      "newEmail": "ახალი email",
+      "confirmEmail": "დაადასტურეთ ახალი email",
+      "confirmEmailPlaceholder": "გაიმეორეთ ახალი email",
+      "saveEmail": "email-ის შენახვა",
+      "verificationCode": "დადასტურების კოდი",
+      "verificationCodePlaceholder": "შეიყვანეთ დადასტურების კოდი",
+      "verificationCodeHint": "კოდი გაიგზავნა ახალ email მისამართზე",
+      "verifyCode": "დადასტურება",
+      "cancel": "გაუქმება",
+      "changePassword": "პაროლის შეცვლა",
+      "currentPassword": "მიმდინარე პაროლი",
+      "currentPasswordPlaceholder": "შეიყვანეთ მიმდინარე პაროლი",
+      "newPassword": "ახალი პაროლი",
+      "newPasswordPlaceholder": "შეიყვანეთ ახალი პაროლი",
+      "savePassword": "პაროლის შენახვა",
+      "requestPasswordChange": "კოდის მოთხოვნა",
+      "passwordVerificationCodeHint": "კოდი გაიგზავნა თქვენს email მისამართზე. კოდი მოქმედებს 15 წუთის განმავლობაში.",
+      "passwordCodeSent": "კოდი გაიგზავნა",
+      "passwordCodeSentDescription": "დადასტურების კოდი გაიგზავნა თქვენს email-ზე",
+      "passwordSuccess": "პაროლი შეიცვალა",
+      "passwordChanged": "პაროლი წარმატებით შეიცვალა",
+      "passwordError": "შეცდომა",
+      "requestPasswordError": "ვერ მოხერხდა კოდის გაგზავნა. სცადეთ კიდევ ერთხელ.",
+      "confirmPasswordError": "არასწორი კოდი ან კოდი ვადაგასულია. სცადეთ კიდევ ერთხელ.",
+      "emailCodeSent": "კოდი გაიგზავნა",
+      "emailCodeSentDescription": "დადასტურების კოდი გაიგზავნა ახალ email მისამართზე",
+      "emailSuccess": "Email შეიცვალა",
+      "emailChanged": "Email წარმატებით შეიცვალა",
+      "emailError": "შეცდომა",
+      "requestEmailError": "ვერ მოხერხდა კოდის გაგზავნა. სცადეთ კიდევ ერთხელ.",
+      "confirmEmailError": "არასწორი კოდი ან კოდი ვადაგასულია. სცადეთ კიდევ ერთხელ."
+    },
+    "notifications": {
+      "title": "შეტყობინებების პარამეტრები",
+      "emailNotifications": "Email შეტყობინებები",
+      "pushNotifications": "Push შეტყობინებები",
+      "smsNotifications": "SMS შეტყობინებები",
+      "otherSettings": "სხვა პარამეტრები",
+      "newMessages": "ახალი შეტყობინებები",
+      "newMessagesDesc": "ახალი შეტყობინებების შეტყობინებების მიღება",
+      "bookingUpdates": "დაჯავშნების განახლებები",
+      "bookingUpdatesDesc": "დაჯავშნებში ცვლილებების შეტყობინებები",
+      "newReviews": "ახალი მიმოხილვები",
+      "newReviewsDesc": "ახალი მიმოხილვების შეტყობინებები",
+      "reminders": "შეხსენებები",
+      "remindersDesc": "მომავალი შეხვედრების შეხსენებები",
+      "bookingConfirmations": "დაჯავშნების დადასტურებები",
+      "bookingConfirmationsDesc": "დაჯავშნების SMS დადასტურებები",
+      "importantUpdates": "მნიშვნელოვანი განახლებები",
+      "importantUpdatesDesc": "კრიტიკული შეტყობინებები SMS-ით",
+      "marketing": "მარკეტინგული გაგზავნები",
+      "marketingDesc": "სპეციალური შეთავაზებებისა და აქციების ინფორმაციის მიღება",
+      "save": "შენახვა"
+    },
+    "role": {
+      "nanny": "ბებისიტერი",
+      "parent": "მშობელი"
+    },
+    "parent": {
+      "dashboard": "მშობლის პანელი",
+      "activeBookings": "აქტიური დაჯავშნები",
+      "favoriteNannies": "რჩეული ბებისიტერები",
+      "messages": "შეტყობინებები",
+      "reviews": "მიმოხილვები",
+      "quickActions": "სწრაფი მოქმედებები",
+      "bookNanny": "დაჯავშნეთ ბებისიტერი",
+      "findNanny": "იპოვეთ ბებისიტერი"
+    },
+    "nanny": {
+      "dashboard": "ბებისიტერის პანელი",
+      "activeBookings": "აქტიური დაჯავშნები",
+      "clients": "კლიენტები",
+      "messages": "შეტყობინებები",
+      "rating": "რეიტინგი",
+      "quickActions": "სწრაფი მოქმედებები",
+      "editProfile": "პროფილის რედაქტირება",
+      "manageSchedule": "განრიგის მართვა"
+    },
+    "nannySchedule": {
+      "title": "განრიგი",
+      "subtitle": "მიუთითეთ, როდის ხართ მზად მუშაობისთვის.",
+      "calendarTitle": "დაკავებულობის კალენდარი",
+      "calendarSubtitle": "მონიშნეთ სამუშაო დღეები და ინტერვალები კალენდარში.",
+      "monthView": "თვე",
+      "weekView": "კვირა",
+      "noIntervals": "ინტერვალები არ არის",
+      "editDay": "დღის რედაქტირება",
+      "addInterval": "ინტერვალის დამატება",
+      "removeInterval": "ინტერვალის წაშლა",
+      "addDay": "დღის დამატება",
+      "deleteDay": "დღის წაშლა",
+      "addDate": "თარიღის დამატება",
+      "deleteDate": "თარიღის წაშლა",
+      "save": "შენახვა",
+      "cancel": "გაუქმება",
+      "weekdaysShort": "ორშ,სამ,ოთხ,ხუთ,პარ,შაბ,კვი",
+      "applyToAllDays": "გამოყენება კვირის ყველა დღეზე",
+      "applyToWeekdays": "გამოყენება სამუშაო დღეებზე",
+      "applyToDayOfWeek": "გამოყენება მხოლოდ კვირის ამ დღეზე",
+      "modes": {
+        "allDays": "ყველა დღე",
+        "weekly": "ყოველკვირეული",
+        "everyday": "კონკრეტული თარიღები"
+      }
+    },
+    "booking": {
+      "title": "დაჯავშნის მონაცემები",
+      "save": "შენახვა",
+      "create": {
+        "title": "დაჯავშნის შექმნა",
+        "subtitle": "დაჯავშნეთ დრო {name}-თან",
+        "startDateTime": "დაწყების თარიღი და დრო",
+        "endDateTime": "დასრულების თარიღი და დრო",
+        "childrenCount": "ბავშვების რაოდენობა",
+        "childAge": "ბავშვის {index} ასაკი",
+        "notes": "დამატებითი შენიშვნები",
+        "notesPlaceholder": "მაგალითად, ბავშვების სპეციალური საჭიროებები, პრეფერენციები და ა.შ.",
+        "estimatedPrice": "სავარაუდო ღირებულება:",
+        "cancel": "გაუქმება",
+        "submit": "დაჯავშნის შექმნა",
+        "loading": "ჩატვირთვა...",
+        "loadError": "მონაცემების ჩატვირთვის შეცდომა",
+        "notFound": "სიტერი არ მოიძებნა",
+        "backToSearch": "დაბრუნება ძიებაში",
+        "validation": {
+          "endTimeBeforeStart": "დასრულების დრო უნდა იყოს დაწყების დროს შემდეგ"
+        },
+        "success": {
+          "title": "წარმატება",
+          "message": "დაჯავშნა შექმნილია"
+        },
+        "error": {
+          "title": "შეცდომა",
+          "message": "ვერ მოხერხდა დაჯავშნის შექმნა"
+        },
+        "agePlaceholder": "მიუთითეთ ასაკი",
+        "selectChildrenFromProfile": "აირჩიეთ ბავშვები პროფილიდან",
+        "selectedChildren": "არჩეული ბავშვები",
+        "noChildrenSelected": "ბავშვები არ არის არჩეული. აირჩიეთ ბავშვები პროფილიდან ან დაამატეთ ახალი.",
+        "noChildrenInProfile": "თქვენ არ გაქვთ დამატებული ბავშვები. დაამატეთ ბავშვები პროფილში.",
+        "addChildFromProfile": "დამატება პროფილიდან",
+        "removeChild": "წაშლა",
+        "addNewChild": "კიდევ ერთი ბავშვის დამატება",
+        "addChild": "ბავშვის დამატება",
+        "newChild": "ახალი ბავშვი",
+        "bookingType": {
+          "offline": {
+            "title": "სიტერი სახლში",
+            "subtitle": "მოვა თქვენთან"
+          },
+          "online": {
+            "title": "სიტერი ონლაინ",
+            "subtitle": "კომუნიკაცია ვიდეოკავშირით"
+          }
+        },
+        "specialConditions": {
+          "title": "სპეციალური პირობები",
+          "childIsSick": "ბავშვს ან ბავშვებს არ არის კარგად",
+          "hasSpecialNeedsChild": "არის სპეციალური ბავშვი",
+          "needsHelpWithHomework": "საჭიროა დახმარება გაკვეთილებში",
+          "needsOutdoorActivities": "საჭიროა გარე აქტივობები",
+          "needsCarTransportation": "საჭიროა მანქანით გადაყვანა (წროში, სექციაში და ა.შ.)",
+          "needsWalking": "საჭიროა წაყვანა (წროში, სექციაში და ა.შ.)"
+        }
+      },
+      "contractData": {
+        "title": "თქვენი შეკვეთების ხელშეკრულების ფორმირების მონაცემები",
+        "description": "ბებისიტერის მიერ დაჯავშნის დადასტურებისას ჩამოყალიბდება ონლაინ ხელშეკრულება.",
+        "templateBoarding": "ბავშვის მოვლის ხელშეკრულების შაბლონი.",
+        "templateDaycare": "დღის მოვლის ხელშეკრულების შაბლონი.",
+        "templateDayNanny": "დღის ბებისიტერის სერვისის ხელშეკრულების შაბლონი."
+      },
+      "personalData": {
+        "title": "თქვენი პირადი მონაცემები",
+        "description": "დაჯავშნის დასრულებისა და სერვისის ხელშეკრულების ფორმირებისთვის, აუცილებელია პირადი მონაცემების შევსება.",
+        "lastName": "გვარი",
+        "lastNamePlaceholder": "ივანოვი",
+        "firstName": "სახელი",
+        "firstNamePlaceholder": "სერგეი",
+        "middleName": "მამის სახელი",
+        "middleNamePlaceholder": "პეტროვიჩი"
+      },
+      "trustedPerson": {
+        "title": "თქვენი სანდო პირი",
+        "description": "მიუთითეთ სანდო პირი თქვენი არყოფნის დროს. ეს კონტაქტი გამოყენებული იქნება მხოლოდ საგანგებო სიტუაციაში, თუ თქვენ მიუწვდომელი ხართ.",
+        "lastName": "გვარი",
+        "lastNamePlaceholder": "ივანოვი",
+        "firstName": "სახელი",
+        "firstNamePlaceholder": "სერგეი",
+        "middleName": "მამის სახელი",
+        "middleNamePlaceholder": "პეტროვიჩი",
+        "phone": "ტელეფონის ნომერი",
+        "phonePlaceholder": "+995_______",
+        "relationship": "ნათესაობის ხარისხი",
+        "relationshipPlaceholder": "ბებია, ბაბუა, ოჯახის მეგობარი",
+        "add": "სანდო პირის დამატება",
+        "edit": "რედაქტირება",
+        "remove": "წაშლა",
+        "noContacts": "თქვენ არ გაქვთ დამატებული სანდო პირები",
+        "deleteSuccess": "სანდო პირი წაიშალა",
+        "deleteError": "წაშლის შეცდომა",
+        "deleteErrorMessage": "ვერ მოხერხდა სანდო პირის წაშლა. სცადეთ კიდევ ერთხელ",
+        "confirmDeleteTitle": "წაშლის დადასტურება",
+        "confirmDeleteMessage": "დარწმუნებული ხართ, რომ გსურთ სანდო პირის \"{name}\" წაშლა?",
+        "confirmDelete": "წაშლა",
+        "addSuccess": "სანდო პირი წარმატებით დაემატა",
+        "addError": "დამატების შეცდომა",
+        "updateSuccess": "სანდო პირი წარმატებით განახლდა",
+        "updateError": "განახლების შეცდომა",
+        "saveErrorMessage": "ვერ მოხერხდა მონაცემების შენახვა. სცადეთ კიდევ ერთხელ",
+        "loadError": "სანდო პირების ჩატვირთვის შეცდომა"
+      }
+    }
+  },
+  "bookings": {
+    "title": "იპოვეთ ბებისიტერი",
+    "search": {
+      "city": "ქალაქი, მისამართი",
+      "date": "შეკვეთის თარიღი",
+      "timeStart": "დაწყება",
+      "timeEnd": "დასრულება",
+      "submit": "ძიება"
+    },
+    "filters": {
+      "title": "ფილტრები",
+      "onlyAvailable": "მხოლოდ ხელმისაწვდომი სიტერების ჩვენება",
+      "onlyOnline": "მხოლოდ ონლაინ სიტერები",
+      "priceRange": "ფასი საათში",
+      "priceFrom": "დან",
+      "priceTo": "მდე",
+      "childrenCount": "ბავშვების რაოდენობა",
+      "advantages": {
+        "title": "სიტერის უპირატესობები",
+        "main": {
+          "title": "ძირითადი",
+          "kidsoutSchool": "სკოლა",
+          "infants": "მუშაობს ჩვილებთან",
+          "specialNeeds": "მუშაობს სპეციალურ ბავშვებთან"
+        },
+        "additional": {
+          "title": "დამატებითი",
+          "homework": "დახმარება გაკვეთილებში",
+          "french": "ფრანგული ენა",
+          "georgian": "ქართული ენა",
+          "russian": "რუსული ენა",
+          "music": "მუსიკალური განათლება",
+          "active": "აქტიური სიტერი",
+          "permanent": "ეძებს მუდმივ ოჯახს",
+          "pedagogical": "პედაგოგიური განათლება",
+          "weather": "გასეირნება ნებისმიერ ამინდში",
+          "housework": "დახმარება სახლის საქმეებში",
+          "english": "ინგლისური ენა",
+          "driver": "მართვის მოწმობა",
+          "night": "ღამის შეკვეთები",
+          "relocation": "მზადყოფნა გადასახლებისთვის",
+          "medical": "სამედიცინო განათლება",
+          "firstAid": "პირველი დახმარების კურსები",
+          "sculpting": "ქანდაკება",
+          "sick": "მოვლა ავადმყოფისთვის",
+          "painting": "ხატვა",
+          "psychology": "ფსიქოლოგიური განათლება",
+          "singing": "სიმღერა",
+          "schoolPrep": "სკოლისთვის მომზადება",
+          "speechTherapist": "ლოგოპედი",
+          "autism": "მუშაობს აუტიზმის მქონე ბავშვებთან",
+          "medicalBook": "სამედიცინო წიგნი"
+        }
+      }
+    },
+    "sort": {
+      "title": "სორტირება",
+      "recommended": "რეკომენდებული",
+      "priceAsc": "ფასი: ზრდადობით",
+      "priceDesc": "ფასი: კლებადობით",
+      "rating": "რეიტინგით",
+      "newest": "ახალი"
+    },
+    "view": {
+      "list": "სია",
+      "card": "ბარათები",
+      "map": "რუკაზე",
+      "tooltip": {
+        "list": "სიის ჩვენება",
+        "card": "ბარათების ჩვენება",
+        "map": "რუკაზე ჩვენება"
+      }
+    },
+    "found": "ნაპოვნია",
+    "loading": "ჩატვირთვა...",
+    "empty": "ბებისიტერები არ მოიძებნა. სცადეთ ძიების პარამეტრების შეცვლა.",
+    "emptyShort": "ბებისიტერები არ მოიძებნა",
+    "mapPlaceholder": "რუკა იქნება აქ",
+    "sitter": {
+      "new": "ახალი ბებისიტერი",
+      "orders": "შეკვეთა",
+      "hours": "საათი ბავშვებთან",
+      "returned": "დაბრუნდა",
+      "returnedPlural": "დაბრუნდნენ",
+      "showInSearch": "ხილულია ძიებაში",
+      "book": "შეკვეთა",
+      "perHour": "/საათი",
+      "details": "დეტალები",
+      "stats": {
+        "title": "სტატისტიკა",
+        "orders": "შეკვეთა",
+        "hours": "საათი",
+        "returned": "დაბრუნდნენ",
+        "response": "პასუხი",
+        "responseTimeDefault": "დღის განმავლობაში"
+      },
+      "priceCard": {
+        "pricesByChildrenCount": "ფასები ბავშვების რაოდენობის მიხედვით",
+        "oneChild": "1 ბავშვი",
+        "twoChildren": "2 ბავშვი",
+        "threeChildren": "3 ბავშვი",
+        "onlineLesson": "ონლაინ გაკვეთილი",
+        "minOrder": "მინიმალური შეკვეთა",
+        "paymentMethods": "გადახდის მეთოდები",
+        "perHour": "₾/საათი",
+        "currency": "₾"
+      },
+      "actions": {
+        "book": "დაჯავშნა",
+        "message": "მესიჯი",
+        "babysitterCannotBook": "ბებისიტერები ვერ ჯავშნიან სხვა ბებისიტერებს"
+      },
+      "sections": {
+        "about": "ჩემს შესახებ",
+        "education": "განათლება",
+        "experience": "სამუშაო გამოცდილება",
+        "preferences": "პრეფერენციები",
+        "advantages": "უპირატესობები და უნარები",
+        "petAttitude": "ცხოველებისადმი დამოკიდებულება"
+      }
+    }
+  },
+  "common": {
+    "cancel": "გაუქმება",
+    "home": "მთავარი",
+    "search": "ძიება",
+    "sitter": "სიტერი",
+    "booking": "დაჯავშნა"
+  }
+}
+

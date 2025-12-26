@@ -34,7 +34,7 @@
                     :items="localeOptions"
                     labelKey="name"
                     valueKey="code"
-                    @update:model-value="(value) => setLocale(value as 'ru' | 'en' | 'be')"
+                    @update:model-value="(value) => setLocale(value as 'ka' | 'en' | 'ru' | 'uk')"
                     class="header__select header__select--locale"
                 />
               </div>

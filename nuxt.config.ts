@@ -11,12 +11,14 @@ export default defineNuxtConfig({
     },
     i18n: {
         locales: [
-            { code: 'ru', iso: 'ru-RU', file: 'ru.json', name: 'Русский' },
+            { code: 'ka', iso: 'ka-GE', file: 'ka.json', name: 'ქართული' },
             { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },
-            { code: 'be', iso: 'be-BY', file: 'be.json', name: 'Беларуская' }
+            { code: 'ru', iso: 'ru-RU', file: 'ru.json', name: 'Русский' },
+            // { code: 'be', iso: 'be-BY', file: 'be.json', name: 'Беларуская' },
+            { code: 'uk', iso: 'uk-UA', file: 'uk.json', name: 'Українська' }
         ],
         langDir: 'locales',
-        defaultLocale: 'ru',
+        defaultLocale: 'en', // ru
         strategy: 'no_prefix',
         detectBrowserLanguage: {
             useCookie: true,

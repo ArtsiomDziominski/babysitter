@@ -1,0 +1,807 @@
+{
+  "header": {
+    "login": "Увійти",
+    "logout": "Вийти",
+    "profile": "Профіль",
+    "bookings": "Бебісітери",
+    "messages": "Повідомлення",
+    "menu": {
+      "account": "Акаунт",
+      "bookings": "Бронювання",
+      "messages": "Повідомлення",
+      "favorites": "Обране",
+      "schedule": "Розклад",
+      "settings": "Налаштування"
+    }
+  },
+  "cities": {
+    "minsk": "Мінськ",
+    "gomel": "Гомель",
+    "vitebsk": "Вітебськ",
+    "grodno": "Гродно",
+    "brest": "Брест",
+    "mogilev": "Могильов",
+    "tbilisi": "Тбілісі",
+    "batumi": "Батумі",
+    "kutaisi": "Кутаїсі",
+    "rustavi": "Руставі",
+    "gori": "Горі",
+    "poti": "Поті"
+  },
+  "languages": {
+    "ru": "Русский",
+    "en": "English",
+    "be": "Беларуская",
+    "ka": "ქართული",
+    "uk": "Українська"
+  },
+  "home": {
+    "hero": {
+      "title": "Знайдіть перевіреного бебісітера поруч з вами",
+      "subtitle": "Тисячі задоволених батьків вже знайшли надійну допомогу для своїх дітей",
+      "cta": "Знайти бебісітера",
+      "ctaSecondary": "Дізнатися більше"
+    },
+    "howItWorks": {
+      "title": "Як це працює",
+      "step1": {
+        "title": "Оберіть бебісітера",
+        "description": "Перегляньте анкети перевірених бебісітерів у вашому місті"
+      },
+      "step2": {
+        "title": "Забронюйте час",
+        "description": "Оберіть зручну дату та час для зустрічі"
+      },
+      "step3": {
+        "title": "Підтвердіть бронювання",
+        "description": "Підтвердіть замовлення та оплатіть послугу"
+      },
+      "step4": {
+        "title": "Насолоджуйтесь вільним часом",
+        "description": "Ваші діти в надійних руках, а ви можете зайнятися своїми справами"
+      }
+    },
+    "advantages": {
+      "title": "Чому обирають нас",
+      "verified": {
+        "title": "Перевірені бебісітери",
+        "description": "Всі наші бебісітери проходять перевірку документів та співбесіду"
+      },
+      "safe": {
+        "title": "Безпека",
+        "description": "Страхування та гарантії для вашого спокою"
+      },
+      "flexible": {
+        "title": "Гнучкий графік",
+        "description": "Оберіть час, який зручний саме вам"
+      },
+      "support": {
+        "title": "Підтримка 24/7",
+        "description": "Наша служба підтримки завжди готова допомогти"
+      }
+    },
+    "reviews": {
+      "title": "Відгуки батьків",
+      "more": "Всі відгуки"
+    },
+    "stats": {
+      "sitters": "Бебісітерів",
+      "families": "Сімей",
+      "bookings": "Бронювань",
+      "rating": "Середній рейтинг"
+    },
+    "cta": {
+      "title": "Готові знайти ідеального бебісітера?",
+      "subtitle": "Приєднуйтеся до тисяч задоволених батьків"
+    }
+  },
+  "footer": {
+    "description": "Все встигати з дітьми — легко!",
+    "services": {
+      "title": "Послуги",
+      "findSitter": "Знайти бебісітера",
+      "onlineClasses": "Онлайн-заняття",
+      "becomeSitter": "Стати бебісітером"
+    },
+    "info": {
+      "title": "Інформація",
+      "about": "Про нас",
+      "faq": "Часті питання",
+      "blog": "Блог",
+      "help": "Довідка"
+    },
+    "contact": {
+      "title": "Контакти",
+      "hours": "Щодня з 9:00 до 22:00"
+    },
+    "legal": {
+      "privacy": "Політика конфіденційності",
+      "terms": "Умови використання",
+      "cookies": "Політика cookies",
+      "offer": "Публічна оферта"
+    }
+  },
+  "auth": {
+    "login": "Вхід",
+    "register": "Реєстрація",
+    "loginDescription": "Введіть ваші дані для входу в акаунт",
+    "registerDescription": "Створіть акаунт, щоб почати користуватися сервісом",
+    "email": "Email",
+    "emailPlaceholder": "Введіть ваш email",
+    "password": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "confirmPassword": "Підтвердіть пароль",
+    "confirmPasswordPlaceholder": "Повторіть пароль",
+    "name": "Ім'я",
+    "namePlaceholder": "Введіть ваше ім'я",
+    "surname": "Прізвище",
+    "surnamePlaceholder": "Введіть ваше прізвище",
+    "rememberMe": "Запам'ятати мене",
+    "agreeToTerms": "Я згоден з умовами використання",
+    "noAccount": "Немає акаунта?",
+    "haveAccount": "Вже є акаунт?",
+    "invalidEmail": "Невірний email",
+    "passwordMinLength": "Пароль повинен містити мінімум 8 символів",
+    "nameMinLength": "Ім'я повинно містити мінімум 2 символи",
+    "surnameMinLength": "Прізвище повинно містити мінімум 2 символи",
+    "passwordsDoNotMatch": "Паролі не співпадають",
+    "mustAgree": "Необхідно погодитися з умовами",
+    "loginSuccess": "Вхід виконано успішно",
+    "registerSuccess": "Реєстрація виконана успішно",
+    "loginWithGoogle": "Вхід через Google",
+    "loginWithYandex": "Вхід через Яндекс",
+    "loginWithVK": "Вхід через VK",
+    "registerWithGoogle": "Реєстрація через Google",
+    "registerWithYandex": "Реєстрація через Яндекс",
+    "registerWithVK": "Реєстрація через VK",
+    "forgotPassword": "Забули пароль?",
+    "resetPassword": "Відновлення пароля",
+    "resetPasswordDescription": "Введіть ваш email, і ми надішлемо вам інструкції з відновлення пароля",
+    "resetPasswordSuccess": "Запит надіслано",
+    "resetPasswordEmailSent": "Інструкції з відновлення пароля надіслано на ваш email",
+    "rememberPassword": "Згадали пароль?",
+    "phone": "Телефон",
+    "phonePlaceholder": "+380________",
+    "phoneMinLength": "Телефон повинен бути не менше 10 символів",
+    "role": "Роль",
+    "orContinueWith": "Або продовжити з",
+    "loginError": "Помилка при вході",
+    "registerError": "Помилка при реєстрації"
+  },
+  "roleSelection": {
+    "title": "Оберіть роль",
+    "subtitle": "Без ролі сайт недоступний, оберіть один варіант",
+    "parent": {
+      "title": "Я батько",
+      "description": "Знайти бебісітера"
+    },
+    "nanny": {
+      "title": "Я бебісітер",
+      "description": "Знайти замовлення"
+    },
+    "selected": "Обрано",
+    "continue": "Продовжити",
+    "selectPrompt": "Оберіть роль",
+    "saved": "Роль збережено",
+    "saveErrorDefault": "Не вдалося зберегти роль"
+  },
+  "account": {
+    "title": "Акаунт",
+    "welcome": "Ласкаво просимо, {name}!",
+    "email": "Email",
+    "phone": "Телефон",
+    "editProfile": "Редагувати профіль",
+    "messages": {
+      "title": "Повідомлення",
+      "aiAssistant": "AI помічник",
+      "admin": "Адміністратор",
+      "loading": "Завантаження чатів...",
+      "selectChat": "Оберіть чат",
+      "loadingMessages": "Завантаження повідомлень...",
+      "inputPlaceholder": "Введіть повідомлення...",
+      "newMessage": "Нове повідомлення",
+      "defaultSender": "Користувач"
+    },
+    "orders": {
+      "title": "Замовлення",
+      "empty": "У вас поки немає замовлень з цим статусом",
+      "loading": "Завантаження замовлень...",
+      "retry": "Повторити",
+      "loadError": "Помилка завантаження",
+      "loadErrorMessage": "Не вдалося завантажити замовлення. Спробуйте ще раз.",
+      "date": "Дата",
+      "time": "Час",
+      "children": "Діти",
+      "createdAt": "Дата створення",
+      "tabs": {
+        "all": "Всі"
+      },
+      "status": {
+        "pending": "Очікує підтвердження",
+        "confirmed": "Підтверджено",
+        "in_progress": "В процесі",
+        "completed": "Завершено",
+        "cancelled": "Скасовано",
+        "rejected": "Відхилено"
+      },
+      "actions": {
+        "details": "Детальніше",
+        "confirm": "Підтвердити",
+        "cancel": "Скасувати",
+        "contact": "Зв'язатися",
+        "review": "Залишити відгук",
+        "repeat": "Повторити замовлення",
+        "findAnother": "Знайти іншого",
+        "confirmSuccess": "Замовлення підтверджено",
+        "confirmError": "Помилка підтвердження",
+        "confirmErrorMessage": "Не вдалося підтвердити замовлення. Спробуйте ще раз.",
+        "cancelConfirmTitle": "Підтвердження скасування",
+        "cancelConfirmMessage": "Ви дійсно хочете скасувати це замовлення?",
+        "cancelConfirmCancel": "Ні",
+        "cancelSuccess": "Замовлення скасовано",
+        "cancelError": "Помилка скасування",
+        "cancelErrorMessage": "Не вдалося скасувати замовлення. Спробуйте ще раз.",
+        "repeatError": "Помилка",
+        "repeatErrorMessage": "Не вдалося знайти інформацію про сіттера. Спробуйте ще раз."
+      },
+      "review": {
+        "title": "Залишити відгук",
+        "orderDetails": "Деталі замовлення",
+        "orderNumber": "Номер замовлення",
+        "date": "Дата",
+        "time": "Час",
+        "target": "Отримувач відгуку",
+        "rating": "Оцінка",
+        "quickReactions": "Швидкі реакції:",
+        "quickTemplates": "Готові шаблони:",
+        "templates": {
+          "excellent": "Відмінна робота!",
+          "responsible": "Дуже відповідальна",
+          "attentive": "Уважна до дітей",
+          "recommend": "Рекомендую!",
+          "thankYou": "Дякую за роботу!",
+          "goodParent": "Хороший батько",
+          "polite": "Ввічлива сім'я",
+          "punctual": "Завжди вчасно",
+          "pleasant": "Приємно працювати"
+        },
+        "comment": "Коментар",
+        "commentPlaceholder": "Залиште ваш відгук (необов'язково)",
+        "submit": "Відправити",
+        "cancel": "Скасування",
+        "success": "Відгук успішно відправлено",
+        "error": "Помилка відправки відгуку",
+        "errorMessage": "Не вдалося відправити відгук. Спробуйте ще раз.",
+        "loadError": "Помилка завантаження",
+        "loadErrorMessage": "Не вдалося завантажити дані замовлення",
+        "alreadyExists": "Ви вже залишали відгук. Ви можете його відредагувати.",
+        "errorWeekPassed": "Пройшло більше тижня з моменту завершення бронювання. Відгук більше не можна залишити або відредагувати.",
+        "errorEditLimit": "Перевищено ліміт редагувань. Ви вже редагували цей відгук максимальну кількість разів (3 рази).",
+        "errorBadRequest": "Некоректний запит. Перевірте дані та спробуйте ще раз.",
+        "errorForbidden": "У вас немає прав для виконання цієї дії.",
+        "errorNotFound": "Бронювання не знайдено."
+      },
+      "details": {
+        "title": "Деталі замовлення",
+        "status": "Статус",
+        "totalPrice": "Сума",
+        "date": "Дата",
+        "time": "Час",
+        "childrenCount": "Кількість дітей",
+        "child": "Дитина",
+        "children": "Діти",
+        "years": "років",
+        "year": "рік",
+        "years2": "роки",
+        "bookingType": "Тип бронювання",
+        "offline": "Офлайн",
+        "online": "Онлайн",
+        "notes": "Примітки",
+        "customer": "Клієнт",
+        "babysitter": "Няня",
+        "parent": "Батько",
+        "needsHelpWithHomework": "Допомога з домашнім завданням",
+        "needsOutdoorActivities": "Активності на вулиці",
+        "needsCarTransportation": "Транспортування на машині",
+        "needsWalking": "Прогулянки",
+        "childIsSick": "Дитина хвора",
+        "hasSpecialNeedsChild": "Дитина з особливими потребами",
+        "createdAt": "Дата створення",
+        "completedAt": "Дата завершення",
+        "duration": "Тривалість",
+        "hours": "год",
+        "minutes": "хв",
+        "error": "Не вдалося завантажити деталі замовлення",
+        "loadError": "Помилка завантаження",
+        "loadErrorMessage": "Не вдалося завантажити деталі замовлення. Спробуйте ще раз."
+      },
+      "notifications": {
+        "newBooking": "Нове бронювання",
+        "newBookingMessage": "У вас нове бронювання",
+        "statusChanged": "Статус замовлення змінено",
+        "statusChangedFrom": "з",
+        "statusChangedTo": "на",
+        "bookingUpdated": "Замовлення оновлено",
+        "bookingUpdatedMessage": "Бронювання було оновлено"
+      }
+    },
+    "profile": "Профіль",
+    "sections": {
+      "basicData": "Основні дані",
+      "kids": "Ваші діти",
+      "security": "Безпека",
+      "notificationSettings": "Налаштування сповіщень",
+      "bookingData": "Дані для бронювання"
+    },
+    "nannyForm": {
+      "title": "Профіль бебісітера",
+      "subtitle": "Заповніть дані та розклад, щоб з'явитися в пошуку.",
+      "reset": "Скинути",
+      "create": "Створити",
+      "update": "Оновити",
+      "edit": "Редагувати",
+      "cancel": "Скасування",
+      "firstName": "Ім'я",
+      "lastName": "Прізвище",
+      "birthDate": "Дата народження",
+      "experience": "Досвід (років)",
+      "experiencePlaceholder": "3",
+      "about": "Про себе",
+      "aboutPlaceholder": "Коротко опишіть досвід та сильні сторони",
+      "minOrder": "Мінімальне замовлення (BYN)",
+      "minOrderPlaceholder": "1000",
+      "minOrderHint": "Мінімальна сума стосується тільки виїзду бебісітера, не стосується онлайн",
+      "cancellationPolicy": "Політика скасування",
+      "cancellationPolicyPlaceholder": "Скасування за 24 години без штрафу",
+      "onlineLesson": "Онлайн-заняття (BYN)",
+      "onlineLessonPlaceholder": "800",
+      "petAttitude": "Ставлення до тварин",
+      "petAttitudePlaceholder": "Комфортно з тваринами",
+      "showInSearch": "Показувати в пошуку",
+      "showInSearchTitle": "Профіль в пошуку. Чекайте замовлення",
+      "hideFromSearch": "Прибрати з пошуку",
+      "showInSearchSuccess": "Профіль додано в пошук",
+      "hideFromSearchSuccess": "Профіль прибрано з пошуку",
+      "toggleSearchVisibilityError": "Помилка зміни видимості в пошуку",
+      "cardPayment": "Оплата карткою",
+      "infantCare": "Готова до немовлят",
+      "specialNeedsCare": "Досвід з особливими дітьми",
+      "certificates": "Сертифікати",
+      "certificatesPlaceholder": "Наприклад: CPR",
+      "certificatesEmpty": "Додайте сертифікати",
+      "advantages": "Переваги",
+      "advantagesPlaceholder": "Наприклад: Мед освіта",
+      "advantagesEmpty": "Додайте переваги",
+      "add": "Додати",
+      "paymentTitle": "Оплата та умови",
+      "paymentSubtitle": "Заповніть вартість та умови роботи.",
+      "extraTitle": "Додаткова інформація",
+      "extraSubtitle": "Вкажіть додаткові побажання та умови.",
+      "price": {
+        "one": "1 дитина",
+        "two": "2 дітей",
+        "three": "3 дітей",
+        "four": "4 дітей",
+        "fivePlus": "5 дітей і більше"
+      },
+      "loadError": "Не вдалося завантажити профіль",
+      "tryLater": "Спробуйте пізніше",
+      "saveSuccess": "Профіль збережено",
+      "saveError": "Помилка збереження",
+      "uploadPhoto": "Завантажити фото",
+      "changePhoto": "Змінити фото",
+      "deletePhoto": "Видалити фото",
+      "photoUploadSuccess": "Фото успішно завантажено",
+      "photoDeleteSuccess": "Фото успішно видалено",
+      "photoRequired": "Фото обов'язкове",
+      "photoRequiredDescription": "Для збереження профілю необхідно завантажити фото",
+      "delete": "Видалити",
+      "confirmDeleteTitle": "Підтвердження видалення",
+      "confirmDeleteMessage": "Ви точно хочете видалити профіль? Для видалення профілю необхідно звернутися до адміністратора в повідомленнях.",
+      "deleteSuccess": "Профіль видалено",
+      "deleteError": "Помилка видалення",
+      "deleteErrorMessage": "Не вдалося видалити профіль. Спробуйте ще раз"
+    },
+    "basicData": {
+      "title": "Основні дані",
+      "name": "Ім'я",
+      "surname": "Прізвище",
+      "surnamePlaceholder": "Ваше прізвище",
+      "surnamePrivacy": "Необхідно вказати реальне прізвище. З метою приватності ваше прізвище не буде відображатися на Вашій сторінці на сайті.",
+      "mobilePhone": "Мобільний телефон",
+      "city": "Місто",
+      "uploadPhoto": "Завантажити фото",
+      "deletePhoto": "Видалити фото",
+      "cropPhoto": "Обрізання фото",
+      "savePhoto": "Зберегти фото",
+      "save": "Зберегти",
+      "errors": {
+        "title": "Помилка",
+        "invalidFormat": "Недопустимий формат файлу. Дозволені: jpg, jpeg, png, webp",
+        "fileTooLarge": "Розмір файлу перевищує 5MB",
+        "uploadFailed": "Не вдалося завантажити фото. Спробуйте ще раз.",
+        "deleteFailed": "Не вдалося видалити фото. Спробуйте ще раз."
+      }
+    },
+    "children": {
+      "title": "Ваші діти",
+      "name": "Ім'я дитини",
+      "namePlaceholder": "Введіть ім'я дитини",
+      "age": "Вік",
+      "agePlaceholder": "Вкажіть вік",
+      "dateOfBirth": "Дата народження",
+      "gender": "Стать",
+      "genderMale": "Хлопчик",
+      "genderFemale": "Дівчинка",
+      "allergies": "Алергії",
+      "allergiesPlaceholder": "Вкажіть алергії дитини",
+      "specialNeeds": "Особливі потреби",
+      "specialNeedsPlaceholder": "Вкажіть особливі потреби, якщо є",
+      "notes": "Додаткові примітки",
+      "notesPlaceholder": "Додаткова інформація про дитину",
+      "addChild": "Додати дитину",
+      "editChild": "Редагувати",
+      "removeChild": "Видалити",
+      "noChildren": "У вас поки немає доданих дітей",
+      "childNumber": "Дитина {number}",
+      "deleteSuccess": "Дані про дитину видалено",
+      "deleteError": "Помилка при видаленні",
+      "deleteErrorMessage": "Не вдалося видалити дитину. Спробуйте ще раз",
+      "confirmDeleteTitle": "Підтвердження видалення",
+      "confirmDeleteMessage": "Ви впевнені, що хочете видалити дані про дитину \"{name}\"?",
+      "confirmDelete": "Видалити",
+      "addSuccess": "Дитина успішно додана",
+      "addError": "Помилка при додаванні",
+      "updateSuccess": "Дані про дитину успішно оновлено",
+      "updateError": "Помилка при оновленні",
+      "saveErrorMessage": "Не вдалося зберегти дані. Спробуйте ще раз"
+    },
+    "security": {
+      "title": "Безпека",
+      "changeEmail": "Змінити поштову адресу",
+      "currentEmail": "Поточний email",
+      "newEmail": "Новий email",
+      "confirmEmail": "Підтвердіть новий email",
+      "confirmEmailPlaceholder": "Повторіть новий email",
+      "saveEmail": "Зберегти email",
+      "verificationCode": "Код підтвердження",
+      "verificationCodePlaceholder": "Введіть код підтвердження",
+      "verificationCodeHint": "Код надіслано на новий email адресу",
+      "verifyCode": "Підтвердити",
+      "cancel": "Скасування",
+      "changePassword": "Змінити пароль",
+      "currentPassword": "Поточний пароль",
+      "currentPasswordPlaceholder": "Введіть поточний пароль",
+      "newPassword": "Новий пароль",
+      "newPasswordPlaceholder": "Введіть новий пароль",
+      "savePassword": "Зберегти пароль",
+      "requestPasswordChange": "Запросити код",
+      "passwordVerificationCodeHint": "Код надіслано на ваш email адресу. Код дійсний 15 хвилин.",
+      "passwordCodeSent": "Код надіслано",
+      "passwordCodeSentDescription": "Код підтвердження надіслано на ваш email",
+      "passwordSuccess": "Пароль змінено",
+      "passwordChanged": "Пароль успішно змінено",
+      "passwordError": "Помилка",
+      "requestPasswordError": "Не вдалося надіслати код. Спробуйте ще раз.",
+      "confirmPasswordError": "Невірний код або код закінчився. Спробуйте ще раз.",
+      "emailCodeSent": "Код надіслано",
+      "emailCodeSentDescription": "Код підтвердження надіслано на новий email адресу",
+      "emailSuccess": "Email змінено",
+      "emailChanged": "Email успішно змінено",
+      "emailError": "Помилка",
+      "requestEmailError": "Не вдалося надіслати код. Спробуйте ще раз.",
+      "confirmEmailError": "Невірний код або код закінчився. Спробуйте ще раз."
+    },
+    "notifications": {
+      "title": "Налаштування сповіщень",
+      "emailNotifications": "Email сповіщення",
+      "pushNotifications": "Push сповіщення",
+      "smsNotifications": "SMS сповіщення",
+      "otherSettings": "Інші налаштування",
+      "newMessages": "Нові повідомлення",
+      "newMessagesDesc": "Отримувати сповіщення про нові повідомлення",
+      "bookingUpdates": "Оновлення бронювань",
+      "bookingUpdatesDesc": "Сповіщення про зміни в бронюваннях",
+      "newReviews": "Нові відгуки",
+      "newReviewsDesc": "Сповіщення про нові відгуки",
+      "reminders": "Нагадування",
+      "remindersDesc": "Нагадування про майбутні зустрічі",
+      "bookingConfirmations": "Підтвердження бронювань",
+      "bookingConfirmationsDesc": "SMS підтвердження про бронювання",
+      "importantUpdates": "Важливі оновлення",
+      "importantUpdatesDesc": "Критично важливі сповіщення по SMS",
+      "marketing": "Маркетингові розсилки",
+      "marketingDesc": "Отримувати інформацію про спеціальні пропозиції та акції",
+      "save": "Зберегти"
+    },
+    "role": {
+      "nanny": "Бебісітер",
+      "parent": "Батько"
+    },
+    "parent": {
+      "dashboard": "Панель батька",
+      "activeBookings": "Активні бронювання",
+      "favoriteNannies": "Обрані бебісітери",
+      "messages": "Повідомлення",
+      "reviews": "Відгуки",
+      "quickActions": "Швидкі дії",
+      "bookNanny": "Забронювати бебісітера",
+      "findNanny": "Знайти бебісітера"
+    },
+    "nanny": {
+      "dashboard": "Панель бебісітера",
+      "activeBookings": "Активні бронювання",
+      "clients": "Клієнти",
+      "messages": "Повідомлення",
+      "rating": "Рейтинг",
+      "quickActions": "Швидкі дії",
+      "editProfile": "Редагувати профіль",
+      "manageSchedule": "Управління розкладом"
+    },
+    "nannySchedule": {
+      "title": "Розклад",
+      "subtitle": "Вкажіть, коли ви готові працювати.",
+      "calendarTitle": "Календар зайнятості",
+      "calendarSubtitle": "Відзначайте дні та інтервали роботи в календарі.",
+      "monthView": "Місяць",
+      "weekView": "Тиждень",
+      "noIntervals": "Немає інтервалів",
+      "editDay": "Редагувати день",
+      "addInterval": "Додати інтервал",
+      "removeInterval": "Видалити інтервал",
+      "addDay": "Додати день",
+      "deleteDay": "Видалити день",
+      "addDate": "Додати дату",
+      "deleteDate": "Видалити дату",
+      "save": "Зберегти",
+      "cancel": "Скасування",
+      "weekdaysShort": "Пн,Вт,Ср,Чт,Пт,Сб,Нд",
+      "applyToAllDays": "Застосувати до всіх днів тижня",
+      "applyToWeekdays": "Застосувати до робочих днів",
+      "applyToDayOfWeek": "Застосувати тільки до дня тижня цього",
+      "modes": {
+        "allDays": "Всі дні",
+        "weekly": "Щотижня",
+        "everyday": "Конкретні дати"
+      }
+    },
+    "booking": {
+      "title": "Дані для бронювання",
+      "save": "Зберегти",
+      "create": {
+        "title": "Створити бронювання",
+        "subtitle": "Забронюйте час з {name}",
+        "startDateTime": "Дата та час початку",
+        "endDateTime": "Дата та час закінчення",
+        "childrenCount": "Кількість дітей",
+        "childAge": "Вік дитини {index}",
+        "notes": "Додаткові примітки",
+        "notesPlaceholder": "Наприклад, особливі потреби дітей, переваги тощо.",
+        "estimatedPrice": "Приблизна вартість:",
+        "cancel": "Скасування",
+        "submit": "Створити бронювання",
+        "loading": "Завантаження...",
+        "loadError": "Помилка завантаження даних",
+        "notFound": "Сіттер не знайдено",
+        "backToSearch": "Повернутися до пошуку",
+        "validation": {
+          "endTimeBeforeStart": "Час закінчення повинен бути пізніше часу початку"
+        },
+        "success": {
+          "title": "Успішно",
+          "message": "Бронювання створено"
+        },
+        "error": {
+          "title": "Помилка",
+          "message": "Не вдалося створити бронювання"
+        },
+        "agePlaceholder": "Вкажіть вік",
+        "selectChildrenFromProfile": "Оберіть дітей з профілю",
+        "selectedChildren": "Обрані діти",
+        "noChildrenSelected": "Діти не обрані. Оберіть дітей з профілю або додайте нового.",
+        "noChildrenInProfile": "У вас поки немає доданих дітей. Додайте дітей в профілі.",
+        "addChildFromProfile": "Додати з профілю",
+        "removeChild": "Видалити",
+        "addNewChild": "Додати ще дитину",
+        "addChild": "Додати дитину",
+        "newChild": "Нова дитина",
+        "bookingType": {
+          "offline": {
+            "title": "Сіттер додому",
+            "subtitle": "Приїде до вас"
+          },
+          "online": {
+            "title": "Сіттер онлайн",
+            "subtitle": "Спілкування по відеозв'язку"
+          }
+        },
+        "specialConditions": {
+          "title": "Особливі умови",
+          "childIsSick": "Дитині або дітям нездоровиться",
+          "hasSpecialNeedsChild": "Є особлива дитина",
+          "needsHelpWithHomework": "Потрібна допомога з уроками",
+          "needsOutdoorActivities": "Потрібні прогулянки на вулиці",
+          "needsCarTransportation": "Потрібно відвезти на машині (в гурток, секцію тощо)",
+          "needsWalking": "Потрібно відвести (в гурток, секцію тощо)"
+        }
+      },
+      "contractData": {
+        "title": "Дані для формування договору за вашими замовленнями",
+        "description": "При підтвердженні бронювання бебісітером буде сформовано онлайн договір.",
+        "templateBoarding": "Шаблон договору на передержку дитини.",
+        "templateDaycare": "Шаблон договору на денний догляд.",
+        "templateDayNanny": "Шаблон договору на послугу денного бебісітера."
+      },
+      "personalData": {
+        "title": "Ваші особисті дані",
+        "description": "Для оформлення бронювання та формування договору за послугою, необхідно заповнити особисті дані.",
+        "lastName": "Прізвище",
+        "lastNamePlaceholder": "Іванов",
+        "firstName": "Ім'я",
+        "firstNamePlaceholder": "Сергій",
+        "middleName": "По батькові",
+        "middleNamePlaceholder": "Петрович"
+      },
+      "trustedPerson": {
+        "title": "Ваша довірена особа",
+        "description": "Вкажіть довірену особу на час вашої відсутності. Цей контакт буде використовуватися тільки в разі екстреної ситуації, якщо ви недоступні.",
+        "lastName": "Прізвище",
+        "lastNamePlaceholder": "Іванов",
+        "firstName": "Ім'я",
+        "firstNamePlaceholder": "Сергій",
+        "middleName": "По батькові",
+        "middleNamePlaceholder": "Петрович",
+        "phone": "Номер телефону",
+        "phonePlaceholder": "+380_______",
+        "relationship": "Ступінь родинності",
+        "relationshipPlaceholder": "Бабуся, Дідусь, Друг сім'ї",
+        "add": "Додати довірену особу",
+        "edit": "Редагувати",
+        "remove": "Видалити",
+        "noContacts": "У вас поки немає доданих довірених осіб",
+        "deleteSuccess": "Довірена особа видалена",
+        "deleteError": "Помилка при видаленні",
+        "deleteErrorMessage": "Не вдалося видалити довірену особу. Спробуйте ще раз",
+        "confirmDeleteTitle": "Підтвердження видалення",
+        "confirmDeleteMessage": "Ви впевнені, що хочете видалити довірену особу \"{name}\"?",
+        "confirmDelete": "Видалити",
+        "addSuccess": "Довірена особа успішно додана",
+        "addError": "Помилка при додаванні",
+        "updateSuccess": "Довірена особа успішно оновлена",
+        "updateError": "Помилка при оновленні",
+        "saveErrorMessage": "Не вдалося зберегти дані. Спробуйте ще раз",
+        "loadError": "Помилка при завантаженні довірених осіб"
+      }
+    }
+  },
+  "bookings": {
+    "title": "Знайти бебісітера",
+    "search": {
+      "city": "Місто, адреса",
+      "date": "Дата замовлення",
+      "timeStart": "Початок",
+      "timeEnd": "Кінець",
+      "submit": "Знайти"
+    },
+    "filters": {
+      "title": "Фільтри",
+      "onlyAvailable": "Показати тільки доступних сіттерів",
+      "onlyOnline": "Тільки сіттери онлайн",
+      "priceRange": "Ціна за годину",
+      "priceFrom": "Від",
+      "priceTo": "До",
+      "childrenCount": "Кількість дітей",
+      "advantages": {
+        "title": "Переваги сіттера",
+        "main": {
+          "title": "Основні",
+          "kidsoutSchool": "Школа",
+          "infants": "Сидить з немовлятами",
+          "specialNeeds": "Сидить з особливими дітьми"
+        },
+        "additional": {
+          "title": "Додаткові",
+          "homework": "Допомога з уроками",
+          "french": "Французька мова",
+          "georgian": "Грузинська мова",
+          "russian": "Російська мова",
+          "music": "Музична освіта",
+          "active": "Активний сіттер",
+          "permanent": "Шукаю постійну сім'ю",
+          "pedagogical": "Педагогічна освіта",
+          "weather": "Прогулянки в будь-яку погоду",
+          "housework": "Допомога по дому",
+          "english": "Англійська мова",
+          "driver": "Водійські права",
+          "night": "Нічні замовлення",
+          "relocation": "Готовність до переїздів",
+          "medical": "Медична освіта",
+          "firstAid": "Курси першої допомоги",
+          "sculpting": "Ліплення",
+          "sick": "Подивлюся за захворілим",
+          "painting": "Живопис",
+          "psychology": "Психологічна освіта",
+          "singing": "Спів",
+          "schoolPrep": "Підготовка до школи",
+          "speechTherapist": "Логопед",
+          "autism": "Працюю з дітьми з РАС",
+          "medicalBook": "Медкнижка"
+        }
+      }
+    },
+    "sort": {
+      "title": "Сортування",
+      "recommended": "Рекомендовано",
+      "priceAsc": "Ціна: за зростанням",
+      "priceDesc": "Ціна: за спаданням",
+      "rating": "За рейтингом",
+      "newest": "Нові"
+    },
+    "view": {
+      "list": "Список",
+      "card": "Картки",
+      "map": "На карті",
+      "tooltip": {
+        "list": "Показати список",
+        "card": "Показати картки",
+        "map": "Показати на карті"
+      }
+    },
+    "found": "Знайдено",
+    "loading": "Завантаження...",
+    "empty": "Няні не знайдено. Спробуйте змінити параметри пошуку.",
+    "emptyShort": "Няні не знайдено",
+    "mapPlaceholder": "Карта буде тут",
+    "sitter": {
+      "new": "Новий бебісітер",
+      "orders": "Замовлення",
+      "hours": "Годин з дітьми",
+      "returned": "Повернувся",
+      "returnedPlural": "Повернулися",
+      "showInSearch": "Видна в пошуку",
+      "book": "Замовити",
+      "perHour": "/година",
+      "details": "Детальніше",
+      "stats": {
+        "title": "Статистика",
+        "orders": "Замовлень",
+        "hours": "Годин",
+        "returned": "Повернулися",
+        "response": "Відповідь",
+        "responseTimeDefault": "Протягом дня"
+      },
+      "priceCard": {
+        "pricesByChildrenCount": "Ціни за кількістю дітей",
+        "oneChild": "1 дитина",
+        "twoChildren": "2 дітей",
+        "threeChildren": "3 дітей",
+        "onlineLesson": "Онлайн-заняття",
+        "minOrder": "Мінімальне замовлення",
+        "paymentMethods": "Способи оплати",
+        "perHour": "₴/година",
+        "currency": "₴"
+      },
+      "actions": {
+        "book": "Забронювати",
+        "message": "Написати",
+        "babysitterCannotBook": "Бебісітери не можуть бронювати інших бебісітерів"
+      },
+      "sections": {
+        "about": "Про себе",
+        "education": "Освіта",
+        "experience": "Досвід роботи",
+        "preferences": "Переваги",
+        "advantages": "Переваги та навички",
+        "petAttitude": "Ставлення до тварин"
+      }
+    }
+  },
+  "common": {
+    "cancel": "Скасування",
+    "home": "Головна",
+    "search": "Пошук",
+    "sitter": "Сіттер",
+    "booking": "Бронювання"
+  }
+}
+
