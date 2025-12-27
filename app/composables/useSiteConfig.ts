@@ -1,7 +1,11 @@
 export const useSiteConfig = () => {
   const config = useRuntimeConfig()
+  const { defaultLocale } = useI18n()
   
-  return config.public.siteConfig as {
+  return {
+    ...config.public.siteConfig,
+    defaultLocale: defaultLocale.value
+  } as {
     name: string
     url: string
     logo: string
@@ -15,6 +19,7 @@ export const useSiteConfig = () => {
     authorCity: string
     authorState: string
     authorZip: string
+    defaultLocale: string
   }
 }
 

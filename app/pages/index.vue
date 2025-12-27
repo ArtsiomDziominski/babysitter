@@ -33,12 +33,9 @@ useSeoMeta({
   twitterImage: `${siteConfig.url}${siteConfig.logo}`
 })
 
-const { getHreflangLinks } = useHreflang()
-
 useHead({
   link: [
-    { rel: 'canonical', href: currentUrl },
-    ...getHreflangLinks()
+    { rel: 'canonical', href: currentUrl }
   ]
 })
 </script>
