@@ -746,6 +746,155 @@
     "forgotPassword": {
       "title": "Password recovery",
       "description": "Restore access to your account."
+    },
+    "about": {
+      "title": "About Us - Babysitter Platform",
+      "description": "Learn more about our platform, mission and values. We help parents find verified babysitters for their children."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "description": "Answers to popular questions about the platform, booking, payment and safety."
+    },
+    "help": {
+      "title": "Help and Support",
+      "description": "Get help with using the platform, troubleshooting, and contact our support team."
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "intro": "We are a modern platform for finding and booking babysitters. Our mission is to help parents find reliable help for their children, and experienced babysitters to find work they love.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We strive to make the process of finding a babysitter simple, safe and convenient. Every parent should be able to find a verified professional they can trust to care for their child."
+    },
+    "values": {
+      "title": "Our Values",
+      "items": {
+        "safety": {
+          "title": "Safety",
+          "description": "All babysitters are checked and verified before being listed on the platform."
+        },
+        "trust": {
+          "title": "Trust",
+          "description": "We build trust between parents and babysitters through a transparent system of reviews and ratings."
+        },
+        "convenience": {
+          "title": "Convenience",
+          "description": "Simple and intuitive interface for quickly finding and booking babysitters."
+        },
+        "quality": {
+          "title": "Quality",
+          "description": "We carefully select babysitters, checking their experience, skills and references."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "description": "Parents can easily find a babysitter in their city, view profiles with photos, reviews and prices, contact the babysitter and book a service. Babysitters can create a profile, specify their schedule, prices and skills to attract clients."
+    },
+    "safety": {
+      "title": "Safety",
+      "description": "Your children's safety is our priority. All babysitters are verified with documents, and the platform has a system of reviews and ratings. You can always contact the babysitter before booking to discuss all details."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "email": "Email",
+      "phone": "Phone",
+      "hours": "Working Hours"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to popular questions",
+    "items": {
+      "forParents": {
+        "title": "How to find a babysitter?",
+        "content": "Use the search form on the home page or go to the search section. You can filter babysitters by price, experience, skills and availability. Browse profiles with photos, reviews and prices, then contact your preferred babysitter and book a service."
+      },
+      "howToBook": {
+        "title": "How to book a babysitter?",
+        "content": "After you find a suitable babysitter, click the Book button in their profile. Specify the date, time, number of children and other details. The babysitter will confirm the booking, and you can pay for the service through the platform."
+      },
+      "pricing": {
+        "title": "How much does a babysitter service cost?",
+        "content": "Prices vary depending on the babysitter's experience, number of children and duration of service. Each babysitter sets their own prices, which are displayed in their profile. You will be able to see the final cost before confirming the booking."
+      },
+      "safety": {
+        "title": "How is safety ensured?",
+        "content": "All babysitters are checked and verified before being listed on the platform. The platform has a system of reviews and ratings from other parents. You can always contact the babysitter before booking to discuss all details and ask questions."
+      },
+      "payment": {
+        "title": "How does payment work?",
+        "content": "Payment is made through a secure payment system on the platform. You can pay for the service with a bank card or another available method. Payment is processed only after the babysitter confirms the booking."
+      },
+      "cancellation": {
+        "title": "Can I cancel a booking?",
+        "content": "Yes, you can cancel a booking through your account. Cancellation and refund conditions depend on the time before the service starts and are specified in the platform terms. We recommend canceling bookings as early as possible."
+      },
+      "becomeSitter": {
+        "title": "How to become a babysitter?",
+        "content": "Register on the platform and select the Babysitter role. Fill out your profile, specify your work experience, skills, schedule and prices. After your profile is verified, you can start accepting bookings."
+      },
+      "support": {
+        "title": "How to contact support?",
+        "content": "You can contact our support team at info&#64;babysitter.by or phone +375 (29) 123-45-67. We work daily from 9:00 to 22:00. You can also find answers to many questions in the Help section."
+      }
+    }
+  },
+  "help": {
+    "title": "Help and Support",
+    "intro": "Welcome to the help center! Here you will find all the information you need to work with the platform.",
+    "gettingStarted": {
+      "title": "Getting Started",
+      "steps": {
+        "register": {
+          "title": "Register",
+          "description": "Create an account on the platform by providing your email and password. Choose a role: parent or babysitter."
+        },
+        "search": {
+          "title": "Find a babysitter",
+          "description": "Use the search form to find a suitable babysitter in your city. Apply filters to refine your search."
+        },
+        "book": {
+          "title": "Book a service",
+          "description": "Select date and time, specify the number of children and other details. Confirm the booking and make payment."
+        },
+        "communicate": {
+          "title": "Communicate with the babysitter",
+          "description": "Use the built-in messenger to communicate with the babysitter before the meeting and during the service."
+        }
+      }
+    },
+    "commonIssues": {
+      "title": "Common Issues",
+      "items": {
+        "forgotPassword": {
+          "title": "Forgot password?",
+          "solution": "Go to the login page and click Forgot password?. Enter your email and we will send password recovery instructions."
+        },
+        "bookingIssues": {
+          "title": "Booking issues",
+          "solution": "If you encounter booking issues, check that the information provided is correct. If the problem persists, contact support."
+        },
+        "paymentProblems": {
+          "title": "Payment problems",
+          "solution": "Make sure your bank card is supported by the platform and has sufficient funds. If the problem persists, contact your bank or our support team."
+        },
+        "accountAccess": {
+          "title": "Cannot access account",
+          "solution": "Check that your email and password are correct. If you forgot your password, use the recovery function. If the problem persists, contact support."
+        }
+      }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Couldn't find an answer to your question? We're always here to help!",
+      "email": "Email",
+      "phone": "Phone",
+      "hours": "Working Hours"
+    },
+    "resources": {
+      "title": "Additional Resources"
     }
   }
 }
