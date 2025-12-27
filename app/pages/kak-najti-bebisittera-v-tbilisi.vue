@@ -112,8 +112,37 @@ definePageMeta({
 const { locale } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
+const { getHowToSchema, addStructuredData } = useStructuredData()
 
 const currentUrl = `${siteConfig.url}${route.path}`
+
+const howToSchema = getHowToSchema({
+  name: 'Как найти бебиситтера в Тбилиси',
+  description: 'Пошаговое руководство по поиску проверенного бебиситтера в Тбилиси через нашу платформу.',
+  steps: [
+    {
+      name: 'Используйте поиск',
+      text: 'Перейдите в раздел поиска и укажите город Тбилиси. Вы сможете увидеть всех доступных бебиситтеров в вашем городе.'
+    },
+    {
+      name: 'Изучите профили',
+      text: 'Просмотрите анкеты бебиситтеров: фото, опыт работы, отзывы родителей, цены и расписание. Обратите внимание на рейтинг и количество выполненных заказов.'
+    },
+    {
+      name: 'Свяжитесь с бебиситтером',
+      text: 'Напишите выбранному бебиситтеру через встроенный мессенджер, чтобы обсудить детали, задать вопросы и договориться о встрече.'
+    },
+    {
+      name: 'Забронируйте услугу',
+      text: 'Выберите удобную дату и время, укажите количество детей и особые требования. После подтверждения бронирования вы сможете оплатить услугу.'
+    }
+  ]
+})
+
+addStructuredData(howToSchema)
+
+const publishedTime = '2024-01-01T00:00:00Z'
+const modifiedTime = new Date().toISOString()
 
 useSeoMeta({
   title: 'Как найти бебиситтера в Тбилиси',
@@ -122,8 +151,10 @@ useSeoMeta({
   ogDescription: 'Ищете надёжного бебиситтера в Тбилиси? Наша платформа поможет найти проверенного специалиста для ухода за детьми.',
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
+  ogType: 'article',
   ogLocale: locale.value,
+  articlePublishedTime: publishedTime,
+  articleModifiedTime: modifiedTime,
   twitterCard: 'summary_large_image',
   twitterTitle: 'Как найти бебиситтера в Тбилиси',
   twitterDescription: 'Ищете надёжного бебиситтера в Тбилиси? Наша платформа поможет найти проверенного специалиста для ухода за детьми.',

@@ -121,8 +121,37 @@
 const { locale } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
+const { getHowToSchema, addStructuredData } = useStructuredData()
 
 const currentUrl = `${siteConfig.url}${route.path}`
+
+const howToSchema = getHowToSchema({
+  name: 'Как стать бебиситтером',
+  description: 'Пошаговое руководство по регистрации и началу работы бебиситтером на нашей платформе.',
+  steps: [
+    {
+      name: 'Зарегистрируйтесь на платформе',
+      text: 'Создайте аккаунт и выберите роль Бебиситтер. Заполните основную информацию и пройдите верификацию.'
+    },
+    {
+      name: 'Заполните профиль',
+      text: 'Добавьте фото, опыт работы, образование, навыки и сертификаты. Чем полнее ваш профиль, тем привлекательнее вы будете для родителей.'
+    },
+    {
+      name: 'Установите расписание',
+      text: 'Укажите, когда вы доступны для работы. Вы можете установить еженедельное расписание или отметить конкретные даты.'
+    },
+    {
+      name: 'Начните принимать заказы',
+      text: 'После проверки вашего профиля вы появитесь в результатах поиска и сможете начать получать запросы на бронирование от родителей.'
+    }
+  ]
+})
+
+addStructuredData(howToSchema)
+
+const publishedTime = '2024-01-01T00:00:00Z'
+const modifiedTime = new Date().toISOString()
 
 useSeoMeta({
   title: 'Как стать бебиситтером',
@@ -131,8 +160,10 @@ useSeoMeta({
   ogDescription: 'Узнайте, как стать проверенным бебиситтером на нашей платформе и начать зарабатывать, занимаясь любимым делом.',
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
+  ogType: 'article',
   ogLocale: locale.value,
+  articlePublishedTime: publishedTime,
+  articleModifiedTime: modifiedTime,
   twitterCard: 'summary_large_image',
   twitterTitle: 'Как стать бебиситтером',
   twitterDescription: 'Узнайте, как стать проверенным бебиситтером на нашей платформе и начать зарабатывать, занимаясь любимым делом.',

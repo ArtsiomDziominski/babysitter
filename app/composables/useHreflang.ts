@@ -1,5 +1,5 @@
 export const useHreflang = () => {
-  const { locale, locales } = useI18n()
+  const { locale, locales, defaultLocale } = useI18n()
   const route = useRoute()
   const siteConfig = useSiteConfig()
 
@@ -14,7 +14,7 @@ export const useHreflang = () => {
     links.push({
       rel: 'alternate',
       hreflang: 'x-default',
-      href: `${siteConfig.url}${basePath}?lang=${siteConfig.defaultLocale || 'ka'}`
+      href: `${siteConfig.url}${basePath}?lang=${defaultLocale.value || siteConfig.defaultLocale || 'ka'}`
     })
     
     return links

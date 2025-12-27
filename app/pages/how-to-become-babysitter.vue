@@ -128,6 +128,9 @@ const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
 
+const publishedTime = '2024-01-01T00:00:00Z'
+const modifiedTime = new Date().toISOString()
+
 useSeoMeta({
   title: 'How to Become a Babysitter',
   description: 'Learn how to become a verified babysitter on our platform and start earning money doing what you love.',
@@ -135,8 +138,10 @@ useSeoMeta({
   ogDescription: 'Learn how to become a verified babysitter on our platform and start earning money doing what you love.',
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
+  ogType: 'article',
   ogLocale: locale.value,
+  articlePublishedTime: publishedTime,
+  articleModifiedTime: modifiedTime,
   twitterCard: 'summary_large_image',
   twitterTitle: 'How to Become a Babysitter',
   twitterDescription: 'Learn how to become a verified babysitter on our platform and start earning money doing what you love.',

@@ -12,6 +12,7 @@ const { locale, locales, defaultLocale, setLocale } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 const notifications = useNotifications()
+const { getOrganizationSchema, addStructuredData } = useStructuredData()
 
 const currentLocale = computed(() => {
   const current = locales.value.find((l: any) => l.code === locale.value)
@@ -44,6 +45,8 @@ watch(() => route.query.lang, (langParam) => {
     }
   }
 }, { immediate: true })
+
+addStructuredData(getOrganizationSchema())
 
 useHead({
   htmlAttrs: {
