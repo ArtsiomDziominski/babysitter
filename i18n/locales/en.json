@@ -891,6 +891,24 @@
     "resources": {
       "title": "Additional Resources"
     }
+  },
+  "error404": {
+    "title": "Page got lost",
+    "description": "Looks like this page went off to play with the kids. Let's find you the perfect babysitter!",
+    "backHome": "Back to home",
+    "findSitter": "Find a babysitter",
+    "card1": {
+      "title": "Verified babysitters",
+      "description": "All our babysitters undergo thorough verification"
+    },
+    "card2": {
+      "title": "Safety",
+      "description": "Your children are in the safe hands of verified professionals"
+    },
+    "card3": {
+      "title": "Childcare",
+      "description": "Thousands of happy parents trust us"
+    }
   }
 }
 
