@@ -107,7 +107,7 @@ const localizedBecomeSitterUrls: Record<string, string> = {
 const becomeSitterUrl = computed(() => localizedBecomeSitterUrls[locale.value] || localizedBecomeSitterUrls.ru)
 
 const serviceLinks = computed(() => [
-  { to: '/find-sitter', label: 'footer.services.findSitter' },
+  { to: '/search', label: 'footer.services.findSitter' },
   { to: '/online-classes', label: 'footer.services.onlineClasses' },
   { to: becomeSitterUrl.value, label: 'footer.services.becomeSitter' }
 ])
