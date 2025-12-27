@@ -11,7 +11,9 @@
       "messages": "Messages",
       "favorites": "Favorites",
       "schedule": "Schedule",
-      "settings": "Settings"
+      "settings": "Settings",
+      "profile": "Profile",
+      "order": "Orders"
     }
   },
   "cities": {
@@ -309,6 +311,8 @@
         "duration": "Duration",
         "hours": "h",
         "minutes": "min",
+        "trustedContacts": "Trusted contacts",
+        "trustedContact": "Trusted contact",
         "error": "Failed to load order details",
         "loadError": "Loading error",
         "loadErrorMessage": "Failed to load order details. Please try again."
@@ -337,6 +341,7 @@
       "reset": "Reset",
       "create": "Create",
       "update": "Update",
+      "edit": "Edit",
       "firstName": "First name",
       "lastName": "Last name",
       "birthDate": "Birth date",

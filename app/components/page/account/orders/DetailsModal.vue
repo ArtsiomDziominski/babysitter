@@ -131,6 +131,30 @@
           </p>
         </div>
 
+        <div v-if="details.trustedContacts && details.trustedContacts.length > 0">
+          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+            {{ $t('account.orders.details.trustedContacts') }}
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <div
+              v-for="(contact, index) in details.trustedContacts"
+              :key="index"
+              class="inline-flex flex-col gap-1 px-3 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg"
+            >
+              <div class="flex items-center gap-2">
+                <Icon name="i-lucide-user-check" size="16" class="text-primary-500" />
+                <span class="text-sm font-medium text-gray-900 dark:text-white">
+                  {{ contact.lastName }} {{ contact.firstName }}
+                </span>
+              </div>
+              <div class="text-xs text-gray-600 dark:text-gray-400">
+                <div>{{ contact.phone }}</div>
+                <div v-if="contact.relationship">{{ contact.relationship }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div v-if="details.babysitter">
           <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
             {{ $t('account.orders.details.babysitter') }}

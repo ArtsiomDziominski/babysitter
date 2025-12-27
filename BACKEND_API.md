@@ -1125,7 +1125,15 @@ avatar: <File>
   "needsOutdoorActivities": true,
   "needsCarTransportation": true,
   "needsWalking": false,
-  "notes": "Нужна помощь с уроками, Нужны прогулки на улице, Нужно свозить на машине (в кружок, секцию и т.д.). Хороший реб"
+  "notes": "Нужна помощь с уроками, Нужны прогулки на улице, Нужно свозить на машине (в кружок, секцию и т.д.). Хороший реб",
+  "trustedContacts": [
+    {
+      "firstName": "Сергей",
+      "lastName": "Иванов",
+      "phone": "+79928338383",
+      "relationship": "Дед"
+    }
+  ]
 }
 ```
 
@@ -1146,6 +1154,11 @@ avatar: <File>
 - `needsCarTransportation` (boolean, optional) - нужна перевозка на машине (по умолчанию: `false`)
 - `needsWalking` (boolean, optional) - нужны прогулки пешком (по умолчанию: `false`)
 - `notes` (string, optional) - дополнительные заметки
+- `trustedContacts` (array, optional) - массив доверенных контактов. Каждый объект содержит:
+  - `firstName` (string, **обязательное**) - имя доверенного лица
+  - `lastName` (string, **обязательное**) - фамилия доверенного лица
+  - `phone` (string, **обязательное**) - телефон в формате E.164 (например, +79928338383)
+  - `relationship` (string, optional) - степень родства или связь (например, "Дед", "Бабушка", "Друг семьи")
 
 **Response (201):**
 ```json
@@ -1172,6 +1185,14 @@ avatar: <File>
   "needsCarTransportation": true,
   "needsWalking": false,
   "notes": "Нужна помощь с уроками, Нужны прогулки на улице, Нужно свозить на машине (в кружок, секцию и т.д.). Хороший реб",
+  "trustedContacts": [
+    {
+      "firstName": "Сергей",
+      "lastName": "Иванов",
+      "phone": "+79928338383",
+      "relationship": "Дед"
+    }
+  ],
   "totalPrice": 4000,
   "createdAt": "2024-01-10T12:00:00.000Z",
   "babysitter": {
@@ -1232,6 +1253,14 @@ avatar: <File>
       "needsCarTransportation": false,
       "needsWalking": false,
       "notes": "Дети любят играть на улице",
+      "trustedContacts": [
+        {
+          "firstName": "Сергей",
+          "lastName": "Иванов",
+          "phone": "+79928338383",
+          "relationship": "Дед"
+        }
+      ],
       "createdAt": "2024-01-10T12:00:00.000Z",
       "parentReviewId": 1,
       "babysitterReviewId": null
@@ -1294,6 +1323,14 @@ avatar: <File>
   "needsCarTransportation": false,
   "needsWalking": false,
   "notes": "Дети любят играть на улице",
+  "trustedContacts": [
+    {
+      "firstName": "Сергей",
+      "lastName": "Иванов",
+      "phone": "+79928338383",
+      "relationship": "Дед"
+    }
+  ],
   "totalPrice": 4000,
   "createdAt": "2024-01-10T12:00:00.000Z",
   "parent": {

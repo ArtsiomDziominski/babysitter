@@ -7,12 +7,12 @@
           <span class="header__logo-text">{{ siteConfig.name }}</span>
         </NuxtLink>
 
-        <nav v-if="authStore.isAuthenticated" class="header__nav">
+        <nav class="header__nav">
           <NuxtLink
-            v-for="item in navLinks"
-            :key="item.to"
-            :to="item.to"
-            class="header__nav-link"
+              v-for="item in navLinks"
+              :key="item.to"
+              :to="item.to"
+              class="header__nav-link"
           >
             {{ item.label }}
           </NuxtLink>
@@ -81,10 +81,11 @@ const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
 const siteConfig = useSiteConfig()
 
-const navLinks = computed(() => [
-  { to: '/search', label: t('header.bookings') },
-  { to: '/account/messages', label: t('header.messages') }
-])
+const navLinks = computed(() => {
+  const nav = [{ to: '/search', label: t('header.bookings') }]
+  if (authStore.isAuthenticated) nav.push({ to: '/account/messages', label: t('header.messages') })
+  return nav
+})
 
 const cityKeys = CITY_KEYS
 const selectedCity = useState('selectedCity', () => cityKeys[0] || City.TBILISI)
@@ -117,14 +118,14 @@ const accountMenuItems = computed(() => {
 
   const mainMenuItems = [
     {
-      label: t('header.menu.account'),
+      label: t('header.menu.profile'),
       icon: 'i-lucide-user',
       to: '/account/profile'
     },
     {
-      label: t('header.menu.bookings'),
-      icon: 'i-lucide-calendar',
-      to: '/account/bookings'
+      label: t('header.menu.order'),
+      icon: 'i-lucide-clipboard-list',
+      to: '/account/orders'
     },
     {
       label: t('header.menu.messages'),
@@ -134,17 +135,17 @@ const accountMenuItems = computed(() => {
   ]
 
   if (role === UserRole.PARENT) {
-    mainMenuItems.push({
-      label: t('header.menu.favorites'),
-      icon: 'i-lucide-heart',
-      to: '/account/favorites'
-    })
+    // mainMenuItems.push({
+    //   label: t('header.menu.favorites'),
+    //   icon: 'i-lucide-heart',
+    //   to: '/account/favorites'
+    // })
   } else if (role === UserRole.BABYSITTER) {
-    mainMenuItems.push({
-      label: t('header.menu.schedule'),
-      icon: 'i-lucide-calendar-clock',
-      to: '/account/schedule'
-    })
+    // mainMenuItems.push({
+    //   label: t('header.menu.schedule'),
+    //   icon: 'i-lucide-calendar-clock',
+    //   to: '/account/schedule'
+    // })
   }
 
   return [
@@ -158,13 +159,13 @@ const accountMenuItems = computed(() => {
       }
     ],
     mainMenuItems,
-    [
-      {
-        label: t('header.menu.settings'),
-        icon: 'i-lucide-settings',
-        to: '/account/settings'
-      }
-    ],
+    // [
+    //   {
+    //     label: t('header.menu.settings'),
+    //     icon: 'i-lucide-settings',
+    //     to: '/account/settings'
+    //   }
+    // ],
     [
       {
         label: t('header.logout'),

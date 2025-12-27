@@ -27,6 +27,10 @@
           v-model:selected-children="form.selectedChildren"
         />
 
+        <BookingTrustedContactFields
+          v-model:selected-trusted-contact="form.selectedTrustedContact"
+        />
+
         <BookingSpecialConditions
           :booking-type="bookingType"
           v-model:child-is-sick="form.childIsSick"
@@ -90,6 +94,7 @@
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
 import type { BookingChild } from '~/composables/useBookings'
+import type { TrustedContact } from '~/composables/useTrustedContacts'
 import { useBabysitter, mapBabysitterToSitter } from '~/composables/useBabysitter'
 import { useBookings } from '~/composables/useBookings'
 import { useBookingPrice } from '~/composables/useBookingPrice'
@@ -116,6 +121,7 @@ const form = ref({
   endDate: '',
   endTime: '',
   selectedChildren: [] as BookingChild[],
+  selectedTrustedContact: null as TrustedContact | null,
   childIsSick: false,
   hasSpecialNeedsChild: false,
   needsHelpWithHomework: false,
@@ -297,6 +303,15 @@ const handleSubmit = async () => {
 
     if (notes) {
       bookingData.notes = notes
+    }
+
+    if (form.value.selectedTrustedContact) {
+      bookingData.trustedContacts = [{
+        firstName: form.value.selectedTrustedContact.firstName,
+        lastName: form.value.selectedTrustedContact.lastName,
+        phone: form.value.selectedTrustedContact.phone,
+        relationship: form.value.selectedTrustedContact.relationship || null
+      }]
     }
 
     await bookingsApi.createBooking(bookingData)

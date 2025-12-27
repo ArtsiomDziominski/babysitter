@@ -6,6 +6,13 @@ export interface BookingChild {
   description?: string
 }
 
+export interface BookingTrustedContact {
+  firstName: string
+  lastName: string
+  phone: string
+  relationship?: string | null
+}
+
 export interface CreateBookingRequest {
   babysitterId: number
   startTime: string
@@ -21,6 +28,7 @@ export interface CreateBookingRequest {
   needsCarTransportation?: boolean
   needsWalking?: boolean
   notes?: string
+  trustedContacts?: BookingTrustedContact[]
 }
 
 export interface BookingListItem {
@@ -46,6 +54,7 @@ export interface BookingListItem {
   needsCarTransportation: boolean
   needsWalking: boolean
   notes?: string
+  trustedContacts?: BookingTrustedContact[]
   createdAt: string
   babysitterId?: number
   parentReviewId?: number | null
@@ -73,6 +82,7 @@ export interface BookingDetails {
   totalPrice: string | number
   createdAt: string
   updatedAt?: string
+  trustedContacts?: BookingTrustedContact[]
   parent?: {
     id: number
     firstName?: string
