@@ -88,8 +88,7 @@
             </p>
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mt-4">
               <p class="text-gray-700 dark:text-gray-300">
-                <strong>ელფოსტა:</strong> info@babysitter.by<br>
-                <strong>ტელეფონი:</strong> +375 (29) 123-45-67
+                <strong>ელფოსტა:</strong> info@babysitter.by
               </p>
             </div>
           </section>

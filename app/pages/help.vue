@@ -65,15 +65,6 @@
                     info@babysitter.by
                   </a>
                 </p>
-                <p class="text-gray-700 dark:text-gray-300 mb-2">
-                  <strong>{{ $t('help.contact.phone') }}:</strong> 
-                  <a href="tel:+375291234567" class="text-primary-500 hover:text-primary-600">
-                    +375 (29) 123-45-67
-                  </a>
-                </p>
-                <p class="text-gray-700 dark:text-gray-300">
-                  <strong>{{ $t('help.contact.hours') }}:</strong> {{ $t('footer.contact.hours') }}
-                </p>
               </div>
             </section>
 

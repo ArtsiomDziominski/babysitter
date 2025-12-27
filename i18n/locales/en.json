@@ -113,8 +113,7 @@
       "help": "Help"
     },
     "contact": {
-      "title": "Contact",
-      "hours": "Daily from 9:00 to 22:00"
+      "title": "Contact"
     },
     "legal": {
       "privacy": "Privacy Policy",
@@ -798,9 +797,7 @@
     },
     "contact": {
       "title": "Contact Us",
-      "email": "Email",
-      "phone": "Phone",
-      "hours": "Working Hours"
+      "email": "Email"
     }
   },
   "faq": {
@@ -837,7 +834,7 @@
       },
       "support": {
         "title": "How to contact support?",
-        "content": "You can contact our support team at info&#64;babysitter.by or phone +375 (29) 123-45-67. We work daily from 9:00 to 22:00. You can also find answers to many questions in the Help section."
+        "content": "You can contact our support team at info&#64;babysitter.by. You can also find answers to many questions in the Help section."
       }
     }
   },
@@ -889,9 +886,7 @@
     "contact": {
       "title": "Contact Us",
       "description": "Couldn't find an answer to your question? We're always here to help!",
-      "email": "Email",
-      "phone": "Phone",
-      "hours": "Working Hours"
+      "email": "Email"
     },
     "resources": {
       "title": "Additional Resources"
