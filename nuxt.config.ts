@@ -63,6 +63,18 @@ export default defineNuxtConfig({
         '/yak-staty-bebisiterom': { prerender: false, ssr: true },
         '/yak-stats-bebisiteram': { prerender: false, ssr: true },
         '/rogor-gavides-bebisiteri': { prerender: false, ssr: true },
-        '/become-sitter': { prerender: false, ssr: true }
+        '/become-sitter': { prerender: false, ssr: true },
+        '/kak-najti-bebisittera-v-tbilisi': { prerender: false, ssr: true },
+        '/kak-najti-nyanyu-v-tbilisi': { prerender: false, ssr: true },
+        '/kak-najti-bebisittera-v-batumi': { prerender: false, ssr: true },
+        '/kak-najti-nyanyu-v-batumi': { prerender: false, ssr: true },
+        '/kak-najti-bebisittera-v-kutaisi': { prerender: false, ssr: true },
+        '/kak-najti-nyanyu-v-kutaisi': { prerender: false, ssr: true },
+        '/kak-najti-bebisittera-v-rustavi': { prerender: false, ssr: true },
+        '/kak-najti-nyanyu-v-rustavi': { prerender: false, ssr: true },
+        '/kak-najti-bebisittera-v-gori': { prerender: false, ssr: true },
+        '/kak-najti-nyanyu-v-gori': { prerender: false, ssr: true },
+        '/kak-najti-bebisittera-v-poti': { prerender: false, ssr: true },
+        '/kak-najti-nyanyu-v-poti': { prerender: false, ssr: true }
     }
 })
