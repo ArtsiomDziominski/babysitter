@@ -2,6 +2,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const siteConfig = config.public.siteConfig
   const baseUrl = siteConfig.url
+  const apiBaseUrl = config.public.apiBaseUrl
 
   const publicPages = [
     { path: '/', priority: '1.0', changefreq: 'daily' },
@@ -33,6 +34,45 @@ export default defineEventHandler(async (event) => {
     { path: '/kak-najti-nyanyu-v-poti', priority: '0.9', changefreq: 'weekly' }
   ]
 
+  const sitterPages: Array<{ path: string; lastmod?: string }> = []
+
+  try {
+    let page = 1
+    let hasMore = true
+    const limit = 100
+
+    while (hasMore) {
+      const response = await fetch(`${apiBaseUrl}/babysitters?page=${page}&limit=${limit}`)
+      if (!response.ok) break
+
+      const data = await response.json()
+      const sitters = data?.data?.data || []
+
+      if (sitters.length === 0) {
+        hasMore = false
+        break
+      }
+
+      for (const sitter of sitters) {
+        if (sitter.showInSearch && sitter.id) {
+          sitterPages.push({
+            path: `/sitter/${sitter.id}`,
+            lastmod: sitter.updatedAt ? new Date(sitter.updatedAt).toISOString().split('T')[0] : undefined
+          })
+        }
+      }
+
+      const totalPages = data?.data?.meta?.totalPages || 1
+      if (page >= totalPages) {
+        hasMore = false
+      } else {
+        page++
+      }
+    }
+  } catch (error) {
+    console.error('Ошибка получения списка ситтеров для sitemap:', error)
+  }
+
   const locales = (siteConfig.locales as Array<{ code: string; iso?: string }>).filter((loc) => loc.code)
   const lastmod = new Date().toISOString().split('T')[0]
 
@@ -55,6 +95,26 @@ export default defineEventHandler(async (event) => {
 
     sitemap += `
     <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${page.path}?lang=${siteConfig.defaultLocale}" />`
+
+    sitemap += `
+  </url>`
+  }
+
+  for (const sitterPage of sitterPages) {
+    sitemap += `
+  <url>
+    <loc>${baseUrl}${sitterPage.path}</loc>
+    <lastmod>${sitterPage.lastmod || lastmod}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>`
+
+    for (const locale of locales) {
+      sitemap += `
+    <xhtml:link rel="alternate" hreflang="${locale.iso || locale.code}" href="${baseUrl}${sitterPage.path}?lang=${locale.code}" />`
+    }
+
+    sitemap += `
+    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${sitterPage.path}?lang=${siteConfig.defaultLocale}" />`
 
     sitemap += `
   </url>`

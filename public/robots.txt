@@ -1,9 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /account/
-Disallow: /login
-Disallow: /register
-Disallow: /forgot-password
-Disallow: /choose-role
-
-Sitemap: https://babysitter.com/sitemap.xml
