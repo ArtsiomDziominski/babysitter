@@ -56,5 +56,13 @@ export default defineNuxtConfig({
                 { name: 'format-detection', content: 'telephone=no' }
             ]
         }
+    },
+    routeRules: {
+        '/kak-stat-bebisitterom': { prerender: false, ssr: true },
+        '/how-to-become-babysitter': { prerender: false, ssr: true },
+        '/yak-staty-bebisiterom': { prerender: false, ssr: true },
+        '/yak-stats-bebisiteram': { prerender: false, ssr: true },
+        '/rogor-gavides-bebisiteri': { prerender: false, ssr: true },
+        '/become-sitter': { prerender: false, ssr: true }
     }
 })

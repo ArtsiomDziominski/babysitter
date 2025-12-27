@@ -93,13 +93,24 @@
 
 <script setup lang="ts">
 const siteConfig = useSiteConfig()
+const { locale } = useI18n()
 const currentYear = new Date().getFullYear()
 
-const serviceLinks = [
+const localizedBecomeSitterUrls: Record<string, string> = {
+  ru: '/kak-stat-bebisitterom',
+  en: '/how-to-become-babysitter',
+  uk: '/yak-staty-bebisiterom',
+  be: '/yak-stats-bebisiteram',
+  ka: '/rogor-gavides-bebisiteri'
+}
+
+const becomeSitterUrl = computed(() => localizedBecomeSitterUrls[locale.value] || localizedBecomeSitterUrls.ru)
+
+const serviceLinks = computed(() => [
   { to: '/find-sitter', label: 'footer.services.findSitter' },
   { to: '/online-classes', label: 'footer.services.onlineClasses' },
-  { to: '/become-sitter', label: 'footer.services.becomeSitter' }
-]
+  { to: becomeSitterUrl.value, label: 'footer.services.becomeSitter' }
+])
 
 const infoLinks = [
   { to: '/about', label: 'footer.info.about' },
