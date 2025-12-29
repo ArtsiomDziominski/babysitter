@@ -34,6 +34,7 @@ export interface Sitter {
   onlineLesson?: string
   minOrderAmount?: string
   petAttitude?: string
+  city?: string
 }
 
 export interface Review {

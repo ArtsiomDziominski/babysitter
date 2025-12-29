@@ -142,4 +142,12 @@ const yearWord = computed(() => {
     return t('bookings.sitter.years')
   }
 })
+
+const getCityName = (cityKey: string) => {
+  try {
+    return t(`cities.${ cityKey }`)
+  } catch {
+    return cityKey
+  }
+}
 </script>

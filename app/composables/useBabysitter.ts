@@ -71,6 +71,7 @@ export interface BabysitterListItem {
   petAttitude?: string
   advantages?: string[]
   birthDate?: string
+  city?: string
   rating?: string
   reviewsCount?: number
   returningCount?: number
@@ -349,6 +350,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     returningCount: data.returningCount,
     responseTime: data.responseTime,
     petAttitude: data.petAttitude,
+    city: data.city,
   }
 }
 

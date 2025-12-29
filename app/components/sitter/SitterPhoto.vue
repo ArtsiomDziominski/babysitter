@@ -42,7 +42,7 @@
     </div>
 
     <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-      <div class="flex items-start justify-between gap-3 mb-2">
+      <div class="flex items-start justify-between gap-3 mb-3">
         <div class="flex-1">
           <h1 class="text-2xl font-bold text-white drop-shadow-lg line-clamp-1 mb-1">
             {{ sitter.name }}
@@ -50,8 +50,12 @@
           <div v-if="sitter.age" class="text-sm text-white/90">
             {{ sitter.age }} {{ getAgeText(sitter.age) }}
           </div>
+          <div v-if="sitter.city" class="flex items-center gap-1.5 text-sm text-white/90 mt-1">
+            <Icon name="i-lucide-map-pin" size="14" />
+            <span>{{ getCityName(sitter.city) }}</span>
+          </div>
         </div>
-        <div class="flex flex-col items-end gap-2 flex-shrink-0">
+        <div class="flex flex-col items-end gap-2 flex-shrink-0 mt-auto">
           <div
             v-if="sitter.isOnline"
             class="flex items-center gap-1.5 bg-green-500/90 backdrop-blur-sm rounded-full px-2.5 py-1 text-white text-xs font-medium shadow-lg"
@@ -96,6 +100,14 @@ const route = useRoute()
 const siteConfig = useSiteConfig()
 const toast = useToast()
 const { t } = useI18n()
+
+const getCityName = (cityKey: string) => {
+  try {
+    return t(`cities.${ cityKey }`)
+  } catch {
+    return cityKey
+  }
+}
 
 const formatRating = (rating: number | string | undefined) => {
   if (!rating) return '0.0'
