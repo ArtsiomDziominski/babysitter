@@ -18,7 +18,7 @@
     </div>
 
     <div class="absolute top-3 right-3 flex gap-1.5 z-10">
-      <button
+      <!-- <button
         class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
         @click="$emit('toggle-favorite')"
       >
@@ -27,18 +27,18 @@
           :class="isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-600 dark:text-gray-400'"
           size="18"
         />
-      </button>
+      </button> -->
       <button
         class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
         @click="handleShare"
       >
         <Icon name="i-lucide-share-2" size="18" class="text-gray-600 dark:text-gray-400" />
       </button>
-      <button
+      <!-- <button
         class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
       >
         <Icon name="i-lucide-flag" size="18" class="text-gray-600 dark:text-gray-400" />
-      </button>
+      </button> -->
     </div>
 
     <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
@@ -66,7 +66,9 @@
             Был {{ formatLastSeen(sitter.lastSeenOnline) }}
           </div>
           <div class="flex items-center gap-1.5 text-white/90">
-            <Icon name="i-lucide-star" size="16" class="text-yellow-400 fill-yellow-400" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-yellow-400">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
             <span class="text-base font-semibold">{{ formatRating(sitter.rating) }}</span>
             <span class="text-xs text-white/70">({{ sitter.orders }})</span>
           </div>
