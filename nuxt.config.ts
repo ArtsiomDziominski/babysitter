@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const siteConfigFile = process.env.SITE_CONFIG || 'babysitters'
+const siteConfigFile = process.env.SITE_CONFIG || 'sitter'
 let siteConfig: any
 
 try {
