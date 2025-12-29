@@ -100,6 +100,7 @@ const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
 const toast = useToast()
 const { t } = useI18n()
+const { convertAdvantagesToKeys } = useAdvantages()
 
 function buildDefaultForm(user?: { name?: string; surname?: string }): BabysitterProfilePayload {
   return {
