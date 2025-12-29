@@ -80,30 +80,6 @@ const fields: AuthFormField[] = [
   }
 ]
 
-const providers = [
-  {
-    label: 'Google',
-    icon: 'i-simple-icons-google',
-    onClick: () => {
-      toast.add({ title: 'Google', description: t('auth.registerWithGoogle') })
-    }
-  },
-  {
-    label: 'Яндекс',
-    icon: 'i-simple-icons-yandexinternational',
-    onClick: () => {
-      toast.add({ title: 'Яндекс', description: t('auth.registerWithYandex') })
-    }
-  },
-  {
-    label: 'VK',
-    icon: 'i-simple-icons-vk',
-    onClick: () => {
-      toast.add({ title: 'VK', description: t('auth.registerWithVK') })
-    }
-  }
-]
-
 const schema = z.object({
   name: z.string().min(2, t('auth.nameMinLength')),
   surname: z.string().min(2, t('auth.surnameMinLength')),
@@ -157,7 +133,6 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         :description="t('auth.registerDescription')"
         icon="i-lucide-user-plus"
         :fields="fields"
-        :providers="providers"
         :loading="isLoading"
         @submit="onSubmit"
       >

@@ -52,30 +52,6 @@ const fields: AuthFormField[] = [
   }
 ]
 
-const providers = [
-  {
-    label: 'Google',
-    icon: 'i-simple-icons-google',
-    onClick: () => {
-      toast.add({ title: 'Google', description: t('auth.loginWithGoogle') })
-    }
-  },
-  {
-    label: 'Яндекс',
-    icon: 'i-lucide-yandex',
-    onClick: () => {
-      toast.add({ title: 'Яндекс', description: t('auth.loginWithYandex') })
-    }
-  },
-  {
-    label: 'VK',
-    icon: 'i-simple-icons-vk',
-    onClick: () => {
-      toast.add({ title: 'VK', description: t('auth.loginWithVK') })
-    }
-  }
-]
-
 const schema = z.object({
   email: z.string().email(t('auth.invalidEmail')),
   password: z.string().min(8, t('auth.passwordMinLength'))
@@ -117,7 +93,6 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         :description="t('auth.loginDescription')"
         icon="i-lucide-user"
         :fields="fields"
-        :providers="providers"
         :loading="isLoading"
         @submit="onSubmit"
       >
