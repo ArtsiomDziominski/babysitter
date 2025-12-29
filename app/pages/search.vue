@@ -52,6 +52,7 @@
 import type { SearchFilters, SearchForm } from '~/types/sitter'
 import type { BabysitterListItem, FetchBabysittersParams } from '~/composables/useBabysitter'
 import { SearchViewMode, type SearchViewModeType } from '~/const/viewMode'
+import { CITY_KEYS } from '~/const/cities'
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -131,7 +132,14 @@ const loadBabysitters = async () => {
     if (filters.value.maxAge) params.maxAge = filters.value.maxAge
     if (filters.value.minRating) params.minRating = filters.value.minRating
     if (filters.value.maxRating) params.maxRating = filters.value.maxRating
-    if (searchForm.value.address) params.search = searchForm.value.address
+    if (searchForm.value.address) {
+      const cityKey = searchForm.value.address
+      if (CITY_KEYS.includes(cityKey as any)) {
+        params.city = cityKey
+      } else {
+        params.search = searchForm.value.address
+      }
+    }
     if (filters.value.onlyOnline) params.isOnline = true
     if (filters.value.advantages && filters.value.advantages.length > 0) {
       params.advantage = filters.value.advantages

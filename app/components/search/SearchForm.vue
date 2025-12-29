@@ -4,11 +4,13 @@
       {{ $t('bookings.title') }}
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <UInput
-        v-model="modelValue.address"
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr_auto] gap-4">
+      <USelect
+        v-model="selectedCity"
+        :items="cityOptions"
         :placeholder="$t('bookings.search.city')"
-        icon="i-lucide-map-pin"
+        labelKey="label"
+        valueKey="value"
         size="lg"
       />
       <UInput
@@ -32,11 +34,9 @@
         icon="i-lucide-clock"
         size="lg"
       />
-    </div>
-    <div class="mt-4 flex justify-end">
       <UButton
         color="primary"
-        size="lg"
+        size="sm"
         @click="$emit('search')"
       >
         {{ $t('bookings.search.submit') }}
@@ -47,12 +47,36 @@
 
 <script setup lang="ts">
 import type { SearchForm } from '~/types/sitter'
+import { CITY_KEYS, City } from '~/const/cities'
 
-defineProps<{
+const props = defineProps<{
   modelValue: SearchForm
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   search: []
+  'update:modelValue': [value: SearchForm]
 }>()
+
+const { t } = useI18n()
+
+const cityOptions = computed(() =>
+    CITY_KEYS.map(key => ({
+      label: t(`cities.${ key }`),
+      value: key
+    }))
+)
+
+const selectedCity = computed({
+  get: () => {
+    const address = props.modelValue.address
+    return address ? (address as City) : undefined
+  },
+  set: (value: City | undefined) => {
+    emit('update:modelValue', {
+      ...props.modelValue,
+      address: value || ''
+    })
+  }
+})
 </script>

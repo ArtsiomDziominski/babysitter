@@ -349,6 +349,8 @@
       "birthDate": "Дата народження",
       "experience": "Досвід (років)",
       "experiencePlaceholder": "3",
+      "city": "Місто",
+      "cityPlaceholder": "Виберіть місто",
       "about": "Про себе",
       "aboutPlaceholder": "Коротко опишіть досвід та сильні сторони",
       "minOrder": "Мінімальне замовлення (BYN)",

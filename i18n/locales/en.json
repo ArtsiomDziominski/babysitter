@@ -346,6 +346,8 @@
       "birthDate": "Birth date",
       "experience": "Experience (years)",
       "experiencePlaceholder": "3",
+      "city": "City",
+      "cityPlaceholder": "Select city",
       "about": "About",
       "aboutPlaceholder": "Briefly describe your experience and strengths",
       "minOrder": "Minimum order (BYN)",

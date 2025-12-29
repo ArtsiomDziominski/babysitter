@@ -49,6 +49,21 @@
       </div>
     </div>
 
+    <div class="w-full md:w-1/3">
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        {{ t('account.nannyForm.city') }}
+      </label>
+      <USelect
+          v-model="selectedCity"
+          :items="cityOptions"
+          labelKey="label"
+          valueKey="value"
+          :placeholder="t('account.nannyForm.cityPlaceholder')"
+          size="lg"
+          class="w-full"
+      />
+    </div>
+
     <div>
       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         {{ t('account.nannyForm.about') }}
@@ -66,6 +81,7 @@
 <script setup lang="ts">
 import { useI18n } from '#imports'
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
+import { CITY_KEYS, City } from '~/const/cities'
 
 const form = inject<Ref<BabysitterProfilePayload>>('babysitterForm')
 if (!form) {
@@ -76,6 +92,23 @@ const { t } = useI18n()
 const authStore = useAuthStore()
 const photoUploadRef = ref<{ hasPhoto: boolean } | null>(null)
 const showPhotoError = inject<Ref<boolean>>('babysitterShowPhotoError', ref(false))
+
+const cityOptions = computed(() =>
+    CITY_KEYS.map(key => ({
+      label: t(`cities.${ key }`),
+      value: key
+    }))
+)
+
+const selectedCity = computed({
+  get: () => {
+    const city = form.value.city
+    return city ? (city as City) : undefined
+  },
+  set: (value: City | undefined) => {
+    form.value.city = value ?? null
+  }
+})
 
 const hasPhoto = computed(() => {
   return !!authStore.currentUser?.avatar

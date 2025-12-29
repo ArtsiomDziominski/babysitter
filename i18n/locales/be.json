@@ -348,6 +348,8 @@
       "birthDate": "Дата нараджэння",
       "experience": "Досвед (гадоў)",
       "experiencePlaceholder": "3",
+      "city": "Горад",
+      "cityPlaceholder": "Выберыце горад",
       "about": "Пра сябе",
       "aboutPlaceholder": "Каротка апішыце досвед і моцныя бакі",
       "minOrder": "Мінімальны заказ (BYN)",

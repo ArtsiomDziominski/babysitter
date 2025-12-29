@@ -348,6 +348,8 @@
       "birthDate": "დაბადების თარიღი",
       "experience": "გამოცდილება (წელი)",
       "experiencePlaceholder": "3",
+      "city": "ქალაქი",
+      "cityPlaceholder": "აირჩიეთ ქალაქი",
       "about": "ჩემს შესახებ",
       "aboutPlaceholder": "მოკლედ აღწერეთ გამოცდილება და ძლიერი მხარეები",
       "minOrder": "მინიმალური შეკვეთა (BYN)",

@@ -349,6 +349,8 @@
       "birthDate": "Дата рождения",
       "experience": "Опыт (лет)",
       "experiencePlaceholder": "3",
+      "city": "Город",
+      "cityPlaceholder": "Выберите город",
       "about": "О себе",
       "aboutPlaceholder": "Кратко опишите опыт и сильные стороны",
       "minOrder": "Минимальный заказ (BYN)",

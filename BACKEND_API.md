@@ -675,7 +675,8 @@ avatar: <File>
 - `maxRate` (number, optional) - максимальная ставка за час
 - `minRating` (number, optional) - минимальный рейтинг (от 0 до 5)
 - `maxRating` (number, optional) - максимальный рейтинг (от 0 до 5)
-- `advantage` (string[] | string, optional) - массив преимуществ для поиска (точное совпадение). Можно передать несколько значений через запятую в одном параметре или несколько параметров. Примеры: `?advantage=Мед образование&advantage=Английский` или `?advantage=Мед образование,Английский`
+- `advantage` (string[] | string, optional) - массив преимуществ для поиска (точное совпадение). Няня должна иметь ВСЕ переданные преимущества. Можно передать несколько значений через запятую в одном параметре или несколько параметров. Примеры: `?advantage=Мед образование&advantage=Английский` или `?advantage=Мед образование,Английский` - вернет только нянь, у которых есть оба преимущества
+- `city` (string, optional) - точное совпадение с названием города
 - `isOnline` (boolean, optional) - фильтр по онлайн статусу (true - только онлайн, false - только оффлайн)
 - `search` (string, optional) - поиск по имени/описанию
 - `sort` (string, optional) - сортировка результатов. Доступные значения:
@@ -724,6 +725,7 @@ avatar: <File>
       "specialNeedsCare": true,
       "petAttitude": "Комфортно с животными",
       "advantages": ["Мед образование", "Английский"],
+      "city": "Москва",
       "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
@@ -760,6 +762,7 @@ avatar: <File>
   "hourlyRate": 700,
   "certifications": ["CPR", "First Aid"],
   "bio": "Опытная няня с 3 годами стажа",
+  "city": "Москва",
   "rating": 4.8,
   "reviewsCount": 15,
   "available": true,
@@ -845,6 +848,7 @@ avatar: <File>
   "specialNeedsCare": true,
   "petAttitude": "Комфортно с животными",
   "advantages": ["Мед образование", "Английский"],
+      "city": "Москва",
       "birthDate": "1999-05-01",
       "rating": 4.8,
       "reviewsCount": 15,
@@ -923,6 +927,7 @@ avatar: <File>
 - `specialNeedsCare` — берёт особенных детей (`true`/`false`).
 - `petAttitude` — отношение к животным.
 - `advantages` — массив преимуществ.
+- `city` — город (строка).
 - `birthDate` — дата рождения в формате `YYYY-MM-DD`.
 - `showInSearch` (boolean, optional) — показывать профиль в поиске (по умолчанию `false`).
 
@@ -948,6 +953,7 @@ avatar: <File>
   "specialNeedsCare": true,
   "petAttitude": "Комфортно с животными",
   "advantages": ["Мед образование", "Английский"],
+  "city": "Москва",
   "birthDate": "1999-05-01",
   "showInSearch": true,
   "schedules": [
@@ -1015,6 +1021,7 @@ avatar: <File>
   "specialNeedsCare": true,
   "petAttitude": "Комфортно с животными",
   "advantages": ["Мед образование", "Английский"],
+  "city": "Москва",
   "birthDate": "1999-05-01",
   "showInSearch": true,
   "schedules": [

@@ -43,6 +43,7 @@ export interface BabysitterProfilePayload {
   petAttitude?: string | null
   advantages?: string[]
   birthDate?: string | null
+  city?: string | null
   showInSearch?: boolean
   schedules?: BabysitterScheduleBlock[]
 }
@@ -108,6 +109,7 @@ export interface FetchBabysittersParams {
   sort?: string
   isOnline?: boolean
   advantage?: string[]
+  city?: string
 }
 
 export interface BabysitterDetailResponse {
@@ -133,6 +135,7 @@ export interface BabysitterDetailResponse {
   petAttitude?: string
   advantages?: string[]
   birthDate?: string
+  city?: string
   rating?: number
   reviewsCount?: number
   available?: boolean
@@ -198,6 +201,7 @@ export const useBabysitter = () => {
     if (params?.search) queryParams.append('search', params.search)
     if (params?.sort) queryParams.append('sort', params.sort)
     if (params?.isOnline !== undefined) queryParams.append('isOnline', params.isOnline.toString())
+    if (params?.city) queryParams.append('city', params.city)
     if (params?.advantage && params.advantage.length > 0) {
       params.advantage.forEach(adv => {
         queryParams.append('advantage', adv)
