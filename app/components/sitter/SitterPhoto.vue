@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-[430px] overflow-hidden rounded-2xl shadow-2xl">
+  <div class="relative w-full aspect-square max-w-[430px] max-h-[430px] overflow-hidden rounded-2xl shadow-2xl mx-auto">
     <div
       v-if="sitter.avatar"
       class="absolute inset-0 bg-cover bg-center"

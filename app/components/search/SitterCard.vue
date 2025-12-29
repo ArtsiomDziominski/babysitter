@@ -35,7 +35,7 @@
           <div>
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white cursor-pointer"
                 @click="$emit('book', sitter.id.toString())">
-              {{ getName(sitter.firstName, sitter.lastName) }}
+              {{ getName(sitter.firstName, sitter.lastName?.[0] + '.') }}
             </h3>
             <div class="flex items-center gap-2 mt-1">
               <div class="flex items-center">
