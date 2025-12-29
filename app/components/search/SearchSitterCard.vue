@@ -7,7 +7,7 @@
       @click="$emit('book', sitter.id.toString())"
     >
       <div class="relative">
-        <div class="w-[246px] h-[256px] bg-gray-200 dark:bg-gray-700 overflow-hidden">
+        <div class="w-[246px] h-[256px] max-xl:w-full max-xl:aspect-[246/256] bg-gray-200 dark:bg-gray-700 overflow-hidden">
           <img
             v-if="sitter.avatarUrl"
             :src="sitter.avatarUrl"
@@ -16,7 +16,7 @@
           />
           <div
             v-else
-            class="w-[246px] h-[256px] flex items-center justify-center text-gray-400"
+            class="w-full h-full flex items-center justify-center text-gray-400"
           >
             <Icon name="i-lucide-user" size="48" />
           </div>
@@ -30,15 +30,15 @@
         </div>
       </div>
 
-      <div class="p-4">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+      <div class="p-4 max-xl:p-3">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1 max-xl:text-base">
           {{ formatName(sitter.firstName, sitter.lastName) }}{{ getAge(sitter.birthDate) }}
         </h3>
-        <div class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+        <div class="text-xl font-bold text-gray-900 dark:text-white mb-3 max-xl:text-lg">
           {{ sitter.priceOneChild ? parseFloat(sitter.priceOneChild) : 0 }} ₽/час
         </div>
 
-        <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+        <div class="flex flex-wrap gap-4 max-xl:gap-2 text-sm text-gray-600 dark:text-gray-400 max-xl:text-xs">
           <div class="flex items-center gap-1">
             <Icon name="i-lucide-shopping-bag" size="16" />
             <span>{{ sitter.reviewsCount || 0 }} Заказа</span>

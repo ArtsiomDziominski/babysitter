@@ -1,17 +1,17 @@
 <template>
   <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
     <UContainer>
-      <div class="py-12 space-y-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="py-12 max-xl:py-6 space-y-8 max-xl:space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-xl:gap-6">
           <div>
-            <NuxtLink to="/" class="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              <img :src="siteConfig.logo" :alt="siteConfig.name" class="w-10 h-10 object-contain"/>
+            <NuxtLink to="/" class="flex items-center gap-2 text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white mb-4 max-xl:mb-3">
+              <img :src="siteConfig.logo" :alt="siteConfig.name" class="w-10 h-10 max-xl:w-8 max-xl:h-8 object-contain"/>
               <span>{{ siteConfig.name }}</span>
             </NuxtLink>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            <p class="text-sm max-xl:text-xs text-gray-600 dark:text-gray-400 mb-4 max-xl:mb-3">
               {{ $t('footer.description') }}
             </p>
-            <div class="flex gap-4">
+            <div class="flex gap-4 max-xl:gap-3">
               <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
                 <Icon name="mdi:instagram" size="24"/>
               </a>
@@ -25,13 +25,13 @@
           </div>
 
           <div>
-            <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
+            <h3 class="font-semibold max-xl:text-sm text-gray-900 dark:text-white mb-4 max-xl:mb-3">
               {{ $t('footer.services.title') }}
             </h3>
-            <ul class="space-y-2">
+            <ul class="space-y-2 max-xl:space-y-1.5">
               <li v-for="link in serviceLinks" :key="link.to">
                 <NuxtLink :to="link.to"
-                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
+                          class="text-sm max-xl:text-xs text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
                   {{ $t(link.label) }}
                 </NuxtLink>
               </li>
@@ -39,13 +39,13 @@
           </div>
 
           <div>
-            <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
+            <h3 class="font-semibold max-xl:text-sm text-gray-900 dark:text-white mb-4 max-xl:mb-3">
               {{ $t('footer.info.title') }}
             </h3>
-            <ul class="space-y-2">
+            <ul class="space-y-2 max-xl:space-y-1.5">
               <li v-for="link in infoLinks" :key="link.to">
                 <NuxtLink :to="link.to"
-                          class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
+                          class="text-sm max-xl:text-xs text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">
                   {{ $t(link.label) }}
                 </NuxtLink>
               </li>
@@ -76,15 +76,15 @@
           <!--          </div>-->
         </div>
 
-        <div class="pt-8 border-t border-gray-200 dark:border-gray-800">
-          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+        <div class="pt-8 max-xl:pt-4 border-t border-gray-200 dark:border-gray-800">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-xl:gap-3">
+            <div class="flex flex-wrap gap-4 max-xl:gap-2 text-sm max-xl:text-xs text-gray-600 dark:text-gray-400">
               <NuxtLink v-for="link in legalLinks" :key="link.to" :to="link.to"
                         class="hover:text-primary-500 transition-colors">
                 {{ $t(link.label) }}
               </NuxtLink>
             </div>
-            <div class="text-sm text-gray-600 dark:text-gray-400">
+            <div class="text-sm max-xl:text-xs text-gray-600 dark:text-gray-400">
               © {{ currentYear }}, Babysitter
             </div>
           </div>

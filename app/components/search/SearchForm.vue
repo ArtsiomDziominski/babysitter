@@ -1,10 +1,10 @@
 <template>
-  <div class="p-6 border-b border-gray-200 dark:border-gray-700">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+  <div class="p-6 max-xl:p-3 border-b border-gray-200 dark:border-gray-700">
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 max-xl:mb-3 max-xl:text-lg">
       {{ $t('bookings.title') }}
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr] gap-4">
+    <div class="grid grid-cols-1 max-xl:grid-cols-2 md:grid-cols-[1fr_1fr_1fr_1fr] gap-4 max-xl:gap-2">
       <USelect
         v-model="selectedCity"
         :items="cityOptions"
@@ -26,6 +26,7 @@
         :placeholder="$t('bookings.search.timeStart')"
         icon="i-lucide-clock"
         size="lg"
+        class="max-xl:hidden"
       />
       <UInput
         v-model="modelValue.timeEnd"
@@ -33,6 +34,7 @@
         :placeholder="$t('bookings.search.timeEnd')"
         icon="i-lucide-clock"
         size="lg"
+        class="max-xl:hidden"
       />
       <!-- <UButton
         color="primary"

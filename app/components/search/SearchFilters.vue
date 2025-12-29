@@ -1,6 +1,6 @@
 <template>
-  <div class="w-80 border-r border-gray-200 dark:border-gray-700 p-6 overflow-y-auto">
-    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+  <div class="w-80 max-xl:!w-full border-r border-gray-200 dark:border-gray-700 max-xl:!border-r-0 p-6 max-xl:p-0 overflow-y-auto">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 max-xl:hidden">
       {{ $t('bookings.filters.title') }}
     </h2>
 
@@ -95,7 +95,7 @@
         <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
           {{ $t('bookings.filters.advantages.title') }}
         </h3>
-        <div class="space-y-2 max-h-96 overflow-y-auto">
+        <div class="space-y-2 max-h-96 max-xl:max-h-none overflow-y-auto max-xl:overflow-visible">
           <label
             v-for="advantageKey in advantageKeys"
             :key="advantageKey"

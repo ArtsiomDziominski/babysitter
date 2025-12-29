@@ -111,6 +111,9 @@ export interface FetchBabysittersParams {
   isOnline?: boolean
   advantage?: string[]
   city?: string
+  date?: string
+  startTime?: string
+  endTime?: string
 }
 
 export interface BabysitterDetailResponse {
@@ -203,6 +206,9 @@ export const useBabysitter = () => {
     if (params?.sort) queryParams.append('sort', params.sort)
     if (params?.isOnline !== undefined) queryParams.append('isOnline', params.isOnline.toString())
     if (params?.city) queryParams.append('city', params.city)
+    if (params?.date) queryParams.append('date', params.date)
+    if (params?.startTime) queryParams.append('startTime', params.startTime)
+    if (params?.endTime) queryParams.append('endTime', params.endTime)
     if (params?.advantage && params.advantage.length > 0) {
       params.advantage.forEach(adv => {
         queryParams.append('advantage', adv)

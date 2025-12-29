@@ -1,16 +1,29 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 max-xl:py-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-xl:px-2">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm max-xl:rounded-none">
         <SearchForm
             v-model="searchForm"
             @search="handleSearch"
         />
 
-        <div class="flex">
-          <SearchFilters v-model="filters"/>
+        <div class="flex max-xl:flex-col">
+          <SearchFilters v-model="filters" class="max-xl:hidden"/>
 
-          <div class="flex-1 p-6">
+          <div class="flex-1 p-6 max-xl:p-3">
+            <div class="max-xl:mb-3">
+              <UButton
+                  color="primary"
+                  variant="outline"
+                  size="sm"
+                  class="xl:hidden mb-3 w-full"
+                  @click="isFiltersModalOpen = true"
+              >
+                <Icon name="i-lucide-filter" class="mr-2"/>
+                {{ $t('bookings.filters.title') }}
+              </UButton>
+            </div>
+
             <SearchToolbar
                 :count="filteredSitters.length"
                 v-model:sort-by="sortBy"
@@ -45,6 +58,12 @@
         </div>
       </div>
     </div>
+
+    <SearchFiltersModal
+        v-model="isFiltersModalOpen"
+        v-model:search-form="searchForm"
+        v-model:filters="filters"
+    />
   </div>
 </template>
 
@@ -251,4 +270,6 @@ onMounted(() => {
 const handleBook = (sitterId: string | number) => {
   router.push(`/sitter/${ sitterId }`)
 }
+
+const isFiltersModalOpen = ref(false)
 </script>

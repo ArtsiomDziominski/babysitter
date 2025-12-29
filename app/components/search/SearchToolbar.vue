@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-between mb-6">
-    <div class="flex items-center gap-4">
+  <div class="flex items-center justify-between mb-6 max-xl:flex-col max-xl:items-stretch max-xl:gap-4">
+    <div class="flex items-center gap-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
       <span class="text-sm text-gray-600 dark:text-gray-400">
         {{ $t('bookings.found') }}: {{ count }}
       </span>
@@ -13,7 +13,7 @@
         @update:model-value="$emit('update:sortBy', $event)"
       />
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 max-xl:hidden">
       <UTooltip :text="$t('bookings.view.tooltip.list')">
         <UButton
           :variant="viewMode === SearchViewMode.LIST ? 'solid' : 'outline'"

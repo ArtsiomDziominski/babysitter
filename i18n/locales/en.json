@@ -592,7 +592,7 @@
   "bookings": {
     "title": "Find babysitter",
     "search": {
-      "city": "City, address",
+      "city": "City",
       "date": "Order date",
       "timeStart": "Start",
       "timeEnd": "End",

@@ -1,8 +1,8 @@
 <template>
   <div class="relative group">
-    <div class="text-2xl font-bold text-gray-900 dark:text-white cursor-pointer">
+    <div class="text-2xl max-xl:text-lg font-bold text-gray-900 dark:text-white cursor-pointer break-words">
       {{ priceOneChild ? parseFloat(priceOneChild) : 0 }} ₽
-      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+      <span class="text-sm max-xl:text-xs font-normal text-gray-500 dark:text-gray-400">
         {{ $t('bookings.sitter.perHour') }}
       </span>
     </div>

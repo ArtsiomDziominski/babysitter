@@ -1,11 +1,11 @@
 <template>
   <div
-      class="relative border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow"
+      class="relative border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-xl:p-3 hover:shadow-md transition-shadow overflow-hidden"
   >
-    <div class="flex gap-6">
-      <div class="flex-shrink-0 flex flex-col">
+    <div class="flex gap-6 max-xl:flex-col max-xl:gap-3">
+      <div class="flex-shrink-0 flex flex-col max-xl:items-center max-xl:w-full">
         <div
-            class="relative w-[140px] h-[140px] bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer"
+            class="relative w-[140px] h-[140px] max-xl:w-full max-xl:max-w-none max-xl:h-auto max-xl:aspect-square bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer"
              @click="$emit('book', sitter.id.toString())"
         >
           <img
@@ -34,31 +34,31 @@
         </div>
       </div>
 
-      <div class="flex-1 min-w-0">
-        <div class="flex items-start justify-between mb-2">
-          <div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white cursor-pointer"
+      <div class="flex-1 min-w-0 max-xl:w-full">
+        <div class="flex items-start justify-between mb-2 max-xl:flex-col max-xl:gap-2">
+          <div class="flex-1 min-w-0">
+            <h3 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white cursor-pointer break-words"
                 @click="$emit('book', sitter.id.toString())">
               {{ getName(sitter.firstName, sitter.lastName?.[0] + '.') }}
             </h3>
-            <div class="flex items-center gap-2 mt-1">
+            <div class="flex items-center gap-2 mt-1 max-xl:flex-wrap max-xl:text-xs">
               <div class="flex items-center">
-                <Icon name="i-lucide-star" class="text-yellow-400"/>
-                <span class="ml-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <Icon name="i-lucide-star" class="text-yellow-400 max-xl:w-3 max-xl:h-3"/>
+                <span class="ml-1 text-sm max-xl:text-xs font-medium text-gray-700 dark:text-gray-300">
                   {{ sitter.rating ? parseFloat(sitter.rating) : 0 }}
                 </span>
               </div>
-              <span class="text-sm text-gray-500 dark:text-gray-400">
+              <span class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400">
                 {{ sitter.reviewsCount || 0 }} {{ $t('bookings.sitter.orders') }}
               </span>
-              <span v-if="sitter.returningCount" class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                <Icon name="i-lucide-repeat" size="14" />
+              <span v-if="sitter.returningCount" class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <Icon name="i-lucide-repeat" size="14" class="max-xl:w-3 max-xl:h-3"/>
                 {{ sitter.returningCount }} {{ $t('bookings.sitter.returned') }}
               </span>
             </div>
           </div>
-          <div class="text-right">
-            <SearchPriceMenu
+          <div class="text-right max-xl:w-full max-xl:text-left">
+            <PriceMenu
                 :price-one-child="sitter.priceOneChild"
                 :price-two-children="sitter.priceTwoChildren"
                 :price-three-children="sitter.priceThreeChildren"
@@ -69,31 +69,31 @@
           </div>
         </div>
 
-        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+        <p class="text-gray-600 dark:text-gray-400 mb-4 max-xl:mb-3 max-xl:text-sm line-clamp-2 break-words">
           {{ sitter.bio || '' }}
         </p>
 
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
+        <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
+          <span class="px-2 py-1 text-xs max-xl:text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded break-words">
             {{ $t('bookings.sitter.experience') }} {{ sitter.experience }} {{ yearWord }}
           </span>
         </div>
 
-        <div class="flex flex-wrap gap-2 mb-4">
+        <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
           <span
               v-for="advantage in displayedAdvantages"
               :key="advantage"
-              class="px-2 py-1 text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded"
+              class="px-2 py-1 text-xs max-xl:text-[10px] bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded break-words"
           >
             {{ advantage }}
           </span>
         </div>
 
-        <div class="flex flex-wrap gap-2 mb-4">
+        <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
           <span
               v-for="tag in sitter.certifications"
               :key="tag"
-              class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded"
+              class="px-2 py-1 text-xs max-xl:text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded break-words"
           >
             {{ tag }}
           </span>
@@ -102,7 +102,7 @@
         <UButton
             color="primary"
             size="lg"
-            class="absolute right-6 bottom-6 cursor-pointer"
+            class="absolute right-6 bottom-6 max-xl:!relative max-xl:!right-auto max-xl:!bottom-auto max-xl:!static max-xl:w-full max-xl:mt-2 max-xl:mb-0 cursor-pointer"
             @click="$emit('book', sitter.id.toString())"
         >
           {{ $t('bookings.sitter.details') }}
