@@ -1,7 +1,7 @@
 <template>
-  <div class="w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
-    <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-      <h1 class="text-xl font-semibold text-gray-900 dark:text-white">
+  <div class="w-80 max-xl:w-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 max-xl:border-r-0 flex flex-col">
+    <div class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <h1 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white">
         {{ $t('account.messages.title') }}
       </h1>
     </div>
@@ -13,7 +13,7 @@
         <button
           v-for="chat in chats"
           :key="chat.id"
-          class="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors text-left group"
+          class="w-full flex items-center gap-3 px-4 max-xl:px-3 py-3 max-xl:py-2 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors text-left group"
           :class="activeChatId === chat.id
             ? 'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-primary-500'
             : ''"
@@ -25,7 +25,7 @@
               :icon="chat.icon"
               :alt="chat.name"
               size="md"
-              class="ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-800"
+              class="max-xl:w-10 max-xl:h-10 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-800"
               :class="activeChatId === chat.id ? 'ring-primary-500' : 'ring-transparent'"
             />
             <div

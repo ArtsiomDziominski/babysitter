@@ -1,16 +1,19 @@
 <template>
-  <div class="chat-container bg-gray-50 dark:bg-gray-900 flex flex-col h-[calc(100vh-12rem)] rounded-lg overflow-hidden">
-    <div class="flex h-full">
+  <div class="chat-container bg-gray-50 dark:bg-gray-900 flex flex-col h-[calc(100vh-12rem)] max-xl:h-[calc(100vh-8rem)] rounded-lg max-xl:rounded-none overflow-hidden">
+    <div class="flex h-full max-xl:relative">
       <ChatList
         :chats="chats"
         :active-chat-id="activeChatId"
         :loading="loading"
         :last-messages-time-map="lastMessagesTimeMap"
+        class="max-xl:absolute max-xl:inset-0 max-xl:z-10"
+        :class="activeChatId && 'max-xl:hidden'"
         @select="selectChat"
       />
 
-      <div class="flex-1 flex flex-col min-h-0 bg-white dark:bg-gray-800">
-        <ChatHeader :chat="activeChat || null" />
+      <div class="flex-1 flex flex-col min-h-0 bg-white dark:bg-gray-800 max-xl:absolute max-xl:inset-0 max-xl:z-20"
+           :class="!activeChatId && 'max-xl:hidden'">
+        <ChatHeader :chat="activeChat || null" @back="handleBackToChatList" />
 
         <div v-if="!activeChat" class="flex-1 flex items-center justify-center">
           <div class="text-gray-500">{{ $t('account.messages.selectChat') }}</div>
@@ -287,6 +290,11 @@ function handleLoadMore() {
   if (activeChat.value && typeof activeChat.value.id === 'number') {
     loadMoreMessages(activeChat.value.id)
   }
+}
+
+function handleBackToChatList() {
+  activeChatId.value = null
+  router.push({ query: {} })
 }
 
 async function selectChat(chatId: number | string) {

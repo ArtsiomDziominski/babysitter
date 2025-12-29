@@ -1,5 +1,5 @@
 <template>
-  <div class="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+  <div class="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 max-xl:p-3">
     <UChatPrompt
       :model-value="input"
       :disabled="disabled"

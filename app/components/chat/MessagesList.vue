@@ -1,7 +1,7 @@
 <template>
   <div
     ref="messagesContainer"
-    class="flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 space-y-3 w-full min-w-0 max-w-full"
+    class="flex-1 overflow-y-auto overflow-x-hidden px-4 max-xl:px-3 py-4 max-xl:py-3 space-y-3 max-xl:space-y-2 w-full min-w-0 max-w-full"
   >
     <div
       v-for="(message, index) in messages"
@@ -28,6 +28,7 @@
       <div
         class="flex flex-col gap-1"
         :class="message.role === 'user' ? 'items-end' : 'items-start'"
+        class="max-xl:max-w-[85%]"
         style="max-width: 70%; min-width: 0; flex-shrink: 1;"
       >
         <div
