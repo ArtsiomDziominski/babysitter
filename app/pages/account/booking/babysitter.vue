@@ -99,8 +99,34 @@ definePageMeta({
 const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
 const toast = useToast()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { convertAdvantagesToKeys } = useAdvantages()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.nannyForm.title'),
+  description: () => t('account.nannyForm.subtitle'),
+  ogTitle: () => t('account.nannyForm.title'),
+  ogDescription: () => t('account.nannyForm.subtitle'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.nannyForm.title'),
+  twitterDescription: () => t('account.nannyForm.subtitle'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
 
 function buildDefaultForm(user?: { name?: string; surname?: string }): BabysitterProfilePayload {
   return {

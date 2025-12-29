@@ -81,11 +81,37 @@
 <script setup lang="ts">
 import { CITY_KEYS, City } from '~/const/cities'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const authStore = useAuthStore()
+const route = useRoute()
+const siteConfig = useSiteConfig()
 
 definePageMeta({
   middleware: 'auth'
+})
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.basicData.title'),
+  description: () => t('account.basicData.title'),
+  ogTitle: () => t('account.basicData.title'),
+  ogDescription: () => t('account.basicData.title'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.basicData.title'),
+  twitterDescription: () => t('account.basicData.title'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
 })
 
 const cityKeys = CITY_KEYS

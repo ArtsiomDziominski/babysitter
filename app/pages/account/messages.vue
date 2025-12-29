@@ -57,6 +57,38 @@ definePageMeta({
   middleware: 'auth'
 })
 
+const { t, locale } = useI18n()
+const authStore = useAuthStore()
+const route = useRoute()
+const router = useRouter()
+const chat = useChat()
+const websocket = useWebSocket()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.sections.messages'),
+  description: () => t('account.sections.messages'),
+  ogTitle: () => t('account.sections.messages'),
+  ogDescription: () => t('account.sections.messages'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.sections.messages'),
+  twitterDescription: () => t('account.sections.messages'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
+
 interface MessagePart {
   type: 'text' | 'tool-call' | 'tool-result' | 'file'
   id: string
@@ -83,13 +115,6 @@ interface Chat {
   unreadCount: number
   conversationId?: number
 }
-
-const { t } = useI18n()
-const authStore = useAuthStore()
-const route = useRoute()
-const router = useRouter()
-const chat = useChat()
-const websocket = useWebSocket()
 
 const input = ref('')
 const status = ref<'submitted' | 'streaming' | 'ready' | 'error'>('ready')

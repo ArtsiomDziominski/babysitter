@@ -332,7 +332,8 @@
       "kids": "Your Children",
       "security": "Security",
       "notificationSettings": "Notification Settings",
-      "bookingData": "Booking Data"
+      "bookingData": "Booking Data",
+      "messages": "Messages"
     },
     "nannyForm": {
       "title": "Nanny profile",

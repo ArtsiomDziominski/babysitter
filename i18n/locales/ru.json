@@ -334,7 +334,8 @@
       "kids": "Ваши дети",
       "security": "Безопасность",
       "notificationSettings": "Настройки оповещений",
-      "bookingData": "Данные для бронирования"
+      "bookingData": "Данные для бронирования",
+      "messages": "Сообщения"
     },
     "nannyForm": {
       "title": "Профиль бебиситтера",

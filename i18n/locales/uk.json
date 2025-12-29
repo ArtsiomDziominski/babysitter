@@ -334,7 +334,8 @@
       "kids": "Ваші діти",
       "security": "Безпека",
       "notificationSettings": "Налаштування сповіщень",
-      "bookingData": "Дані для бронювання"
+      "bookingData": "Дані для бронювання",
+      "messages": "Повідомлення"
     },
     "nannyForm": {
       "title": "Профіль бебісітера",

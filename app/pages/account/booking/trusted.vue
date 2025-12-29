@@ -62,13 +62,39 @@
 <script setup lang="ts">
 import type { TrustedContact } from '~/composables/useTrustedContacts'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const modalStore = useModalStore()
 const { createTrustedContact, deleteTrustedContact, getTrustedContacts, updateTrustedContact } = useTrustedContacts()
 const toast = useToast()
+const route = useRoute()
+const siteConfig = useSiteConfig()
 
 definePageMeta({
   middleware: ['auth', 'parent-only']
+})
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.booking.trustedPerson.title'),
+  description: () => t('account.booking.trustedPerson.description'),
+  ogTitle: () => t('account.booking.trustedPerson.title'),
+  ogDescription: () => t('account.booking.trustedPerson.description'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.booking.trustedPerson.title'),
+  twitterDescription: () => t('account.booking.trustedPerson.description'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
 })
 
 const contacts = ref<TrustedContact[]>([])

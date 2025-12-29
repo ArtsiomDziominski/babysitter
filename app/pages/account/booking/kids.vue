@@ -58,14 +58,40 @@
 <script setup lang="ts">
 import type { Child } from '~/composables/useChildren'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const authStore = useAuthStore()
 const modalStore = useModalStore()
 const { createChild, deleteChild, getChildren, updateChild } = useChildren()
 const toast = useToast()
+const route = useRoute()
+const siteConfig = useSiteConfig()
 
 definePageMeta({
   middleware: ['auth', 'parent-only']
+})
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.children.title'),
+  description: () => t('account.children.title'),
+  ogTitle: () => t('account.children.title'),
+  ogDescription: () => t('account.children.title'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.children.title'),
+  twitterDescription: () => t('account.children.title'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
 })
 
 const children = ref<Child[]>([])

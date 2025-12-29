@@ -3,6 +3,32 @@ import { UserRole } from '~/const/roles'
 
 const route = useRoute()
 const authStore = useAuthStore()
+const { t, locale } = useI18n()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.sections.booking'),
+  description: () => t('account.sections.booking'),
+  ogTitle: () => t('account.sections.booking'),
+  ogDescription: () => t('account.sections.booking'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.sections.booking'),
+  twitterDescription: () => t('account.sections.booking'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
 
 const enum BookingSection {
   KIDS = 'kids',

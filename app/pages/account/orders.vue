@@ -66,12 +66,38 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const bookingsApi = useBookings()
 const toast = useToast()
 const authStore = useAuthStore()
 const modalStore = useModalStore()
 const websocket = useWebSocket()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+
+const currentUrl = `${siteConfig.url}${route.path}`
+
+useSeoMeta({
+  title: () => t('account.orders.title'),
+  description: () => t('account.orders.title'),
+  ogTitle: () => t('account.orders.title'),
+  ogDescription: () => t('account.orders.title'),
+  ogImage: `${siteConfig.url}${siteConfig.logo}`,
+  ogUrl: currentUrl,
+  ogType: 'website',
+  ogLocale: locale.value,
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('account.orders.title'),
+  twitterDescription: () => t('account.orders.title'),
+  twitterImage: `${siteConfig.url}${siteConfig.logo}`,
+  robots: 'noindex, nofollow'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: currentUrl }
+  ]
+})
 
 const selectedStatus = ref<string | null>(null)
 const orders = ref<BookingListItem[]>([])
