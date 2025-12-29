@@ -61,8 +61,8 @@
               <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mt-4">
                 <p class="text-gray-700 dark:text-gray-300 mb-2">
                   <strong>{{ $t('help.contact.email') }}:</strong> 
-                  <a href="mailto:info@babysitter.by" class="text-primary-500 hover:text-primary-600">
-                    info@babysitter.by
+                  <a href="mailto:info@sitter.ge" class="text-primary-500 hover:text-primary-600">
+                    info@sitter.ge
                   </a>
                 </p>
               </div>

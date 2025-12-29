@@ -64,9 +64,9 @@
           <!--                </a>-->
           <!--              </li>-->
           <!--              <li>-->
-          <!--                <a href="mailto:info@babysitter.by" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">-->
+          <!--                <a href="mailto:info@sitter.ge" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors">-->
           <!--                  <Icon name="mdi:email" size="20"/>-->
-          <!--                  <span>info@babysitter.by</span>-->
+          <!--                  <span>info@sitter.ge</span>-->
           <!--                </a>-->
           <!--              </li>-->
           <!--              <li class="text-sm text-gray-600 dark:text-gray-400">-->
@@ -85,7 +85,7 @@
               </NuxtLink>
             </div>
             <div class="text-sm max-xl:text-xs text-gray-600 dark:text-gray-400">
-              © {{ currentYear }}, Babysitter
+              © {{ currentYear }}, Sitter
             </div>
           </div>
         </div>
