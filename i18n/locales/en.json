@@ -713,7 +713,11 @@
     "home": "Home",
     "search": "Search",
     "sitter": "Sitter",
-    "booking": "Booking"
+    "booking": "Booking",
+    "copied": "Copied",
+    "linkCopied": "Link copied to clipboard",
+    "error": "Error",
+    "copyFailed": "Failed to copy link"
   },
   "seo": {
     "home": {

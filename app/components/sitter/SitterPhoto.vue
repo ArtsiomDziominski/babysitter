@@ -30,6 +30,7 @@
       </button>
       <button
         class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
+        @click="handleShare"
       >
         <Icon name="i-lucide-share-2" size="18" class="text-gray-600 dark:text-gray-400" />
       </button>
@@ -79,7 +80,7 @@
 import type { Sitter } from '~/types/sitter'
 import { useSitterUtils } from '~/composables/useSitterUtils'
 
-defineProps<{
+const props = defineProps<{
   sitter: Sitter
   isFavorite: boolean
 }>()
@@ -89,10 +90,53 @@ defineEmits<{
 }>()
 
 const { formatLastSeen, getAgeText } = useSitterUtils()
+const route = useRoute()
+const siteConfig = useSiteConfig()
+const toast = useToast()
+const { t } = useI18n()
 
 const formatRating = (rating: number | string | undefined) => {
   if (!rating) return '0.0'
   const numRating = typeof rating === 'string' ? parseFloat(rating) : rating
   return isNaN(numRating) ? '0.0' : numRating.toFixed(1)
+}
+
+const handleShare = async () => {
+  const url = `${siteConfig.url}${route.path}`
+  const title = `${props.sitter.name} - ${t('seo.sitter.defaultTitle')}`
+  const text = props.sitter.description || title
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title,
+        text,
+        url
+      })
+    } catch (err) {
+      if ((err as Error).name !== 'AbortError') {
+        copyToClipboard(url)
+      }
+    }
+  } else {
+    copyToClipboard(url)
+  }
+}
+
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    toast.add({
+      title: t('common.copied'),
+      description: t('common.linkCopied'),
+      color: 'success'
+    })
+  } catch (err) {
+    toast.add({
+      title: t('common.error'),
+      description: t('common.copyFailed'),
+      color: 'error'
+    })
+  }
 }
 </script>
