@@ -21,7 +21,7 @@
         <div class="header__controls max-xl:flex-1 max-xl:justify-end">
           <MobileMenu :nav-links="navLinks" />
 
-          <div class="max-xl:hidden flex items-center gap-1">
+          <div class="max-xl:hidden flex items-center gap-4">
           <ClientOnly>
             <template v-if="localeOptions.length > 0">
               <div class="header__selects">
