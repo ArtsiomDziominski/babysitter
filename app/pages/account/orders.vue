@@ -205,7 +205,6 @@ const openDetailsModal = async (id: number) => {
 
   try {
     const details = await bookingsApi.getBookingById(id)
-    console.log('Детали заказа загружены:', details)
     bookingDetails.value = details
     if (details.babysitterId) {
       babysitterIdMap.value[id] = details.babysitterId

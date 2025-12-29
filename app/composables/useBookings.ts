@@ -165,8 +165,6 @@ export const useBookings = () => {
       method: 'GET',
     })
 
-    console.log('Ответ getBookingById:', response)
-
     if ('data' in response && 'statusCode' in response) {
       return response.data
     }

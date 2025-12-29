@@ -3,7 +3,7 @@
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
       <div class="text-center mb-6">
         <div class="text-4xl font-bold text-gray-900 dark:text-white mb-1">
-          {{ sitter.price }} ₽
+          {{ sitter.price }} {{ siteConfig.currency }}
         </div>
         <div class="text-sm text-gray-500 dark:text-gray-400">за час</div>
       </div>
@@ -128,6 +128,8 @@
 
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
+
+const siteConfig = useSiteConfig()
 
 defineProps<{
   sitter: Sitter

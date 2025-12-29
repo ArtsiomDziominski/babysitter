@@ -12,6 +12,7 @@ export default {
     authorCity: 'Anytown',
     authorState: 'CA',
     authorZip: '12345',
+    currency: 'BYN',
     locales: [
         { code: 'ka', iso: 'ka-GE', file: 'ka.json', name: 'ქართული' },
         { code: 'en', iso: 'en-US', file: 'en.json', name: 'English' },

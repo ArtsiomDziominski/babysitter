@@ -22,7 +22,7 @@
               {{ $t('account.orders.details.totalPrice') }}
             </p>
             <p class="text-lg font-semibold text-gray-900 dark:text-white">
-              {{ typeof details.totalPrice === 'string' ? parseFloat(details.totalPrice).toFixed(2) : details.totalPrice }} ₽
+              {{ typeof details.totalPrice === 'string' ? parseFloat(details.totalPrice).toFixed(2) : details.totalPrice }} {{ siteConfig.currency }}
             </p>
           </div>
         </div>
@@ -284,6 +284,7 @@ import { UserRole } from '~/const/roles'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const siteConfig = useSiteConfig()
 
 const props = defineProps<{
   isOpen: boolean

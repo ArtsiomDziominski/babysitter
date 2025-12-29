@@ -8,15 +8,15 @@
         <div class="space-y-2">
           <div v-if="sitter.priceOneChild" class="flex justify-between items-center text-sm">
             <span class="text-gray-600 dark:text-gray-400">{{ $t('bookings.sitter.priceCard.oneChild') }}</span>
-            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceOneChild) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
+            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceOneChild) }} {{ siteConfig.currency }}{{ $t('bookings.sitter.perHour') }}</span>
           </div>
           <div v-if="sitter.priceTwoChildren" class="flex justify-between items-center text-sm">
             <span class="text-gray-600 dark:text-gray-400">{{ $t('bookings.sitter.priceCard.twoChildren') }}</span>
-            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceTwoChildren) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
+            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceTwoChildren) }} {{ siteConfig.currency }}{{ $t('bookings.sitter.perHour') }}</span>
           </div>
           <div v-if="sitter.priceThreeChildren" class="flex justify-between items-center text-sm">
             <span class="text-gray-600 dark:text-gray-400">{{ $t('bookings.sitter.priceCard.threeChildren') }}</span>
-            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceThreeChildren) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
+            <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.priceThreeChildren) }} {{ siteConfig.currency }}{{ $t('bookings.sitter.perHour') }}</span>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
             <Icon name="i-lucide-monitor" size="18" class="text-primary-500" />
             <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $t('bookings.sitter.priceCard.onlineLesson') }}</span>
           </div>
-          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.onlineLesson) }} {{ $t('bookings.sitter.priceCard.perHour') }}</span>
+          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.onlineLesson) }} {{ siteConfig.currency }}{{ $t('bookings.sitter.perHour') }}</span>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
             <Icon name="i-lucide-wallet" size="18" class="text-primary-500" />
             <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $t('bookings.sitter.priceCard.minOrder') }}</span>
           </div>
-          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.minOrderAmount) }} {{ $t('bookings.sitter.priceCard.currency') }}</span>
+          <span class="font-semibold text-gray-900 dark:text-white">{{ parseFloat(sitter.minOrderAmount) }} {{ siteConfig.currency }}</span>
         </div>
       </div>
     </div>
@@ -61,6 +61,8 @@
 
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
+
+const siteConfig = useSiteConfig()
 
 defineProps<{
   sitter: Sitter

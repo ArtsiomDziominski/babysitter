@@ -19,6 +19,7 @@ export const useSiteConfig = () => {
     authorCity: string
     authorState: string
     authorZip: string
+    currency: string
     defaultLocale: string
   }
 }

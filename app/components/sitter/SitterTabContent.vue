@@ -110,7 +110,7 @@
           </h3>
         </div>
         <div class="text-4xl font-bold text-gray-900 dark:text-white mb-6">
-          {{ sitter.price }} ₽<span class="text-xl text-gray-500 dark:text-gray-400">/час</span>
+          {{ sitter.price }} {{ siteConfig.currency }}<span class="text-xl text-gray-500 dark:text-gray-400">/час</span>
         </div>
         <div v-if="sitter.paymentMethods && sitter.paymentMethods.length > 0">
           <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -212,6 +212,8 @@
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
 import { useSitterUtils } from '~/composables/useSitterUtils'
+
+const siteConfig = useSiteConfig()
 
 defineProps<{
   sitter: Sitter

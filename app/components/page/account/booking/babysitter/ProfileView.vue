@@ -56,7 +56,7 @@
         <div v-for="(field, index) in priceFields" :key="index">
           <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ field.label }}</div>
           <div class="text-base text-gray-900 dark:text-white">
-            {{ profile[field.model] ? `${profile[field.model]} BYN` : '—' }}
+            {{ profile[field.model] ? `${profile[field.model]} ${siteConfig.currency}` : '—' }}
           </div>
         </div>
       </div>
@@ -64,13 +64,13 @@
         <div>
           <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('account.nannyForm.minOrder') }}</div>
           <div class="text-base text-gray-900 dark:text-white">
-            {{ profile.minOrderAmount ? `${profile.minOrderAmount} BYN` : '—' }}
+            {{ profile.minOrderAmount ? `${profile.minOrderAmount} ${siteConfig.currency}` : '—' }}
           </div>
         </div>
         <div>
           <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('account.nannyForm.onlineLesson') }}</div>
           <div class="text-base text-gray-900 dark:text-white">
-            {{ profile.onlineLesson ? `${profile.onlineLesson} BYN` : '—' }}
+            {{ profile.onlineLesson ? `${profile.onlineLesson} ${siteConfig.currency}` : '—' }}
           </div>
         </div>
         <div v-if="profile.cancellationPolicy">
@@ -175,6 +175,7 @@ const props = defineProps<{
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const siteConfig = useSiteConfig()
 const { convertKeysToTranslations, convertAdvantagesToKeys } = useAdvantages()
 
 const displayedAdvantages = computed(() => {

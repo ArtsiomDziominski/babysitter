@@ -5,13 +5,15 @@
         {{ $t('account.booking.create.estimatedPrice') }}
       </span>
       <span class="text-xl font-bold text-primary-900 dark:text-primary-100">
-        {{ price }} ₽
+        {{ price }} {{ siteConfig.currency }}
       </span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const siteConfig = useSiteConfig()
+
 defineProps<{
   price: number | null
 }>()

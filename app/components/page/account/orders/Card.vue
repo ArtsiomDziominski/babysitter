@@ -54,7 +54,7 @@
       </div>
       <div class="flex flex-col items-end max-xl:items-start max-xl:mt-2">
         <span class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white">
-          {{ typeof order.totalPrice === 'string' ? parseFloat(order.totalPrice).toFixed(2) : order.totalPrice }} ₽
+          {{ typeof order.totalPrice === 'string' ? parseFloat(order.totalPrice).toFixed(2) : order.totalPrice }} {{ siteConfig.currency }}
         </span>
       </div>
     </div>
@@ -88,6 +88,7 @@ import { UserRole } from '~/const/roles'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const siteConfig = useSiteConfig()
 
 const props = defineProps<{
   order: BookingListItem

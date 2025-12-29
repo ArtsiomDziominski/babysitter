@@ -1,6 +1,6 @@
 <template>
   <div
-      class="relative border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-xl:p-3 hover:shadow-md transition-shadow overflow-hidden"
+      class="relative border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-xl:p-3 hover:shadow-md transition-shadow"
   >
     <div class="flex gap-6 max-xl:flex-col max-xl:gap-3">
       <div class="flex-shrink-0 flex flex-col max-xl:items-center max-xl:w-full">
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="text-right max-xl:w-full max-xl:text-left">
-            <PriceMenu
+            <SearchPriceMenu
                 :price-one-child="sitter.priceOneChild"
                 :price-two-children="sitter.priceTwoChildren"
                 :price-three-children="sitter.priceThreeChildren"

@@ -110,7 +110,6 @@ const loadContacts = async () => {
   isLoading.value = true
   try {
     const contactsData = await getTrustedContacts()
-    console.log(contactsData)
     contacts.value = contactsData
   } catch (error) {
     console.error('Ошибка при загрузке доверенных лиц:', error)

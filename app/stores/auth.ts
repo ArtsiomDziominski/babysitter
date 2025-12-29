@@ -96,7 +96,6 @@ export const useAuthStore = defineStore('auth', () => {
         const auth = useAuth()
         try {
             const response = await auth.getProfile()
-            console.log(response)
             const mappedUser = mapApiUserToFrontend(response.data as ApiUser)
             setUser(mappedUser)
             await loadAvatarUrl()
