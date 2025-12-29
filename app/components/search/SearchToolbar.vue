@@ -36,7 +36,7 @@
           <Icon name="i-lucide-grid" />
         </UButton>
       </UTooltip>
-      <UTooltip :text="$t('bookings.view.tooltip.map')">
+      <!-- <UTooltip :text="$t('bookings.view.tooltip.map')">
         <UButton
           :variant="viewMode === SearchViewMode.MAP ? 'solid' : 'outline'"
           :class="viewMode === SearchViewMode.MAP ? '' : 'cursor-pointer'"
@@ -46,7 +46,7 @@
         >
           <Icon name="i-lucide-map" />
         </UButton>
-      </UTooltip>
+      </UTooltip> -->
     </div>
   </div>
 </template>

@@ -28,6 +28,10 @@
             <span class="text-xs text-green-600 dark:text-green-400 font-medium">{{ $t('bookings.sitter.online') }}</span>
           </div>
         </div>
+        <div v-if="sitter.city" class="flex items-center justify-center gap-1 mt-2 text-xs text-gray-500 dark:text-gray-400">
+          <Icon name="i-lucide-map-pin" size="12" />
+          <span>{{ getCityName(sitter.city) }}</span>
+        </div>
       </div>
 
       <div class="flex-1 min-w-0">
