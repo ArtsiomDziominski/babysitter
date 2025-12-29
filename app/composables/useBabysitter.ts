@@ -103,6 +103,7 @@ export interface FetchBabysittersParams {
   minRate?: number
   maxRate?: number
   search?: string
+  sort?: string
 }
 
 export interface BabysitterDetailResponse {
@@ -189,6 +190,7 @@ export const useBabysitter = () => {
     if (params?.minRate) queryParams.append('minRate', params.minRate.toString())
     if (params?.maxRate) queryParams.append('maxRate', params.maxRate.toString())
     if (params?.search) queryParams.append('search', params.search)
+    if (params?.sort) queryParams.append('sort', params.sort)
 
     const queryString = queryParams.toString()
     const endpoint = `/babysitters${queryString ? `?${queryString}` : ''}`

@@ -130,7 +130,9 @@ const { fetchBabysitters } = useBabysitter()
 const loadBabysitters = async () => {
   isLoading.value = true
   try {
-    const params: FetchBabysittersParams = {}
+    const params: FetchBabysittersParams = {
+      sort: sortBy.value || 'recommended'
+    }
 
     if (filters.value.priceMin) params.minRate = filters.value.priceMin
     if (filters.value.priceMax) params.maxRate = filters.value.priceMax
@@ -177,32 +179,16 @@ const filteredSitters = computed(() => {
     result = result.filter(s => s.specialNeedsCare)
   }
 
-  if (sortBy.value === 'priceAsc') {
-    result.sort((a, b) => {
-      const priceA = a.priceOneChild ? parseFloat(a.priceOneChild) : 0
-      const priceB = b.priceOneChild ? parseFloat(b.priceOneChild) : 0
-      return priceA - priceB
-    })
-  } else if (sortBy.value === 'priceDesc') {
-    result.sort((a, b) => {
-      const priceA = a.priceOneChild ? parseFloat(a.priceOneChild) : 0
-      const priceB = b.priceOneChild ? parseFloat(b.priceOneChild) : 0
-      return priceB - priceA
-    })
-  } else if (sortBy.value === 'rating') {
-    result.sort((a, b) => {
-      const ratingA = a.rating ? parseFloat(a.rating) : 0
-      const ratingB = b.rating ? parseFloat(b.rating) : 0
-      return ratingB - ratingA
-    })
-  }
-
   return result
 })
 
 const handleSearch = () => {
   loadBabysitters()
 }
+
+watch(sortBy, () => {
+  loadBabysitters()
+})
 
 onMounted(() => {
   loadBabysitters()
