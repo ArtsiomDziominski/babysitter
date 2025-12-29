@@ -88,7 +88,6 @@ const searchForm = ref<SearchForm>({
 })
 
 const filters = ref<SearchFilters>({
-  onlyAvailable: false,
   onlyOnline: false,
   priceMin: undefined,
   priceMax: undefined,
@@ -137,6 +136,7 @@ const loadBabysitters = async () => {
     if (filters.value.priceMin) params.minRate = filters.value.priceMin
     if (filters.value.priceMax) params.maxRate = filters.value.priceMax
     if (searchForm.value.address) params.search = searchForm.value.address
+    if (filters.value.onlyOnline) params.isOnline = true
 
     const response = await fetchBabysitters(params)
     sitters.value = response.data?.data || []
@@ -150,12 +150,6 @@ const loadBabysitters = async () => {
 
 const filteredSitters = computed(() => {
   let result = [...sitters.value]
-
-  if (filters.value.onlyAvailable) {
-    result = result.filter(s => s.showInSearch)
-  }
-
-  if (filters.value.onlyOnline) result = result.filter(s => s.isOnline)
 
   if (filters.value.priceMin !== undefined) {
     result = result.filter(s => {
@@ -186,9 +180,9 @@ const handleSearch = () => {
   loadBabysitters()
 }
 
-watch(sortBy, () => {
+watch([sortBy, filters], () => {
   loadBabysitters()
-})
+}, { deep: true })
 
 onMounted(() => {
   loadBabysitters()

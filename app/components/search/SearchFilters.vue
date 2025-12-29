@@ -7,13 +7,6 @@
     <div class="space-y-6">
       <div>
         <UCheckbox
-          v-model="modelValue.onlyAvailable"
-          :label="$t('bookings.filters.onlyAvailable')"
-        />
-      </div>
-
-      <div>
-        <UCheckbox
           v-model="modelValue.onlyOnline"
           :label="$t('bookings.filters.onlyOnline')"
         />

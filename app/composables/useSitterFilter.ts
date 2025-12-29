@@ -8,10 +8,6 @@ export const useSitterFilter = (
   const filteredSitters = computed(() => {
     let result = [...sitters.value]
 
-    if (filters.value.onlyAvailable) {
-      result = result.filter(s => s.isAvailable)
-    }
-
     if (filters.value.onlyOnline) {
       result = result.filter(s => s.isOnline)
     }

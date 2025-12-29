@@ -60,7 +60,6 @@ export interface SearchForm {
 }
 
 export interface SearchFilters {
-  onlyAvailable: boolean
   onlyOnline: boolean
   priceMin?: number
   priceMax?: number
