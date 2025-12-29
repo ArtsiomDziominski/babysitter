@@ -4,7 +4,7 @@
       {{ $t('bookings.title') }}
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr_auto] gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1fr] gap-4">
       <USelect
         v-model="selectedCity"
         :items="cityOptions"
@@ -34,13 +34,13 @@
         icon="i-lucide-clock"
         size="lg"
       />
-      <UButton
+      <!-- <UButton
         color="primary"
         size="sm"
         @click="$emit('search')"
       >
         {{ $t('bookings.search.submit') }}
-      </UButton>
+      </UButton> -->
     </div>
   </div>
 </template>

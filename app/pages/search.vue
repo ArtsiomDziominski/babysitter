@@ -56,6 +56,7 @@ import { CITY_KEYS } from '~/const/cities'
 
 const { t, locale } = useI18n()
 const route = useRoute()
+const router = useRouter()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
@@ -81,26 +82,40 @@ useHead({
   ]
 })
 
-const searchForm = ref<SearchForm>({
-  address: '',
-  date: '',
-  timeStart: '',
-  timeEnd: ''
-})
+const parseQueryParams = () => {
+  const query = route.query
 
-const filters = ref<SearchFilters>({
-  onlyOnline: false,
-  priceMin: undefined,
-  priceMax: undefined,
-  minAge: undefined,
-  maxAge: undefined,
-  minRating: undefined,
-  maxRating: undefined,
-  childrenCount: undefined,
-  advantages: []
-})
+  return {
+    searchForm: {
+      address: (query.city as string) || (query.address as string) || '',
+      date: (query.date as string) || '',
+      timeStart: (query.startTime as string) || '',
+      timeEnd: (query.endTime as string) || ''
+    },
+    filters: {
+      onlyOnline: query.isOnline === 'true' || query.onlyOnline === 'true',
+      priceMin: query.minRate ? Number(query.minRate) : undefined,
+      priceMax: query.maxRate ? Number(query.maxRate) : undefined,
+      minAge: query.minAge ? Number(query.minAge) : undefined,
+      maxAge: query.maxAge ? Number(query.maxAge) : undefined,
+      minRating: query.minRating ? Number(query.minRating) : undefined,
+      maxRating: query.maxRating ? Number(query.maxRating) : undefined,
+      childrenCount: query.childrenCount ? Number(query.childrenCount) : undefined,
+      advantages: Array.isArray(query.advantage) ? query.advantage as string[] : (query.advantage ? [query.advantage as string] : [])
+    },
+    sortBy: (query.sort as string) || 'recommended'
+  }
+}
 
-const sortBy = ref('recommended')
+const initialParams = parseQueryParams()
+
+const searchForm = ref<SearchForm>(initialParams.searchForm)
+
+const filters = ref<SearchFilters>(initialParams.filters)
+
+const sortBy = ref(initialParams.sortBy)
+
+const skipNextWatch = ref(true)
 
 const setInitialViewMode = () => {
   const saved = localStorage.getItem('searchViewMode')
@@ -118,6 +133,40 @@ const sitters = ref<BabysitterListItem[]>([])
 const isLoading = ref(false)
 
 const { fetchBabysitters } = useBabysitter()
+
+const updateQueryParams = () => {
+  const query: Record<string, string | string[]> = {}
+
+  if (searchForm.value.address) {
+    const cityKey = searchForm.value.address
+    if (CITY_KEYS.includes(cityKey as any)) {
+      query.city = cityKey
+    } else {
+      query.address = cityKey
+    }
+  }
+  if (searchForm.value.date) query.date = searchForm.value.date
+  if (searchForm.value.timeStart) query.startTime = searchForm.value.timeStart
+  if (searchForm.value.timeEnd) query.endTime = searchForm.value.timeEnd
+
+  if (filters.value.onlyOnline) query.isOnline = 'true'
+  if (filters.value.priceMin !== undefined) query.minRate = filters.value.priceMin.toString()
+  if (filters.value.priceMax !== undefined) query.maxRate = filters.value.priceMax.toString()
+  if (filters.value.minAge !== undefined) query.minAge = filters.value.minAge.toString()
+  if (filters.value.maxAge !== undefined) query.maxAge = filters.value.maxAge.toString()
+  if (filters.value.minRating !== undefined) query.minRating = filters.value.minRating.toString()
+  if (filters.value.maxRating !== undefined) query.maxRating = filters.value.maxRating.toString()
+  if (filters.value.childrenCount !== undefined) query.childrenCount = filters.value.childrenCount.toString()
+  if (filters.value.advantages && filters.value.advantages.length > 0) {
+    query.advantage = filters.value.advantages
+  }
+
+  if (sortBy.value && sortBy.value !== 'recommended') {
+    query.sort = sortBy.value
+  }
+
+  router.replace({ query })
+}
 
 const loadBabysitters = async () => {
   isLoading.value = true
@@ -140,6 +189,9 @@ const loadBabysitters = async () => {
         params.search = searchForm.value.address
       }
     }
+    if (searchForm.value.date) params.date = searchForm.value.date
+    if (searchForm.value.timeStart) params.startTime = searchForm.value.timeStart
+    if (searchForm.value.timeEnd) params.endTime = searchForm.value.timeEnd
     if (filters.value.onlyOnline) params.isOnline = true
     if (filters.value.advantages && filters.value.advantages.length > 0) {
       params.advantage = filters.value.advantages
@@ -175,20 +227,26 @@ const filteredSitters = computed(() => {
   return result
 })
 
+const isUpdatingFromQuery = ref(false)
+
 const handleSearch = () => {
+  updateQueryParams()
   loadBabysitters()
 }
 
-watch([sortBy, filters], () => {
+watch([sortBy, filters, searchForm], () => {
+  if (isUpdatingFromQuery.value || skipNextWatch.value) return
+  updateQueryParams()
   loadBabysitters()
 }, { deep: true })
 
 onMounted(() => {
   loadBabysitters()
   setInitialViewMode()
+  nextTick(() => {
+    skipNextWatch.value = false
+  })
 })
-
-const router = useRouter()
 
 const handleBook = (sitterId: string | number) => {
   router.push(`/sitter/${ sitterId }`)
