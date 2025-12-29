@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+    <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white mb-8 max-xl:mb-4">
       {{ $t('account.orders.title') }}
     </h1>
 
@@ -33,7 +33,7 @@
       </p>
     </div>
 
-    <div v-else class="space-y-4">
+    <div v-else class="space-y-4 max-xl:space-y-3">
       <PageAccountOrdersCard
         v-for="order in orders"
         :key="order.id"

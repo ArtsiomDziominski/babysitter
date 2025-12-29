@@ -1,10 +1,10 @@
 <template>
-  <div class="border-b border-gray-200 dark:border-gray-700 pb-8">
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+  <div class="border-b border-gray-200 dark:border-gray-700 pb-8 max-xl:pb-4">
+    <h2 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white mb-6 max-xl:mb-4">
       {{ $t('account.security.changeEmail') }}
     </h2>
 
-    <form @submit.prevent="handleEmailChange" class="space-y-4 max-w-md">
+    <form @submit.prevent="handleEmailChange" class="space-y-4 max-w-md max-xl:max-w-full">
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           {{ $t('account.security.currentEmail') }}
@@ -41,12 +41,13 @@
         </p>
       </div>
 
-      <div class="flex gap-3">
+      <div class="flex gap-3 max-xl:flex-col">
         <UButton
             v-if="!showVerificationCode"
             type="submit"
             color="primary"
             size="lg"
+            class="max-xl:w-full"
             :loading="isChangingEmail"
         >
           {{ $t('account.security.saveEmail') }}
@@ -56,6 +57,7 @@
             type="button"
             color="primary"
             size="lg"
+            class="max-xl:w-full"
             :loading="isVerifyingCode"
             @click="handleVerifyCode"
         >
@@ -66,6 +68,7 @@
             type="button"
             variant="outline"
             size="lg"
+            class="max-xl:w-full"
             @click="cancelEmailChange"
         >
           {{ $t('account.security.cancel') }}

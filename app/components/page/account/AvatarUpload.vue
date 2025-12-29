@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center max-xl:w-full">
     <div class="relative mb-4">
       <UserAvatar
         :preview="avatarPreview"
         size="3xl"
-        class="border-4 border-gray-200 dark:border-gray-700 w-36 h-36"
+        class="border-4 border-gray-200 dark:border-gray-700 w-36 h-36 max-xl:w-28 max-xl:h-28"
         :show-fallback="true"
       />
       
@@ -16,10 +16,11 @@
         @change="handleFileSelect"
       />
     </div>
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 max-xl:w-full">
       <UButton
         variant="outline"
         color="primary"
+        class="max-xl:w-full"
         :loading="isUploadingAvatar"
         :disabled="isUploadingAvatar || isDeletingAvatar"
         @click="() => fileInput?.click()"
@@ -30,6 +31,7 @@
         v-if="hasAvatar"
         variant="outline"
         color="error"
+        class="max-xl:w-full"
         :loading="isDeletingAvatar"
         :disabled="isUploadingAvatar || isDeletingAvatar"
         @click="handleDeleteAvatar"

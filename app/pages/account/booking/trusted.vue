@@ -1,21 +1,22 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-      <div class="flex items-center justify-between mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+      <div class="flex items-center justify-between mb-8 max-xl:mb-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3">
+        <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white">
           {{ $t('account.booking.trustedPerson.title') }}
         </h1>
         <UButton
             v-if="contacts.length < 10"
             variant="outline"
             color="primary"
+            class="max-xl:w-full"
             @click="addContact"
         >
           {{ $t('account.booking.trustedPerson.add') }}
         </UButton>
       </div>
 
-      <p class="text-gray-600 dark:text-gray-400 mb-8">
+      <p class="text-gray-600 dark:text-gray-400 mb-8 max-xl:mb-4 max-xl:text-sm">
         {{ $t('account.booking.trustedPerson.description') }}
       </p>
 
@@ -34,7 +35,7 @@
           </UButton>
         </div>
 
-        <div v-if="contacts.length > 0" class="space-y-4">
+        <div v-if="contacts.length > 0" class="space-y-4 max-xl:space-y-3">
           <PageAccountBookingTrustedContactCard
               v-for="contact in contacts"
               :key="contact.id"

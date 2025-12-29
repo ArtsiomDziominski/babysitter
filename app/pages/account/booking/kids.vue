@@ -1,13 +1,14 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-      <div class="flex items-center justify-between mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+      <div class="flex items-center justify-between mb-8 max-xl:mb-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3">
+        <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white">
           {{ $t('account.children.title') }}
         </h1>
         <UButton
             variant="outline"
             color="primary"
+            class="max-xl:w-full"
             @click="addChild"
         >
           {{ $t('account.children.addChild') }}
@@ -29,7 +30,7 @@
           </UButton>
         </div>
 
-        <div v-if="existingChildren.length > 0" class="space-y-4">
+        <div v-if="existingChildren.length > 0" class="space-y-4 max-xl:space-y-3">
           <PageAccountChildCard
               v-for="child in existingChildren"
               :key="child.id"

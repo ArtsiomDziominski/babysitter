@@ -1,14 +1,14 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-8">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+      <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white mb-8 max-xl:mb-4">
         {{ $t('account.basicData.title') }}
       </h1>
 
-      <form @submit.prevent="handleSave" class="space-y-6">
-        <div class="flex gap-8">
+      <form @submit.prevent="handleSave" class="space-y-6 max-xl:space-y-4">
+        <div class="flex gap-8 max-xl:flex-col max-xl:gap-6">
           <!-- Левая колонка с полями -->
-          <div class="flex-1 space-y-6">
+          <div class="flex-1 space-y-6 max-xl:space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {{ $t('account.basicData.name') }}
@@ -63,11 +63,12 @@
           <PageAccountAvatarUpload />
         </div>
 
-        <div class="flex justify-center pt-6">
+        <div class="flex justify-center pt-6 max-xl:pt-4">
           <UButton
               type="submit"
               color="primary"
               size="lg"
+              class="max-xl:w-full"
               :loading="isSaving"
           >
             {{ $t('account.basicData.save') }}

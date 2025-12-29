@@ -1,11 +1,11 @@
 <template>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center gap-2 max-xl:flex-wrap max-xl:w-full">
     <template v-if="status === 'pending'">
       <UButton
         v-if="userRole === UserRole.BABYSITTER"
         size="sm"
         color="primary"
-        class="cursor-pointer"
+        class="cursor-pointer max-xl:flex-1"
         @click="$emit('action', orderId, 'confirm')"
       >
         {{ $t('account.orders.actions.confirm') }}
@@ -15,7 +15,7 @@
         size="sm"
         color="error"
         variant="outline"
-        class="cursor-pointer"
+        class="cursor-pointer max-xl:flex-1"
         @click="$emit('action', orderId, 'cancel')"
       >
         {{ $t('account.orders.actions.cancel') }}
@@ -27,7 +27,7 @@
       size="sm"
       color="error"
       variant="outline"
-      class="cursor-pointer"
+      class="cursor-pointer max-xl:flex-1"
       @click="$emit('action', orderId, 'cancel')"
     >
       {{ $t('account.orders.actions.cancel') }}
@@ -38,7 +38,7 @@
         v-if="canLeaveReview"
         size="sm"
         variant="outline"
-        class="cursor-pointer"
+        class="cursor-pointer max-xl:flex-1"
         @click="$emit('action', orderId, 'review')"
       >
         {{ $t('account.orders.actions.review') }}
@@ -47,7 +47,7 @@
         v-if="userRole !== UserRole.BABYSITTER"
         size="sm"
         color="primary"
-        class="cursor-pointer"
+        class="cursor-pointer max-xl:flex-1"
         @click="$emit('action', orderId, 'repeat')"
       >
         {{ $t('account.orders.actions.repeat') }}
@@ -58,7 +58,7 @@
       v-if="status === 'cancelled' && userRole !== UserRole.BABYSITTER"
       size="sm"
       color="primary"
-      class="cursor-pointer"
+      class="cursor-pointer max-xl:flex-1"
       @click="$emit('action', orderId, 'repeat')"
     >
       {{ $t('account.orders.actions.repeat') }}
@@ -68,7 +68,7 @@
       v-if="status === 'confirmed' || status === 'in_progress'"
       size="sm"
       color="primary"
-      class="cursor-pointer"
+      class="cursor-pointer max-xl:flex-1"
       :to="'/account/messages'"
     >
       {{ $t('account.orders.actions.contact') }}

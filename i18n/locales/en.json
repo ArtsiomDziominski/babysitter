@@ -312,6 +312,7 @@
         "minutes": "min",
         "trustedContacts": "Trusted contacts",
         "trustedContact": "Trusted contact",
+        "city": "City",
         "error": "Failed to load order details",
         "loadError": "Loading error",
         "loadErrorMessage": "Failed to load order details. Please try again."

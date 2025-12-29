@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+    <h2 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white mb-6 max-xl:mb-4">
       {{ $t('account.security.changePassword') }}
     </h2>
 
-    <form @submit.prevent="handlePasswordChange" class="space-y-4 max-w-md">
+    <form @submit.prevent="handlePasswordChange" class="space-y-4 max-w-md max-xl:max-w-full">
       <div v-if="!showPasswordVerificationCode">
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           {{ $t('account.security.newPassword') }}
@@ -32,12 +32,13 @@
         </p>
       </div>
 
-      <div class="flex gap-3">
+      <div class="flex gap-3 max-xl:flex-col">
         <UButton
             v-if="!showPasswordVerificationCode"
             type="submit"
             color="primary"
             size="lg"
+            class="max-xl:w-full"
             :loading="isRequestingPasswordCode"
         >
           {{ $t('account.security.requestPasswordChange') }}
@@ -47,6 +48,7 @@
             type="button"
             color="primary"
             size="lg"
+            class="max-xl:w-full"
             :loading="isChangingPassword"
             @click="handleConfirmPasswordChange"
         >
@@ -57,6 +59,7 @@
             type="button"
             variant="outline"
             size="lg"
+            class="max-xl:w-full"
             @click="cancelPasswordChange"
         >
           {{ $t('account.security.cancel') }}

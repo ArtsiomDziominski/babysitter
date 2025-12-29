@@ -26,9 +26,8 @@
         class="flex-shrink-0 w-6"
       />
       <div
-        class="flex flex-col gap-1"
+        class="flex flex-col gap-1 max-xl:max-w-[85%]"
         :class="message.role === 'user' ? 'items-end' : 'items-start'"
-        class="max-xl:max-w-[85%]"
         style="max-width: 70%; min-width: 0; flex-shrink: 1;"
       >
         <div

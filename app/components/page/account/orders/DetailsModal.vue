@@ -122,6 +122,20 @@
           </div>
         </div>
 
+        <div v-if="getCity(details)" class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+          <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30">
+            <Icon name="i-lucide-map-pin" size="20" class="text-primary-600 dark:text-primary-400" />
+          </div>
+          <div class="flex-1">
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-0.5">
+              {{ $t('account.orders.details.city') }}
+            </p>
+            <p class="text-base font-semibold text-gray-900 dark:text-white">
+              {{ getCity(details) }}
+            </p>
+          </div>
+        </div>
+
         <div v-if="details.notes" class="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
           <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
             {{ $t('account.orders.details.notes') }}
@@ -411,6 +425,14 @@ const getAgeWord = (age: number): string => {
   }
 
   return t('account.orders.details.years')
+}
+
+const getCity = (details: BookingDetails): string | null => {
+  const cityKey = details.city || details.babysitter?.city
+  if (!cityKey) return null
+  
+  const translated = t(`cities.${cityKey}`)
+  return translated && translated !== `cities.${cityKey}` ? translated : cityKey
 }
 </script>
 

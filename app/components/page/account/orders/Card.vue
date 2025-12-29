@@ -1,32 +1,32 @@
 <template>
-  <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow">
-    <div class="flex items-start justify-between mb-4">
-      <div class="flex-1">
-        <div class="flex items-center gap-3 mb-2">
-          <span class="text-lg font-semibold text-gray-900 dark:text-white">
+  <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-xl:p-4 hover:shadow-md transition-shadow">
+    <div class="flex items-start justify-between mb-4 max-xl:mb-3 max-xl:flex-col max-xl:gap-3">
+      <div class="flex-1 max-xl:w-full">
+        <div class="flex items-center gap-3 mb-2 max-xl:flex-wrap max-xl:gap-2">
+          <span class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white">
             #{{ order.id }}
           </span>
           <NuxtLink
             v-if="sitterId && userRole === UserRole.PARENT"
             :to="`/sitter/${sitterId}`"
-            class="text-lg font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-words"
           >
             {{ order.customer.name }}
           </NuxtLink>
           <h3
             v-else
-            class="text-lg font-semibold text-gray-900 dark:text-white"
+            class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white break-words"
           >
             {{ order.customer.name }}
           </h3>
           <span
-            class="px-2 py-1 text-xs font-medium rounded"
+            class="px-2 py-1 text-xs max-xl:text-[10px] font-medium rounded flex-shrink-0"
             :class="getStatusClass(order.status)"
           >
             {{ getStatusText(order.status) }}
           </span>
         </div>
-        <div class="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+        <div class="space-y-1 max-xl:space-y-0.5 text-sm max-xl:text-xs text-gray-600 dark:text-gray-400">
           <p>
             <span class="font-medium">{{ $t('account.orders.date') }}:</span>
             {{ formatDate(order.date) }}
@@ -52,14 +52,14 @@
           </p>
         </div>
       </div>
-      <div class="flex flex-col items-end">
-        <span class="text-lg font-semibold text-gray-900 dark:text-white">
+      <div class="flex flex-col items-end max-xl:items-start max-xl:mt-2">
+        <span class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white">
           {{ typeof order.totalPrice === 'string' ? parseFloat(order.totalPrice).toFixed(2) : order.totalPrice }} ₽
         </span>
       </div>
     </div>
 
-    <div class="flex items-center justify-between gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between gap-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3 pt-4 max-xl:pt-3 border-t border-gray-200 dark:border-gray-700">
       <PageAccountOrdersOrderActions
         :order-id="order.id"
         :status="order.status"
@@ -68,11 +68,11 @@
         @action="(id, action) => $emit('action', id, action)"
       />
 
-      <div class="flex gap-2">
+      <div class="flex gap-2 max-xl:w-full">
         <UButton
           size="sm"
           variant="outline"
-          class="cursor-pointer"
+          class="cursor-pointer max-xl:flex-1"
           @click="$emit('showDetails', order.id)"
         >
           {{ $t('account.orders.actions.details') }}

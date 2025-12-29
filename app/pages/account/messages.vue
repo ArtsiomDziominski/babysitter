@@ -586,6 +586,8 @@ onMounted(async () => {
   await loadConversations()
 
   const chatParam = route.query.chat
+  const { isMobile } = useBreakpoint()
+  
   if (chatParam === 'admin') {
     await selectChat('admin-placeholder')
   } else if (chatParam) {
@@ -594,13 +596,13 @@ onMounted(async () => {
       const chatId = typeof chatIdStr === 'string' ? parseInt(chatIdStr, 10) : chatIdStr
       if (!isNaN(chatId) && typeof chatId === 'number' && conversations.value.find(c => c.id === chatId)) {
         await selectChat(chatId)
-      } else if (conversations.value.length > 0 && conversations.value[0]) {
+      } else if (!isMobile.value && conversations.value.length > 0 && conversations.value[0]) {
         await selectChat(conversations.value[0].id)
       }
-    } else if (conversations.value.length > 0 && conversations.value[0]) {
+    } else if (!isMobile.value && conversations.value.length > 0 && conversations.value[0]) {
       await selectChat(conversations.value[0].id)
     }
-  } else if (conversations.value.length > 0 && conversations.value[0]) {
+  } else if (!isMobile.value && conversations.value.length > 0 && conversations.value[0]) {
     await selectChat(conversations.value[0].id)
   }
 

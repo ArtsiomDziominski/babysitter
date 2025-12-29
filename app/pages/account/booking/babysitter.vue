@@ -1,10 +1,10 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <h1 class="text-2xl font-bold text-gray-900 dark:text-white">{{ t('account.nannyForm.title') }}</h1>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+      <div class="flex items-center justify-between mb-8 max-xl:mb-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3">
+        <div class="max-xl:w-full">
+          <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white">{{ t('account.nannyForm.title') }}</h1>
+          <p class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 mt-1">
             {{ t('account.nannyForm.subtitle') }}
           </p>
         </div>
@@ -34,7 +34,7 @@
         />
       </div>
 
-      <div v-else class="space-y-10">
+      <div v-else class="space-y-10 max-xl:space-y-6">
         <PageAccountBookingBabysitterPersonalInfoFields ref="personalInfoRef" />
 
         <PageAccountBookingBabysitterPaymentFields
@@ -53,10 +53,11 @@
           </label>
         </div>
 
-        <div class="flex gap-3">
+        <div class="flex gap-3 max-xl:flex-col">
           <UButton
               variant="outline"
               :disabled="isSaving || isLoading"
+              class="max-xl:w-full"
               @click="handleCancelEdit"
           >
             {{ hasProfile ? t('account.nannyForm.cancel') : t('account.nannyForm.reset') }}
@@ -65,6 +66,7 @@
               color="primary"
               :loading="isSaving"
               :disabled="isLoading"
+              class="max-xl:w-full"
               @click="handleSubmit"
           >
             {{ hasProfile ? t('account.nannyForm.update') : t('account.nannyForm.create') }}

@@ -83,6 +83,7 @@ export interface BookingDetails {
   createdAt: string
   updatedAt?: string
   trustedContacts?: BookingTrustedContact[]
+  city?: string | null
   parent?: {
     id: number
     firstName?: string
@@ -94,6 +95,7 @@ export interface BookingDetails {
   }
   babysitter?: {
     id: number
+    city?: string | null
     user: {
       id: number
       firstName: string
