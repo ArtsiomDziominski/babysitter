@@ -112,7 +112,7 @@
       <div v-if="profile.advantages?.length" class="mb-6">
         <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">{{ t('account.nannyForm.advantages') }}</div>
         <div class="flex flex-wrap gap-2">
-          <UBadge v-for="(advantage, index) in profile.advantages" :key="index" color="primary" variant="soft">
+          <UBadge v-for="(advantage, index) in displayedAdvantages" :key="index" color="primary" variant="soft">
             {{ advantage }}
           </UBadge>
         </div>
@@ -161,6 +161,7 @@
 import { useI18n } from '#imports'
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
 import { ScheduleMode } from '~/const/schedule'
+import { useAdvantages } from '~/composables/useAdvantages'
 
 interface PriceField {
   model: keyof Pick<BabysitterProfilePayload, 'priceOneChild' | 'priceTwoChildren' | 'priceThreeChildren' | 'priceFourChildren' | 'priceFiveChildren'>
@@ -174,6 +175,13 @@ const props = defineProps<{
 
 const { t } = useI18n()
 const authStore = useAuthStore()
+const { convertKeysToTranslations, convertAdvantagesToKeys } = useAdvantages()
+
+const displayedAdvantages = computed(() => {
+  if (!props.profile.advantages?.length) return []
+  const keys = convertAdvantagesToKeys(props.profile.advantages)
+  return convertKeysToTranslations(keys)
+})
 
 const formatDate = (date?: string | null): string => {
   if (!date) return '—'

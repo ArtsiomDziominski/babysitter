@@ -25,7 +25,7 @@
               class="absolute top-2 left-2 flex items-center gap-1.5"
           >
             <span class="w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></span>
-            <span class="text-xs text-green-600 dark:text-green-400 font-medium">Онлайн</span>
+            <span class="text-xs text-green-600 dark:text-green-400 font-medium">{{ $t('bookings.sitter.online') }}</span>
           </div>
         </div>
       </div>
@@ -71,13 +71,13 @@
 
         <div class="flex flex-wrap gap-2 mb-4">
           <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
-            Опыт {{ sitter.experience }} {{ yearWord }}
+            {{ $t('bookings.sitter.experience') }} {{ sitter.experience }} {{ yearWord }}
           </span>
         </div>
 
         <div class="flex flex-wrap gap-2 mb-4">
           <span
-              v-for="advantage in sitter.advantages"
+              v-for="advantage in displayedAdvantages"
               :key="advantage"
               class="px-2 py-1 text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded"
           >
@@ -110,6 +110,7 @@
 
 <script setup lang="ts">
 import type { BabysitterListItem } from '~/composables/useBabysitter'
+import { useAdvantages } from '~/composables/useAdvantages'
 
 const props = defineProps<{
   sitter: BabysitterListItem
@@ -119,8 +120,13 @@ defineEmits<{
   book: [sitterId: string | number]
 }>()
 
+const { t } = useI18n()
+const { getDisplayedAdvantages } = useAdvantages()
+
+const displayedAdvantages = computed(() => getDisplayedAdvantages(props.sitter.advantages))
+
 const getName = (firstName?: string, lastName?: string) => {
-  return `${ firstName || '' } ${ lastName || '' }`.trim() || 'Без имени'
+  return `${ firstName || '' } ${ lastName || '' }`.trim() || t('bookings.sitter.noName')
 }
 
 const yearWord = computed(() => {
@@ -129,11 +135,11 @@ const yearWord = computed(() => {
   const mod100 = years % 100
 
   if (mod10 === 1 && mod100 !== 11) {
-    return 'год'
+    return t('bookings.sitter.year')
   } else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) {
-    return 'года'
+    return t('bookings.sitter.years2to4')
   } else {
-    return 'лет'
+    return t('bookings.sitter.years')
   }
 })
 </script>

@@ -693,17 +693,16 @@
       "priceRange": "Ціна за годину",
       "priceFrom": "Від",
       "priceTo": "До",
+      "ageRange": "Вік",
+      "ageFrom": "Від",
+      "ageTo": "До",
+      "ratingRange": "Рейтинг",
+      "ratingFrom": "Від",
+      "ratingTo": "До",
       "childrenCount": "Кількість дітей",
       "advantages": {
-        "title": "Переваги сіттера",
-        "main": {
-          "title": "Основні",
-          "kidsoutSchool": "Школа",
-          "infants": "Сидить з немовлятами",
-          "specialNeeds": "Сидить з особливими дітьми"
-        },
+        "title": "Переваги",
         "additional": {
-          "title": "Додаткові",
           "homework": "Допомога з уроками",
           "french": "Французька мова",
           "georgian": "Грузинська мова",
@@ -765,6 +764,12 @@
       "book": "Замовити",
       "perHour": "/година",
       "details": "Детальніше",
+      "online": "Онлайн",
+      "experience": "Досвід",
+      "noName": "Без імені",
+      "year": "рік",
+      "years2to4": "роки",
+      "years": "років",
       "stats": {
         "title": "Статистика",
         "orders": "Замовлень",

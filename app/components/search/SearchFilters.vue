@@ -34,73 +34,79 @@
 
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          {{ $t('bookings.filters.ageRange') }}
+        </label>
+        <div class="flex gap-2">
+          <UInput
+            v-model.number="modelValue.minAge"
+            type="number"
+            :placeholder="$t('bookings.filters.ageFrom')"
+            size="sm"
+          />
+          <UInput
+            v-model.number="modelValue.maxAge"
+            type="number"
+            :placeholder="$t('bookings.filters.ageTo')"
+            size="sm"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          {{ $t('bookings.filters.ratingRange') }}
+        </label>
+        <div class="flex gap-2">
+          <UInput
+            v-model.number="modelValue.minRating"
+            type="number"
+            min="0"
+            max="5"
+            step="0.1"
+            :placeholder="$t('bookings.filters.ratingFrom')"
+            size="sm"
+          />
+          <UInput
+            v-model.number="modelValue.maxRating"
+            type="number"
+            min="0"
+            max="5"
+            step="0.1"
+            :placeholder="$t('bookings.filters.ratingTo')"
+            size="sm"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           {{ $t('bookings.filters.childrenCount') }}
         </label>
         <UInput
           v-model.number="modelValue.childrenCount"
           type="number"
           min="1"
+          max="3"
           size="sm"
         />
       </div>
 
       <div>
         <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-          {{ $t('bookings.filters.advantages.main.title') }}
+          {{ $t('bookings.filters.advantages.title') }}
         </h3>
-        <div class="space-y-2">
-          <UCheckbox
-            v-model="modelValue.advantages.kidsoutSchool"
-            :label="$t('bookings.filters.advantages.main.kidsoutSchool')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.infants"
-            :label="$t('bookings.filters.advantages.main.infants')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.specialNeeds"
-            :label="$t('bookings.filters.advantages.main.specialNeeds')"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-          {{ $t('bookings.filters.advantages.additional.title') }}
-        </h3>
-        <div class="space-y-2 max-h-64 overflow-y-auto">
-          <UCheckbox
-            v-model="modelValue.advantages.homework"
-            :label="$t('bookings.filters.advantages.additional.homework')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.french"
-            :label="$t('bookings.filters.advantages.additional.french')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.music"
-            :label="$t('bookings.filters.advantages.additional.music')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.active"
-            :label="$t('bookings.filters.advantages.additional.active')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.english"
-            :label="$t('bookings.filters.advantages.additional.english')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.driver"
-            :label="$t('bookings.filters.advantages.additional.driver')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.medical"
-            :label="$t('bookings.filters.advantages.additional.medical')"
-          />
-          <UCheckbox
-            v-model="modelValue.advantages.firstAid"
-            :label="$t('bookings.filters.advantages.additional.firstAid')"
-          />
+        <div class="space-y-2 max-h-96 overflow-y-auto">
+          <label
+            v-for="advantageKey in advantageKeys"
+            :key="advantageKey"
+            class="flex items-center gap-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 pl-2 rounded"
+          >
+            <UCheckbox
+              :model-value="isAdvantageSelected(advantageKey)"
+              @update:model-value="toggleAdvantage(advantageKey, !!$event)"
+            />
+            <span class="flex-1">{{ $t(`bookings.filters.advantages.additional.${advantageKey}`) }}</span>
+          </label>
         </div>
       </div>
     </div>
@@ -109,8 +115,39 @@
 
 <script setup lang="ts">
 import type { SearchFilters } from '~/types/sitter'
+import { ADVANTAGE_KEYS } from '~/const/advantages'
 
-defineProps<{
+const props = defineProps<{
   modelValue: SearchFilters
 }>()
+
+const emit = defineEmits<{
+  'update:modelValue': [value: SearchFilters]
+}>()
+
+const advantageKeys = ADVANTAGE_KEYS
+
+const isAdvantageSelected = (key: string): boolean => {
+  return (props.modelValue.advantages || []).includes(key)
+}
+
+const toggleAdvantage = (key: string, checked: boolean) => {
+  const currentAdvantages = [...(props.modelValue.advantages || [])]
+  
+  if (checked) {
+    if (!currentAdvantages.includes(key)) {
+      currentAdvantages.push(key)
+    }
+  } else {
+    const index = currentAdvantages.indexOf(key)
+    if (index > -1) {
+      currentAdvantages.splice(index, 1)
+    }
+  }
+  
+  emit('update:modelValue', {
+    ...props.modelValue,
+    advantages: currentAdvantages
+  })
+}
 </script>

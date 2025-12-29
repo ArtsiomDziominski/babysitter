@@ -604,17 +604,16 @@
       "priceRange": "Цана за гадзіну",
       "priceFrom": "Ад",
       "priceTo": "Да",
+      "ageRange": "Узрост",
+      "ageFrom": "Ад",
+      "ageTo": "Да",
+      "ratingRange": "Рэйтынг",
+      "ratingFrom": "Ад",
+      "ratingTo": "Да",
       "childrenCount": "Колькасць дзяцей",
       "advantages": {
-        "title": "Перавагі сітэра",
-        "main": {
-          "title": "Асноўныя",
-          "kidsoutSchool": "Школа",
-          "infants": "Сядзіць з немаўлятамі",
-          "specialNeeds": "Сядзіць з асаблівымі дзецьмі"
-        },
+        "title": "Перавагі",
         "additional": {
-          "title": "Дадатковыя",
           "homework": "Дапамога з урокамі",
           "french": "Французская мова",
           "georgian": "Грузінская мова",
@@ -676,6 +675,12 @@
       "book": "Заказаць",
       "perHour": "/гадзіну",
       "details": "Падрабязна",
+      "online": "Анлайн",
+      "experience": "Вопыт",
+      "noName": "Без імя",
+      "year": "год",
+      "years2to4": "гады",
+      "years": "гадоў",
       "stats": {
         "title": "Статыстыка",
         "orders": "Заказаў",

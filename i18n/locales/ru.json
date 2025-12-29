@@ -693,17 +693,16 @@
       "priceRange": "Цена за час",
       "priceFrom": "От",
       "priceTo": "До",
+      "ageRange": "Возраст",
+      "ageFrom": "От",
+      "ageTo": "До",
+      "ratingRange": "Рейтинг",
+      "ratingFrom": "От",
+      "ratingTo": "До",
       "childrenCount": "Количество детей",
       "advantages": {
-        "title": "Преимущества ситтера",
-        "main": {
-          "title": "Основные",
-          "kidsoutSchool": "Школа",
-          "infants": "Сидит с младенцами",
-          "specialNeeds": "Сидит с особыми детьми"
-        },
+        "title": "Преимущества",
         "additional": {
-          "title": "Дополнительные",
           "homework": "Помощь с уроками",
           "french": "Французский язык",
           "georgian": "Грузинский язык",
@@ -765,6 +764,12 @@
       "book": "Заказать",
       "perHour": "/час",
       "details": "Подробнее",
+      "online": "Онлайн",
+      "experience": "Опыт",
+      "noName": "Без имени",
+      "year": "год",
+      "years2to4": "года",
+      "years": "лет",
       "stats": {
         "title": "Статистика",
         "orders": "Заказов",

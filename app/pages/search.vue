@@ -91,20 +91,12 @@ const filters = ref<SearchFilters>({
   onlyOnline: false,
   priceMin: undefined,
   priceMax: undefined,
+  minAge: undefined,
+  maxAge: undefined,
+  minRating: undefined,
+  maxRating: undefined,
   childrenCount: undefined,
-  advantages: {
-    kidsoutSchool: false,
-    infants: false,
-    specialNeeds: false,
-    homework: false,
-    french: false,
-    music: false,
-    active: false,
-    english: false,
-    driver: false,
-    medical: false,
-    firstAid: false
-  }
+  advantages: []
 })
 
 const sortBy = ref('recommended')
@@ -135,8 +127,15 @@ const loadBabysitters = async () => {
 
     if (filters.value.priceMin) params.minRate = filters.value.priceMin
     if (filters.value.priceMax) params.maxRate = filters.value.priceMax
+    if (filters.value.minAge) params.minAge = filters.value.minAge
+    if (filters.value.maxAge) params.maxAge = filters.value.maxAge
+    if (filters.value.minRating) params.minRating = filters.value.minRating
+    if (filters.value.maxRating) params.maxRating = filters.value.maxRating
     if (searchForm.value.address) params.search = searchForm.value.address
     if (filters.value.onlyOnline) params.isOnline = true
+    if (filters.value.advantages && filters.value.advantages.length > 0) {
+      params.advantage = filters.value.advantages
+    }
 
     const response = await fetchBabysitters(params)
     sitters.value = response.data?.data || []
@@ -163,14 +162,6 @@ const filteredSitters = computed(() => {
       const price = s.priceOneChild ? parseFloat(s.priceOneChild) : 0
       return price <= filters.value.priceMax!
     })
-  }
-
-  if (filters.value.advantages.infants) {
-    result = result.filter(s => s.infantCare)
-  }
-
-  if (filters.value.advantages.specialNeeds) {
-    result = result.filter(s => s.specialNeedsCare)
   }
 
   return result

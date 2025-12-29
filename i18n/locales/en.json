@@ -602,17 +602,16 @@
       "priceRange": "Price per hour",
       "priceFrom": "From",
       "priceTo": "To",
+      "ageRange": "Age",
+      "ageFrom": "From",
+      "ageTo": "To",
+      "ratingRange": "Rating",
+      "ratingFrom": "From",
+      "ratingTo": "To",
       "childrenCount": "Number of children",
       "advantages": {
-        "title": "Sitter advantages",
-        "main": {
-          "title": "Main",
-          "kidsoutSchool": "School",
-          "infants": "Sits with infants",
-          "specialNeeds": "Sits with special needs children"
-        },
+        "title": "Advantages",
         "additional": {
-          "title": "Additional",
           "homework": "Homework help",
           "french": "French language",
           "georgian": "Georgian language",
@@ -674,6 +673,12 @@
       "book": "Book",
       "perHour": "/hour",
       "details": "Details",
+      "online": "Online",
+      "experience": "Experience",
+      "noName": "No name",
+      "year": "year",
+      "years2to4": "years",
+      "years": "years",
       "stats": {
         "title": "Statistics",
         "orders": "Orders",

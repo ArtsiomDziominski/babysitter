@@ -63,18 +63,10 @@ export interface SearchFilters {
   onlyOnline: boolean
   priceMin?: number
   priceMax?: number
+  minAge?: number
+  maxAge?: number
+  minRating?: number
+  maxRating?: number
   childrenCount?: number
-  advantages: {
-    kidsoutSchool: boolean
-    infants: boolean
-    specialNeeds: boolean
-    homework: boolean
-    french: boolean
-    music: boolean
-    active: boolean
-    english: boolean
-    driver: boolean
-    medical: boolean
-    firstAid: boolean
-  }
+  advantages?: string[]
 }

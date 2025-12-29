@@ -20,16 +20,6 @@ export const useSitterFilter = (
       result = result.filter(s => s.price <= filters.value.priceMax!)
     }
 
-    const activeAdvantages = Object.entries(filters.value.advantages)
-      .filter(([_, value]) => value)
-      .map(([key]) => key)
-
-    if (activeAdvantages.length > 0) {
-      result = result.filter(s =>
-        activeAdvantages.some(adv => s.advantages.includes(adv))
-      )
-    }
-
     if (sortBy.value === 'priceAsc') {
       result.sort((a, b) => a.price - b.price)
     } else if (sortBy.value === 'priceDesc') {

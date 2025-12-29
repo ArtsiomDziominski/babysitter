@@ -90,6 +90,7 @@ import {
 } from '~/composables/useScheduleTransform'
 import { ScheduleMode } from '~/const/schedule'
 import { useI18n } from '#imports'
+import { useAdvantages } from '~/composables/useAdvantages'
 
 definePageMeta({
   middleware: ['auth', 'nanny-only']
@@ -351,7 +352,11 @@ const loadProfile = async () => {
     if (profile) {
       hasProfile.value = true
       isEditing.value = false
-      form.value = { ...profile }
+      const convertedProfile = {
+        ...profile,
+        advantages: profile.advantages ? convertAdvantagesToKeys(profile.advantages) : []
+      }
+      form.value = convertedProfile
       loadedSnapshot.value = clone(form.value)
       applySchedules(profile.schedules)
     } else {

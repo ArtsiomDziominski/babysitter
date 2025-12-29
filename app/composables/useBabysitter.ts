@@ -102,9 +102,12 @@ export interface FetchBabysittersParams {
   maxAge?: number
   minRate?: number
   maxRate?: number
+  minRating?: number
+  maxRating?: number
   search?: string
   sort?: string
   isOnline?: boolean
+  advantage?: string[]
 }
 
 export interface BabysitterDetailResponse {
@@ -190,9 +193,16 @@ export const useBabysitter = () => {
     if (params?.maxAge) queryParams.append('maxAge', params.maxAge.toString())
     if (params?.minRate) queryParams.append('minRate', params.minRate.toString())
     if (params?.maxRate) queryParams.append('maxRate', params.maxRate.toString())
+    if (params?.minRating) queryParams.append('minRating', params.minRating.toString())
+    if (params?.maxRating) queryParams.append('maxRating', params.maxRating.toString())
     if (params?.search) queryParams.append('search', params.search)
     if (params?.sort) queryParams.append('sort', params.sort)
     if (params?.isOnline !== undefined) queryParams.append('isOnline', params.isOnline.toString())
+    if (params?.advantage && params.advantage.length > 0) {
+      params.advantage.forEach(adv => {
+        queryParams.append('advantage', adv)
+      })
+    }
 
     const queryString = queryParams.toString()
     const endpoint = `/babysitters${queryString ? `?${queryString}` : ''}`

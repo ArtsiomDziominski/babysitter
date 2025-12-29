@@ -692,17 +692,16 @@
       "priceRange": "ფასი საათში",
       "priceFrom": "დან",
       "priceTo": "მდე",
+      "ageRange": "ასაკი",
+      "ageFrom": "დან",
+      "ageTo": "მდე",
+      "ratingRange": "რეიტინგი",
+      "ratingFrom": "დან",
+      "ratingTo": "მდე",
       "childrenCount": "ბავშვების რაოდენობა",
       "advantages": {
-        "title": "სიტერის უპირატესობები",
-        "main": {
-          "title": "ძირითადი",
-          "kidsoutSchool": "სკოლა",
-          "infants": "მუშაობს ჩვილებთან",
-          "specialNeeds": "მუშაობს სპეციალურ ბავშვებთან"
-        },
+        "title": "უპირატესობები",
         "additional": {
-          "title": "დამატებითი",
           "homework": "დახმარება გაკვეთილებში",
           "french": "ფრანგული ენა",
           "georgian": "ქართული ენა",
@@ -764,6 +763,12 @@
       "book": "შეკვეთა",
       "perHour": "/საათი",
       "details": "დეტალები",
+      "online": "ონლაინ",
+      "experience": "გამოცდილება",
+      "noName": "უსახელო",
+      "year": "წელი",
+      "years2to4": "წელი",
+      "years": "წელი",
       "stats": {
         "title": "სტატისტიკა",
         "orders": "შეკვეთა",

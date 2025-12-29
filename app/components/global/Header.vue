@@ -20,15 +20,8 @@
 
         <div class="header__controls">
           <ClientOnly>
-            <template v-if="cityOptions.length > 0 && localeOptions.length > 0">
+            <template v-if="localeOptions.length > 0">
               <div class="header__selects">
-                <USelect
-                    v-model="selectedCity"
-                    :items="cityOptions"
-                    labelKey="label"
-                    valueKey="value"
-                    class="header__select"
-                />
                 <USelect
                     :model-value="locale"
                     :items="localeOptions"
@@ -75,7 +68,6 @@
 
 <script setup lang="ts">
 import { UserRole } from '~/const/roles'
-import { CITY_KEYS, City } from '~/const/cities'
 
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
@@ -87,22 +79,8 @@ const navLinks = computed(() => {
   return nav
 })
 
-const cityKeys = CITY_KEYS
-const selectedCity = useState('selectedCity', () => cityKeys[0] || City.TBILISI)
-
 onMounted(() => {
   authStore.loadAvatarUrl()
-})
-
-const cityOptions = computed(() => {
-  try {
-    return cityKeys.map(key => ({
-      label: t(`cities.${ key }`),
-      value: key
-    }))
-  } catch {
-    return []
-  }
 })
 
 const localeOptions = computed(() => {

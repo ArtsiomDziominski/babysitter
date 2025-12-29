@@ -48,7 +48,7 @@
       </div>
       <div class="flex flex-wrap gap-2">
         <span
-          v-for="advantage in sitter.advantages"
+          v-for="advantage in displayedAdvantages"
           :key="advantage"
           class="px-3 py-1.5 bg-primary/10 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium"
         >
@@ -75,9 +75,18 @@
 
 <script setup lang="ts">
 import type { Sitter } from '~/types/sitter'
+import { useAdvantages } from '~/composables/useAdvantages'
 
-defineProps<{
+const props = defineProps<{
   sitter: Sitter
 }>()
+
+const { convertKeysToTranslations, convertAdvantagesToKeys } = useAdvantages()
+
+const displayedAdvantages = computed(() => {
+  if (!props.sitter.advantages?.length) return []
+  const keys = convertAdvantagesToKeys(props.sitter.advantages)
+  return convertKeysToTranslations(keys)
+})
 </script>
 

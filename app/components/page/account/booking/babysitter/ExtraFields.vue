@@ -99,6 +99,7 @@
 import { useI18n } from '#imports'
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
 import { ADVANTAGE_KEYS, AdvantageKey } from '~/const/advantages'
+import { useAdvantages } from '~/composables/useAdvantages'
 
 const form = inject<Ref<BabysitterProfilePayload>>('babysitterForm')
 if (!form) {
@@ -110,6 +111,7 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
+const { convertAdvantagesToKeys } = useAdvantages()
 
 const advantageKeys = ADVANTAGE_KEYS
 const newCertification = ref('')
@@ -126,26 +128,27 @@ const removeCertification = (index: number) => {
 }
 
 const isAdvantageSelected = (key: string): boolean => {
-  const localizedText = t(`bookings.filters.advantages.additional.${key}`)
-  return (form.value.advantages || []).includes(localizedText)
+  const currentAdvantages = form.value.advantages || []
+  const convertedKeys = convertAdvantagesToKeys(currentAdvantages)
+  return convertedKeys.includes(key)
 }
 
 const toggleAdvantage = (key: string, checked: boolean) => {
-  const currentAdvantages = [...(form.value.advantages || [])]
-  const localizedText = t(`bookings.filters.advantages.additional.${key}`)
+  const currentAdvantages = form.value.advantages || []
+  const convertedKeys = convertAdvantagesToKeys(currentAdvantages)
 
   if (checked) {
-    if (!currentAdvantages.includes(localizedText)) {
-      currentAdvantages.push(localizedText)
+    if (!convertedKeys.includes(key)) {
+      convertedKeys.push(key)
     }
   } else {
-    const index = currentAdvantages.indexOf(localizedText)
+    const index = convertedKeys.indexOf(key)
     if (index > -1) {
-      currentAdvantages.splice(index, 1)
+      convertedKeys.splice(index, 1)
     }
   }
 
-  form.value.advantages = currentAdvantages
+  form.value.advantages = convertedKeys
 }
 </script>
 
