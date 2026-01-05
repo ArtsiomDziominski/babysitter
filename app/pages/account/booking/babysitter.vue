@@ -91,7 +91,6 @@ import {
   startOfMonth
 } from '~/composables/useScheduleTransform'
 import { ScheduleMode } from '~/const/schedule'
-import { useI18n } from '#imports'
 import { useAdvantages } from '~/composables/useAdvantages'
 
 definePageMeta({

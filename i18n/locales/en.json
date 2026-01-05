@@ -4,6 +4,7 @@
     "logout": "Logout",
     "profile": "Profile",
     "bookings": "Find a Babysitter",
+    "blog": "Blog",
     "messages": "Messages",
     "menu": {
       "account": "Account",
@@ -95,6 +96,11 @@
     "cta": {
       "title": "Ready to find the perfect babysitter?",
       "subtitle": "Join thousands of happy parents"
+    },
+    "blog": {
+      "title": "Useful articles",
+      "subtitle": "Read our articles about parenting and babysitting",
+      "cta": "Read all articles"
     }
   },
   "footer": {
@@ -921,6 +927,32 @@
     "card3": {
       "title": "Childcare",
       "description": "Thousands of happy parents trust us"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Useful articles about parenting and babysitting",
+    "searchPlaceholder": "Search articles...",
+    "clearAll": "Clear all",
+    "loading": "Loading articles...",
+    "notFound": "Articles not found",
+    "previous": "Previous",
+    "next": "Next",
+    "pageInfo": "Page {current} of {total}",
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "article": {
+      "loading": "Loading article...",
+      "notFound": "Article not found",
+      "backToBlog": "Back to blog",
+      "returnToBlog": "Return to blog",
+      "noContent": "Content not available",
+      "defaultTitle": "Article"
+    },
+    "relatedArticles": {
+      "title": "Related articles",
+      "notFound": "No other articles found"
     }
   }
 }

@@ -121,7 +121,6 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useI18n } from '#imports'
 import { addDays, endOfMonth, formatDateKey, startOfMonth, mapToEverydaySchedules, buildDateMapFromBlocks } from '~/composables/useScheduleTransform'
 import type { TimeInterval, BabysitterSchedule, BabysitterScheduleBlock } from '~/composables/useBabysitter'
 import { ScheduleViewMode } from '~/const/schedule'
