@@ -35,6 +35,7 @@ export default defineEventHandler(async (event) => {
   ]
 
   const sitterPages: Array<{ path: string; lastmod?: string }> = []
+  const blogPages: Array<{ path: string; lastmod?: string }> = []
 
   try {
     let page = 1
@@ -70,7 +71,65 @@ export default defineEventHandler(async (event) => {
       }
     }
   } catch (error) {
-    console.error('Ошибка получения списка ситтеров для sitemap:', error)
+    console.error('Error loading sitters for sitemap:', error)
+  }
+
+  try {
+    const strapiUrl = config.strapiUrl
+    const strapiApiToken = config.strapiApiToken
+    let page = 1
+    let hasMore = true
+    const limit = 100
+
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    }
+
+    if (strapiApiToken) {
+      headers['Authorization'] = `Bearer ${strapiApiToken}`
+    }
+
+    while (hasMore) {
+      const queryParams = new URLSearchParams()
+      queryParams.append('populate', '*')
+      queryParams.append('pagination[page]', page.toString())
+      queryParams.append('pagination[pageSize]', limit.toString())
+      queryParams.append('sort', 'publishedAt:desc')
+
+      const response = await fetch(`${strapiUrl}/api/articles?${queryParams.toString()}`, {
+        headers,
+      })
+
+      if (!response.ok) break
+
+      const data = await response.json()
+      const articles = data?.data || []
+
+      if (articles.length === 0) {
+        hasMore = false
+        break
+      }
+
+      for (const article of articles) {
+        if (article.slug && article.publishedAt) {
+          blogPages.push({
+            path: `/blog/${article.slug}`,
+            lastmod: article.updatedAt 
+              ? new Date(article.updatedAt).toISOString().split('T')[0] 
+              : new Date(article.publishedAt).toISOString().split('T')[0]
+          })
+        }
+      }
+
+      const totalPages = data?.meta?.pagination?.pageCount || 1
+      if (page >= totalPages) {
+        hasMore = false
+      } else {
+        page++
+      }
+    }
+  } catch (error) {
+    console.error('Error loading blog articles for sitemap:', error)
   }
 
   const locales = (siteConfig.locales as Array<{ code: string; iso?: string }>).filter((loc) => loc.code)
@@ -115,6 +174,26 @@ export default defineEventHandler(async (event) => {
 
     sitemap += `
     <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${sitterPage.path}?lang=${siteConfig.defaultLocale}" />`
+
+    sitemap += `
+  </url>`
+  }
+
+  for (const blogPage of blogPages) {
+    sitemap += `
+  <url>
+    <loc>${baseUrl}${blogPage.path}</loc>
+    <lastmod>${blogPage.lastmod || lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>`
+
+    for (const locale of locales) {
+      sitemap += `
+    <xhtml:link rel="alternate" hreflang="${locale.iso || locale.code}" href="${baseUrl}${blogPage.path}?lang=${locale.code}" />`
+    }
+
+    sitemap += `
+    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${blogPage.path}?lang=${siteConfig.defaultLocale}" />`
 
     sitemap += `
   </url>`
