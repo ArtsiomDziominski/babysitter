@@ -23,8 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from '#imports'
-
 const props = defineProps<{
   hasProfile: boolean
   isEditing: boolean

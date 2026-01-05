@@ -56,7 +56,6 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from '#imports'
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
 
 interface PriceField {
