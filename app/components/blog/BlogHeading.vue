@@ -26,9 +26,11 @@ const props = defineProps<{
 }>()
 
 const textChildren = computed(() => {
-  return props.block.children.filter(
-    (child): child is import('~/types/blog').StrapiTextChild => child.type === 'text'
-  )
+  return props.block.children
+    .filter((child): child is import('~/types/blog').StrapiTextChild => 
+      child.type === 'text' && 'text' in child && typeof (child as any).text === 'string'
+    )
+    .filter(child => child.text && child.text.trim())
 })
 </script>
 

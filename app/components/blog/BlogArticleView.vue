@@ -98,7 +98,13 @@ const { locale } = useI18n()
 
 const authorName = computed(() => {
   if (!props.article.author) return ''
-  return `${props.article.author.firstName} ${props.article.author.secondName}`.trim()
+  if ('name' in props.article.author) {
+    return props.article.author.name
+  }
+  if ('firstName' in props.article.author && 'secondName' in props.article.author) {
+    return `${props.article.author.firstName} ${props.article.author.secondName}`.trim()
+  }
+  return ''
 })
 
 const formatDate = (dateString: string) => {

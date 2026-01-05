@@ -1,23 +1,26 @@
 <template>
   <div class="blog-content">
     <div v-if="typeof content === 'string'" v-html="content"></div>
-    <template v-else>
+    <template v-else-if="Array.isArray(content) && content.length > 0">
       <template v-for="(block, index) in processedBlocks" :key="index">
         <BlogHeading
-          v-if="shouldRenderBlock(index, 'heading')"
+          v-if="block && block.type === 'heading' && shouldRenderBlock(index, 'heading')"
           :block="block"
         />
         <BlogParagraph
-          v-else-if="shouldRenderBlock(index, 'paragraph')"
+          v-else-if="block && block.type === 'paragraph' && shouldRenderBlock(index, 'paragraph')"
           :block="block"
         />
         <BlogList
-          v-else-if="shouldRenderBlock(index, 'list')"
+          v-else-if="block && block.type === 'list' && shouldRenderBlock(index, 'list')"
           :blocks="processedBlocks"
           :start-index="index"
         />
       </template>
     </template>
+    <div v-else class="text-gray-500 dark:text-gray-400">
+      Контент не найден (тип: {{ typeof content }}, массив: {{ Array.isArray(content) }})
+    </div>
   </div>
 </template>
 
@@ -30,6 +33,11 @@ const props = defineProps<{
 
 const processedBlocks = computed(() => {
   if (typeof props.content === 'string') return []
+  if (!Array.isArray(props.content)) {
+    console.warn('BlogContent: content is not an array', props.content)
+    return []
+  }
+  console.log('BlogContent: processedBlocks', props.content.length, props.content)
   return props.content
 })
 
@@ -57,14 +65,27 @@ function shouldRenderBlock(index: number, type: 'heading' | 'paragraph' | 'list'
   }
   
   const block = processedBlocks.value[index]
-  if (!block || block.type !== type) return false
+  if (!block) {
+    console.warn(`BlogContent: block at index ${index} is undefined`)
+    return false
+  }
+  
+  if (block.type !== type) return false
   
   if (type === 'heading') {
-    return hasHeadingContent(block)
+    const hasContent = hasHeadingContent(block)
+    if (!hasContent) {
+      console.log(`BlogContent: heading at index ${index} has no content`, block)
+    }
+    return hasContent
   }
   
   if (type === 'paragraph') {
-    return hasParagraphContent(block)
+    const hasContent = hasParagraphContent(block)
+    if (!hasContent) {
+      console.log(`BlogContent: paragraph at index ${index} has no content`, block)
+    }
+    return hasContent
   }
   
   if (type === 'list') {

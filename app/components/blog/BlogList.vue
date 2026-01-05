@@ -12,11 +12,12 @@
       :key="index"
       class="text-gray-700 dark:text-gray-300"
     >
-      <BlogText
-        v-for="(child, childIndex) in item.children"
-        :key="childIndex"
-        :child="child"
-      />
+      <template v-for="(child, childIndex) in item.children" :key="childIndex">
+        <BlogText
+          v-if="child.type === 'text'"
+          :child="child"
+        />
+      </template>
     </li>
   </component>
 </template>

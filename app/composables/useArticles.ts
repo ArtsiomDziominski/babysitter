@@ -51,14 +51,33 @@ export const useArticles = () => {
   }
 
   const getArticle = async (slug: string): Promise<BlogPost> => {
-    const response = await $fetch<{ data: any[] }>(`/api/strapi/articles/${slug}`)
+    const response = await $fetch<{ data: any[] | any }>(`/api/strapi/articles/${slug}`)
     
-    if (!response.data || response.data.length === 0) {
+    console.log('API response:', response)
+    
+    let articleData: any
+    if (Array.isArray(response.data)) {
+      if (response.data.length === 0) {
+        throw new Error('Статья не найдена')
+      }
+      articleData = response.data[0]
+    } else {
+      articleData = response.data
+    }
+    
+    if (!articleData) {
       throw new Error('Статья не найдена')
     }
     
-    const article = transformStrapiArticle(response.data[0])
-    console.log('Transformed article content:', article.content)
+    const article = transformStrapiArticle(articleData)
+    console.log('Transformed article:', {
+      id: article.id,
+      title: article.title,
+      contentType: typeof article.content,
+      contentIsArray: Array.isArray(article.content),
+      contentLength: Array.isArray(article.content) ? article.content.length : 0,
+      content: article.content
+    })
     return article
   }
 
