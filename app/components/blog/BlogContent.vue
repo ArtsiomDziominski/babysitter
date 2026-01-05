@@ -96,28 +96,63 @@ function hasParagraphContent(block: StrapiBlock): boolean {
 .blog-content :deep(h4),
 .blog-content :deep(h5),
 .blog-content :deep(h6) {
-  @apply font-semibold text-gray-900 dark:text-white mt-6 mb-4 first:mt-0;
+  font-weight: 600;
+  color: rgb(17 24 39);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content :deep(h1:first-child),
+.blog-content :deep(h2:first-child),
+.blog-content :deep(h3:first-child),
+.blog-content :deep(h4:first-child),
+.blog-content :deep(h5:first-child),
+.blog-content :deep(h6:first-child) {
+  margin-top: 0;
+}
+
+.dark .blog-content :deep(h1),
+.dark .blog-content :deep(h2),
+.dark .blog-content :deep(h3),
+.dark .blog-content :deep(h4),
+.dark .blog-content :deep(h5),
+.dark .blog-content :deep(h6) {
+  color: rgb(255 255 255);
 }
 
 .blog-content :deep(p) {
-  @apply text-gray-700 dark:text-gray-300 mb-4 leading-relaxed;
+  color: rgb(55 65 81);
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+.dark .blog-content :deep(p) {
+  color: rgb(209 213 219);
 }
 
 .blog-content :deep(ul),
 .blog-content :deep(ol) {
-  @apply mb-4 ml-6 space-y-2;
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .blog-content :deep(ul) {
-  @apply list-disc;
+  list-style-type: disc;
 }
 
 .blog-content :deep(ol) {
-  @apply list-decimal;
+  list-style-type: decimal;
 }
 
 .blog-content :deep(li) {
-  @apply text-gray-700 dark:text-gray-300;
+  color: rgb(55 65 81);
+}
+
+.dark .blog-content :deep(li) {
+  color: rgb(209 213 219);
 }
 </style>
 
