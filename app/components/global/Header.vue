@@ -78,7 +78,10 @@ const authStore = useAuthStore()
 const siteConfig = useSiteConfig()
 
 const navLinks = computed(() => {
-  const nav = [{ to: '/search', label: t('header.bookings') }]
+  const nav = [
+    { to: '/search', label: t('header.bookings') },
+    { to: '/blog', label: t('header.blog') }
+  ]
   if (authStore.isAuthenticated) nav.push({ to: '/account/messages', label: t('header.messages') })
   return nav
 })
