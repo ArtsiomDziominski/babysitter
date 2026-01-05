@@ -7,6 +7,7 @@
     <PageMainAdvantagesSection />
     <!-- <PageMainImageGallerySection /> -->
     <!-- <PageMainReviewsSection /> -->
+    <PageMainBlogSection />
     <PageMainCTASection />
   </div>
 </template>

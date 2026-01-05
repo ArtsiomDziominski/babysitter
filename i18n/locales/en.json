@@ -4,6 +4,7 @@
     "logout": "Logout",
     "profile": "Profile",
     "bookings": "Find a Babysitter",
+    "blog": "Blog",
     "messages": "Messages",
     "menu": {
       "account": "Account",
@@ -95,6 +96,11 @@
     "cta": {
       "title": "Ready to find the perfect babysitter?",
       "subtitle": "Join thousands of happy parents"
+    },
+    "blog": {
+      "title": "Useful articles",
+      "subtitle": "Read our articles about parenting and babysitting",
+      "cta": "Read all articles"
     }
   },
   "footer": {
