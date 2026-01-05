@@ -37,7 +37,9 @@ export const useArticles = () => {
     }
 
     const query = queryParams.toString()
-    const response = await $fetch<{ data: any[]; meta: any }>(`/api/strapi/articles?${query}`)
+    const url = `/api/strapi/articles?${query}`
+    
+    const response = await $fetch<{ data: any[]; meta: any }>(url)
     
     return {
       data: response.data.map(transformStrapiArticle),

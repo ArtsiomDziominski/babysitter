@@ -60,7 +60,7 @@
               v-for="post in posts"
               :key="post.id"
               :post="post"
-              @click="navigateToPost(post.slug)"
+              @click="post.slug && navigateToPost(post.slug)"
             />
           </div>
 
@@ -137,9 +137,6 @@ const filters = ref<BlogFilters>({
   searchQuery: ''
 })
 
-const posts = ref<BlogPost[]>([])
-const meta = ref<{ page: number; limit: number; total: number; totalPages: number } | null>(null)
-const loading = ref(false)
 const currentPage = ref(1)
 const pageSize = ref(10)
 
@@ -148,9 +145,12 @@ const allCategories = ref<string[]>([])
 
 const selectedTags = computed(() => filters.value.selectedTags)
 
-const loadArticles = async () => {
-  loading.value = true
+const loadArticlesData = async () => {
   try {
+    if (process.server) {
+      console.log('SSR: Загрузка статей')
+    }
+    
     const params: any = {
       page: currentPage.value,
       limit: pageSize.value
@@ -168,26 +168,55 @@ const loadArticles = async () => {
       params.tag = filters.value.selectedTags.join(',')
     }
 
+    if (process.server) {
+      console.log('SSR: Параметры запроса:', params)
+    }
+
     const response = await articles.getArticles(params)
-    posts.value = response.data
-    meta.value = response.meta
+    
+    if (process.server) {
+      console.log('SSR: Статьи загружены:', response?.data?.length || 0)
+    }
 
     const tagSet = new Set<string>()
     const categorySet = new Set<string>()
 
     response.data.forEach(post => {
-      post.tags?.forEach(tag => tagSet.add(tag.name))
-      post.categories?.forEach(cat => categorySet.add(cat.name))
+      if (Array.isArray(post.tags)) {
+        post.tags.forEach((tag: any) => {
+          const tagName = typeof tag === 'string' ? tag : tag?.name
+          if (tagName) tagSet.add(tagName)
+        })
+      }
+      post.categories?.forEach((cat: any) => {
+        if (cat?.name) categorySet.add(cat.name)
+      })
     })
 
     allTags.value = Array.from(tagSet).sort()
     allCategories.value = Array.from(categorySet).sort()
+
+    return response
   } catch (error) {
     console.error('Ошибка загрузки статей:', error)
-  } finally {
-    loading.value = false
+    return { data: [], meta: null }
   }
 }
+
+const { data: articlesData, pending: loading, refresh } = await useAsyncData(
+  'blog-articles',
+  loadArticlesData,
+  {
+    default: () => ({ data: [], meta: null })
+  }
+)
+
+watch([currentPage, () => filters.value.searchQuery, () => filters.value.selectedCategory, () => filters.value.selectedTags], () => {
+  refresh()
+}, { deep: true })
+
+const posts = computed(() => articlesData.value?.data || [])
+const meta = computed(() => articlesData.value?.meta || null)
 
 let searchTimeout: NodeJS.Timeout | null = null
 
@@ -197,14 +226,12 @@ const handleSearch = () => {
   }
   searchTimeout = setTimeout(() => {
     currentPage.value = 1
-    loadArticles()
   }, 500)
 }
 
 const removeTag = (tag: string) => {
   filters.value.selectedTags = filters.value.selectedTags.filter(t => t !== tag)
   currentPage.value = 1
-  loadArticles()
 }
 
 const clearFilters = () => {
@@ -212,28 +239,18 @@ const clearFilters = () => {
   filters.value.selectedCategory = null
   filters.value.searchQuery = ''
   currentPage.value = 1
-  loadArticles()
 }
 
-watch(() => filters.value.selectedCategory, () => {
-  currentPage.value = 1
-  loadArticles()
-})
 
 const router = useRouter()
 
 const goToPage = (page: number) => {
   currentPage.value = page
-  loadArticles()
 }
 
 const navigateToPost = (slug: string) => {
   router.push(`/blog/${slug}`)
 }
-
-onMounted(() => {
-  loadArticles()
-})
 
 onUnmounted(() => {
   if (searchTimeout) {
@@ -241,3 +258,4 @@ onUnmounted(() => {
   }
 })
 </script>
+

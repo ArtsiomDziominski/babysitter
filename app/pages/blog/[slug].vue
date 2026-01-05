@@ -39,10 +39,16 @@ const router = useRouter()
 const articles = useArticles()
 const siteConfig = useSiteConfig()
 
-const article = ref<BlogPost | null>(null)
-const loading = ref(false)
-
 const slug = computed(() => route.params.slug as string)
+
+const { data: article, pending: loading } = await useAsyncData(
+  `article-${slug.value}`,
+  () => articles.getArticle(slug.value).catch(() => null),
+  {
+    default: () => null,
+    watch: [slug]
+  }
+)
 
 const coverImage = computed(() => {
   if (!article.value?.coverImage) return null
@@ -50,26 +56,6 @@ const coverImage = computed(() => {
     return article.value.coverImage[0]
   }
   return article.value.coverImage
-})
-
-const loadArticle = async () => {
-  loading.value = true
-  try {
-    article.value = await articles.getArticle(slug.value)
-  } catch (error) {
-    console.error('Ошибка загрузки статьи:', error)
-    article.value = null
-  } finally {
-    loading.value = false
-  }
-}
-
-onMounted(() => {
-  loadArticle()
-})
-
-watch(() => route.params.slug, () => {
-  loadArticle()
 })
 
 const currentUrl = computed(() => `${siteConfig.url}${route.path}`)
