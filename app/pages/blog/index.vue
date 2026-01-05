@@ -145,6 +145,32 @@ const allCategories = ref<string[]>([])
 
 const selectedTags = computed(() => filters.value.selectedTags)
 
+const loadTagsAndCategories = async () => {
+  try {
+    const response = await articles.getArticles({ page: 1, limit: 100 })
+    
+    const tagSet = new Set<string>()
+    const categorySet = new Set<string>()
+
+    response.data.forEach(post => {
+      if (Array.isArray(post.tags)) {
+        post.tags.forEach((tag: any) => {
+          const tagName = typeof tag === 'string' ? tag : tag?.name
+          if (tagName) tagSet.add(tagName)
+        })
+      }
+      post.categories?.forEach((cat: any) => {
+        if (cat?.name) categorySet.add(cat.name)
+      })
+    })
+
+    allTags.value = Array.from(tagSet).sort()
+    allCategories.value = Array.from(categorySet).sort()
+  } catch (error) {
+    console.error('Ошибка загрузки тегов и категорий:', error)
+  }
+}
+
 const loadArticlesData = async () => {
   try {
     if (process.server) {
@@ -178,23 +204,9 @@ const loadArticlesData = async () => {
       console.log('SSR: Статьи загружены:', response?.data?.length || 0)
     }
 
-    const tagSet = new Set<string>()
-    const categorySet = new Set<string>()
-
-    response.data.forEach(post => {
-      if (Array.isArray(post.tags)) {
-        post.tags.forEach((tag: any) => {
-          const tagName = typeof tag === 'string' ? tag : tag?.name
-          if (tagName) tagSet.add(tagName)
-        })
-      }
-      post.categories?.forEach((cat: any) => {
-        if (cat?.name) categorySet.add(cat.name)
-      })
-    })
-
-    allTags.value = Array.from(tagSet).sort()
-    allCategories.value = Array.from(categorySet).sort()
+    if (allTags.value.length === 0 && allCategories.value.length === 0) {
+      await loadTagsAndCategories()
+    }
 
     return response
   } catch (error) {
@@ -210,6 +222,10 @@ const { data: articlesData, pending: loading, refresh } = await useAsyncData(
     default: () => ({ data: [], meta: null })
   }
 )
+
+if (allTags.value.length === 0 && allCategories.value.length === 0) {
+  await loadTagsAndCategories()
+}
 
 watch([currentPage, () => filters.value.searchQuery, () => filters.value.selectedCategory, () => filters.value.selectedTags], () => {
   refresh()
