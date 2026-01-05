@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <SitterCard
+    <SitterCardDetailed
       v-for="sitter in sitters"
       :key="sitter.id"
       :sitter="sitter"
@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import type { BabysitterListItem } from '~/composables/useBabysitter'
-import SitterCard from './SitterCard.vue'
+import SitterCardDetailed from './SitterCardDetailed.vue'
 
 defineProps<{
   sitters: BabysitterListItem[]
