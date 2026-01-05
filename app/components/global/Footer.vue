@@ -111,7 +111,6 @@ const becomeSitterUrl = computed(() => localizedBecomeSitterUrls[locale.value] |
 
 const serviceLinks = computed(() => [
   { to: '/search', label: 'footer.services.findSitter' },
-  { to: '/online-classes', label: 'footer.services.onlineClasses' },
   { to: becomeSitterUrl.value, label: 'footer.services.becomeSitter' }
 ])
 
