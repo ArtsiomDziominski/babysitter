@@ -12,7 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from '#imports'
 
 defineProps<{
   variant?: 'top' | 'center'

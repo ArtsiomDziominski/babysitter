@@ -96,7 +96,6 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from '#imports'
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
 import { ADVANTAGE_KEYS, AdvantageKey } from '~/const/advantages'
 import { useAdvantages } from '~/composables/useAdvantages'

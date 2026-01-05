@@ -35,6 +35,8 @@ export default defineNuxtConfig({
         }
     },
     runtimeConfig: {
+        strapiUrl: process.env.STRAPI_URL || 'http://localhost:1337',
+        strapiApiToken: process.env.STRAPI_API_TOKEN || '',
         public: {
             apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3003',
             siteUrl: process.env.SITE_URL || siteConfig.url,
@@ -58,6 +60,8 @@ export default defineNuxtConfig({
         }
     },
     routeRules: {
+        '/blog': { prerender: true },
+        '/blog/**': { prerender: true },
         '/kak-stat-bebisitterom': { prerender: false, ssr: true },
         '/how-to-become-babysitter': { prerender: false, ssr: true },
         '/yak-staty-bebisiterom': { prerender: false, ssr: true },
@@ -76,5 +80,11 @@ export default defineNuxtConfig({
         '/kak-najti-nyanyu-v-gori': { prerender: false, ssr: true },
         '/kak-najti-bebisittera-v-poti': { prerender: false, ssr: true },
         '/kak-najti-nyanyu-v-poti': { prerender: false, ssr: true }
+    },
+    nitro: {
+        prerender: {
+            crawlLinks: true,
+            routes: []
+        }
     }
 })
