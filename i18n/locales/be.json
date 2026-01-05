@@ -727,6 +727,7 @@
   },
   "common": {
     "cancel": "Адмена",
+    "close": "Зачыніць",
     "home": "Галоўная",
     "search": "Пошук",
     "sitter": "Сітэр",
@@ -935,12 +936,33 @@
     "title": "Блог",
     "subtitle": "Карысныя артыкулы пра выхаванне дзяцей і працу бебісітэраў",
     "searchPlaceholder": "Пошук артыкулаў...",
+    "filters": "Фільтры",
+    "categories": "Катэгорыі",
+    "tags": "Тэгі",
+    "allCategories": "Усе катэгорыі",
     "clearAll": "Ачысціць усё",
     "loading": "Загрузка артыкулаў...",
     "notFound": "Артыкулы не знойдзены",
     "previous": "Папярэдняя",
     "next": "Наступная",
     "pageInfo": "Старонка {current} з {total}",
+    "categoryLabels": {
+      "parenting": "Выхаванне",
+      "safety": "Бяспека",
+      "development": "Развіццё",
+      "tips-for-parents": "Парады бацькам",
+      "tips-for-sitters": "Парады бебісітэрам"
+    },
+    "tagLabels": {
+      "babysitting": "Бебісітынг",
+      "childcare": "Догляд за дзецьмі",
+      "parenting-tips": "Парады па выхаванні",
+      "safety": "Бяспека",
+      "education": "Адукацыя",
+      "activities": "Заняткі",
+      "health": "Здароўе",
+      "nutrition": "Харчаванне"
+    },
     "breadcrumbs": {
       "home": "Галоўная"
     },

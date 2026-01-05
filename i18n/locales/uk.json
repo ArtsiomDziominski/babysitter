@@ -816,6 +816,7 @@
   },
   "common": {
     "cancel": "Скасування",
+    "close": "Закрити",
     "home": "Головна",
     "search": "Пошук",
     "sitter": "Сіттер",
@@ -1024,12 +1025,33 @@
     "title": "Блог",
     "subtitle": "Корисні статті про виховання дітей та роботу бебісітерів",
     "searchPlaceholder": "Пошук статей...",
+    "filters": "Фільтри",
+    "categories": "Категорії",
+    "tags": "Теги",
+    "allCategories": "Всі категорії",
     "clearAll": "Очистити все",
     "loading": "Завантаження статей...",
     "notFound": "Статті не знайдено",
     "previous": "Попередня",
     "next": "Наступна",
     "pageInfo": "Сторінка {current} з {total}",
+    "categoryLabels": {
+      "parenting": "Виховання",
+      "safety": "Безпека",
+      "development": "Розвиток",
+      "tips-for-parents": "Поради батькам",
+      "tips-for-sitters": "Поради бебісітерам"
+    },
+    "tagLabels": {
+      "babysitting": "Бебісітинг",
+      "childcare": "Догляд за дітьми",
+      "parenting-tips": "Поради з виховання",
+      "safety": "Безпека",
+      "education": "Освіта",
+      "activities": "Заняття",
+      "health": "Здоров'я",
+      "nutrition": "Харчування"
+    },
     "breadcrumbs": {
       "home": "Головна"
     },

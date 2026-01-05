@@ -815,6 +815,7 @@
   },
   "common": {
     "cancel": "გაუქმება",
+    "close": "დახურვა",
     "home": "მთავარი",
     "search": "ძიება",
     "sitter": "სიტერი",
@@ -1023,12 +1024,33 @@
     "title": "ბლოგი",
     "subtitle": "სასარგებლო სტატიები ბავშვების აღზრდისა და ბებისიტერების მუშაობის შესახებ",
     "searchPlaceholder": "სტატიების ძიება...",
+    "filters": "ფილტრები",
+    "categories": "კატეგორიები",
+    "tags": "ტეგები",
+    "allCategories": "ყველა კატეგორია",
     "clearAll": "ყველაფრის გასუფთავება",
     "loading": "სტატიების ჩატვირთვა...",
     "notFound": "სტატიები ვერ მოიძებნა",
     "previous": "წინა",
     "next": "შემდეგი",
     "pageInfo": "გვერდი {current} {total}-დან",
+    "categoryLabels": {
+      "parenting": "აღზრდა",
+      "safety": "უსაფრთხოება",
+      "development": "განვითარება",
+      "tips-for-parents": "რჩევები მშობლებისთვის",
+      "tips-for-sitters": "რჩევები ბებისიტერებისთვის"
+    },
+    "tagLabels": {
+      "babysitting": "ბებისიტინგი",
+      "childcare": "ბავშვების მოვლა",
+      "parenting-tips": "აღზრდის რჩევები",
+      "safety": "უსაფრთხოება",
+      "education": "განათლება",
+      "activities": "აქტივობები",
+      "health": "ჯანმრთელობა",
+      "nutrition": "კვება"
+    },
     "breadcrumbs": {
       "home": "მთავარი"
     },

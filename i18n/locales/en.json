@@ -725,6 +725,7 @@
   },
   "common": {
     "cancel": "Cancel",
+    "close": "Close",
     "home": "Home",
     "search": "Search",
     "sitter": "Sitter",
@@ -933,12 +934,33 @@
     "title": "Blog",
     "subtitle": "Useful articles about parenting and babysitting",
     "searchPlaceholder": "Search articles...",
+    "filters": "Filters",
+    "categories": "Categories",
+    "tags": "Tags",
+    "allCategories": "All categories",
     "clearAll": "Clear all",
     "loading": "Loading articles...",
     "notFound": "Articles not found",
     "previous": "Previous",
     "next": "Next",
     "pageInfo": "Page {current} of {total}",
+    "categoryLabels": {
+      "parenting": "Parenting",
+      "safety": "Safety",
+      "development": "Development",
+      "tips-for-parents": "Tips for Parents",
+      "tips-for-sitters": "Tips for Sitters"
+    },
+    "tagLabels": {
+      "babysitting": "Babysitting",
+      "childcare": "Childcare",
+      "parenting-tips": "Parenting Tips",
+      "safety": "Safety",
+      "education": "Education",
+      "activities": "Activities",
+      "health": "Health",
+      "nutrition": "Nutrition"
+    },
     "breadcrumbs": {
       "home": "Home"
     },
