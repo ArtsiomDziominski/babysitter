@@ -35,10 +35,39 @@ export interface BlogPost {
   category: string
   readTime: number
   views: number
+  slug?: string
+  coverImage?: string | string[]
+  published?: string
+  categories?: Array<{ id: number; name: string; slug: string }>
+  seoTitle?: string
+  seoDescription?: string
+  seoKeywords?: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 export interface BlogFilters {
   selectedTags: string[]
   selectedCategory: string | null
   searchQuery: string
+}
+
+export interface ArticlesResponse {
+  data: BlogPost[]
+  meta: {
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+  }
+}
+
+export interface ArticleQueryParams {
+  page?: number
+  limit?: number
+  search?: string
+  category?: string
+  tag?: string
+  sort?: string
+  order?: 'asc' | 'desc'
 }

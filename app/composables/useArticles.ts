@@ -71,10 +71,12 @@ export const useArticles = () => {
     const article = strapiArticle.attributes || strapiArticle
     
     const getAuthor = () => {
+      if (!article.author) return null
+      
       if (article.author?.data) {
         const authorData = article.author.data.attributes || article.author.data
         return {
-          id: article.author.data.id,
+          name: `${authorData.first_name || authorData.firstName || ''} ${authorData.second_name || authorData.secondName || ''}`.trim() || 'Автор',
           firstName: authorData.first_name || authorData.firstName || '',
           secondName: authorData.second_name || authorData.secondName || '',
           avatar: authorData.avatar?.data 
@@ -84,13 +86,13 @@ export const useArticles = () => {
       }
       if (article.author && !article.author.data) {
         return {
-          id: article.author.id,
+          name: `${article.author.first_name || article.author.firstName || ''} ${article.author.second_name || article.author.secondName || ''}`.trim() || 'Автор',
           firstName: article.author.first_name || article.author.firstName || '',
           secondName: article.author.second_name || article.author.secondName || '',
           avatar: undefined
         }
       }
-      return undefined
+      return null
     }
     
     const getCategories = () => {
@@ -151,16 +153,20 @@ export const useArticles = () => {
     const content = article.content
     
     return {
-      id: strapiArticle.id,
+      id: strapiArticle.id?.toString() || strapiArticle.documentId || '',
       title: article.title || '',
       slug: article.slug || '',
       excerpt: article.excerpt || '',
       content: Array.isArray(content) ? content : (typeof content === 'string' ? content : ''),
       coverImage: getCoverImage(),
       author: getAuthor(),
+      publishedAt: article.published || article.publishedAt || new Date().toISOString(),
       published: article.published || article.publishedAt || undefined,
       categories: getCategories(),
       tags: getTags(),
+      category: getCategories()?.[0]?.name || '',
+      readTime: 5,
+      views: 0,
       seoTitle: article.seoTitle || article.title,
       seoDescription: article.seoDescription || article.excerpt,
       seoKeywords: article.seoKeywords || undefined,

@@ -1,19 +1,22 @@
 <template>
   <div class="blog-content">
-    <template v-for="(block, index) in processedBlocks" :key="index">
-      <BlogHeading
-        v-if="shouldRenderBlock(index, 'heading')"
-        :block="block"
-      />
-      <BlogParagraph
-        v-else-if="shouldRenderBlock(index, 'paragraph')"
-        :block="block"
-      />
-      <BlogList
-        v-else-if="shouldRenderBlock(index, 'list')"
-        :blocks="processedBlocks"
-        :start-index="index"
-      />
+    <div v-if="typeof content === 'string'" v-html="content"></div>
+    <template v-else>
+      <template v-for="(block, index) in processedBlocks" :key="index">
+        <BlogHeading
+          v-if="shouldRenderBlock(index, 'heading')"
+          :block="block"
+        />
+        <BlogParagraph
+          v-else-if="shouldRenderBlock(index, 'paragraph')"
+          :block="block"
+        />
+        <BlogList
+          v-else-if="shouldRenderBlock(index, 'list')"
+          :blocks="processedBlocks"
+          :start-index="index"
+        />
+      </template>
     </template>
   </div>
 </template>
@@ -22,16 +25,20 @@
 import type { StrapiBlock } from '~/types/blog'
 
 const props = defineProps<{
-  content: StrapiBlock[]
+  content: string | StrapiBlock[]
 }>()
 
-const processedBlocks = computed(() => props.content)
+const processedBlocks = computed(() => {
+  if (typeof props.content === 'string') return []
+  return props.content
+})
 
 const skippedIndices = computed(() => {
   const skipped = new Set<number>()
   
   for (let i = 0; i < processedBlocks.value.length; i++) {
     const block = processedBlocks.value[i]
+    if (!block) continue
     
     if (block.type === 'list' && i > 0) {
       const prevBlock = processedBlocks.value[i - 1]
@@ -50,7 +57,7 @@ function shouldRenderBlock(index: number, type: 'heading' | 'paragraph' | 'list'
   }
   
   const block = processedBlocks.value[index]
-  if (block?.type !== type) return false
+  if (!block || block.type !== type) return false
   
   if (type === 'heading') {
     return hasHeadingContent(block)
@@ -63,7 +70,7 @@ function shouldRenderBlock(index: number, type: 'heading' | 'paragraph' | 'list'
   if (type === 'list') {
     if (index === 0) return true
     const prevBlock = processedBlocks.value[index - 1]
-    return prevBlock?.type !== 'list' || prevBlock.format !== block.format
+    return !prevBlock || prevBlock.type !== 'list' || prevBlock.format !== block.format
   }
   
   return false
