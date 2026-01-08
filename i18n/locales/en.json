@@ -976,6 +976,449 @@
       "title": "Related articles",
       "notFound": "No other articles found"
     }
+  },
+  "pages": {
+    "findBabysitter": {
+      "batumi": {
+        "title": "How to Find a Babysitter in Batumi",
+        "intro": "Looking for a reliable babysitter in Batumi? Our platform will help you find a verified specialist to care for your children. All babysitters are verified and have experience working with children.",
+        "stepsTitle": "How to Find a Babysitter in Batumi",
+        "steps": {
+          "step1": {
+            "name": "Use search",
+            "text": "Go to the search section and specify the city of Batumi. You will be able to see all available babysitters in your city."
+          },
+          "step2": {
+            "name": "Review profiles",
+            "text": "Browse babysitter profiles: photos, work experience, parent reviews, prices and schedule. Pay attention to the rating and number of completed orders."
+          },
+          "step3": {
+            "name": "Contact the babysitter",
+            "text": "Write to the selected babysitter through the built-in messenger to discuss details, ask questions and arrange a meeting."
+          },
+          "step4": {
+            "name": "Book a service",
+            "text": "Choose a convenient date and time, specify the number of children and special requirements. After confirming the booking, you can pay for the service."
+          }
+        },
+        "advantagesTitle": "Benefits of searching through our platform",
+        "advantages": [
+          "Verified babysitters - all specialists are verified",
+          "Convenient search - filters by price, experience, skills and availability",
+          "Safety - review and rating system",
+          "Support 24/7 - we are always ready to help",
+          "Flexible payment - secure payments through the platform"
+        ],
+        "ctaTitle": "Ready to find a babysitter in Batumi?",
+        "ctaButton": "Find a babysitter"
+      },
+      "gori": {
+        "title": "How to Find a Babysitter in Gori",
+        "intro": "Looking for a reliable babysitter in Gori? Our platform will help you find a verified specialist to care for your children. All babysitters are verified and have experience working with children.",
+        "stepsTitle": "How to Find a Babysitter in Gori",
+        "steps": {
+          "step1": {
+            "name": "Use search",
+            "text": "Go to the search section and specify the city of Gori. You will be able to see all available babysitters in your city."
+          },
+          "step2": {
+            "name": "Review profiles",
+            "text": "Browse babysitter profiles: photos, work experience, parent reviews, prices and schedule. Pay attention to the rating and number of completed orders."
+          },
+          "step3": {
+            "name": "Contact the babysitter",
+            "text": "Write to the selected babysitter through the built-in messenger to discuss details, ask questions and arrange a meeting."
+          },
+          "step4": {
+            "name": "Book a service",
+            "text": "Choose a convenient date and time, specify the number of children and special requirements. After confirming the booking, you can pay for the service."
+          }
+        },
+        "advantagesTitle": "Benefits of searching through our platform",
+        "advantages": [
+          "Verified babysitters - all specialists are verified",
+          "Convenient search - filters by price, experience, skills and availability",
+          "Safety - review and rating system",
+          "Support 24/7 - we are always ready to help",
+          "Flexible payment - secure payments through the platform"
+        ],
+        "ctaTitle": "Ready to find a babysitter in Gori?",
+        "ctaButton": "Find a babysitter"
+      },
+      "kutaisi": {
+        "title": "How to Find a Babysitter in Kutaisi",
+        "intro": "Looking for a reliable babysitter in Kutaisi? Our platform will help you find a verified specialist to care for your children. All babysitters are verified and have experience working with children.",
+        "stepsTitle": "How to Find a Babysitter in Kutaisi",
+        "steps": {
+          "step1": {
+            "name": "Use search",
+            "text": "Go to the search section and specify the city of Kutaisi. You will be able to see all available babysitters in your city."
+          },
+          "step2": {
+            "name": "Review profiles",
+            "text": "Browse babysitter profiles: photos, work experience, parent reviews, prices and schedule. Pay attention to the rating and number of completed orders."
+          },
+          "step3": {
+            "name": "Contact the babysitter",
+            "text": "Write to the selected babysitter through the built-in messenger to discuss details, ask questions and arrange a meeting."
+          },
+          "step4": {
+            "name": "Book a service",
+            "text": "Choose a convenient date and time, specify the number of children and special requirements. After confirming the booking, you can pay for the service."
+          }
+        },
+        "advantagesTitle": "Benefits of searching through our platform",
+        "advantages": [
+          "Verified babysitters - all specialists are verified",
+          "Convenient search - filters by price, experience, skills and availability",
+          "Safety - review and rating system",
+          "Support 24/7 - we are always ready to help",
+          "Flexible payment - secure payments through the platform"
+        ],
+        "ctaTitle": "Ready to find a babysitter in Kutaisi?",
+        "ctaButton": "Find a babysitter"
+      },
+      "poti": {
+        "title": "How to Find a Babysitter in Poti",
+        "intro": "Looking for a reliable babysitter in Poti? Our platform will help you find a verified specialist to care for your children. All babysitters are verified and have experience working with children.",
+        "stepsTitle": "How to Find a Babysitter in Poti",
+        "steps": {
+          "step1": {
+            "name": "Use search",
+            "text": "Go to the search section and specify the city of Poti. You will be able to see all available babysitters in your city."
+          },
+          "step2": {
+            "name": "Review profiles",
+            "text": "Browse babysitter profiles: photos, work experience, parent reviews, prices and schedule. Pay attention to the rating and number of completed orders."
+          },
+          "step3": {
+            "name": "Contact the babysitter",
+            "text": "Write to the selected babysitter through the built-in messenger to discuss details, ask questions and arrange a meeting."
+          },
+          "step4": {
+            "name": "Book a service",
+            "text": "Choose a convenient date and time, specify the number of children and special requirements. After confirming the booking, you can pay for the service."
+          }
+        },
+        "advantagesTitle": "Benefits of searching through our platform",
+        "advantages": [
+          "Verified babysitters - all specialists are verified",
+          "Convenient search - filters by price, experience, skills and availability",
+          "Safety - review and rating system",
+          "Support 24/7 - we are always ready to help",
+          "Flexible payment - secure payments through the platform"
+        ],
+        "ctaTitle": "Ready to find a babysitter in Poti?",
+        "ctaButton": "Find a babysitter"
+      },
+      "rustavi": {
+        "title": "How to Find a Babysitter in Rustavi",
+        "intro": "Looking for a reliable babysitter in Rustavi? Our platform will help you find a verified specialist to care for your children. All babysitters are verified and have experience working with children.",
+        "stepsTitle": "How to Find a Babysitter in Rustavi",
+        "steps": {
+          "step1": {
+            "name": "Use search",
+            "text": "Go to the search section and specify the city of Rustavi. You will be able to see all available babysitters in your city."
+          },
+          "step2": {
+            "name": "Review profiles",
+            "text": "Browse babysitter profiles: photos, work experience, parent reviews, prices and schedule. Pay attention to the rating and number of completed orders."
+          },
+          "step3": {
+            "name": "Contact the babysitter",
+            "text": "Write to the selected babysitter through the built-in messenger to discuss details, ask questions and arrange a meeting."
+          },
+          "step4": {
+            "name": "Book a service",
+            "text": "Choose a convenient date and time, specify the number of children and special requirements. After confirming the booking, you can pay for the service."
+          }
+        },
+        "advantagesTitle": "Benefits of searching through our platform",
+        "advantages": [
+          "Verified babysitters - all specialists are verified",
+          "Convenient search - filters by price, experience, skills and availability",
+          "Safety - review and rating system",
+          "Support 24/7 - we are always ready to help",
+          "Flexible payment - secure payments through the platform"
+        ],
+        "ctaTitle": "Ready to find a babysitter in Rustavi?",
+        "ctaButton": "Find a babysitter"
+      },
+      "tbilisi": {
+        "title": "How to Find a Babysitter in Tbilisi",
+        "intro": "Looking for a reliable babysitter in Tbilisi? Our platform will help you find a verified specialist to care for your children. All babysitters are verified and have experience working with children.",
+        "stepsTitle": "How to Find a Babysitter in Tbilisi",
+        "steps": {
+          "step1": {
+            "name": "Use search",
+            "text": "Go to the search section and specify the city of Tbilisi. You will be able to see all available babysitters in your city."
+          },
+          "step2": {
+            "name": "Review profiles",
+            "text": "Browse babysitter profiles: photos, work experience, parent reviews, prices and schedule. Pay attention to the rating and number of completed orders."
+          },
+          "step3": {
+            "name": "Contact the babysitter",
+            "text": "Write to the selected babysitter through the built-in messenger to discuss details, ask questions and arrange a meeting."
+          },
+          "step4": {
+            "name": "Book a service",
+            "text": "Choose a convenient date and time, specify the number of children and special requirements. After confirming the booking, you can pay for the service."
+          }
+        },
+        "advantagesTitle": "Benefits of searching through our platform",
+        "advantages": [
+          "Verified babysitters - all specialists are verified",
+          "Convenient search - filters by price, experience, skills and availability",
+          "Safety - review and rating system",
+          "Support 24/7 - we are always ready to help",
+          "Flexible payment - secure payments through the platform"
+        ],
+        "ctaTitle": "Ready to find a babysitter in Tbilisi?",
+        "ctaButton": "Find a babysitter"
+      }
+    },
+    "findNanny": {
+      "batumi": {
+        "title": "How to Find a Nanny in Batumi",
+        "intro": "Need a professional nanny in Batumi? Our platform offers verified specialists with experience working with children of different ages. All nannies undergo thorough screening and verification.",
+        "stepsTitle": "How to Find a Nanny in Batumi",
+        "steps": {
+          "step1": {
+            "name": "Select Batumi city",
+            "text": "In the search section, specify the city of Batumi. The system will show all available nannies in your city with their profiles and schedules."
+          },
+          "step2": {
+            "name": "Apply filters",
+            "text": "Use filters to search for a nanny by work experience, education, skills, price and availability. You can find a nanny with medical or pedagogical education."
+          },
+          "step3": {
+            "name": "Review nanny profiles",
+            "text": "Browse detailed profiles: education, certificates, work experience, reviews from other parents, photos and prices. Pay attention to the nanny's specialization."
+          },
+          "step4": {
+            "name": "Contact and book",
+            "text": "Write to the nanny you like, discuss all details, special requirements for childcare and book the service at a convenient time."
+          }
+        },
+        "considerationsTitle": "What to consider when choosing a nanny",
+        "considerations": [
+          "Experience working with children of the required age",
+          "Education and additional certificates",
+          "Reviews and ratings from other parents",
+          "Schedule flexibility and availability",
+          "Specialization (work with infants, special needs children, etc.)"
+        ],
+        "ctaTitle": "Find a nanny in Batumi",
+        "ctaButton": "Find a nanny"
+      },
+      "gori": {
+        "title": "How to Find a Nanny in Gori",
+        "intro": "Need a professional nanny in Gori? Our platform offers verified specialists with experience working with children of different ages. All nannies undergo thorough screening and verification.",
+        "stepsTitle": "How to Find a Nanny in Gori",
+        "steps": {
+          "step1": {
+            "name": "Select Gori city",
+            "text": "In the search section, specify the city of Gori. The system will show all available nannies in your city with their profiles and schedules."
+          },
+          "step2": {
+            "name": "Apply filters",
+            "text": "Use filters to search for a nanny by work experience, education, skills, price and availability. You can find a nanny with medical or pedagogical education."
+          },
+          "step3": {
+            "name": "Review nanny profiles",
+            "text": "Browse detailed profiles: education, certificates, work experience, reviews from other parents, photos and prices. Pay attention to the nanny's specialization."
+          },
+          "step4": {
+            "name": "Contact and book",
+            "text": "Write to the nanny you like, discuss all details, special requirements for childcare and book the service at a convenient time."
+          }
+        },
+        "considerationsTitle": "What to consider when choosing a nanny",
+        "considerations": [
+          "Experience working with children of the required age",
+          "Education and additional certificates",
+          "Reviews and ratings from other parents",
+          "Schedule flexibility and availability",
+          "Specialization (work with infants, special needs children, etc.)"
+        ],
+        "ctaTitle": "Find a nanny in Gori",
+        "ctaButton": "Find a nanny"
+      },
+      "kutaisi": {
+        "title": "How to Find a Nanny in Kutaisi",
+        "intro": "Need a professional nanny in Kutaisi? Our platform offers verified specialists with experience working with children of different ages. All nannies undergo thorough screening and verification.",
+        "stepsTitle": "How to Find a Nanny in Kutaisi",
+        "steps": {
+          "step1": {
+            "name": "Select Kutaisi city",
+            "text": "In the search section, specify the city of Kutaisi. The system will show all available nannies in your city with their profiles and schedules."
+          },
+          "step2": {
+            "name": "Apply filters",
+            "text": "Use filters to search for a nanny by work experience, education, skills, price and availability. You can find a nanny with medical or pedagogical education."
+          },
+          "step3": {
+            "name": "Review nanny profiles",
+            "text": "Browse detailed profiles: education, certificates, work experience, reviews from other parents, photos and prices. Pay attention to the nanny's specialization."
+          },
+          "step4": {
+            "name": "Contact and book",
+            "text": "Write to the nanny you like, discuss all details, special requirements for childcare and book the service at a convenient time."
+          }
+        },
+        "considerationsTitle": "What to consider when choosing a nanny",
+        "considerations": [
+          "Experience working with children of the required age",
+          "Education and additional certificates",
+          "Reviews and ratings from other parents",
+          "Schedule flexibility and availability",
+          "Specialization (work with infants, special needs children, etc.)"
+        ],
+        "ctaTitle": "Find a nanny in Kutaisi",
+        "ctaButton": "Find a nanny"
+      },
+      "poti": {
+        "title": "How to Find a Nanny in Poti",
+        "intro": "Need a professional nanny in Poti? Our platform offers verified specialists with experience working with children of different ages. All nannies undergo thorough screening and verification.",
+        "stepsTitle": "How to Find a Nanny in Poti",
+        "steps": {
+          "step1": {
+            "name": "Select Poti city",
+            "text": "In the search section, specify the city of Poti. The system will show all available nannies in your city with their profiles and schedules."
+          },
+          "step2": {
+            "name": "Apply filters",
+            "text": "Use filters to search for a nanny by work experience, education, skills, price and availability. You can find a nanny with medical or pedagogical education."
+          },
+          "step3": {
+            "name": "Review nanny profiles",
+            "text": "Browse detailed profiles: education, certificates, work experience, reviews from other parents, photos and prices. Pay attention to the nanny's specialization."
+          },
+          "step4": {
+            "name": "Contact and book",
+            "text": "Write to the nanny you like, discuss all details, special requirements for childcare and book the service at a convenient time."
+          }
+        },
+        "considerationsTitle": "What to consider when choosing a nanny",
+        "considerations": [
+          "Experience working with children of the required age",
+          "Education and additional certificates",
+          "Reviews and ratings from other parents",
+          "Schedule flexibility and availability",
+          "Specialization (work with infants, special needs children, etc.)"
+        ],
+        "ctaTitle": "Find a nanny in Poti",
+        "ctaButton": "Find a nanny"
+      },
+      "rustavi": {
+        "title": "How to Find a Nanny in Rustavi",
+        "intro": "Need a professional nanny in Rustavi? Our platform offers verified specialists with experience working with children of different ages. All nannies undergo thorough screening and verification.",
+        "stepsTitle": "How to Find a Nanny in Rustavi",
+        "steps": {
+          "step1": {
+            "name": "Select Rustavi city",
+            "text": "In the search section, specify the city of Rustavi. The system will show all available nannies in your city with their profiles and schedules."
+          },
+          "step2": {
+            "name": "Apply filters",
+            "text": "Use filters to search for a nanny by work experience, education, skills, price and availability. You can find a nanny with medical or pedagogical education."
+          },
+          "step3": {
+            "name": "Review nanny profiles",
+            "text": "Browse detailed profiles: education, certificates, work experience, reviews from other parents, photos and prices. Pay attention to the nanny's specialization."
+          },
+          "step4": {
+            "name": "Contact and book",
+            "text": "Write to the nanny you like, discuss all details, special requirements for childcare and book the service at a convenient time."
+          }
+        },
+        "considerationsTitle": "What to consider when choosing a nanny",
+        "considerations": [
+          "Experience working with children of the required age",
+          "Education and additional certificates",
+          "Reviews and ratings from other parents",
+          "Schedule flexibility and availability",
+          "Specialization (work with infants, special needs children, etc.)"
+        ],
+        "ctaTitle": "Find a nanny in Rustavi",
+        "ctaButton": "Find a nanny"
+      },
+      "tbilisi": {
+        "title": "How to Find a Nanny in Tbilisi",
+        "intro": "Need a professional nanny in Tbilisi? Our platform offers verified specialists with experience working with children of different ages. All nannies undergo thorough screening and verification.",
+        "stepsTitle": "How to Find a Nanny in Tbilisi",
+        "steps": {
+          "step1": {
+            "name": "Select Tbilisi city",
+            "text": "In the search section, specify the city of Tbilisi. The system will show all available nannies in your city with their profiles and schedules."
+          },
+          "step2": {
+            "name": "Apply filters",
+            "text": "Use filters to search for a nanny by work experience, education, skills, price and availability. You can find a nanny with medical or pedagogical education."
+          },
+          "step3": {
+            "name": "Review nanny profiles",
+            "text": "Browse detailed profiles: education, certificates, work experience, reviews from other parents, photos and prices. Pay attention to the nanny's specialization."
+          },
+          "step4": {
+            "name": "Contact and book",
+            "text": "Write to the nanny you like, discuss all details, special requirements for childcare and book the service at a convenient time."
+          }
+        },
+        "considerationsTitle": "What to consider when choosing a nanny",
+        "considerations": [
+          "Experience working with children of the required age",
+          "Education and additional certificates",
+          "Reviews and ratings from other parents",
+          "Schedule flexibility and availability",
+          "Specialization (work with infants, special needs children, etc.)"
+        ],
+        "ctaTitle": "Find a nanny in Tbilisi",
+        "ctaButton": "Find a nanny"
+      }
+    },
+    "becomeBabysitter": {
+      "title": "How to Become a Babysitter",
+      "intro": "Join our platform and start working as a verified babysitter. We help experienced caregivers find families who need reliable childcare.",
+      "stepsTitle": "Steps",
+      "steps": {
+        "step1": {
+          "name": "Register on the platform",
+          "text": "Create an account and select the Babysitter role. Fill in your basic information and verify your identity."
+        },
+        "step2": {
+          "name": "Fill out your profile",
+          "text": "Add your photo, work experience, education, skills and certificates. The more complete your profile, the more attractive you will be to parents."
+        },
+        "step3": {
+          "name": "Set your schedule",
+          "text": "Specify when you are available to work. You can set a weekly schedule or mark specific dates."
+        },
+        "step4": {
+          "name": "Start accepting bookings",
+          "text": "After your profile is verified, you will appear in search results and can start receiving booking requests from parents."
+        }
+      },
+      "requirementsTitle": "Requirements",
+      "requirements": [
+        "Age 18 or older",
+        "Experience working with children",
+        "Valid identification documents",
+        "Responsibility and love for children",
+        "Ability to provide references"
+      ],
+      "benefitsTitle": "Benefits of working with us",
+      "benefits": [
+        "Flexible schedule - work when it's convenient for you",
+        "Fair payment - set your own rates",
+        "Verified clients - all parents are verified",
+        "Support 24/7 - we're always here to help",
+        "Safe platform - insurance and guarantees"
+      ],
+      "ctaTitle": "Ready to start?",
+      "ctaButton": "Register as a babysitter"
+    }
   }
 }
 
