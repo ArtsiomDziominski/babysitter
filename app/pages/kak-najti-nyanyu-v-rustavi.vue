@@ -4,19 +4,19 @@
       <div class="max-w-4xl mx-auto">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            Как найти няню в Рустави
+            {{ $t('pages.findNanny.rustavi.title') }}
           </h1>
 
           <div class="prose prose-gray dark:prose-invert max-w-none">
             <section class="mb-8">
               <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-lg">
-                Нужна профессиональная няня в Рустави? Наша платформа предлагает проверенных специалистов с опытом работы с детьми разного возраста. Все няни проходят тщательный отбор и верификацию.
+                {{ $t('pages.findNanny.rustavi.intro') }}
               </p>
             </section>
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Как найти няню в Рустави
+                {{ $t('pages.findNanny.rustavi.stepsTitle') }}
               </h2>
               <div class="space-y-6">
                 <div class="flex gap-4">
@@ -25,10 +25,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Выберите город Рустави
+                      {{ $t('pages.findNanny.rustavi.steps.step1.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      В разделе поиска укажите город Рустави. Система покажет всех доступных нянь в вашем городе с их профилями и расписанием.
+                      {{ $t('pages.findNanny.rustavi.steps.step1.text') }}
                     </p>
                   </div>
                 </div>
@@ -38,10 +38,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Примените фильтры
+                      {{ $t('pages.findNanny.rustavi.steps.step2.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Используйте фильтры для поиска няни по опыту работы, образованию, навыкам, цене и доступности. Вы можете найти няню с медицинским или педагогическим образованием.
+                      {{ $t('pages.findNanny.rustavi.steps.step2.text') }}
                     </p>
                   </div>
                 </div>
@@ -51,10 +51,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Изучите анкеты нянь
+                      {{ $t('pages.findNanny.rustavi.steps.step3.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Просмотрите подробные профили: образование, сертификаты, опыт работы, отзывы других родителей, фотографии и цены. Обратите внимание на специализацию няни.
+                      {{ $t('pages.findNanny.rustavi.steps.step3.text') }}
                     </p>
                   </div>
                 </div>
@@ -64,10 +64,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Свяжитесь и забронируйте
+                      {{ $t('pages.findNanny.rustavi.steps.step4.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Напишите понравившейся няне, обсудите все детали, особые требования к уходу за ребёнком и забронируйте услугу на удобное время.
+                      {{ $t('pages.findNanny.rustavi.steps.step4.text') }}
                     </p>
                   </div>
                 </div>
@@ -76,24 +76,22 @@
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Что учитывать при выборе няни
+                {{ $t('pages.findNanny.rustavi.considerationsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li>Опыт работы с детьми нужного возраста</li>
-                <li>Образование и дополнительные сертификаты</li>
-                <li>Отзывы и рейтинг от других родителей</li>
-                <li>Гибкость графика и доступность</li>
-                <li>Специализация (работа с младенцами, особыми детьми и т.д.)</li>
+                <li v-for="(consideration, index) in $t('pages.findNanny.rustavi.considerations')" :key="index">
+                  {{ consideration }}
+                </li>
               </ul>
             </section>
 
             <section class="mb-8">
               <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 text-center">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                  Найти няню в Рустави
+                  {{ $t('pages.findNanny.rustavi.ctaTitle') }}
                 </h3>
                 <UButton to="/search?city=rustavi" color="primary" size="lg">
-                  Найти няню
+                  {{ $t('pages.findNanny.rustavi.ctaButton') }}
                 </UButton>
               </div>
             </section>
@@ -109,24 +107,27 @@ definePageMeta({
   pageTransition: false
 })
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
 
+const pageTitle = t('pages.findNanny.rustavi.title')
+const pageDescription = t('pages.findNanny.rustavi.intro')
+
 useSeoMeta({
-  title: 'Как найти няню в Рустави',
-  description: 'Нужна профессиональная няня в Рустави? Наша платформа предлагает проверенных специалистов с опытом работы с детьми.',
-  ogTitle: 'Как найти няню в Рустави',
-  ogDescription: 'Нужна профессиональная няня в Рустави? Наша платформа предлагает проверенных специалистов с опытом работы с детьми.',
+  title: pageTitle,
+  description: pageDescription,
+  ogTitle: pageTitle,
+  ogDescription: pageDescription,
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
   ogLocale: locale.value,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Как найти няню в Рустави',
-  twitterDescription: 'Нужна профессиональная няня в Рустави? Наша платформа предлагает проверенных специалистов с опытом работы с детьми.',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDescription,
   twitterImage: `${siteConfig.url}${siteConfig.logo}`
 })
 

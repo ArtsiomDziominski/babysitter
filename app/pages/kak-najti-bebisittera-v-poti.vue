@@ -4,19 +4,19 @@
       <div class="max-w-4xl mx-auto">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            Как найти бебиситтера в Поти
+            {{ $t('pages.findBabysitter.poti.title') }}
           </h1>
 
           <div class="prose prose-gray dark:prose-invert max-w-none">
             <section class="mb-8">
               <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-lg">
-                Ищете надёжного бебиситтера в Поти? Наша платформа поможет вам найти проверенного специалиста для ухода за вашими детьми. Все бебиситтеры проходят верификацию и имеют опыт работы с детьми.
+                {{ $t('pages.findBabysitter.poti.intro') }}
               </p>
             </section>
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Как найти бебиситтера в Поти
+                {{ $t('pages.findBabysitter.poti.stepsTitle') }}
               </h2>
               <div class="space-y-6">
                 <div class="flex gap-4">
@@ -25,10 +25,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Используйте поиск
+                      {{ $t('pages.findBabysitter.poti.steps.step1.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Перейдите в раздел поиска и укажите город Поти. Вы сможете увидеть всех доступных бебиситтеров в вашем городе.
+                      {{ $t('pages.findBabysitter.poti.steps.step1.text') }}
                     </p>
                   </div>
                 </div>
@@ -38,10 +38,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Изучите профили
+                      {{ $t('pages.findBabysitter.poti.steps.step2.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Просмотрите анкеты бебиситтеров: фото, опыт работы, отзывы родителей, цены и расписание. Обратите внимание на рейтинг и количество выполненных заказов.
+                      {{ $t('pages.findBabysitter.poti.steps.step2.text') }}
                     </p>
                   </div>
                 </div>
@@ -51,10 +51,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Свяжитесь с бебиситтером
+                      {{ $t('pages.findBabysitter.poti.steps.step3.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Напишите выбранному бебиситтеру через встроенный мессенджер, чтобы обсудить детали, задать вопросы и договориться о встрече.
+                      {{ $t('pages.findBabysitter.poti.steps.step3.text') }}
                     </p>
                   </div>
                 </div>
@@ -64,10 +64,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Забронируйте услугу
+                      {{ $t('pages.findBabysitter.poti.steps.step4.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Выберите удобную дату и время, укажите количество детей и особые требования. После подтверждения бронирования вы сможете оплатить услугу.
+                      {{ $t('pages.findBabysitter.poti.steps.step4.text') }}
                     </p>
                   </div>
                 </div>
@@ -76,24 +76,22 @@
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Преимущества поиска через нашу платформу
+                {{ $t('pages.findBabysitter.poti.advantagesTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li>Проверенные бебиситтеры - все специалисты проходят верификацию</li>
-                <li>Удобный поиск - фильтры по цене, опыту, навыкам и доступности</li>
-                <li>Безопасность - система отзывов и рейтингов</li>
-                <li>Поддержка 24/7 - мы всегда готовы помочь</li>
-                <li>Гибкая оплата - безопасные платежи через платформу</li>
+                <li v-for="(advantage, index) in $t('pages.findBabysitter.poti.advantages')" :key="index">
+                  {{ advantage }}
+                </li>
               </ul>
             </section>
 
             <section class="mb-8">
               <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 text-center">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                  Готовы найти бебиситтера в Поти?
+                  {{ $t('pages.findBabysitter.poti.ctaTitle') }}
                 </h3>
                 <UButton to="/search?city=poti" color="primary" size="lg">
-                  Найти бебиситтера
+                  {{ $t('pages.findBabysitter.poti.ctaButton') }}
                 </UButton>
               </div>
             </section>
@@ -109,24 +107,27 @@ definePageMeta({
   pageTransition: false
 })
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
 
+const pageTitle = t('pages.findBabysitter.poti.title')
+const pageDescription = t('pages.findBabysitter.poti.intro')
+
 useSeoMeta({
-  title: 'Как найти бебиситтера в Поти',
-  description: 'Ищете надёжного бебиситтера в Поти? Наша платформа поможет найти проверенного специалиста для ухода за детьми.',
-  ogTitle: 'Как найти бебиситтера в Поти',
-  ogDescription: 'Ищете надёжного бебиситтера в Поти? Наша платформа поможет найти проверенного специалиста для ухода за детьми.',
+  title: pageTitle,
+  description: pageDescription,
+  ogTitle: pageTitle,
+  ogDescription: pageDescription,
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
   ogLocale: locale.value,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Как найти бебиситтера в Поти',
-  twitterDescription: 'Ищете надёжного бебиситтера в Поти? Наша платформа поможет найти проверенного специалиста для ухода за детьми.',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDescription,
   twitterImage: `${siteConfig.url}${siteConfig.logo}`
 })
 

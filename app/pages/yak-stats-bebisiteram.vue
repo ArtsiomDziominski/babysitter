@@ -4,19 +4,19 @@
       <div class="max-w-4xl mx-auto">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            Як стаць бебісітэрам
+            {{ $t('pages.becomeBabysitter.title') }}
           </h1>
 
           <div class="prose prose-gray dark:prose-invert max-w-none">
             <section class="mb-8">
               <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-lg">
-                Далучайцеся да нашай платформы і пачніце працаваць правяраным бебісітэрам. Мы дапамагаем вопытным няням знайсці сям'і, якім патрэбна надзейная дапамога з дзецьмі.
+                {{ $t('pages.becomeBabysitter.intro') }}
               </p>
             </section>
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Крокі
+                {{ $t('pages.becomeBabysitter.stepsTitle') }}
               </h2>
               <div class="space-y-6">
                 <div class="flex gap-4">
@@ -25,10 +25,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Зарэгіструйцеся на платформе
+                      {{ $t('pages.becomeBabysitter.steps.step1.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Стварыце акаўнт і выберыце ролю Бебісітэр. Запоўніце асноўную інфармацыю і прайдзіце верыфікацыю.
+                      {{ $t('pages.becomeBabysitter.steps.step1.text') }}
                     </p>
                   </div>
                 </div>
@@ -38,10 +38,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Запоўніце профіль
+                      {{ $t('pages.becomeBabysitter.steps.step2.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Дадайце фота, вопыт працы, адукацыю, навыкі і сертыфікаты. Чым поўней ваш профіль, тым прывабней вы будзеце для бацькоў.
+                      {{ $t('pages.becomeBabysitter.steps.step2.text') }}
                     </p>
                   </div>
                 </div>
@@ -51,10 +51,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Усталюйце расклад
+                      {{ $t('pages.becomeBabysitter.steps.step3.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Пазначце, калі вы даступныя для працы. Вы можаце ўсталяваць штотыднёвы расклад або адзначыць канкрэтныя даты.
+                      {{ $t('pages.becomeBabysitter.steps.step3.text') }}
                     </p>
                   </div>
                 </div>
@@ -64,10 +64,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      Пачніце прымаць заказы
+                      {{ $t('pages.becomeBabysitter.steps.step4.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      Пасля праверкі вашага профіля вы з'явіцеся ў выніках пошуку і зможаце пачаць атрымліваць запыты на браніраванне ад бацькоў.
+                      {{ $t('pages.becomeBabysitter.steps.step4.text') }}
                     </p>
                   </div>
                 </div>
@@ -76,37 +76,33 @@
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Патрабаванні
+                {{ $t('pages.becomeBabysitter.requirementsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li>Узрост ад 18 гадоў</li>
-                <li>Вопыт працы з дзецьмі</li>
-                <li>Дзеючыя дакументы, якія пацвярджаюць асобу</li>
-                <li>Адказнасць і любоў да дзяцей</li>
-                <li>Магчымасць прадставіць рэкамендацыі</li>
+                <li v-for="(requirement, index) in $t('pages.becomeBabysitter.requirements')" :key="index">
+                  {{ requirement }}
+                </li>
               </ul>
             </section>
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Перавагі працы з намі
+                {{ $t('pages.becomeBabysitter.benefitsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li>Гнуткі графік - працуйце, калі вам зручна</li>
-                <li>Справядлівая аплата - усталёўвайце свае тарыфы</li>
-                <li>Правяраныя кліенты - усе бацькі верыфікаваны</li>
-                <li>Падтрымка 24/7 - мы заўсёды гатовы дапамагчы</li>
-                <li>Бяспечная платформа - страхаванне і гарантыі</li>
+                <li v-for="(benefit, index) in $t('pages.becomeBabysitter.benefits')" :key="index">
+                  {{ benefit }}
+                </li>
               </ul>
             </section>
 
             <section class="mb-8">
               <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 text-center">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                  Гатовыя пачаць?
+                  {{ $t('pages.becomeBabysitter.ctaTitle') }}
                 </h3>
                 <UButton to="/register" color="primary" size="lg">
-                  Зарэгістравацца як бебісітэр
+                  {{ $t('pages.becomeBabysitter.ctaButton') }}
                 </UButton>
               </div>
             </section>
@@ -122,24 +118,27 @@ definePageMeta({
   pageTransition: false
 })
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
 
+const pageTitle = t('pages.becomeBabysitter.title')
+const pageDescription = t('pages.becomeBabysitter.intro')
+
 useSeoMeta({
-  title: 'Як стаць бебісітэрам',
-  description: 'Даведайцеся, як стаць правяраным бебісітэрам на нашай платформе і пачаць зарабляць, займаючыся любімай справай.',
-  ogTitle: 'Як стаць бебісітэрам',
-  ogDescription: 'Даведайцеся, як стаць правяраным бебісітэрам на нашай платформе і пачаць зарабляць, займаючыся любімай справай.',
+  title: pageTitle,
+  description: pageDescription,
+  ogTitle: pageTitle,
+  ogDescription: pageDescription,
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
   ogLocale: locale.value,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Як стаць бебісітэрам',
-  twitterDescription: 'Даведайцеся, як стаць правяраным бебісітэрам на нашай платформе і пачаць зарабляць, займаючыся любімай справай.',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDescription,
   twitterImage: `${siteConfig.url}${siteConfig.logo}`
 })
 

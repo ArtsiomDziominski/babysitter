@@ -4,19 +4,19 @@
       <div class="max-w-4xl mx-auto">
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
           <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            როგორ გახდეთ ბებისიტერი
+            {{ $t('pages.becomeBabysitter.title') }}
           </h1>
 
           <div class="prose prose-gray dark:prose-invert max-w-none">
             <section class="mb-8">
               <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-lg">
-                შემოუერთდით ჩვენს პლატფორმას და დაიწყეთ მუშაობა დამოწმებული ბებისიტერის სახით. ჩვენ ვეხმარებით გამოცდილ მზრუნველებს იპოვონ ოჯახები, რომლებსაც სჭირდებათ საიმედო ბავშვების მოვლა.
+                {{ $t('pages.becomeBabysitter.intro') }}
               </p>
             </section>
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                ნაბიჯები
+                {{ $t('pages.becomeBabysitter.stepsTitle') }}
               </h2>
               <div class="space-y-6">
                 <div class="flex gap-4">
@@ -25,10 +25,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      დარეგისტრირდით პლატფორმაზე
+                      {{ $t('pages.becomeBabysitter.steps.step1.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      შექმენით ანგარიში და აირჩიეთ ბებისიტერის როლი. შეავსეთ ძირითადი ინფორმაცია და გაიარეთ იდენტიფიკაცია.
+                      {{ $t('pages.becomeBabysitter.steps.step1.text') }}
                     </p>
                   </div>
                 </div>
@@ -38,10 +38,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      შეავსეთ თქვენი პროფილი
+                      {{ $t('pages.becomeBabysitter.steps.step2.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      დაამატეთ თქვენი ფოტო, სამუშაო გამოცდილება, განათლება, უნარები და სერტიფიკატები. რაც უფრო სრულია თქვენი პროფილი, მით უფრო მიმზიდველი იქნებით მშობლებისთვის.
+                      {{ $t('pages.becomeBabysitter.steps.step2.text') }}
                     </p>
                   </div>
                 </div>
@@ -51,10 +51,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      დააყენეთ თქვენი განრიგი
+                      {{ $t('pages.becomeBabysitter.steps.step3.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      მიუთითეთ, როდის ხართ მზად მუშაობისთვის. შეგიძლიათ დააყენოთ ყოველკვირეული განრიგი ან მონიშნოთ კონკრეტული თარიღები.
+                      {{ $t('pages.becomeBabysitter.steps.step3.text') }}
                     </p>
                   </div>
                 </div>
@@ -64,10 +64,10 @@
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
-                      დაიწყეთ შეკვეთების მიღება
+                      {{ $t('pages.becomeBabysitter.steps.step4.name') }}
                     </h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                      თქვენი პროფილის გადამოწმების შემდეგ, თქვენ გამოჩნდებით ძიების შედეგებში და შეძლებთ დაიწყოთ ბრონირების მოთხოვნების მიღება მშობლებისგან.
+                      {{ $t('pages.becomeBabysitter.steps.step4.text') }}
                     </p>
                   </div>
                 </div>
@@ -76,37 +76,33 @@
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                მოთხოვნები
+                {{ $t('pages.becomeBabysitter.requirementsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li>18 წლის ან უფროსი ასაკი</li>
-                <li>ბავშვებთან მუშაობის გამოცდილება</li>
-                <li>მოქმედი პირადობის დამადასტურებელი დოკუმენტები</li>
-                <li>პასუხისმგებლობა და სიყვარული ბავშვების მიმართ</li>
-                <li>რეკომენდაციების მიწოდების შესაძლებლობა</li>
+                <li v-for="(requirement, index) in $t('pages.becomeBabysitter.requirements')" :key="index">
+                  {{ requirement }}
+                </li>
               </ul>
             </section>
 
             <section class="mb-8">
               <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                ჩვენთან მუშაობის უპირატესობები
+                {{ $t('pages.becomeBabysitter.benefitsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li>მოქნილი განრიგი - იმუშავეთ, როცა თქვენთვის მოსახერხებელია</li>
-                <li>სამართლიანი გადახდა - დააყენეთ საკუთარი ტარიფები</li>
-                <li>დამოწმებული კლიენტები - ყველა მშობელი დამოწმებულია</li>
-                <li>მხარდაჭერა 24/7 - ჩვენ ყოველთვის მზად ვართ დაგეხმაროთ</li>
-                <li>უსაფრთხო პლატფორმა - დაზღვევა და გარანტიები</li>
+                <li v-for="(benefit, index) in $t('pages.becomeBabysitter.benefits')" :key="index">
+                  {{ benefit }}
+                </li>
               </ul>
             </section>
 
             <section class="mb-8">
               <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 text-center">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                  მზად ხართ დასაწყებად?
+                  {{ $t('pages.becomeBabysitter.ctaTitle') }}
                 </h3>
                 <UButton to="/register" color="primary" size="lg">
-                  დარეგისტრირდით ბებისიტერად
+                  {{ $t('pages.becomeBabysitter.ctaButton') }}
                 </UButton>
               </div>
             </section>
@@ -122,24 +118,27 @@ definePageMeta({
   pageTransition: false
 })
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
 
+const pageTitle = t('pages.becomeBabysitter.title')
+const pageDescription = t('pages.becomeBabysitter.intro')
+
 useSeoMeta({
-  title: 'როგორ გახდეთ ბებისიტერი',
-  description: 'გაიგეთ, როგორ გახდეთ დამოწმებული ბებისიტერი ჩვენს პლატფორმაზე და დაიწყეთ ფულის გამომუშავება იმით, რაც გიყვართ.',
-  ogTitle: 'როგორ გახდეთ ბებისიტერი',
-  ogDescription: 'გაიგეთ, როგორ გახდეთ დამოწმებული ბებისიტერი ჩვენს პლატფორმაზე და დაიწყეთ ფულის გამომუშავება იმით, რაც გიყვართ.',
+  title: pageTitle,
+  description: pageDescription,
+  ogTitle: pageTitle,
+  ogDescription: pageDescription,
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
   ogLocale: locale.value,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'როგორ გახდეთ ბებისიტერი',
-  twitterDescription: 'გაიგეთ, როგორ გახდეთ დამოწმებული ბებისიტერი ჩვენს პლატფორმაზე და დაიწყეთ ფულის გამომუშავება იმით, რაც გიყვართ.',
+  twitterTitle: pageTitle,
+  twitterDescription: pageDescription,
   twitterImage: `${siteConfig.url}${siteConfig.logo}`
 })
 
