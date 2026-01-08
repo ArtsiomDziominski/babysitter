@@ -79,7 +79,7 @@
                 {{ $t('pages.findBabysitter.tbilisi.advantagesTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li v-for="(advantage, index) in $t('pages.findBabysitter.tbilisi.advantages')" :key="index">
+                <li v-for="(advantage, index) in advantages" :key="index">
                   {{ advantage }}
                 </li>
               </ul>
@@ -144,6 +144,32 @@ const modifiedTime = new Date().toISOString()
 
 const pageTitle = t('pages.findBabysitter.tbilisi.title')
 const pageDescription = t('pages.findBabysitter.tbilisi.intro')
+
+const advantages = computed(() => {
+  try {
+    const { $i18n } = useNuxtApp()
+    const i18nInstance = $i18n as any
+    const messages = i18nInstance.localeMessages?.value?.[locale.value] || 
+                     i18nInstance.messages?.value?.[locale.value]
+    
+    if (messages?.pages?.findBabysitter?.tbilisi?.advantages) {
+      const value = messages.pages.findBabysitter.tbilisi.advantages
+      if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === 'string') {
+          return value
+        }
+        return value.map((_, index) => {
+          const key = `pages.findBabysitter.tbilisi.advantages.${index}`
+          const translated = t(key)
+          return translated !== key ? translated : String(value[index])
+        })
+      }
+    }
+    return []
+  } catch (e) {
+    return []
+  }
+})
 
 useSeoMeta({
   title: pageTitle,

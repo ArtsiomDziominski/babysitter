@@ -79,7 +79,7 @@
                 {{ $t('pages.findNanny.rustavi.considerationsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li v-for="(consideration, index) in $t('pages.findNanny.rustavi.considerations')" :key="index">
+                <li v-for="(consideration, index) in considerations" :key="index">
                   {{ consideration }}
                 </li>
               </ul>
@@ -115,6 +115,32 @@ const currentUrl = `${siteConfig.url}${route.path}`
 
 const pageTitle = t('pages.findNanny.rustavi.title')
 const pageDescription = t('pages.findNanny.rustavi.intro')
+
+const considerations = computed(() => {
+  try {
+    const { $i18n } = useNuxtApp()
+    const i18nInstance = $i18n as any
+    const messages = i18nInstance.localeMessages?.value?.[locale.value] || 
+                     i18nInstance.messages?.value?.[locale.value]
+    
+    if (messages?.pages?.findNanny?.rustavi?.considerations) {
+      const value = messages.pages.findNanny.rustavi.considerations
+      if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === 'string') {
+          return value
+        }
+        return value.map((_, index) => {
+          const key = `pages.findNanny.rustavi.considerations.${index}`
+          const translated = t(key)
+          return translated !== key ? translated : String(value[index])
+        })
+      }
+    }
+    return []
+  } catch (e) {
+    return []
+  }
+})
 
 useSeoMeta({
   title: pageTitle,

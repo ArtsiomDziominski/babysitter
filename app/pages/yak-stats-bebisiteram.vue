@@ -79,7 +79,7 @@
                 {{ $t('pages.becomeBabysitter.requirementsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li v-for="(requirement, index) in $t('pages.becomeBabysitter.requirements')" :key="index">
+                <li v-for="(requirement, index) in requirements" :key="index">
                   {{ requirement }}
                 </li>
               </ul>
@@ -90,7 +90,7 @@
                 {{ $t('pages.becomeBabysitter.benefitsTitle') }}
               </h2>
               <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
-                <li v-for="(benefit, index) in $t('pages.becomeBabysitter.benefits')" :key="index">
+                <li v-for="(benefit, index) in benefits" :key="index">
                   {{ benefit }}
                 </li>
               </ul>
@@ -126,6 +126,58 @@ const currentUrl = `${siteConfig.url}${route.path}`
 
 const pageTitle = t('pages.becomeBabysitter.title')
 const pageDescription = t('pages.becomeBabysitter.intro')
+
+const requirements = computed(() => {
+  try {
+    const { $i18n } = useNuxtApp()
+    const i18nInstance = $i18n as any
+    const messages = i18nInstance.localeMessages?.value?.[locale.value] || 
+                     i18nInstance.messages?.value?.[locale.value]
+    
+    if (messages?.pages?.becomeBabysitter?.requirements) {
+      const value = messages.pages.becomeBabysitter.requirements
+      if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === 'string') {
+          return value
+        }
+        return value.map((_, index) => {
+          const key = `pages.becomeBabysitter.requirements.${index}`
+          const translated = t(key)
+          return translated !== key ? translated : String(value[index])
+        })
+      }
+    }
+    return []
+  } catch (e) {
+    return []
+  }
+})
+
+const benefits = computed(() => {
+  try {
+    const { $i18n } = useNuxtApp()
+    const i18nInstance = $i18n as any
+    const messages = i18nInstance.localeMessages?.value?.[locale.value] || 
+                     i18nInstance.messages?.value?.[locale.value]
+    
+    if (messages?.pages?.becomeBabysitter?.benefits) {
+      const value = messages.pages.becomeBabysitter.benefits
+      if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === 'string') {
+          return value
+        }
+        return value.map((_, index) => {
+          const key = `pages.becomeBabysitter.benefits.${index}`
+          const translated = t(key)
+          return translated !== key ? translated : String(value[index])
+        })
+      }
+    }
+    return []
+  } catch (e) {
+    return []
+  }
+})
 
 useSeoMeta({
   title: pageTitle,
