@@ -1,3 +1,12 @@
+function escapeXml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+}
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const siteConfig = config.public.siteConfig
@@ -140,60 +149,69 @@ export default defineEventHandler(async (event) => {
         xmlns:xhtml="http://www.w3.org/1999/xhtml">`
 
   for (const page of publicPages) {
+    const fullUrl = `${baseUrl}${page.path}`
     sitemap += `
   <url>
-    <loc>${baseUrl}${page.path}</loc>
+    <loc>${escapeXml(fullUrl)}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>`
 
     for (const locale of locales) {
+      const localeUrl = `${baseUrl}${page.path}?lang=${locale.code}`
       sitemap += `
-    <xhtml:link rel="alternate" hreflang="${locale.iso || locale.code}" href="${baseUrl}${page.path}?lang=${locale.code}" />`
+    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localeUrl)}" />`
     }
 
+    const defaultUrl = `${baseUrl}${page.path}?lang=${siteConfig.defaultLocale}`
     sitemap += `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${page.path}?lang=${siteConfig.defaultLocale}" />`
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`
 
     sitemap += `
   </url>`
   }
 
   for (const sitterPage of sitterPages) {
+    const fullUrl = `${baseUrl}${sitterPage.path}`
     sitemap += `
   <url>
-    <loc>${baseUrl}${sitterPage.path}</loc>
+    <loc>${escapeXml(fullUrl)}</loc>
     <lastmod>${sitterPage.lastmod || lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>`
 
     for (const locale of locales) {
+      const localeUrl = `${baseUrl}${sitterPage.path}?lang=${locale.code}`
       sitemap += `
-    <xhtml:link rel="alternate" hreflang="${locale.iso || locale.code}" href="${baseUrl}${sitterPage.path}?lang=${locale.code}" />`
+    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localeUrl)}" />`
     }
 
+    const defaultUrl = `${baseUrl}${sitterPage.path}?lang=${siteConfig.defaultLocale}`
     sitemap += `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${sitterPage.path}?lang=${siteConfig.defaultLocale}" />`
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`
 
     sitemap += `
   </url>`
   }
 
   for (const blogPage of blogPages) {
+    const fullUrl = `${baseUrl}${blogPage.path}`
     sitemap += `
   <url>
-    <loc>${baseUrl}${blogPage.path}</loc>
+    <loc>${escapeXml(fullUrl)}</loc>
     <lastmod>${blogPage.lastmod || lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>`
 
     for (const locale of locales) {
+      const localeUrl = `${baseUrl}${blogPage.path}?lang=${locale.code}`
       sitemap += `
-    <xhtml:link rel="alternate" hreflang="${locale.iso || locale.code}" href="${baseUrl}${blogPage.path}?lang=${locale.code}" />`
+    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localeUrl)}" />`
     }
 
+    const defaultUrl = `${baseUrl}${blogPage.path}?lang=${siteConfig.defaultLocale}`
     sitemap += `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${blogPage.path}?lang=${siteConfig.defaultLocale}" />`
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`
 
     sitemap += `
   </url>`
