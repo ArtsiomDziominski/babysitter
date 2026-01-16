@@ -65,12 +65,18 @@
         :status="order.status"
         :end-time="order.endTime"
         :user-role="userRole"
-        :chat-id="chatId"
-        :user-id="userId"
         @action="(id, action) => $emit('action', id, action)"
       />
 
       <div class="flex gap-2 max-xl:w-full">
+        <UButton
+            size="sm"
+            color="primary"
+            class="cursor-pointer max-xl:flex-1"
+            :to="contactTo"
+        >
+          {{ $t('account.orders.actions.contact') }}
+        </UButton>
         <UButton
           size="sm"
           variant="outline"
@@ -192,6 +198,11 @@ const childrenTooltipText = computed((): string | undefined => {
     }
     return ''
   }).filter(Boolean).join(', ')
+})
+
+const contactTo = computed(() => {
+  const to = `/account/messages?chat=${chatId.value}`
+  return chatId.value ? to : to + `&userId=${userId.value}`
 })
 </script>
 

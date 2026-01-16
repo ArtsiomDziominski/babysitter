@@ -265,8 +265,6 @@
             :status="details.status"
             :end-time="details.endTime"
             :user-role="userRole"
-            :chat-iId="chatId"
-            :user-id="userId"
             @action="handleAction"
           />
         </div>
@@ -300,10 +298,6 @@ const emit = defineEmits<{
 }>()
 
 const userRole = computed(() => authStore.currentUser?.role)
-const chatId = computed(() => props.details?.chatId || null)
-const userId = computed(() =>
-    (props.details?.babysitter?.userId && authStore.currentUser.id === props.details.babysitter.userId ? props.details?.parentId : props.details?.babysitter?.userId) || null
-)
 
 const handleAction = (id: number, action: string) => {
   emit('action', id, action)

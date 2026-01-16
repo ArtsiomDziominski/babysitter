@@ -63,15 +63,6 @@
     >
       {{ $t('account.orders.actions.repeat') }}
     </UButton>
-
-    <UButton
-      size="sm"
-      color="primary"
-      class="cursor-pointer max-xl:flex-1"
-      :to="`/account/messages?chat=${props.chatId || null}&userId=${props.userId}`"
-    >
-      {{ $t('account.orders.actions.contact') }}
-    </UButton>
   </div>
 </template>
 
@@ -81,8 +72,6 @@ import { UserRole } from '~/const/roles'
 const props = defineProps<{
   orderId: number
   status: 'pending' | 'confirmed' | 'in_progress' | 'completed' | 'cancelled'
-  chatId?: number | null
-  userId?: number | null
   endTime?: string
   userRole?: string | null
 }>()
