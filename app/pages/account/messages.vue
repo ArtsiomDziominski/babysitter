@@ -586,14 +586,14 @@ onMounted(async () => {
   const chatParam = route.query.chat
   const { isMobile } = useBreakpoint()
 
-  if (chatParam === 'null' && route.query?.userId)
-    await chat.createConversation({ userId: Number(route.query.userId) })
+  const createConversation = await chat.createConversation({ userId: Number(route.query.userId) })
+  const createConversationId = createConversation?.data?.id
   await loadConversations()
 
   if (chatParam === 'admin') {
     await selectChat('admin-placeholder')
   } else if (chatParam) {
-    const chatIdStr = Array.isArray(chatParam) ? chatParam[0] : chatParam
+    const chatIdStr = createConversationId ? createConversationId : Array.isArray(chatParam) ? chatParam[0] : chatParam
     if (chatIdStr) {
       const chatId = typeof chatIdStr === 'string' ? parseInt(chatIdStr, 10) : chatIdStr
       if (!isNaN(chatId) && typeof chatId === 'number' && conversations.value.find(c => c.id === chatId)) {

@@ -59,11 +59,11 @@ export const useChat = () => {
 
   const getConversations = async (): Promise<Conversation[]> => {
     const response = await api.request<{ data?: Conversation[]; statusCode?: number } | Conversation[]>('/chat/conversations')
-    
+
     if ('data' in response && response.data) {
       return response.data
     }
-    
+
     return Array.isArray(response) ? response : []
   }
 
@@ -74,8 +74,8 @@ export const useChat = () => {
   const createConversation = async (data: {
     userId: number
     bookingId?: number
-  }): Promise<Conversation> => {
-    return await api.request<Conversation>('/chat/conversations', {
+  }): Promise<{ data?: Conversation; statusCode?: number }> => {
+    return await api.request<{ data?: Conversation; statusCode?: number }>('/chat/conversations', {
       method: 'POST',
       body: JSON.stringify(data),
     })
@@ -85,11 +85,11 @@ export const useChat = () => {
     const response = await api.request<{ data?: Conversation; statusCode?: number } | Conversation>('/chat/conversations/admin', {
       method: 'POST',
     })
-    
+
     if ('data' in response && response.data) {
       return response.data
     }
-    
+
     return response as Conversation
   }
 
@@ -101,11 +101,11 @@ export const useChat = () => {
     const response = await api.request<{ data?: MessagesResponse; statusCode?: number } | MessagesResponse>(
       `/chat/conversations/${conversationId}/messages?page=${page}&limit=${limit}`
     )
-    
+
     if ('data' in response && response.data) {
       return response.data
     }
-    
+
     return response as MessagesResponse
   }
 
@@ -118,11 +118,11 @@ export const useChat = () => {
       method: 'POST',
       body: JSON.stringify(data),
     })
-    
+
     if ('data' in response && response.data) {
       return response.data
     }
-    
+
     return response as Message
   }
 

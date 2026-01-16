@@ -194,7 +194,7 @@ const handleContact = () => {
 }
 
 const handleMessage = () => {
-  if (sitter.value?.userId) useRouter().push(`/account/messages?chat=null&user=${sitter.value.userId}`)
+  if (sitter.value?.userId) useRouter().push(`/account/messages?chat=null&userId=${sitter.value.userId}`)
 }
 
 </script>
