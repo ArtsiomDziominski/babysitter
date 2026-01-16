@@ -586,7 +586,7 @@ onMounted(async () => {
   const chatParam = route.query.chat
   const { isMobile } = useBreakpoint()
 
-  const createConversation = await chat.createConversation({ userId: Number(route.query.userId) })
+  const createConversation = chatParam === 'null' && route.query?.userId ? await chat.createConversation({ userId: Number(route.query.userId) }) : null
   const createConversationId = createConversation?.data?.id
   await loadConversations()
 
