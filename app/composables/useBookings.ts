@@ -36,7 +36,9 @@ export interface BookingListItem {
   customer: {
     name: string
     phone: string
+    id: number
   }
+  chatId: number
   date: string
   time: string
   children: string[] | BookingChild[]
@@ -95,6 +97,7 @@ export interface BookingDetails {
   }
   babysitter?: {
     id: number
+    userId: number
     city?: string | null
     user: {
       id: number

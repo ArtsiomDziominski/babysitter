@@ -95,7 +95,7 @@ import { useBabysitter, mapBabysitterToSitter } from '~/composables/useBabysitte
 import { UserRole } from '~/const/roles'
 
 const route = useRoute()
-const sitterId = route.params.id as string
+const bookId = route.params.id as string
 const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
 const { t, locale } = useI18n()
@@ -107,10 +107,10 @@ const isFavorite = ref(false)
 const isBabysitter = computed(() => authStore.currentUser?.role === UserRole.BABYSITTER)
 
 const { data: sitter, pending, error } = await useAsyncData<Sitter | null>(
-  `sitter-${sitterId}`,
+  `sitter-${bookId}`,
   async () => {
     try {
-      const id = parseInt(sitterId)
+      const id = parseInt(bookId)
       if (isNaN(id)) {
         return null
       }
@@ -135,8 +135,8 @@ const seoTitle = computed(() => {
 
 const seoDescription = computed(() => {
   if (sitter.value) {
-    return sitter.value.about 
-      ? `${sitter.value.about.substring(0, 160)}...` 
+    return sitter.value.about
+      ? `${sitter.value.about.substring(0, 160)}...`
       : t('seo.sitter.description', { name: sitter.value.name })
   }
   return t('seo.sitter.defaultDescription')
@@ -190,12 +190,11 @@ const toggleFavorite = () => {
 
 const handleContact = () => {
   const router = useRouter()
-  router.push(`/sitter/${sitterId}/book`)
+  router.push(`/sitter/${bookId}/book`)
 }
 
 const handleMessage = () => {
-  // TODO: Implement message functionality
-  console.log('Message clicked')
+  if (sitter.value?.userId) useRouter().push(`/account/messages?chat=null&user=${sitter.value.userId}`)
 }
 
 </script>

@@ -106,10 +106,10 @@
 
         <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
           <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30">
-            <Icon 
-              :name="details.bookingType === 'offline' ? 'i-lucide-home' : 'i-lucide-video'" 
-              size="20" 
-              class="text-primary-600 dark:text-primary-400" 
+            <Icon
+              :name="details.bookingType === 'offline' ? 'i-lucide-home' : 'i-lucide-video'"
+              size="20"
+              class="text-primary-600 dark:text-primary-400"
             />
           </div>
           <div class="flex-1">
@@ -265,6 +265,8 @@
             :status="details.status"
             :end-time="details.endTime"
             :user-role="userRole"
+            :chat-iId="chatId"
+            :user-id="userId"
             @action="handleAction"
           />
         </div>
@@ -298,6 +300,10 @@ const emit = defineEmits<{
 }>()
 
 const userRole = computed(() => authStore.currentUser?.role)
+const chatId = computed(() => props.details?.chatId || null)
+const userId = computed(() =>
+    (props.details?.babysitter?.userId && authStore.currentUser.id === props.details.babysitter.userId ? props.details?.parentId : props.details?.babysitter?.userId) || null
+)
 
 const handleAction = (id: number, action: string) => {
   emit('action', id, action)
@@ -355,7 +361,7 @@ const formatDuration = (startTime: string, endTime: string) => {
   const diffMs = end.getTime() - start.getTime()
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
   const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
-  
+
   const parts: string[] = []
   if (diffHours > 0) {
     parts.push(`${diffHours} ${t('account.orders.details.hours')}`)
@@ -363,7 +369,7 @@ const formatDuration = (startTime: string, endTime: string) => {
   if (diffMinutes > 0) {
     parts.push(`${diffMinutes} ${t('account.orders.details.minutes')}`)
   }
-  
+
   return parts.length > 0 ? parts.join(' ') : `0 ${t('account.orders.details.minutes')}`
 }
 
@@ -431,7 +437,7 @@ const getAgeWord = (age: number): string => {
 const getCity = (details: BookingDetails): string | null => {
   const cityKey = details.city || details.babysitter?.city
   if (!cityKey) return null
-  
+
   const translated = t(`cities.${cityKey}`)
   return translated && translated !== `cities.${cityKey}` ? translated : cityKey
 }

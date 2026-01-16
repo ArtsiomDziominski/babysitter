@@ -8,7 +8,7 @@
       />
 
       <SitterQuickInfo :sitter="sitter" />
-      
+
       <SitterActions
         @contact="$emit('contact')"
         @message="$emit('message')"

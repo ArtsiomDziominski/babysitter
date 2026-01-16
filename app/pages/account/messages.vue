@@ -252,14 +252,14 @@ async function loadMessages(conversationId: number, page = 1, prepend = false) {
   loadingMessages.value = true
   try {
     const response = await chat.getMessages(conversationId, page, 50)
-    
+
     if (prepend) {
       const existingMessages = messagesMap.value.get(conversationId) || []
       messagesMap.value.set(conversationId, [...response.data, ...existingMessages])
     } else {
       messagesMap.value.set(conversationId, response.data)
     }
-    
+
     messagesPagination.value.set(conversationId, {
       page: response.meta.page,
       totalPages: response.meta.totalPages,
@@ -281,7 +281,7 @@ async function loadMoreMessages(conversationId: number) {
   if (!pagination || !pagination.hasMore || loadingMessages.value) {
     return
   }
-  
+
   const nextPage = pagination.page + 1
   await loadMessages(conversationId, nextPage, true)
 }
@@ -489,10 +489,10 @@ function handleNewMessage(message: Message) {
 
   // Проверяем, есть ли временное сообщение с таким же контентом от текущего пользователя
   const currentUserId = authStore.currentUser?.id
-  const tempMessageIndex = messages.findIndex(m => 
-    m.senderId === currentUserId && 
-    m.content === message.content && 
-    'isPending' in m && 
+  const tempMessageIndex = messages.findIndex(m =>
+    m.senderId === currentUserId &&
+    m.content === message.content &&
+    'isPending' in m &&
     m.isPending === true
   )
 
@@ -561,14 +561,14 @@ function handleMessageDeleted(data: Partial<Message> & { id: number; conversatio
 function handleMessageRead(data: { conversationId: number; userId: number }) {
   const messages = messagesMap.value.get(data.conversationId) || []
   const currentUserId = authStore.currentUser?.id
-  
+
   if (!currentUserId || currentUserId === data.userId) {
     return
   }
 
   const now = new Date().toISOString()
   let updated = false
-  
+
   for (let i = 0; i < messages.length; i++) {
     const message = messages[i]
     if (message && message.senderId === currentUserId && !message.readAt) {
@@ -576,18 +576,20 @@ function handleMessageRead(data: { conversationId: number; userId: number }) {
       updated = true
     }
   }
-  
+
   if (updated) {
     messagesMap.value.set(data.conversationId, messages)
   }
 }
 
 onMounted(async () => {
-  await loadConversations()
-
   const chatParam = route.query.chat
   const { isMobile } = useBreakpoint()
-  
+
+  if (chatParam === 'null' && route.query?.userId)
+    await chat.createConversation({ userId: Number(route.query.userId) })
+  await loadConversations()
+
   if (chatParam === 'admin') {
     await selectChat('admin-placeholder')
   } else if (chatParam) {

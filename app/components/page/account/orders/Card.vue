@@ -65,6 +65,8 @@
         :status="order.status"
         :end-time="order.endTime"
         :user-role="userRole"
+        :chat-id="chatId"
+        :user-id="userId"
         @action="(id, action) => $emit('action', id, action)"
       />
 
@@ -95,9 +97,9 @@ const props = defineProps<{
   babysitterIdMap?: Record<number, number>
 }>()
 
-const sitterId = computed(() => {
-  return props.order.babysitterId || props.babysitterIdMap?.[props.order.id]
-})
+const sitterId = computed(() => props.order.babysitterId || props.babysitterIdMap?.[props.order.id] || props.order?.customer?.id)
+const chatId = computed(() => props.order?.chatId || null)
+const userId = computed(() => props.order?.customer?.id || null)
 
 defineEmits<{
   showDetails: [id: number]
@@ -175,7 +177,7 @@ const childrenTooltipText = computed((): string | undefined => {
   }
 
   const children = props.order.children
-  
+
   if (typeof children[0] === 'string') {
     return (children as string[]).join(', ')
   }
