@@ -770,6 +770,7 @@
       "hours": "Годин з дітьми",
       "returned": "Повернувся",
       "returnedPlural": "Повернулися",
+      "returnedTooltip": "Батьки, які звернулися повторно",
       "showInSearch": "Видна в пошуку",
       "book": "Замовити",
       "perHour": "/година",

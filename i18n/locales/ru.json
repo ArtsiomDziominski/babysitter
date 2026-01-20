@@ -769,6 +769,7 @@
       "orders": "Заказа",
       "hours": "Часов с детьми",
       "returned": "Вернулся",
+      "returnedTooltip": "Родители, обратившиеся повторно",
       "returnedPlural": "Вернулись",
       "showInSearch": "Видна в поиске",
       "book": "Заказать",

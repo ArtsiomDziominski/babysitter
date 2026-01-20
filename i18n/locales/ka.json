@@ -769,6 +769,7 @@
       "hours": "საათი ბავშვებთან",
       "returned": "დაბრუნდა",
       "returnedPlural": "დაბრუნდნენ",
+      "returnedTooltip": "განმეორებით მომართავი მშობლები",
       "showInSearch": "ხილულია ძიებაში",
       "book": "შეკვეთა",
       "perHour": "/საათი",

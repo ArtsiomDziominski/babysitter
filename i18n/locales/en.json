@@ -678,6 +678,7 @@
       "orders": "Orders",
       "hours": "Hours with children",
       "returned": "Returned",
+      "returnedTooltip": "Parents who returned",
       "returnedPlural": "Returned",
       "showInSearch": "Visible in search",
       "book": "Book",

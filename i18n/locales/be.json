@@ -681,6 +681,7 @@
       "hours": "Гадзін з дзецьмі",
       "returned": "Вярнуўся",
       "returnedPlural": "Вярнуліся",
+      "returnedTooltip": "Бацькі, якія звярнуліся паўторна",
       "showInSearch": "Бачная ў пошуку",
       "book": "Заказаць",
       "perHour": "/гадзіну",

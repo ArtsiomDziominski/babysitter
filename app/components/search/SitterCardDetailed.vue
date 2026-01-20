@@ -6,30 +6,33 @@
       <div class="flex-shrink-0 flex flex-col max-xl:items-center max-xl:w-full">
         <div
             class="relative w-[140px] h-[140px] max-xl:w-full max-xl:max-w-none max-xl:h-auto max-xl:aspect-square bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer"
-             @click="$emit('book', sitter.id.toString())"
+            @click="$emit('book', sitter.id.toString())"
         >
           <img
-            v-if="sitter.avatarUrl"
-            :src="sitter.avatarUrl"
-            :alt="getName(sitter.firstName, sitter.lastName)"
-            class="w-full h-full object-cover"
+              v-if="sitter.avatarUrl"
+              :src="sitter.avatarUrl"
+              :alt="getName(sitter.firstName, sitter.lastName)"
+              class="w-full h-full object-cover"
           />
           <Icon
-            v-else
-            name="i-lucide-user"
-            size="48"
-            class="text-gray-400 absolute inset-0 m-auto"
+              v-else
+              name="i-lucide-user"
+              size="48"
+              class="text-gray-400 absolute inset-0 m-auto"
           />
           <div
               v-if="sitter.isOnline"
               class="absolute top-2 left-2 flex items-center gap-1.5"
           >
             <span class="w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></span>
-            <span class="text-xs text-green-600 dark:text-green-400 font-medium">{{ $t('bookings.sitter.online') }}</span>
+            <span class="text-xs text-green-600 dark:text-green-400 font-medium">{{
+                $t('bookings.sitter.online')
+              }}</span>
           </div>
         </div>
-        <div v-if="sitter.city" class="flex items-center justify-center gap-1 mt-2 text-xs text-gray-500 dark:text-gray-400">
-          <Icon name="i-lucide-map-pin" size="12" />
+        <div v-if="sitter.city"
+             class="flex items-center justify-center gap-1 mt-2 text-xs text-gray-500 dark:text-gray-400">
+          <Icon name="i-lucide-map-pin" size="12"/>
           <span>{{ getCityName(sitter.city) }}</span>
         </div>
       </div>
@@ -51,9 +54,12 @@
               <span class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400">
                 {{ sitter.completedOrdersCount || 0 }} {{ $t('bookings.sitter.orders') }}
               </span>
-              <span v-if="sitter.returningCount" class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                <Icon name="i-lucide-repeat" size="14" class="max-xl:w-3 max-xl:h-3"/>
-                {{ sitter.returningCount }} {{ $t('bookings.sitter.returned') }}
+              <span v-if="sitter.returningCount"
+                    class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 cursor-default">
+                <UTooltip :text="$t('bookings.sitter.returnedTooltip')">
+                  <Icon name="i-lucide-repeat" size="14" class="max-xl:w-3 max-xl:h-3"/>
+                  <span> {{ sitter.returningCount }} {{ $t('bookings.sitter.returned') }} </span>
+                </UTooltip>
               </span>
             </div>
           </div>
@@ -74,7 +80,8 @@
         </p>
 
         <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
-          <span class="px-2 py-1 text-xs max-xl:text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded break-words">
+          <span
+              class="px-2 py-1 text-xs max-xl:text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded break-words">
             {{ $t('bookings.sitter.experience') }} {{ sitter.experience }} {{ yearWord }}
           </span>
         </div>
