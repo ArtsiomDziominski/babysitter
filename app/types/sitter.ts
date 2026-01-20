@@ -4,7 +4,8 @@ export interface Sitter {
   name: string
   avatar?: string
   rating: number
-  orders: number
+  completedOrdersCount: number
+  reviewsCount: number
   hours: number
   price: number
   description: string

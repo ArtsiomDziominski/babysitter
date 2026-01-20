@@ -49,7 +49,7 @@
                 </span>
               </div>
               <span class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400">
-                {{ sitter.reviewsCount || 0 }} {{ $t('bookings.sitter.orders') }}
+                {{ sitter.completedOrdersCount || 0 }} {{ $t('bookings.sitter.orders') }}
               </span>
               <span v-if="sitter.returningCount" class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                 <Icon name="i-lucide-repeat" size="14" class="max-xl:w-3 max-xl:h-3"/>

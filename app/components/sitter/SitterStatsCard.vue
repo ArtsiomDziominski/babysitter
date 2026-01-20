@@ -33,7 +33,7 @@ const props = defineProps<{
 const stats = computed(() => [
   {
     icon: 'i-lucide-shopping-bag',
-    value: props.sitter.orders,
+    value: props.sitter.completedOrdersCount,
     label: t('bookings.sitter.stats.orders'),
     textSize: 'text-2xl'
   },

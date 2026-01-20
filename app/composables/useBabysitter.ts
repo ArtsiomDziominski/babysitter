@@ -73,6 +73,7 @@ export interface BabysitterListItem {
   birthDate?: string
   city?: string
   rating?: string
+  completedOrdersCount?: number
   reviewsCount?: number
   returningCount?: number
   showInSearch?: boolean
@@ -151,6 +152,7 @@ export interface BabysitterDetailResponse {
   responseTime?: string
   createdAt?: string
   updatedAt?: string
+  completedOrdersCount: number
 }
 
 export const useBabysitter = () => {
@@ -332,7 +334,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     name: `${data.firstName || ''} ${data.lastName?.[0] + '.' || ''}`.trim() || 'Без имени',
     avatar: data.avatarUrl,
     rating: data.rating || 0,
-    orders: data.reviewsCount || 0,
+    reviewsCount: data.reviewsCount || 0,
+    completedOrdersCount: data.completedOrdersCount || 0,
     hours: 0,
     price: data.priceOneChild ? parseFloat(data.priceOneChild) : 0,
     description: data.bio || '',
