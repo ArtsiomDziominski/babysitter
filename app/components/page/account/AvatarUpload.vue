@@ -3,11 +3,12 @@
     <div class="relative mb-4">
       <UserAvatar
         :preview="avatarPreview"
+        :src="avatarUrl"
         size="3xl"
         class="border-4 border-gray-200 dark:border-gray-700 w-36 h-36 max-xl:w-28 max-xl:h-28"
         :show-fallback="true"
       />
-      
+
       <input
         ref="fileInput"
         type="file"
@@ -52,13 +53,12 @@ const avatarPreview = ref<string | null>(null)
 const isUploadingAvatar = ref(false)
 const isDeletingAvatar = ref(false)
 
-const hasAvatar = computed(() => {
-  return !!authStore.currentUser?.avatar || !!avatarPreview.value
-})
-
 const ALLOWED_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
 const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']
 const MAX_FILE_SIZE = 5 * 1024 * 1024
+
+const avatarUrl = computed(() => authStore.currentUser?.avatarUrl)
+const hasAvatar = computed(() => !!avatarUrl.value || !!avatarPreview.value)
 
 const handleFileSelect = async (event: Event) => {
   const target = event.target as HTMLInputElement

@@ -11,6 +11,7 @@ export interface User {
     phone: string
     city?: string
     avatar?: string
+    avatarUrl?: string
     role: Role
     children?: any[]
     babysitter?: any | null
@@ -24,6 +25,7 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         email: apiUser.email,
         phone: apiUser.phone || '',
         avatar: apiUser.avatar,
+        avatarUrl: apiUser.avatarUrl,
         role: apiUser.role === UserRole.PARENT ? UserRole.PARENT : apiUser.role === UserRole.BABYSITTER ? UserRole.BABYSITTER : null,
         children: apiUser.children || undefined,
     }
