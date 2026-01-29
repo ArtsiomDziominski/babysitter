@@ -40,7 +40,7 @@
               </label>
               <UInput
                   v-model="formData.phone"
-                  placeholder="+7"
+                  placeholder="+995"
                   size="lg"
               />
             </div>
@@ -126,7 +126,7 @@ const cityOptions = computed(() =>
 const formData = ref({
   name: authStore.currentUser?.name || '',
   surname: authStore.currentUser?.surname || '',
-  phone: authStore.currentUser?.phone || '+7',
+  phone: authStore.currentUser?.phone || '+995',
   city: authStore.currentUser?.city || City.TBILISI
 })
 

@@ -168,7 +168,7 @@
     "resetPasswordEmailSent": "Інструкцыі па аднаўленні пароля адпраўлены на ваш email",
     "rememberPassword": "Успомнілі пароль?",
     "phone": "Тэлефон",
-    "phonePlaceholder": "+79001234567",
+    "phonePlaceholder": "+995_________",
     "phoneMinLength": "Тэлефон павінен быць не менш за 10 сімвалаў",
     "role": "Роля",
     "orContinueWith": "Або працягнуць з",
@@ -594,7 +594,7 @@
         "middleName": "Імя па бацьку",
         "middleNamePlaceholder": "Пятровіч",
         "phone": "Нумар тэлефона",
-        "phonePlaceholder": "+7_______"
+        "phonePlaceholder": "+995_________"
       }
     }
   },

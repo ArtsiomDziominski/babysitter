@@ -210,7 +210,7 @@ const addNewContactForm = () => {
   newContactForm.value = {
     firstName: '',
     lastName: '',
-    phone: '+7',
+    phone: '+995',
     relationship: null
   }
 }
