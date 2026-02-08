@@ -85,11 +85,7 @@ import type {
   BabysitterScheduleBlock,
   TimeInterval
 } from '~/composables/useBabysitter'
-import {
-  mapEverydaySchedules,
-  mapToEverydaySchedules,
-  startOfMonth
-} from '~/composables/useScheduleTransform'
+import { mapEverydaySchedules, mapToEverydaySchedules } from '~/composables/useScheduleTransform'
 import { ScheduleMode } from '~/const/schedule'
 import { useAdvantages } from '~/composables/useAdvantages'
 
@@ -382,11 +378,10 @@ const loadProfile = async () => {
     if (profile) {
       hasProfile.value = true
       isEditing.value = false
-      const convertedProfile = {
+      form.value = {
         ...profile,
         advantages: profile.advantages ? convertAdvantagesToKeys(profile.advantages) : []
       }
-      form.value = convertedProfile
       loadedSnapshot.value = clone(form.value)
       applySchedules(profile.schedules)
     } else {

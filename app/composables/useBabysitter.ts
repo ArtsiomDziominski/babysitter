@@ -45,6 +45,7 @@ export interface BabysitterProfilePayload {
   birthDate?: string | null
   city?: string | null
   showInSearch?: boolean
+  avatarUrl?: string
   schedules?: BabysitterScheduleBlock[]
 }
 

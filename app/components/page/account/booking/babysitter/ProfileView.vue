@@ -4,8 +4,8 @@
       <div class="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
         <div class="w-[140px] h-[140px] rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 flex-shrink-0">
           <img
-            v-if="authStore.currentUser?.avatarUrl"
-            :src="authStore.currentUser.avatarUrl"
+            v-if="profile?.avatarUrl"
+            :src="profile.avatarUrl"
             alt="Фото профиля"
             class="w-full h-full object-cover"
           />
@@ -173,7 +173,6 @@ const props = defineProps<{
 }>()
 
 const { t } = useI18n()
-const authStore = useAuthStore()
 const siteConfig = useSiteConfig()
 const { convertKeysToTranslations, convertAdvantagesToKeys } = useAdvantages()
 
