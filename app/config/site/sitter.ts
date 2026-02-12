@@ -25,6 +25,6 @@ export default {
         // { code: 'be', iso: 'be-BY', file: 'be.json', name: 'Беларуская' },
         { code: 'uk', iso: 'uk-UA', file: 'uk.json', name: 'Українська' }
     ],
-    defaultLocale: 'ka',
+    defaultLocale: 'ru',
     langDir: 'locales'
 } as const
