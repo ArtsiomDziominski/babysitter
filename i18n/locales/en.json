@@ -134,6 +134,22 @@
       "ctaBabysitter": "Create your profile",
       "ctaParent": "Find a babysitter"
     },
+    "babysitterCan": {
+      "label": "Capabilities",
+      "title": "What a babysitter can do",
+      "subtitle": "Everything your family needs — in one service",
+      "more": "And much more",
+      "cta": "Find a babysitter",
+      "services": {
+        "home": "Stay home with your child while you're away",
+        "transport": "Take kids to classes, tutors or sports",
+        "school": "Pick up from school or kindergarten",
+        "party": "Help with kids at a birthday or family event",
+        "mall": "Entertain your child at the mall while you're busy",
+        "relatives": "Take the child to grandparents or relatives",
+        "chores": "Keep kids busy while you handle household tasks"
+      }
+    },
     "blog": {
       "title": "Useful articles",
       "subtitle": "Read our articles about parenting and babysitting",

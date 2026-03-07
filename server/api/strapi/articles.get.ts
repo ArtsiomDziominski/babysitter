@@ -44,9 +44,25 @@ export default defineEventHandler(async (event) => {
     headers['Authorization'] = `Bearer ${strapiApiToken}`
   }
 
-  const response = await fetch(`${strapiUrl}/api/articles?${queryParams.toString()}`, {
-    headers,
-  })
+  let response: Response
+  try {
+    response = await fetch(`${strapiUrl}/api/articles?${queryParams.toString()}`, {
+      headers,
+    })
+  } catch {
+    // Keep homepage/blog widgets usable even when local Strapi is down.
+    return {
+      data: [],
+      meta: {
+        pagination: {
+          page: Number(query.page || 1),
+          pageSize: Number(query.limit || 10),
+          pageCount: 0,
+          total: 0
+        }
+      }
+    }
+  }
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ message: 'Ошибка загрузки данных' }))

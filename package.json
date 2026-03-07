@@ -25,6 +25,7 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
     "@vitejs/plugin-vue": "^6.0.4",
     "@vue/test-utils": "^2.4.6",
     "jsdom": "^28.1.0",

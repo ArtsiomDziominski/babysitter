@@ -3,6 +3,7 @@
     <PageMainHeroSection />
     <PageMainStatsSection />
     <PageMainHowItWorksSection />
+    <PageMainBabysitterCanSection />
     <PageMainFeaturedSittersSection />
     <PageMainAdvantagesSection />
     <PageMainReviewsSection />

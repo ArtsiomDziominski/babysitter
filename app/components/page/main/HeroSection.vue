@@ -36,7 +36,7 @@ const { t } = useI18n()
             {{ t('home.hero.cta') }}
           </UButton>
           <UButton
-            to="/auth/register"
+            to="/register"
             size="xl"
             variant="outline"
             color="neutral"
