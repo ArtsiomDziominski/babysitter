@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen">
     <PageMainHeroSection />
-    <!-- <PageMainStatsSection /> -->
+    <PageMainStatsSection />
     <PageMainHowItWorksSection />
     <PageMainBabysitterCanSection />
+    <PageMainFeaturedSittersSection />
     <PageMainAdvantagesSection />
-    <!-- <PageMainImageGallerySection /> -->
-    <!-- <PageMainReviewsSection /> -->
+    <PageMainReviewsSection />
     <PageMainBlogSection />
     <PageMainCTASection />
   </div>

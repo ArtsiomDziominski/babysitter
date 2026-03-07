@@ -43,29 +43,45 @@
       "title": "Find a verified babysitter near you",
       "subtitle": "Thousands of happy parents have already found reliable help for their children",
       "cta": "Find a babysitter",
-      "ctaSecondary": "Learn more"
+      "ctaSecondary": "Become a Babysitter",
+      "trusted": "Trusted by 2,000+ families",
+      "trustVerified": "Verified profiles",
+      "trustFree": "Free for parents",
+      "trustSupport": "24/7 support"
     },
     "howItWorks": {
       "title": "How it works",
+      "subtitle": "Find your perfect babysitter in 3 simple steps",
       "step1": {
-        "title": "Choose a babysitter",
-        "description": "Browse profiles of verified babysitters in your city"
+        "title": "Search babysitters",
+        "description": "Browse profiles of verified babysitters in your area"
       },
       "step2": {
-        "title": "Book a time",
-        "description": "Select a convenient date and time for the meeting"
+        "title": "View profiles & reviews",
+        "description": "Check experience, qualifications, and reviews from other parents"
       },
       "step3": {
-        "title": "Confirm booking",
-        "description": "Confirm your order and pay for the service"
+        "title": "Contact & hire",
+        "description": "Message the babysitter directly and arrange everything"
       },
       "step4": {
         "title": "Enjoy your free time",
         "description": "Your children are in safe hands, and you can take care of your business"
       }
     },
+    "featured": {
+      "title": "Featured Babysitters",
+      "subtitle": "Meet our top-rated and most trusted caregivers",
+      "viewAll": "View all babysitters",
+      "experience": "yrs experience",
+      "perHour": "/hour",
+      "reviews": "reviews",
+      "verified": "Verified",
+      "contact": "Contact"
+    },
     "advantages": {
       "title": "Why choose us",
+      "subtitle": "We care about your family's safety and comfort",
       "verified": {
         "title": "Verified babysitters",
         "description": "All our babysitters undergo document verification and interviews"
@@ -85,7 +101,25 @@
     },
     "reviews": {
       "title": "Parent reviews",
+      "subtitle": "See what other parents say about our service",
       "more": "All reviews"
+    },
+    "testimonials": {
+      "1": {
+        "name": "Anna K.",
+        "city": "Tbilisi",
+        "text": "Amazing service! Found a wonderful babysitter for our son. Everything went perfectly, our child was thrilled."
+      },
+      "2": {
+        "name": "Maria L.",
+        "city": "Batumi",
+        "text": "Very convenient platform. Easy to find a babysitter with the right experience. The reviews helped a lot in making our choice."
+      },
+      "3": {
+        "name": "Elena D.",
+        "city": "Kutaisi",
+        "text": "We've been using the service for 6 months now. Our babysitter has become part of the family. Highly recommend!"
+      }
     },
     "stats": {
       "sitters": "Babysitters",
@@ -95,7 +129,26 @@
     },
     "cta": {
       "title": "Ready to find the perfect babysitter?",
-      "subtitle": "Join thousands of happy parents"
+      "subtitle": "Join thousands of happy parents",
+      "badge": "Join our community",
+      "ctaBabysitter": "Create your profile",
+      "ctaParent": "Find a babysitter"
+    },
+    "babysitterCan": {
+      "label": "Capabilities",
+      "title": "What a babysitter can do",
+      "subtitle": "Everything your family needs — in one service",
+      "more": "And much more",
+      "cta": "Find a babysitter",
+      "services": {
+        "home": "Stay home with your child while you're away",
+        "transport": "Take kids to classes, tutors or sports",
+        "school": "Pick up from school or kindergarten",
+        "party": "Help with kids at a birthday or family event",
+        "mall": "Entertain your child at the mall while you're busy",
+        "relatives": "Take the child to grandparents or relatives",
+        "chores": "Keep kids busy while you handle household tasks"
+      }
     },
     "blog": {
       "title": "Useful articles",
