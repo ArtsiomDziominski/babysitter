@@ -290,9 +290,10 @@ const handleAction = async (orderId: number, action: string) => {
     }
   } else if (action === 'repeat') {
     try {
-      let sitterId = bookingDetails.value?.babysitterId || 
-                     orders.value.find(o => o.id === orderId)?.babysitterId || 
-                     babysitterIdMap.value[orderId]
+      // bookingDetails — это последний открытый в модалке заказ, он может не совпадать с orderId
+      let sitterId = orders.value.find(o => o.id === orderId)?.babysitterId ||
+                     babysitterIdMap.value[orderId] ||
+                     (bookingDetails.value?.id === orderId ? bookingDetails.value.babysitterId : undefined)
       
       if (!sitterId) {
         const details = await bookingsApi.getBookingById(orderId)

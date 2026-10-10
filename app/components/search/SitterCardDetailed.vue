@@ -42,7 +42,7 @@
           <div class="flex-1 min-w-0">
             <h3 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white cursor-pointer break-words"
                 @click="$emit('book', sitter.id.toString())">
-              {{ getName(sitter.firstName, sitter.lastName?.[0] + '.') }}
+              {{ getName(sitter.firstName, sitter.lastName ? `${sitter.lastName[0]}.` : '') }}
             </h3>
             <div class="flex items-center gap-2 mt-1 max-xl:flex-wrap max-xl:text-xs">
               <div class="flex items-center">

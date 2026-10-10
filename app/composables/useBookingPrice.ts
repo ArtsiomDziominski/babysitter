@@ -31,23 +31,19 @@ export const useBookingPrice = () => {
           }
         }
       } else {
-        if (childrenCount === 1 && sitter.priceOneChild) {
-          const parsed = parseFloat(sitter.priceOneChild)
-          if (!isNaN(parsed) && isFinite(parsed) && parsed > 0) {
-            pricePerHour = parsed
-          }
-        } else if (childrenCount === 2 && sitter.priceTwoChildren) {
-          const parsed = parseFloat(sitter.priceTwoChildren)
-          if (!isNaN(parsed) && isFinite(parsed) && parsed > 0) {
-            pricePerHour = parsed
-          }
-        } else if (childrenCount === 3 && sitter.priceThreeChildren) {
-          const parsed = parseFloat(sitter.priceThreeChildren)
-          if (!isNaN(parsed) && isFinite(parsed) && parsed > 0) {
-            pricePerHour = parsed
-          }
+        // Цена за час зависит от количества детей (как и на бэкенде)
+        const priceByChildrenCount = [
+          sitter.priceOneChild,
+          sitter.priceTwoChildren,
+          sitter.priceThreeChildren,
+          sitter.priceFourChildren,
+          sitter.priceFiveChildren
+        ]
+        const parsed = parseFloat(priceByChildrenCount[childrenCount - 1] ?? '')
+        if (!isNaN(parsed) && isFinite(parsed) && parsed > 0) {
+          pricePerHour = parsed
         }
-        
+
         if (pricePerHour === 0 && sitter.price) {
           pricePerHour = sitter.price
         }

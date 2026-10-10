@@ -212,6 +212,8 @@ const handleSave = async () => {
   }
 
   isSaving.value = true
+  // closeModal() сбрасывает isEditMode, поэтому режим запоминаем заранее
+  const wasEdit = isEditMode.value
   try {
     const payload: any = {
       firstName: newContact.value.firstName.trim(),
@@ -223,7 +225,7 @@ const handleSave = async () => {
       payload.relationship = newContact.value.relationship.trim()
     }
 
-    if (isEditMode.value && newContact.value.id) {
+    if (wasEdit && newContact.value.id) {
       await updateTrustedContact(newContact.value.id, payload)
     } else {
       await createTrustedContact(payload)
@@ -231,13 +233,13 @@ const handleSave = async () => {
     await loadContacts()
     closeModal()
     toast.add({
-      title: isEditMode.value ? t('account.booking.trustedPerson.updateSuccess') : t('account.booking.trustedPerson.addSuccess'),
+      title: wasEdit ? t('account.booking.trustedPerson.updateSuccess') : t('account.booking.trustedPerson.addSuccess'),
       color: 'success'
     })
   } catch (error: any) {
     console.error('Ошибка при сохранении:', error)
     toast.add({
-      title: isEditMode.value ? t('account.booking.trustedPerson.updateError') : t('account.booking.trustedPerson.addError'),
+      title: wasEdit ? t('account.booking.trustedPerson.updateError') : t('account.booking.trustedPerson.addError'),
       description: error.message || t('account.booking.trustedPerson.saveErrorMessage'),
       color: 'error'
     })

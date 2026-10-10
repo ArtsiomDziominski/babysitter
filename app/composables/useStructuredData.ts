@@ -106,7 +106,8 @@ export const useStructuredData = () => {
       script: [
         {
           type: 'application/ld+json',
-          children: JSON.stringify(schema)
+          // unhead v2 не поддерживает `children` — с ним скрипт выводился пустым
+          innerHTML: JSON.stringify(schema)
         }
       ]
     })

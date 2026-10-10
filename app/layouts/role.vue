@@ -15,7 +15,7 @@ const handleLogout = () => {
         <NuxtLink to="/" class="text-lg font-semibold">
           Babysitter
         </NuxtLink>
-        <UButton color="gray" variant="ghost" @click="handleLogout">
+        <UButton color="neutral" variant="ghost" @click="handleLogout">
           Выйти
         </UButton>
       </div>

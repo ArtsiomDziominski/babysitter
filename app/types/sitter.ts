@@ -32,6 +32,8 @@ export interface Sitter {
   priceOneChild?: string
   priceTwoChildren?: string
   priceThreeChildren?: string
+  priceFourChildren?: string
+  priceFiveChildren?: string
   onlineLesson?: string
   minOrderAmount?: string
   petAttitude?: string

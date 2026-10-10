@@ -119,12 +119,20 @@ const { data: sitter, pending, error } = await useAsyncData<Sitter | null>(
         return null
       }
       return mapBabysitterToSitter(babysitterData)
-    } catch (err) {
+    } catch (err: any) {
+      if (err?.statusCode === 404) {
+        return null
+      }
       console.error('Ошибка загрузки ситтера:', err)
-      return null
+      throw err
     }
   }
 )
+
+// Несуществующая анкета должна отдавать 404, а не страницу с кодом 200
+if (!sitter.value && !error.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Sitter not found' })
+}
 
 const seoTitle = computed(() => {
   if (sitter.value) {
@@ -135,15 +143,15 @@ const seoTitle = computed(() => {
 
 const seoDescription = computed(() => {
   if (sitter.value) {
-    return sitter.value.about
-      ? `${sitter.value.about.substring(0, 160)}...`
+    return sitter.value.description
+      ? `${sitter.value.description.substring(0, 160)}...`
       : t('seo.sitter.description', { name: sitter.value.name })
   }
   return t('seo.sitter.defaultDescription')
 })
 
 const seoImage = computed(() => {
-  return sitter.value?.photo || `${siteConfig.url}${siteConfig.logo}`
+  return sitter.value?.avatar || `${siteConfig.url}${siteConfig.logo}`
 })
 
 useSeoMeta({

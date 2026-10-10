@@ -29,6 +29,16 @@ export interface ApiUser {
   children?: any[]
 }
 
+/**
+ * Бэкенд оборачивает каждый ответ в { data, statusCode }. Возвращает полезную нагрузку.
+ */
+export const unwrapApiResponse = <T>(response: T | { data: T; statusCode: number }): T => {
+  if (response && typeof response === 'object' && 'statusCode' in response && 'data' in response) {
+    return response.data
+  }
+  return response as T
+}
+
 export const useApi = () => {
   const config = useRuntimeConfig()
   const apiBaseUrl = config.public.apiBaseUrl
@@ -48,19 +58,28 @@ export const useApi = () => {
       headers['Authorization'] = `Bearer ${token}`
     }
 
-    const response = await fetch(`${apiBaseUrl}${endpoint}`, {
-      ...options,
-      headers,
-    })
+    let response: Response
+    try {
+      response = await fetch(`${apiBaseUrl}${endpoint}`, {
+        ...options,
+        headers,
+      })
+    } catch {
+      const error: ApiError = { statusCode: 0, message: 'Сервер недоступен. Проверьте подключение к интернету' }
+      throw error
+    }
 
-    const data = await response.json()
+    // Ответ может быть пустым (204) или HTML-страницей прокси (502) — не падаем на JSON.parse
+    const data = response.status === 204 ? null : await response.json().catch(() => null)
 
     if (!response.ok) {
+      // Ошибки валидации Nest приходят массивом сообщений
+      const message = Array.isArray(data?.message) ? data.message.join(', ') : data?.message
       const error: ApiError = {
         statusCode: response.status,
-        message: data.message || 'Произошла ошибка',
-        error: data.error,
-        details: data.details,
+        message: message || 'Произошла ошибка',
+        error: data?.error,
+        details: data?.details,
       }
       throw error
     }

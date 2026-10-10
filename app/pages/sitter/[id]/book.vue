@@ -166,7 +166,7 @@ watch(pending, (val) => {
 }, { immediate: true })
 
 const calculatedPrice = computed(() => {
-  const childrenCount = form.value.selectedChildren.filter(child => child.age > 0).length || 1
+  const childrenCount = form.value.selectedChildren.filter(child => child.age >= 0).length || 1
   return calculatePrice(
     sitter.value ?? null,
     bookingType.value,
@@ -179,7 +179,7 @@ const calculatedPrice = computed(() => {
 })
 
 const isFormValid = computed(() => {
-  const validChildren = form.value.selectedChildren.filter(child => child.age > 0 && child.age <= 18)
+  const validChildren = form.value.selectedChildren.filter(child => child.age >= 0 && child.age <= 18)
   return (
     form.value.startDate &&
     form.value.startTime &&
@@ -274,7 +274,7 @@ const handleSubmit = async () => {
       throw new Error('Неверный ID няни')
     }
 
-    const validChildren = form.value.selectedChildren.filter(child => child.age > 0 && child.age <= 18)
+    const validChildren = form.value.selectedChildren.filter(child => child.age >= 0 && child.age <= 18)
     if (validChildren.length === 0) {
       throw new Error('Необходимо указать хотя бы одного ребенка с корректным возрастом')
     }

@@ -16,7 +16,9 @@ interface RegisterRequest {
 }
 
 interface AuthResponseData {
-  access_token: string
+  access_token?: string
+  requires2FA?: boolean
+  tempToken?: string
   user: {
     id: number
     email: string

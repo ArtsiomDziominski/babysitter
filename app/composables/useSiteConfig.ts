@@ -4,7 +4,7 @@ export const useSiteConfig = () => {
   
   return {
     ...config.public.siteConfig,
-    defaultLocale: defaultLocale.value
+    defaultLocale: defaultLocale || config.public.siteConfig.defaultLocale
   } as {
     name: string
     url: string
