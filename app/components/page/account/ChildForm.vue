@@ -6,7 +6,7 @@
       </h3>
       <UButton
           variant="ghost"
-          color="red"
+          color="error"
           size="sm"
           @click="$emit('remove')"
       >
@@ -39,7 +39,7 @@
             min="0"
             max="18"
             size="lg"
-            @update:model-value="updateField('age', $event && $event !== '' ? Number($event) : null)"
+            @update:model-value="updateField('age', $event === '' || $event === null || $event === undefined ? null : Number($event))"
         />
       </div>
 

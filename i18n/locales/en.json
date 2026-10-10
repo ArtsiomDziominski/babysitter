@@ -47,7 +47,11 @@
       "trusted": "Trusted by 2,000+ families",
       "trustVerified": "Verified profiles",
       "trustFree": "Free for parents",
-      "trustSupport": "24/7 support"
+      "trustSupport": "24/7 support",
+      "babysitterPrompt": "Are you a babysitter?",
+      "searchPlaceholder": "Your city...",
+      "titleLine1": "Find",
+      "titleLine2": "a trusted babysitter"
     },
     "howItWorks": {
       "title": "How it works",
@@ -77,7 +81,8 @@
       "perHour": "/hour",
       "reviews": "reviews",
       "verified": "Verified",
-      "contact": "Contact"
+      "contact": "Contact",
+      "label": "Top babysitters"
     },
     "advantages": {
       "title": "Why choose us",
@@ -102,7 +107,8 @@
     "reviews": {
       "title": "Parent reviews",
       "subtitle": "See what other parents say about our service",
-      "more": "All reviews"
+      "more": "All reviews",
+      "label": "Reviews"
     },
     "testimonials": {
       "1": {
@@ -119,6 +125,31 @@
         "name": "Elena D.",
         "city": "Kutaisi",
         "text": "We've been using the service for 6 months now. Our babysitter has become part of the family. Highly recommend!"
+      },
+      "4": {
+        "city": "Tbilisi",
+        "name": "Svetlana R.",
+        "text": "Found a babysitter in 20 minutes! The profiles are very detailed, so you can see right away who you can trust with your kids."
+      },
+      "5": {
+        "city": "Rustavi",
+        "name": "Natalia V.",
+        "text": "This is the third time I've used the service. Every time we find a great specialist. Thank you for such a convenient service!"
+      },
+      "6": {
+        "city": "Batumi",
+        "name": "Irina P.",
+        "text": "The site is clear and easy to use. Booking takes a few minutes and support is always available."
+      },
+      "7": {
+        "city": "Tbilisi",
+        "name": "Olga M.",
+        "text": "The babysitter arrived on time and the kids loved her right away. We finally had a quiet dinner together."
+      },
+      "8": {
+        "city": "Kutaisi",
+        "name": "Tatiana B.",
+        "text": "Verified profiles give me confidence. I know my kids are in safe hands."
       }
     },
     "stats": {
@@ -132,7 +163,25 @@
       "subtitle": "Join thousands of happy parents",
       "badge": "Join our community",
       "ctaBabysitter": "Create your profile",
-      "ctaParent": "Find a babysitter"
+      "ctaParent": "Find a babysitter",
+      "parent": {
+        "badge": "For parents",
+        "cta": "Find a babysitter",
+        "perk1": "Filter by experience, skills and price",
+        "perk2": "Real reviews from other parents",
+        "perk3": "Safe service with 24/7 support",
+        "subtitle": "Hundreds of verified babysitters in your city are ready to help.",
+        "title": "Find the perfect babysitter today"
+      },
+      "sitter": {
+        "badge": "For babysitters",
+        "cta": "Create a babysitter profile",
+        "perk1": "Flexible schedule: work when it suits you",
+        "perk2": "Direct contact with parents, no middlemen",
+        "perk3": "Free registration",
+        "subtitle": "Create a profile and start receiving requests from families in your city today.",
+        "title": "Earn doing what you love"
+      }
     },
     "babysitterCan": {
       "label": "Capabilities",
@@ -224,7 +273,11 @@
     "role": "Role",
     "orContinueWith": "Or continue with",
     "loginError": "Login error",
-    "registerError": "Registration error"
+    "registerError": "Registration error",
+    "loginWithVK": "Log in with VK",
+    "loginWithYandex": "Log in with Yandex",
+    "registerWithVK": "Sign up with VK",
+    "registerWithYandex": "Sign up with Yandex"
   },
   "roleSelection": {
     "title": "Choose your role",
@@ -393,7 +446,9 @@
       "security": "Security",
       "notificationSettings": "Notification Settings",
       "bookingData": "Booking Data",
-      "messages": "Messages"
+      "messages": "Messages",
+      "profile": "Profile",
+      "booking": "Booking"
     },
     "nannyForm": {
       "title": "Nanny profile",
@@ -459,7 +514,12 @@
       "confirmDeleteMessage": "Are you sure you want to delete the profile? To delete the profile, you need to contact the administrator in messages.",
       "deleteSuccess": "Profile deleted",
       "deleteError": "Deletion error",
-      "deleteErrorMessage": "Failed to delete profile. Please try again"
+      "deleteErrorMessage": "Failed to delete profile. Please try again",
+      "cancel": "Cancel",
+      "hideFromSearch": "Hide from search",
+      "hideFromSearchSuccess": "Profile hidden from search",
+      "showInSearchSuccess": "Profile is now shown in search",
+      "toggleSearchVisibilityError": "Failed to change search visibility"
     },
     "nannySchedule": {
       "title": "Schedule",
@@ -534,7 +594,13 @@
       "deleteErrorMessage": "Failed to delete child. Please try again",
       "confirmDeleteTitle": "Confirm deletion",
       "confirmDeleteMessage": "Are you sure you want to delete data about child \"{name}\"?",
-      "confirmDelete": "Delete"
+      "confirmDelete": "Delete",
+      "addError": "Failed to add",
+      "addSuccess": "Child added",
+      "editChild": "Edit",
+      "saveErrorMessage": "Could not save the data. Please try again",
+      "updateError": "Failed to update",
+      "updateSuccess": "Child details updated"
     },
     "notifications": {
       "title": "Notification Settings",
@@ -645,8 +711,86 @@
         "middleName": "Middle name",
         "middleNamePlaceholder": "Petrovich",
         "phone": "Phone number",
-        "phonePlaceholder": "+995_________"
+        "phonePlaceholder": "+995_________",
+        "add": "Add trusted person",
+        "addError": "Failed to add",
+        "addSuccess": "Trusted person added",
+        "confirmDelete": "Delete",
+        "confirmDeleteMessage": "Are you sure you want to delete the trusted person \"{name}\"?",
+        "confirmDeleteTitle": "Confirm deletion",
+        "deleteError": "Failed to delete",
+        "deleteErrorMessage": "Could not delete the trusted person. Please try again",
+        "deleteSuccess": "Trusted person deleted",
+        "edit": "Edit",
+        "loadError": "Failed to load trusted persons",
+        "noContacts": "You have not added any trusted persons yet",
+        "relationship": "Relationship",
+        "relationshipPlaceholder": "Grandmother, grandfather, family friend",
+        "remove": "Remove",
+        "saveErrorMessage": "Could not save the data. Please try again",
+        "updateError": "Failed to update",
+        "updateSuccess": "Trusted person updated"
       }
+    },
+    "nanny": {
+      "activeBookings": "Active bookings",
+      "clients": "Clients",
+      "dashboard": "Babysitter dashboard",
+      "editProfile": "Edit profile",
+      "manageSchedule": "Manage schedule",
+      "messages": "Messages",
+      "quickActions": "Quick actions",
+      "rating": "Rating"
+    },
+    "parent": {
+      "activeBookings": "Active bookings",
+      "bookNanny": "Book a babysitter",
+      "dashboard": "Parent dashboard",
+      "favoriteNannies": "Favorite babysitters",
+      "findNanny": "Find a babysitter",
+      "messages": "Messages",
+      "quickActions": "Quick actions",
+      "reviews": "Reviews"
+    },
+    "role": {
+      "nanny": "Babysitter",
+      "parent": "Parent"
+    },
+    "security": {
+      "cancel": "Cancel",
+      "changeEmail": "Change email address",
+      "changePassword": "Change password",
+      "confirmEmail": "Confirm new email",
+      "confirmEmailError": "Invalid or expired code. Please try again.",
+      "confirmEmailPlaceholder": "Repeat new email",
+      "confirmPasswordError": "Invalid or expired code. Please try again.",
+      "currentEmail": "Current email",
+      "currentPassword": "Current password",
+      "currentPasswordPlaceholder": "Enter current password",
+      "emailChanged": "Email changed successfully",
+      "emailCodeSent": "Code sent",
+      "emailCodeSentDescription": "A confirmation code has been sent to the new email address",
+      "emailError": "Error",
+      "emailSuccess": "Email changed",
+      "newEmail": "New email",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "Enter new password",
+      "passwordChanged": "Password changed successfully",
+      "passwordCodeSent": "Code sent",
+      "passwordCodeSentDescription": "A confirmation code has been sent to your email",
+      "passwordError": "Error",
+      "passwordSuccess": "Password changed",
+      "passwordVerificationCodeHint": "The code has been sent to your email address. It is valid for 15 minutes.",
+      "requestEmailError": "Could not send the code. Please try again.",
+      "requestPasswordChange": "Request code",
+      "requestPasswordError": "Could not send the code. Please try again.",
+      "saveEmail": "Save email",
+      "savePassword": "Save password",
+      "title": "Security",
+      "verificationCode": "Verification code",
+      "verificationCodeHint": "The code has been sent to the new email address",
+      "verificationCodePlaceholder": "Enter verification code",
+      "verifyCode": "Confirm"
     }
   },
   "bookings": {
@@ -787,7 +931,8 @@
     "copied": "Copied",
     "linkCopied": "Link copied to clipboard",
     "error": "Error",
-    "copyFailed": "Failed to copy link"
+    "copyFailed": "Failed to copy link",
+    "apply": "Apply"
   },
   "seo": {
     "home": {
@@ -1475,4 +1620,3 @@
     }
   }
 }
-

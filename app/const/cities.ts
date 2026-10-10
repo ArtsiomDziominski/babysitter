@@ -13,7 +13,7 @@ export enum City {
   MOGILEV = 'mogilev',
 }
 
-export const CITY_KEYS = [City.TBILISI, City.BATUMI, City.KUTAISI, City.RUSTAVI, City.POTI];
+export const CITY_KEYS = [City.TBILISI, City.BATUMI, City.KUTAISI, City.RUSTAVI, City.GORI, City.POTI];
 
 export type CityType = City | string
 

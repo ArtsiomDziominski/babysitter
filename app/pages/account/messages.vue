@@ -33,7 +33,7 @@
             :current-user-avatar="authStore.currentUser?.avatar"
             :current-user-name="authStore.currentUser?.name"
             :has-more="activeChat && typeof activeChat.id === 'number' ? (messagesPagination.get(activeChat.id)?.hasMore ?? false) : false"
-            :loading="loadingMessages"
+            :loading="loadingMore"
             @load-more="handleLoadMore"
           />
 
@@ -123,6 +123,7 @@ const input = ref('')
 const status = ref<'submitted' | 'streaming' | 'ready' | 'error'>('ready')
 const loading = ref(false)
 const loadingMessages = ref(false)
+const loadingMore = ref(false)
 const activeChatId = ref<number | string | null>(null)
 const conversations = ref<Conversation[]>([])
 const messagesMap = ref<Map<number, (Message & { isPending?: boolean })[]>>(new Map())
@@ -216,9 +217,7 @@ async function loadConversations() {
     const data = await chat.getConversations()
     conversations.value = Array.isArray(data) ? data : []
 
-    for (const conv of conversations.value) {
-      await loadLastMessage(conv.id)
-    }
+    await Promise.all(conversations.value.map(conv => loadLastMessage(conv.id)))
   } catch (err) {
     console.error('Ошибка загрузки чатов:', err)
     conversations.value = []
@@ -249,7 +248,9 @@ async function loadMessages(conversationId: number, page = 1, prepend = false) {
     return
   }
 
-  loadingMessages.value = true
+  // Догрузка истории не должна скрывать список (иначе он перемонтируется и теряет прокрутку)
+  const loadingFlag = prepend ? loadingMore : loadingMessages
+  loadingFlag.value = true
   try {
     const response = await chat.getMessages(conversationId, page, 50)
 
@@ -268,7 +269,7 @@ async function loadMessages(conversationId: number, page = 1, prepend = false) {
   } catch (err) {
     console.error('Ошибка загрузки сообщений:', err)
   } finally {
-    loadingMessages.value = false
+    loadingFlag.value = false
     if (!prepend) {
       await nextTick()
       setTimeout(() => scrollToBottom(), 100)
@@ -278,7 +279,7 @@ async function loadMessages(conversationId: number, page = 1, prepend = false) {
 
 async function loadMoreMessages(conversationId: number) {
   const pagination = messagesPagination.value.get(conversationId)
-  if (!pagination || !pagination.hasMore || loadingMessages.value) {
+  if (!pagination || !pagination.hasMore || loadingMessages.value || loadingMore.value) {
     return
   }
 
@@ -344,6 +345,11 @@ async function selectChat(chatId: number | string) {
 
   if (typeof chatId === 'string') {
     return
+  }
+
+  const previousChatId = activeChatId.value
+  if (typeof previousChatId === 'number' && previousChatId !== chatId) {
+    websocket.leaveChatRoom(previousChatId)
   }
 
   activeChatId.value = chatId
@@ -582,12 +588,28 @@ function handleMessageRead(data: { conversationId: number; userId: number }) {
   }
 }
 
-onMounted(async () => {
-  const chatParam = route.query.chat
-  const { isMobile } = useBreakpoint()
+// useBreakpoint регистрирует свои onMounted-хуки, поэтому вызывается на верхнем уровне setup
+const { isMobile } = useBreakpoint()
 
-  const createConversation = chatParam === 'null' && route.query?.userId ? await chat.createConversation({ userId: Number(route.query.userId) }) : null
-  const createConversationId = createConversation?.data?.id
+onMounted(async () => {
+  // Подписываемся до первых await: если уйти со страницы во время загрузки,
+  // onUnmounted уже отработает и поздняя подписка останется висеть
+  websocket.onMessageNew(handleNewMessage)
+  websocket.onMessageEdited(handleMessageEdited)
+  websocket.onMessageDeleted(handleMessageDeleted)
+  websocket.onMessageRead(handleMessageRead)
+
+  const chatParam = route.query.chat
+
+  let createConversationId: number | undefined
+  if (chatParam === 'null' && route.query?.userId) {
+    try {
+      const createConversation = await chat.createConversation({ userId: Number(route.query.userId) })
+      createConversationId = createConversation?.data?.id
+    } catch (err) {
+      console.error('Ошибка создания чата:', err)
+    }
+  }
   await loadConversations()
 
   if (chatParam === 'admin') {
@@ -607,11 +629,6 @@ onMounted(async () => {
   } else if (!isMobile.value && conversations.value.length > 0 && conversations.value[0]) {
     await selectChat(conversations.value[0].id)
   }
-
-  websocket.onMessageNew(handleNewMessage)
-  websocket.onMessageEdited(handleMessageEdited)
-  websocket.onMessageDeleted(handleMessageDeleted)
-  websocket.onMessageRead(handleMessageRead)
 })
 
 onUnmounted(() => {

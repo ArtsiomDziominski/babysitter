@@ -332,7 +332,7 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
   return {
     id: data.id?.toString() || '0',
     userId: data.userId,
-    name: `${data.firstName || ''} ${data.lastName?.[0] + '.' || ''}`.trim() || 'Без имени',
+    name: `${data.firstName || ''} ${data.lastName ? `${data.lastName[0]}.` : ''}`.trim() || 'Без имени',
     avatar: data.avatarUrl,
     rating: data.rating || 0,
     reviewsCount: data.reviewsCount || 0,
@@ -355,6 +355,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     priceOneChild: data.priceOneChild,
     priceTwoChildren: data.priceTwoChildren,
     priceThreeChildren: data.priceThreeChildren,
+    priceFourChildren: data.priceFourChildren,
+    priceFiveChildren: data.priceFiveChildren,
     onlineLesson: data.onlineLesson,
     minOrderAmount: data.minOrderAmount,
     returningCount: data.returningCount,

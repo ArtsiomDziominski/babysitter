@@ -5,8 +5,8 @@ let siteConfig: any
 try {
     siteConfig = require(`./app/config/site/${siteConfigFile}`).default
 } catch (error) {
-    console.warn(`Site config file "${siteConfigFile}" not found, falling back to "babysitters"`)
-    siteConfig = require('./app/config/site/babysitters').default
+    console.warn(`Site config file "${siteConfigFile}" not found, falling back to "sitter"`)
+    siteConfig = require('./app/config/site/sitter').default
 }
 
 export default defineNuxtConfig({
@@ -61,30 +61,14 @@ export default defineNuxtConfig({
     },
     routeRules: {
         '/blog': { prerender: true },
-        '/blog/**': { prerender: true },
-        '/kak-stat-bebisitterom': { prerender: false, ssr: true },
-        '/how-to-become-babysitter': { prerender: false, ssr: true },
-        '/yak-staty-bebisiterom': { prerender: false, ssr: true },
-        '/yak-stats-bebisiteram': { prerender: false, ssr: true },
-        '/rogor-gavides-bebisiteri': { prerender: false, ssr: true },
-        '/become-sitter': { prerender: false, ssr: true },
-        '/kak-najti-bebisittera-v-tbilisi': { prerender: false, ssr: true },
-        '/kak-najti-nyanyu-v-tbilisi': { prerender: false, ssr: true },
-        '/kak-najti-bebisittera-v-batumi': { prerender: false, ssr: true },
-        '/kak-najti-nyanyu-v-batumi': { prerender: false, ssr: true },
-        '/kak-najti-bebisittera-v-kutaisi': { prerender: false, ssr: true },
-        '/kak-najti-nyanyu-v-kutaisi': { prerender: false, ssr: true },
-        '/kak-najti-bebisittera-v-rustavi': { prerender: false, ssr: true },
-        '/kak-najti-nyanyu-v-rustavi': { prerender: false, ssr: true },
-        '/kak-najti-bebisittera-v-gori': { prerender: false, ssr: true },
-        '/kak-najti-nyanyu-v-gori': { prerender: false, ssr: true },
-        '/kak-najti-bebisittera-v-poti': { prerender: false, ssr: true },
-        '/kak-najti-nyanyu-v-poti': { prerender: false, ssr: true }
+        '/blog/**': { prerender: true }
     },
     nitro: {
         prerender: {
-            crawlLinks: true,
-            routes: []
+            // Обход ссылок пререндерил /, /search, /login и все /account/** как статический HTML
+            // без авторизации и языка пользователя — такие страницы должны рендериться на сервере
+            crawlLinks: false,
+            routes: ['/blog']
         }
     }
 })

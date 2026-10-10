@@ -26,7 +26,7 @@
         </UButton>
         <UButton
             variant="ghost"
-            color="red"
+            color="error"
             size="sm"
             :loading="isDeleting"
             :disabled="isDeleting"

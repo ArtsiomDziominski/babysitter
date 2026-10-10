@@ -224,6 +224,8 @@ const handleSave = async () => {
   }
 
   isSaving.value = true
+  // closeModal() сбрасывает isEditMode, поэтому режим запоминаем заранее
+  const wasEdit = isEditMode.value
   try {
     const payload: any = {}
 
@@ -253,7 +255,7 @@ const handleSave = async () => {
       payload.notes = null
     }
 
-    if (isEditMode.value && newChild.value.id) {
+    if (wasEdit && newChild.value.id) {
       await updateChild(newChild.value.id, payload)
     } else {
       await createChild(payload)
@@ -261,13 +263,13 @@ const handleSave = async () => {
     await loadChildren()
     closeModal()
     toast.add({
-      title: isEditMode.value ? t('account.children.updateSuccess') : t('account.children.addSuccess'),
+      title: wasEdit ? t('account.children.updateSuccess') : t('account.children.addSuccess'),
       color: 'success'
     })
   } catch (error: any) {
     console.error('Ошибка при сохранении:', error)
     toast.add({
-      title: isEditMode.value ? t('account.children.updateError') : t('account.children.addError'),
+      title: wasEdit ? t('account.children.updateError') : t('account.children.addError'),
       description: error.message || t('account.children.saveErrorMessage'),
       color: 'error'
     })

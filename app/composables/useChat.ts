@@ -102,8 +102,8 @@ export const useChat = () => {
       `/chat/conversations/${conversationId}/messages?page=${page}&limit=${limit}`
     )
 
-    if ('data' in response && response.data) {
-      return response.data
+    if ('statusCode' in response && response.data) {
+      return response.data as MessagesResponse
     }
 
     return response as MessagesResponse

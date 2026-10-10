@@ -4,7 +4,7 @@
       <div class="max-w-3xl mx-auto text-center">
         <div class="relative mb-8">
           <div class="text-[120px] md:text-[180px] font-bold text-primary-200 dark:text-primary-900/20 leading-none select-none">
-            404
+            {{ error?.statusCode || 404 }}
           </div>
           <div class="absolute inset-0 flex items-center justify-center">
             <Icon name="i-lucide-baby" class="w-24 h-24 md:w-32 md:h-32 text-primary-400 dark:text-primary-500 animate-bounce" />
@@ -30,7 +30,7 @@
             {{ $t('error404.backHome') }}
           </UButton>
           <UButton
-            color="gray"
+            color="neutral"
             variant="outline"
             size="xl"
             to="/search"

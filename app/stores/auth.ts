@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { ApiUser } from '~/composables/useApi'
+import { unwrapApiResponse, type ApiUser } from '~/composables/useApi'
 import { UserRole, type Role } from '~/const/roles'
 
 export interface User {
@@ -103,8 +103,12 @@ export const useAuthStore = defineStore('auth', () => {
             await loadAvatarUrl()
             setAuth(true)
             return mappedUser
-        } catch (error) {
-            setToken(null)
+        } catch (error: any) {
+            // Сбрасываем токен только если сервер его отверг. При сетевой ошибке или 5xx
+            // пользователь не должен разлогиниваться
+            if (error?.statusCode === 401 || error?.statusCode === 403) {
+                setToken(null)
+            }
             setAuth(false)
             throw error
         }
@@ -126,6 +130,10 @@ export const useAuthStore = defineStore('auth', () => {
         const auth = useAuth()
         try {
             const response = await auth.login({ email, password })
+            if (!response.access_token) {
+                // Аккаунт с включённой 2FA: без кода токена нет, и интерфейс ввода кода пока не реализован
+                throw { statusCode: 401, message: 'Для этого аккаунта включена двухфакторная аутентификация' }
+            }
             setToken(response.access_token)
             const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
             setUser(mappedUser)
@@ -154,7 +162,7 @@ export const useAuthStore = defineStore('auth', () => {
                 phone: data.phone,
                 ...(data.role ? { role: data.role } : {}),
             })
-            setToken(response.access_token)
+            setToken(response.access_token ?? null)
             const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
             setUser(mappedUser)
             setAuth(true)
@@ -170,7 +178,7 @@ export const useAuthStore = defineStore('auth', () => {
             throw new Error('Role is required')
         }
 
-        const updatedUser = await profile.updateRole(role)
+        const updatedUser = unwrapApiResponse(await profile.updateRole(role))
         const mappedUser = mapApiUserToFrontend(updatedUser as ApiUser)
         setUser(mappedUser)
         setAuth(true)

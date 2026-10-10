@@ -78,6 +78,7 @@ type UserStatusChangedCallback = (data: UserStatusChangedData) => void
 
 let socketInstance: Socket | null = null
 let chatSocketInstance: Socket | null = null
+const joinedChatRooms = new Set<number>()
 const isConnected = ref(false)
 const isChatConnected = ref(false)
 const connectionError = ref<string | null>(null)
@@ -245,7 +246,10 @@ export const useWebSocket = () => {
 
     chatSocketInstance.on('connect', () => {
       isChatConnected.value = true
-      console.log('Chat WebSocket подключен')
+      // После (пере)подключения сервер не помнит комнаты — входим в них заново
+      joinedChatRooms.forEach((conversationId) => {
+        chatSocketInstance?.emit('chat:join', { conversationId })
+      })
     })
 
     chatSocketInstance.on('disconnect', () => {
@@ -259,6 +263,7 @@ export const useWebSocket = () => {
   }
 
   const disconnectChat = () => {
+    joinedChatRooms.clear()
     if (chatSocketInstance) {
       chatSocketInstance.disconnect()
       chatSocketInstance = null
@@ -266,12 +271,15 @@ export const useWebSocket = () => {
     }
   }
 
+  // Комнату запоминаем, даже если сокет ещё подключается: вход выполнится в обработчике connect
   const joinChatRoom = (conversationId: number) => {
+    joinedChatRooms.add(conversationId)
     if (!chatSocketInstance || !chatSocketInstance.connected) return
     chatSocketInstance.emit('chat:join', { conversationId })
   }
 
   const leaveChatRoom = (conversationId: number) => {
+    joinedChatRooms.delete(conversationId)
     if (!chatSocketInstance || !chatSocketInstance.connected) return
     chatSocketInstance.emit('chat:leave', { conversationId })
   }

@@ -187,11 +187,18 @@ const updateQueryParams = () => {
   router.replace({ query })
 }
 
+// Номер последнего запроса: ответ на устаревший запрос (фильтры уже поменялись) игнорируется
+let lastRequestId = 0
+// Пагинации в интерфейсе нет, поэтому запрашиваем максимум, который отдаёт API (по умолчанию было 10)
+const SEARCH_LIMIT = 100
+
 const loadBabysitters = async () => {
+  const requestId = ++lastRequestId
   isLoading.value = true
   try {
     const params: FetchBabysittersParams = {
-      sort: sortBy.value || 'recommended'
+      sort: sortBy.value || 'recommended',
+      limit: SEARCH_LIMIT
     }
 
     if (filters.value.priceMin) params.minRate = filters.value.priceMin
@@ -217,12 +224,16 @@ const loadBabysitters = async () => {
     }
 
     const response = await fetchBabysitters(params)
+    if (requestId !== lastRequestId) return
     sitters.value = response.data?.data || []
   } catch (error) {
+    if (requestId !== lastRequestId) return
     console.error('Ошибка загрузки нянь:', error)
     sitters.value = []
   } finally {
-    isLoading.value = false
+    if (requestId === lastRequestId) {
+      isLoading.value = false
+    }
   }
 }
 

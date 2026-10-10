@@ -50,7 +50,7 @@ addStructuredData(getOrganizationSchema())
 
 useHead({
   htmlAttrs: {
-    lang: currentLocale.value.split('-')[0]
+    lang: () => currentLocale.value.split('-')[0]
   },
   link: hreflangLinks
 })
