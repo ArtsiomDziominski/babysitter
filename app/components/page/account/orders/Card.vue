@@ -1,21 +1,21 @@
 <template>
-  <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-xl:p-4 hover:shadow-md transition-shadow">
+  <div class="border border-default rounded-lg p-6 max-xl:p-4 hover:shadow-md transition-shadow">
     <div class="flex items-start justify-between mb-4 max-xl:mb-3 max-xl:flex-col max-xl:gap-3">
       <div class="flex-1 max-xl:w-full">
         <div class="flex items-center gap-3 mb-2 max-xl:flex-wrap max-xl:gap-2">
-          <span class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white">
+          <span class="text-lg max-xl:text-base font-semibold text-highlighted">
             #{{ order.id }}
           </span>
           <NuxtLink
             v-if="sitterId && userRole === UserRole.PARENT"
             :to="`/sitter/${sitterId}`"
-            class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors break-words"
+            class="text-lg max-xl:text-base font-semibold text-highlighted hover:text-primary transition-colors break-words"
           >
             {{ order.customer.name }}
           </NuxtLink>
           <h3
             v-else
-            class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white break-words"
+            class="text-lg max-xl:text-base font-semibold text-highlighted break-words"
           >
             {{ order.customer.name }}
           </h3>
@@ -26,7 +26,7 @@
             {{ getStatusText(order.status) }}
           </span>
         </div>
-        <div class="space-y-1 max-xl:space-y-0.5 text-sm max-xl:text-xs text-gray-600 dark:text-gray-400">
+        <div class="space-y-1 max-xl:space-y-0.5 text-sm max-xl:text-xs text-toned">
           <p>
             <span class="font-medium">{{ $t('account.orders.date') }}:</span>
             {{ formatDate(order.date) }}
@@ -53,13 +53,13 @@
         </div>
       </div>
       <div class="flex flex-col items-end max-xl:items-start max-xl:mt-2">
-        <span class="text-lg max-xl:text-base font-semibold text-gray-900 dark:text-white">
+        <span class="text-lg max-xl:text-base font-semibold text-highlighted">
           {{ typeof order.totalPrice === 'string' ? parseFloat(order.totalPrice).toFixed(2) : order.totalPrice }} {{ siteConfig.currency }}
         </span>
       </div>
     </div>
 
-    <div class="flex items-center justify-between gap-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3 pt-4 max-xl:pt-3 border-t border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between gap-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3 pt-4 max-xl:pt-3 border-t border-default">
       <PageAccountOrdersOrderActions
         :order-id="order.id"
         :status="order.status"
@@ -116,11 +116,11 @@ const userRole = computed(() => authStore.currentUser?.role)
 
 const getStatusClass = (status: BookingListItem['status']) => {
   const classes = {
-    pending: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300',
-    confirmed: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
+    pending: 'bg-warning-100 dark:bg-warning-900/30 text-warning-800 dark:text-warning-300',
+    confirmed: 'bg-info-100 dark:bg-info-900/30 text-info-800 dark:text-info-300',
     in_progress: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
-    completed: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300',
-    cancelled: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+    completed: 'bg-success-100 dark:bg-success-900/30 text-success-800 dark:text-success-300',
+    cancelled: 'bg-error-100 dark:bg-error-900/30 text-error-800 dark:text-error-300'
   }
   return classes[status]
 }

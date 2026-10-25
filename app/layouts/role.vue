@@ -9,8 +9,8 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
-    <header class="border-b bg-white/80 dark:bg-gray-900/80 backdrop-blur">
+  <div class="min-h-screen bg-muted dark:bg-default">
+    <header class="border-b bg-white/80 dark:bg-neutral-900/80 backdrop-blur">
       <div class="container mx-auto flex items-center justify-between px-4 py-4">
         <NuxtLink to="/" class="text-lg font-semibold">
           Babysitter

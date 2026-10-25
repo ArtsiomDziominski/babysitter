@@ -6,10 +6,10 @@
         :class="[
           'rounded-lg border p-3 transition-colors',
           day.isPast
-            ? 'bg-gray-100 dark:bg-gray-900 border-gray-300 dark:border-gray-600 opacity-60 cursor-not-allowed'
+            ? 'bg-elevated border-accented opacity-60 cursor-not-allowed'
             : day.intervals.length
-              ? 'bg-white dark:bg-gray-800 border-green-200 dark:border-green-700 cursor-pointer'
-              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 cursor-pointer'
+              ? 'bg-default border-success-200 dark:border-success-700 cursor-pointer'
+              : 'bg-default border-default cursor-pointer'
         ]"
         @click="!day.isPast && $emit('edit', day.key)"
     >
@@ -19,8 +19,8 @@
               :class="[
                 'text-sm font-semibold',
                 day.isPast
-                  ? 'text-gray-400 dark:text-gray-600'
-                  : 'text-gray-900 dark:text-white'
+                  ? 'text-dimmed'
+                  : 'text-highlighted'
               ]"
           >
             {{ day.label }}
@@ -29,8 +29,8 @@
               :class="[
                 'text-xs',
                 day.isPast
-                  ? 'text-gray-400 dark:text-gray-600'
-                  : 'text-gray-500 dark:text-gray-400'
+                  ? 'text-dimmed'
+                  : 'text-muted'
               ]"
           >
             {{ day.dateLabel }}
@@ -42,7 +42,7 @@
             variant="ghost"
             size="md"
             color="neutral"
-            class="h-full cursor-pointer hover:bg-green-50 hover:text-green-600 dark:hover:bg-green-900/30 dark:hover:text-green-400"
+            class="h-full cursor-pointer hover:bg-success-50 hover:text-success-600 dark:hover:bg-success-900/30 dark:hover:text-success-400"
             @click="$emit('edit', day.key)"
         />
       </div>
@@ -52,12 +52,12 @@
             :key="idx"
             variant="soft"
             color="success"
-            class="bg-green-50 text-green-600 border border-green-100 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800 cursor-text"
+            class="bg-success-50 text-success-600 border border-success-100 dark:bg-success-900/30 dark:text-success-300 dark:border-success-800 cursor-text"
             @click.stop
         >
           {{ interval.startTime }} – {{ interval.endTime }}
         </UBadge>
-        <span v-if="!day.intervals.length" class="text-xs text-gray-400">
+        <span v-if="!day.intervals.length" class="text-xs text-dimmed">
           {{ emptyText }}
         </span>
       </div>

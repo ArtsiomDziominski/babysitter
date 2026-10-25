@@ -1,12 +1,12 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+  <div class="min-h-screen bg-muted dark:bg-default py-8">
     <UContainer>
       <div class="max-w-4xl mx-auto">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-          <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <div class="bg-default rounded-lg shadow-sm p-8">
+          <h1 class="text-3xl font-bold text-highlighted mb-2">
             {{ $t('faq.title') }}
           </h1>
-          <p class="text-gray-600 dark:text-gray-400 mb-8">
+          <p class="text-toned mb-8">
             {{ $t('faq.subtitle') }}
           </p>
 

@@ -13,13 +13,13 @@
       <div class="flex-1 w-full space-y-6">
         <div class="space-y-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label class="block text-sm font-medium text-default mb-2">
               {{ t('account.nannyForm.firstName') }}
             </label>
             <UInput v-model="form.firstName" type="text" :placeholder="t('account.nannyForm.firstName')" size="lg" />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label class="block text-sm font-medium text-default mb-2">
               {{ t('account.nannyForm.lastName') }}
             </label>
             <UInput v-model="form.lastName" type="text" :placeholder="t('account.nannyForm.lastName')" size="lg" />
@@ -30,13 +30,13 @@
 
     <div class="grid md:grid-cols-2 gap-6">
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ t('account.nannyForm.birthDate') }}
         </label>
         <UInput v-model="form.birthDate" type="date" size="lg" />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ t('account.nannyForm.experience') }}
         </label>
         <UInput
@@ -50,7 +50,7 @@
     </div>
 
     <div class="w-full md:w-1/3">
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      <label class="block text-sm font-medium text-default mb-2">
         {{ t('account.nannyForm.city') }}
       </label>
       <USelect
@@ -65,13 +65,13 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      <label class="block text-sm font-medium text-default mb-2">
         {{ t('account.nannyForm.about') }}
       </label>
       <textarea
           v-model="form.bio"
           rows="4"
-          class="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-4 py-3 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          class="w-full rounded-lg border border-default bg-transparent px-4 py-3 text-sm text-highlighted focus:outline-none focus:ring-2 focus:ring-primary"
           :placeholder="t('account.nannyForm.aboutPlaceholder')"
       ></textarea>
     </div>

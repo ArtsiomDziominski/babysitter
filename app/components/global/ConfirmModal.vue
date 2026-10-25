@@ -1,7 +1,7 @@
 <template>
   <UModal v-model:open="isOpen" :title="state.title || ''">
     <template #body>
-      <p v-if="state.description" class="text-gray-700 dark:text-gray-300">
+      <p v-if="state.description" class="text-default">
         {{ state.description }}
       </p>
     </template>

@@ -1,6 +1,6 @@
 <template>
-  <div class="p-6 max-xl:p-3 border-b border-gray-200 dark:border-gray-700">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 max-xl:mb-3 max-xl:text-lg">
+  <div class="p-6 max-xl:p-3 border-b border-default">
+    <h1 class="text-2xl font-bold text-highlighted mb-6 max-xl:mb-3 max-xl:text-lg">
       {{ $t('bookings.title') }}
     </h1>
 

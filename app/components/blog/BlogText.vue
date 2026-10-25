@@ -6,7 +6,7 @@
       'italic': child.italic,
       'underline': child.underline,
       'line-through': child.strikethrough,
-      'font-mono bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm': child.code
+      'font-mono bg-elevated px-1 py-0.5 rounded text-sm': child.code
     }"
   >
     {{ text }}

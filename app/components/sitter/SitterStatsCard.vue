@@ -1,21 +1,21 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-6">
-    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+  <div class="bg-default rounded-2xl shadow-lg border border-default p-6">
+    <h3 class="text-lg font-semibold text-highlighted mb-4">
       {{ $t('bookings.sitter.stats.title') }}
     </h3>
     <div class="grid grid-cols-4 gap-4">
       <div
         v-for="stat in stats"
         :key="stat.label"
-        class="flex flex-col items-center text-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+        class="flex flex-col items-center text-center p-3 bg-muted rounded-lg"
       >
         <div class="p-2 bg-primary/10 rounded-lg mb-2">
-          <Icon :name="stat.icon" size="20" class="text-primary-500" />
+          <Icon :name="stat.icon" size="20" class="text-primary" />
         </div>
-        <div :class="[stat.textSize, 'font-bold text-gray-900 dark:text-white']">
+        <div :class="[stat.textSize, 'font-bold text-highlighted']">
           {{ stat.value }}
         </div>
-        <div class="text-xs text-gray-600 dark:text-gray-400">{{ stat.label }}</div>
+        <div class="text-xs text-toned">{{ stat.label }}</div>
       </div>
     </div>
   </div>

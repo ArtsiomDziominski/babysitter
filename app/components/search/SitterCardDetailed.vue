@@ -1,11 +1,11 @@
 <template>
   <div
-      class="relative border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-xl:p-3 hover:shadow-md transition-shadow"
+      class="relative border border-default rounded-lg p-6 max-xl:p-3 hover:shadow-md transition-shadow"
   >
     <div class="flex gap-6 max-xl:flex-col max-xl:gap-3">
       <div class="flex-shrink-0 flex flex-col max-xl:items-center max-xl:w-full">
         <div
-            class="relative w-[140px] h-[140px] max-xl:w-full max-xl:max-w-none max-xl:h-auto max-xl:aspect-square bg-gray-200 dark:bg-gray-700 rounded-xl border-2 border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer"
+            class="relative w-[140px] h-[140px] max-xl:w-full max-xl:max-w-none max-xl:h-auto max-xl:aspect-square bg-accented rounded-xl border-2 border-default overflow-hidden cursor-pointer"
             @click="$emit('book', sitter.id.toString())"
         >
           <img
@@ -18,20 +18,20 @@
               v-else
               name="i-lucide-user"
               size="48"
-              class="text-gray-400 absolute inset-0 m-auto"
+              class="text-dimmed absolute inset-0 m-auto"
           />
           <div
               v-if="sitter.isOnline"
               class="absolute top-2 left-2 flex items-center gap-1.5"
           >
-            <span class="w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></span>
-            <span class="text-xs text-green-600 dark:text-green-400 font-medium">{{
+            <span class="w-4 h-4 bg-success-500 rounded-full border-2 border-(--ui-bg)"></span>
+            <span class="text-xs text-success-600 dark:text-success-400 font-medium">{{
                 $t('bookings.sitter.online')
               }}</span>
           </div>
         </div>
         <div v-if="sitter.city"
-             class="flex items-center justify-center gap-1 mt-2 text-xs text-gray-500 dark:text-gray-400">
+             class="flex items-center justify-center gap-1 mt-2 text-xs text-muted">
           <Icon name="i-lucide-map-pin" size="12"/>
           <span>{{ getCityName(sitter.city) }}</span>
         </div>
@@ -40,22 +40,22 @@
       <div class="flex-1 min-w-0 max-xl:w-full">
         <div class="flex items-start justify-between mb-2 max-xl:flex-col max-xl:gap-2">
           <div class="flex-1 min-w-0">
-            <h3 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white cursor-pointer break-words"
+            <h3 class="text-xl max-xl:text-lg font-semibold text-highlighted cursor-pointer break-words"
                 @click="$emit('book', sitter.id.toString())">
               {{ getName(sitter.firstName, sitter.lastName ? `${sitter.lastName[0]}.` : '') }}
             </h3>
             <div class="flex items-center gap-2 mt-1 max-xl:flex-wrap max-xl:text-xs">
               <div class="flex items-center">
                 <Icon name="i-lucide-star" class="text-yellow-400 max-xl:w-3 max-xl:h-3"/>
-                <span class="ml-1 text-sm max-xl:text-xs font-medium text-gray-700 dark:text-gray-300">
+                <span class="ml-1 text-sm max-xl:text-xs font-medium text-default">
                   {{ sitter.rating ? parseFloat(sitter.rating) : 0 }}
                 </span>
               </div>
-              <span class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400">
+              <span class="text-sm max-xl:text-xs text-muted">
                 {{ sitter.completedOrdersCount || 0 }} {{ $t('bookings.sitter.orders') }}
               </span>
               <span v-if="sitter.returningCount"
-                    class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 cursor-default">
+                    class="text-sm max-xl:text-xs text-muted flex items-center gap-1 cursor-default">
                 <UTooltip :text="$t('bookings.sitter.returnedTooltip')">
                   <Icon name="i-lucide-repeat" size="14" class="max-xl:w-3 max-xl:h-3"/>
                   <span> {{ sitter.returningCount }} {{ $t('bookings.sitter.returned') }} </span>
@@ -75,13 +75,13 @@
           </div>
         </div>
 
-        <p class="text-gray-600 dark:text-gray-400 mb-4 max-xl:mb-3 max-xl:text-sm line-clamp-2 break-words">
+        <p class="text-toned mb-4 max-xl:mb-3 max-xl:text-sm line-clamp-2 break-words">
           {{ sitter.bio || '' }}
         </p>
 
         <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
           <span
-              class="px-2 py-1 text-xs max-xl:text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded break-words">
+              class="px-2 py-1 text-xs max-xl:text-[10px] bg-elevated text-default rounded break-words">
             {{ $t('bookings.sitter.experience') }} {{ sitter.experience }} {{ yearWord }}
           </span>
         </div>
@@ -100,7 +100,7 @@
           <span
               v-for="tag in sitter.certifications"
               :key="tag"
-              class="px-2 py-1 text-xs max-xl:text-[10px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded break-words"
+              class="px-2 py-1 text-xs max-xl:text-[10px] bg-elevated text-default rounded break-words"
           >
             {{ tag }}
           </span>

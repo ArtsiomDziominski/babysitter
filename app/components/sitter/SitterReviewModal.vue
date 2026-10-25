@@ -3,7 +3,7 @@
     <template #body>
       <div class="space-y-4">
         <div v-if="completedBookings.length > 0" class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             Выберите бронирование
           </label>
           <USelect
@@ -16,7 +16,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             Оценка
           </label>
           <div class="flex gap-2">
@@ -25,7 +25,7 @@
               :key="star"
               type="button"
               class="text-3xl transition-colors cursor-pointer leading-none"
-              :class="star <= rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'"
+              :class="star <= rating ? 'text-yellow-400' : 'text-dimmed'"
               @click="rating = star"
             >
               {{ star <= rating ? '★' : '☆' }}
@@ -34,7 +34,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             Комментарий
           </label>
           <UTextarea
@@ -45,8 +45,8 @@
           />
         </div>
 
-        <div class="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-          <p class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <div class="p-3 bg-muted dark:bg-default rounded-lg border border-default">
+          <p class="text-xs font-medium text-default mb-2">
             Быстрые реакции
           </p>
           <div class="flex flex-wrap gap-2 mb-3">
@@ -60,7 +60,7 @@
               {{ emoji }}
             </button>
           </div>
-          <p class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <p class="text-xs font-medium text-default mb-2">
             Шаблоны
           </p>
           <div class="flex flex-wrap gap-2">
@@ -68,7 +68,7 @@
               v-for="template in reviewTemplates"
               :key="template"
               type="button"
-              class="px-3 py-1.5 text-xs bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300 cursor-pointer"
+              class="px-3 py-1.5 text-xs bg-default border border-accented rounded-md hover:bg-elevated transition-colors text-default cursor-pointer"
               @click="addTemplateToComment(template)"
             >
               {{ template }}

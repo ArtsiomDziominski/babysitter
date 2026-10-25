@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 flex items-center justify-center py-12 px-4">
+  <div class="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-800 flex items-center justify-center py-12 px-4">
     <UContainer>
       <div class="max-w-3xl mx-auto text-center">
         <div class="relative mb-8">
@@ -11,11 +11,11 @@
           </div>
         </div>
 
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-highlighted mb-4">
           {{ $t('error404.title') }}
         </h1>
 
-        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto">
+        <p class="text-lg md:text-xl text-toned mb-8 max-w-xl mx-auto">
           {{ $t('error404.description') }}
         </p>
 
@@ -42,32 +42,32 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
-            <Icon name="i-lucide-users" class="w-10 h-10 text-primary-500 mb-4 mx-auto" />
-            <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+          <div class="p-6 bg-default rounded-xl shadow-sm border border-default hover:shadow-md transition-shadow">
+            <Icon name="i-lucide-users" class="w-10 h-10 text-primary mb-4 mx-auto" />
+            <h3 class="font-semibold text-highlighted mb-2">
               {{ $t('error404.card1.title') }}
             </h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-toned">
               {{ $t('error404.card1.description') }}
             </p>
           </div>
 
-          <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
-            <Icon name="i-lucide-shield-check" class="w-10 h-10 text-primary-500 mb-4 mx-auto" />
-            <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+          <div class="p-6 bg-default rounded-xl shadow-sm border border-default hover:shadow-md transition-shadow">
+            <Icon name="i-lucide-shield-check" class="w-10 h-10 text-primary mb-4 mx-auto" />
+            <h3 class="font-semibold text-highlighted mb-2">
               {{ $t('error404.card2.title') }}
             </h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-toned">
               {{ $t('error404.card2.description') }}
             </p>
           </div>
 
-          <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
-            <Icon name="i-lucide-heart-handshake" class="w-10 h-10 text-primary-500 mb-4 mx-auto" />
-            <h3 class="font-semibold text-gray-900 dark:text-white mb-2">
+          <div class="p-6 bg-default rounded-xl shadow-sm border border-default hover:shadow-md transition-shadow">
+            <Icon name="i-lucide-heart-handshake" class="w-10 h-10 text-primary mb-4 mx-auto" />
+            <h3 class="font-semibold text-highlighted mb-2">
               {{ $t('error404.card3.title') }}
             </h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-toned">
               {{ $t('error404.card3.description') }}
             </p>
           </div>

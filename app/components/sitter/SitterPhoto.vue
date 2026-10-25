@@ -9,7 +9,7 @@
     </div>
     <div
       v-else
-      class="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-600 dark:from-gray-600 dark:to-gray-800"
+      class="absolute inset-0 bg-gradient-to-br from-neutral-400 to-neutral-600 dark:from-neutral-600 dark:to-neutral-800"
     >
       <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
       <div class="absolute inset-0 flex items-center justify-center">
@@ -19,25 +19,25 @@
 
     <div class="absolute top-3 right-3 flex gap-1.5 z-10">
       <!-- <button
-        class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
+        class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md rounded-full p-2 hover:bg-muted transition-all shadow-lg hover:scale-110 active:scale-95"
         @click="$emit('toggle-favorite')"
       >
         <Icon
           name="i-lucide-heart"
-          :class="isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-600 dark:text-gray-400'"
+          :class="isFavorite ? 'text-error-500 fill-error-500' : 'text-toned'"
           size="18"
         />
       </button> -->
       <button
-        class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
+        class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md rounded-full p-2 hover:bg-muted transition-all shadow-lg hover:scale-110 active:scale-95"
         @click="handleShare"
       >
-        <Icon name="i-lucide-share-2" size="18" class="text-gray-600 dark:text-gray-400" />
+        <Icon name="i-lucide-share-2" size="18" class="text-toned" />
       </button>
       <!-- <button
-        class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-full p-2 hover:bg-white dark:hover:bg-gray-800 transition-all shadow-lg hover:scale-110 active:scale-95"
+        class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md rounded-full p-2 hover:bg-muted transition-all shadow-lg hover:scale-110 active:scale-95"
       >
-        <Icon name="i-lucide-flag" size="18" class="text-gray-600 dark:text-gray-400" />
+        <Icon name="i-lucide-flag" size="18" class="text-toned" />
       </button> -->
     </div>
 
@@ -58,7 +58,7 @@
         <div class="flex flex-col items-end gap-2 flex-shrink-0 mt-auto">
           <div
             v-if="sitter.isOnline"
-            class="flex items-center gap-1.5 bg-green-500/90 backdrop-blur-sm rounded-full px-2.5 py-1 text-white text-xs font-medium shadow-lg"
+            class="flex items-center gap-1.5 bg-success-500/90 backdrop-blur-sm rounded-full px-2.5 py-1 text-white text-xs font-medium shadow-lg"
           >
             <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
             Онлайн

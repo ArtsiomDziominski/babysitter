@@ -1,12 +1,12 @@
 <template>
-  <div :class="['bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6', $attrs.class]">
-    <h2 v-if="!hideTitle" class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+  <div :class="['bg-default rounded-lg shadow-sm p-6', $attrs.class]">
+    <h2 v-if="!hideTitle" class="text-lg font-semibold text-highlighted mb-4">
       {{ $t('blog.filters') }}
     </h2>
 
     <div class="space-y-6">
       <div>
-        <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+        <h3 class="text-sm font-semibold text-highlighted mb-3">
           {{ $t('blog.categories') }}
         </h3>
         <div class="space-y-2">
@@ -26,7 +26,7 @@
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+        <h3 class="text-sm font-semibold text-highlighted mb-3">
           {{ $t('blog.tags') }}
         </h3>
         <div class="space-y-2 max-h-64 sm:max-h-96 overflow-y-auto">

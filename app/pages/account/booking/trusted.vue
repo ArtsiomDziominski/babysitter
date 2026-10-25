@@ -1,8 +1,8 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+    <div class="bg-default rounded-lg shadow-sm p-8 max-xl:p-4">
       <div class="flex items-center justify-between mb-8 max-xl:mb-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3">
-        <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white">
+        <h1 class="text-2xl max-xl:text-xl font-bold text-highlighted">
           {{ $t('account.booking.trustedPerson.title') }}
         </h1>
         <UButton
@@ -16,7 +16,7 @@
         </UButton>
       </div>
 
-      <p class="text-gray-600 dark:text-gray-400 mb-8 max-xl:mb-4 max-xl:text-sm">
+      <p class="text-toned mb-8 max-xl:mb-4 max-xl:text-sm">
         {{ $t('account.booking.trustedPerson.description') }}
       </p>
 
@@ -25,7 +25,7 @@
       </div>
 
       <template v-else>
-        <div v-if="!contacts.length" class="text-center py-12 text-gray-500 dark:text-gray-400">
+        <div v-if="!contacts.length" class="text-center py-12 text-muted">
           <p class="text-lg mb-4">{{ $t('account.booking.trustedPerson.noContacts') }}</p>
           <UButton
               color="primary"

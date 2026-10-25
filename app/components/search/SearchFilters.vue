@@ -1,6 +1,6 @@
 <template>
-  <div class="w-80 max-xl:!w-full border-r border-gray-200 dark:border-gray-700 max-xl:!border-r-0 p-6 max-xl:p-0 overflow-y-auto">
-    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 max-xl:hidden">
+  <div class="w-80 max-xl:!w-full border-r border-default max-xl:!border-r-0 p-6 max-xl:p-0 overflow-y-auto">
+    <h2 class="text-lg font-semibold text-highlighted mb-4 max-xl:hidden">
       {{ $t('bookings.filters.title') }}
     </h2>
 
@@ -13,7 +13,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('bookings.filters.priceRange') }}
         </label>
         <div class="flex gap-2">
@@ -33,7 +33,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('bookings.filters.ageRange') }}
         </label>
         <div class="flex gap-2">
@@ -53,7 +53,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('bookings.filters.ratingRange') }}
         </label>
         <div class="flex gap-2">
@@ -79,7 +79,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('bookings.filters.childrenCount') }}
         </label>
         <UInput
@@ -92,14 +92,14 @@
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+        <h3 class="text-sm font-semibold text-highlighted mb-3">
           {{ $t('bookings.filters.advantages.title') }}
         </h3>
         <div class="space-y-2 max-h-96 max-xl:max-h-none overflow-y-auto max-xl:overflow-visible">
           <label
             v-for="advantageKey in advantageKeys"
             :key="advantageKey"
-            class="flex items-center gap-3 text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 pl-2 rounded"
+            class="flex items-center gap-3 text-sm font-medium text-default cursor-pointer hover:bg-muted pl-2 rounded"
           >
             <UCheckbox
               :model-value="isAdvantageSelected(advantageKey)"

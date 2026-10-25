@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        {{ $t('account.booking.create.startDateTime') }} <span class="text-red-500">*</span>
+      <label class="block text-sm font-medium text-default mb-2">
+        {{ $t('account.booking.create.startDateTime') }} <span class="text-error-500">*</span>
       </label>
       <div class="flex gap-3">
         <UInput
@@ -32,8 +32,8 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        {{ $t('account.booking.create.endDateTime') }} <span class="text-red-500">*</span>
+      <label class="block text-sm font-medium text-default mb-2">
+        {{ $t('account.booking.create.endDateTime') }} <span class="text-error-500">*</span>
       </label>
       <div class="flex gap-3">
         <UInput

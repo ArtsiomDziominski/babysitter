@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
-    <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white mb-8 max-xl:mb-4">
+  <div class="bg-default rounded-lg shadow-sm p-8 max-xl:p-4">
+    <h1 class="text-2xl max-xl:text-xl font-bold text-highlighted mb-8 max-xl:mb-4">
       {{ $t('account.orders.title') }}
     </h1>
 
@@ -11,15 +11,15 @@
 
     <div v-if="isLoading" class="flex items-center justify-center py-12">
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-        <p class="text-gray-500 dark:text-gray-400">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+        <p class="text-muted">
           {{ $t('account.orders.loading') }}
         </p>
       </div>
     </div>
 
     <div v-else-if="error" class="text-center py-12">
-      <p class="text-red-500 dark:text-red-400 mb-4">
+      <p class="text-error-500 dark:text-error-400 mb-4">
         {{ error }}
       </p>
       <UButton color="primary" @click="loadBookings">
@@ -28,7 +28,7 @@
     </div>
 
     <div v-else-if="orders.length === 0" class="text-center py-12">
-      <p class="text-gray-500 dark:text-gray-400">
+      <p class="text-muted">
         {{ $t('account.orders.empty') }}
       </p>
     </div>

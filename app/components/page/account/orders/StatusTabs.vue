@@ -7,17 +7,17 @@
         @click="$emit('update:selectedStatus', tab.value)"
         class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-semibold whitespace-nowrap transition-all duration-200 relative group flex-shrink-0 cursor-pointer"
         :class="selectedStatus === tab.value
-          ? 'text-primary-600 dark:text-primary-400'
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+          ? 'text-primary'
+          : 'text-toned hover:text-highlighted'"
       >
         <span class="relative z-10">{{ tab.label }}</span>
         <span
           v-if="selectedStatus === tab.value"
-          class="absolute bottom-0 left-0 right-0 h-1 bg-primary-500 rounded-t-full transition-all duration-200"
+          class="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full transition-all duration-200"
         ></span>
         <span
           v-else
-          class="absolute bottom-0 left-0 right-0 h-0.5 bg-transparent group-hover:bg-gray-300 dark:group-hover:bg-gray-600 transition-all duration-200"
+          class="absolute bottom-0 left-0 right-0 h-0.5 bg-transparent group-hover:bg-neutral-300 dark:group-hover:bg-neutral-600 transition-all duration-200"
         ></span>
       </button>
     </div>

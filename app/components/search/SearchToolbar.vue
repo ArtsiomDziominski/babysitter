@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-between mb-6 max-xl:flex-col max-xl:items-stretch max-xl:gap-4">
     <div class="flex items-center gap-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-      <span class="text-sm text-gray-600 dark:text-gray-400">
+      <span class="text-sm text-toned">
         {{ $t('bookings.found') }}: {{ count }}
       </span>
       <USelect
