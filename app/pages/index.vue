@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen">
+  <div>
     <PageMainHeroSection />
     <PageMainStatsSection />
     <PageMainHowItWorksSection />
@@ -13,6 +13,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'landing'
+})
+
 const { t, locale } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()

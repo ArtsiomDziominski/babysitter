@@ -20,7 +20,7 @@
       <p class="text-sm text-muted">© {{ currentYear }}, Sitter</p>
     </template>
 
-    <UNavigationMenu :items="legalItems" variant="link" class="flex-wrap justify-center" />
+    <UNavigationMenu :items="legalItems" variant="link" :ui="{ list: 'flex-wrap justify-center' }" />
 
     <template #right>
       <UButton
