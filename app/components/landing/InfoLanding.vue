@@ -1,65 +1,48 @@
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default py-8">
-    <UContainer>
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-default rounded-lg shadow-sm p-8">
-          <h1 class="text-3xl font-bold text-highlighted mb-6">
-            {{ $t(`${i18nPrefix}.title`) }}
-          </h1>
+  <div class="max-w-4xl mx-auto pb-16">
+    <UPageHeader
+      :title="$t(`${i18nPrefix}.title`)"
+      :description="$t(`${i18nPrefix}.intro`)"
+      :ui="{ description: 'text-lg' }"
+    />
 
-          <div class="prose prose-gray dark:prose-invert max-w-none">
-            <section class="mb-8">
-              <p class="text-default mb-4 leading-relaxed text-lg">
-                {{ $t(`${i18nPrefix}.intro`) }}
-              </p>
-            </section>
+    <UPageBody class="space-y-12">
+      <section>
+        <h2 class="text-2xl font-semibold text-highlighted mb-6">
+          {{ $t(`${i18nPrefix}.stepsTitle`) }}
+        </h2>
+        <ol class="grid gap-4 sm:grid-cols-2">
+          <li v-for="(step, index) in steps" :key="index">
+            <UPageCard :title="step.name" :description="step.text" class="h-full">
+              <template #leading>
+                <span class="flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary font-semibold ring-1 ring-inset ring-primary/20">
+                  {{ index + 1 }}
+                </span>
+              </template>
+            </UPageCard>
+          </li>
+        </ol>
+      </section>
 
-            <section class="mb-8">
-              <h2 class="text-2xl font-semibold text-highlighted mb-4">
-                {{ $t(`${i18nPrefix}.stepsTitle`) }}
-              </h2>
-              <div class="space-y-6">
-                <div v-for="(step, index) in steps" :key="index" class="flex gap-4">
-                  <div class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-semibold">
-                    {{ index + 1 }}
-                  </div>
-                  <div>
-                    <h3 class="font-semibold text-highlighted mb-1">
-                      {{ step.name }}
-                    </h3>
-                    <p class="text-default">
-                      {{ step.text }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+      <section v-for="list in renderedLists" :key="list.name">
+        <h2 class="text-2xl font-semibold text-highlighted mb-6">
+          {{ $t(`${i18nPrefix}.${list.name}Title`) }}
+        </h2>
+        <ul class="grid gap-3 sm:grid-cols-2">
+          <li v-for="(item, index) in list.items" :key="index" class="flex gap-3 text-default">
+            <UIcon name="i-lucide-circle-check" class="size-5 shrink-0 mt-0.5 text-primary" />
+            <span>{{ item }}</span>
+          </li>
+        </ul>
+      </section>
 
-            <section v-for="list in renderedLists" :key="list.name" class="mb-8">
-              <h2 class="text-2xl font-semibold text-highlighted mb-4">
-                {{ $t(`${i18nPrefix}.${list.name}Title`) }}
-              </h2>
-              <ul class="list-disc list-inside text-default mb-4 space-y-2 ml-4">
-                <li v-for="(item, index) in list.items" :key="index">
-                  {{ item }}
-                </li>
-              </ul>
-            </section>
-
-            <section class="mb-8">
-              <div class="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 text-center">
-                <h3 class="text-xl font-semibold text-highlighted mb-4">
-                  {{ $t(`${i18nPrefix}.ctaTitle`) }}
-                </h3>
-                <UButton :to="ctaTo" color="primary" size="lg">
-                  {{ $t(`${i18nPrefix}.ctaButton`) }}
-                </UButton>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </UContainer>
+      <UPageCTA
+        :title="$t(`${i18nPrefix}.ctaTitle`)"
+        :links="[{ label: $t(`${i18nPrefix}.ctaButton`), to: ctaTo, size: 'lg', trailingIcon: 'i-lucide-arrow-right' }]"
+        variant="soft"
+        :ui="{ container: 'py-10 sm:py-12 lg:py-12', title: 'text-2xl sm:text-3xl' }"
+      />
+    </UPageBody>
   </div>
 </template>
 
