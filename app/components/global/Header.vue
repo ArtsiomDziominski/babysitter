@@ -1,7 +1,7 @@
 <template>
   <UHeader to="/" mode="slideover" :ui="{ title: 'items-center gap-2' }">
     <template #title>
-      <img :src="siteConfig.logo" :alt="siteConfig.name" class="size-8 rounded-md object-contain"/>
+      <img :src="siteConfig.icon" :alt="siteConfig.name" class="size-8 object-contain"/>
       <span class="text-lg font-semibold text-highlighted">{{ siteConfig.name }}</span>
     </template>
 

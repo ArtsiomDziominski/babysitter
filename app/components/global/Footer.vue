@@ -5,7 +5,7 @@
         <UFooterColumns :columns="columns">
           <template #left>
             <NuxtLink to="/" class="inline-flex items-center gap-2 text-lg font-semibold text-highlighted">
-              <img :src="siteConfig.logo" :alt="siteConfig.name" class="size-9 rounded-md object-contain"/>
+              <img :src="siteConfig.icon" :alt="siteConfig.name" class="size-9 object-contain"/>
               <span>{{ siteConfig.name }}</span>
             </NuxtLink>
             <p class="mt-4 max-w-xs text-sm text-muted">
