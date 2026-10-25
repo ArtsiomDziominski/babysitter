@@ -19,6 +19,11 @@ export default defineNuxtConfig({
             transitions: false
         }
     },
+    fonts: {
+        families: [
+            { name: 'Unbounded', provider: 'google', weights: [500, 600] }
+        ]
+    },
     i18n: {
         locales: [...siteConfig.locales],
         langDir: siteConfig.langDir,

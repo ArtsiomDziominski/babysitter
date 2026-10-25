@@ -13,15 +13,19 @@
   --color-coral-800: #983522;
   --color-coral-900: #7e3122;
   --color-coral-950: #45150d;
+
+  --font-display: 'Unbounded', sans-serif;
 }
 
 :root {
   --ui-primary: var(--ui-color-primary-600);
+  --home-bg: #f6f1eb;
   --ui-radius: 0.5rem;
 }
 
 .dark {
   --ui-primary: var(--ui-color-primary-400);
+  --home-bg: var(--ui-color-neutral-950);
 }
 
 .scrollbar-hide {

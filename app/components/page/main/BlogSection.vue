@@ -1,74 +1,51 @@
 <template>
-  <section class="py-16 md:py-24 bg-muted dark:bg-default">
+  <section class="pt-20 sm:pt-28">
     <UContainer>
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-highlighted mb-4">
-          {{ $t('home.blog.title') }}
-        </h2>
-        <p class="text-lg text-toned max-w-2xl mx-auto">
-          {{ $t('home.blog.subtitle') }}
-        </p>
-      </div>
-
-      <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div v-for="i in 3" :key="i" class="bg-default rounded-lg shadow-sm overflow-hidden animate-pulse">
-          <div class="h-48 bg-accented"></div>
-          <div class="p-6 space-y-3">
-            <div class="h-4 bg-accented rounded w-3/4"></div>
-            <div class="h-4 bg-accented rounded w-full"></div>
-          </div>
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
+            {{ $t('home.blog.title') }}
+          </h2>
+          <p class="mt-3 text-lg text-muted">
+            {{ $t('home.blog.subtitle') }}
+          </p>
         </div>
-      </div>
-
-      <div v-else-if="articles.length > 0" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <NuxtLink
-          v-for="article in articles"
-          :key="article.id"
-          :to="`/blog/${article.slug}`"
-          class="bg-default rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
-        >
-          <div v-if="getCoverImage(article)" class="w-full h-48 overflow-hidden">
-            <img
-              :src="getCoverImage(article)"
-              :alt="article.title"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-3 flex-wrap">
-              <UBadge
-                v-for="category in article.categories?.slice(0, 1)"
-                :key="category.id"
-                color="primary"
-                variant="subtle"
-                size="sm"
-              >
-                {{ category.name }}
-              </UBadge>
-              <span v-if="article.published" class="text-sm text-muted">
-                {{ formatDate(article.published) }}
-              </span>
-            </div>
-            <h3 class="text-xl font-semibold text-highlighted mb-2 group-hover:text-primary transition-colors">
-              {{ article.title }}
-            </h3>
-            <p v-if="article.excerpt" class="text-toned line-clamp-2">
-              {{ article.excerpt }}
-            </p>
-          </div>
-        </NuxtLink>
-      </div>
-
-      <div class="text-center">
         <UButton
           to="/blog"
-          color="primary"
+          :label="$t('home.blog.cta')"
+          trailing-icon="i-lucide-arrow-right"
+          variant="link"
           size="lg"
-          variant="solid"
-        >
-          {{ $t('home.blog.cta') }}
-        </UButton>
+          class="px-0 font-bold"
+        />
       </div>
+
+      <ul v-if="loading" class="divide-y divide-accented border-y border-accented">
+        <li v-for="i in 3" :key="i" class="flex animate-pulse items-center gap-8 py-7">
+          <div class="h-4 w-24 rounded bg-accented" />
+          <div class="h-6 flex-1 rounded bg-accented" />
+        </li>
+      </ul>
+
+      <ul v-else-if="articles.length > 0" class="divide-y divide-accented border-y border-accented">
+        <li v-for="article in articles" :key="article.id">
+          <NuxtLink
+            :to="`/blog/${article.slug}`"
+            class="group flex flex-wrap items-center gap-x-8 gap-y-2 py-6"
+          >
+            <span class="w-32 shrink-0 text-sm text-muted">
+              {{ article.categories?.[0]?.name }}
+            </span>
+            <span class="min-w-0 flex-1 basis-80 text-xl font-bold text-highlighted transition-colors group-hover:text-primary sm:text-2xl">
+              {{ article.title }}
+            </span>
+            <span class="flex items-center gap-2 text-sm text-muted">
+              <span v-if="article.published">{{ formatDate(article.published) }}</span>
+              <UIcon name="i-lucide-arrow-right" class="size-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          </NuxtLink>
+        </li>
+      </ul>
     </UContainer>
   </section>
 </template>
@@ -98,13 +75,6 @@ const loadArticles = async () => {
   }
 }
 
-const getCoverImage = (article: BlogPost) => {
-  if (!article.coverImage) return null
-  if (Array.isArray(article.coverImage)) {
-    return article.coverImage[0]
-  }
-  return article.coverImage
-}
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString)

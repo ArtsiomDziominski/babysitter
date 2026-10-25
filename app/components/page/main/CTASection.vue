@@ -1,27 +1,36 @@
 <script setup lang="ts">
 const { t } = useI18n()
-
-const links = computed(() => [
-  { label: t('home.cta.ctaBabysitter'), to: '/register', icon: 'i-lucide-user-plus', size: 'xl' as const, color: 'neutral' as const },
-  { label: t('home.cta.ctaParent'), to: '/search', size: 'xl' as const, color: 'neutral' as const, variant: 'outline' as const, class: 'text-white ring-white/40 hover:bg-white/10' }
-])
 </script>
 
 <template>
-  <UPageSection :ui="{ container: 'py-16 sm:py-24' }">
-    <UPageCTA
-      :title="t('home.cta.title')"
-      :description="t('home.cta.subtitle')"
-      :links="links"
-      variant="solid"
-      class="bg-gradient-to-br from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-900"
-      :ui="{ title: 'text-white', description: 'text-white/85' }"
-    >
-      <template #top>
-        <div class="flex justify-center pt-10 sm:pt-16">
-          <UBadge :label="t('home.cta.badge')" icon="i-lucide-heart" color="neutral" variant="outline" class="rounded-full bg-white/10 text-white ring-white/30" />
+  <section class="pt-20 sm:pt-28">
+    <UContainer>
+      <div class="flex flex-col items-center gap-5 rounded-[2.5rem] bg-primary-600 px-6 py-16 text-center text-white sm:py-20 dark:bg-primary-700">
+        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-balance sm:text-4xl lg:text-5xl">
+          {{ t('home.cta.title') }}
+        </h2>
+        <p class="text-lg text-white/90">
+          {{ t('home.cta.subtitle') }}
+        </p>
+        <div class="mt-2 flex flex-wrap justify-center gap-3">
+          <UButton
+            to="/search"
+            :label="t('home.cta.ctaParent')"
+            icon="i-lucide-search"
+            size="xl"
+            color="neutral"
+            class="rounded-full bg-white px-7 font-extrabold text-stone-900 hover:bg-stone-100"
+          />
+          <UButton
+            to="/register"
+            :label="t('home.cta.ctaBabysitter')"
+            icon="i-lucide-user-plus"
+            size="xl"
+            color="neutral"
+            class="rounded-full bg-stone-900 px-7 font-bold text-white hover:bg-stone-800"
+          />
         </div>
-      </template>
-    </UPageCTA>
-  </UPageSection>
+      </div>
+    </UContainer>
+  </section>
 </template>

@@ -1,35 +1,38 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const steps = [
-  { key: 'step1', icon: 'i-lucide-search' },
-  { key: 'step2', icon: 'i-lucide-id-card' },
-  { key: 'step3', icon: 'i-lucide-handshake' }
-]
+const steps = ['step1', 'step2', 'step3']
 </script>
 
 <template>
-  <UPageSection
-    :title="t('home.howItWorks.title')"
-    :description="t('home.howItWorks.subtitle')"
-  >
-    <ol class="grid gap-8 md:grid-cols-3">
-      <li v-for="(step, index) in steps" :key="step.key" class="relative flex flex-col items-center text-center">
-        <div class="relative mb-5">
-          <div class="flex size-16 items-center justify-center rounded-2xl bg-primary/10 text-primary ring-1 ring-inset ring-primary/20">
-            <UIcon :name="step.icon" class="size-8" />
-          </div>
-          <span class="absolute -top-2 -right-2 flex size-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-inverted">
-            {{ index + 1 }}
-          </span>
-        </div>
-        <h3 class="text-lg font-semibold text-highlighted">
-          {{ t(`home.howItWorks.${step.key}.title`) }}
-        </h3>
-        <p class="mt-2 max-w-xs text-muted">
-          {{ t(`home.howItWorks.${step.key}.description`) }}
+  <section class="pt-20 sm:pt-28">
+    <UContainer>
+      <div class="mb-10 text-center">
+        <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
+          {{ t('home.howItWorks.title') }}
+        </h2>
+        <p class="mt-3 text-lg text-muted">
+          {{ t('home.howItWorks.subtitle') }}
         </p>
-      </li>
-    </ol>
-  </UPageSection>
+      </div>
+
+      <ol class="grid gap-8 md:grid-cols-3">
+        <li
+          v-for="(step, index) in steps"
+          :key="step"
+          class="flex flex-col gap-3 border-t-2 border-dashed border-accented pt-7"
+        >
+          <span class="font-display text-5xl font-semibold leading-none text-primary" aria-hidden="true">
+            {{ String(index + 1).padStart(2, '0') }}
+          </span>
+          <h3 class="mt-2 text-xl font-extrabold text-highlighted">
+            {{ t(`home.howItWorks.${step}.title`) }}
+          </h3>
+          <p class="text-muted">
+            {{ t(`home.howItWorks.${step}.description`) }}
+          </p>
+        </li>
+      </ol>
+    </UContainer>
+  </section>
 </template>
