@@ -1,21 +1,21 @@
 <template>
-  <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+  <section class="py-16 md:py-24 bg-muted dark:bg-default">
     <UContainer>
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-highlighted mb-4">
           {{ $t('home.blog.title') }}
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        <p class="text-lg text-toned max-w-2xl mx-auto">
           {{ $t('home.blog.subtitle') }}
         </p>
       </div>
 
       <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div v-for="i in 3" :key="i" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden animate-pulse">
-          <div class="h-48 bg-gray-200 dark:bg-gray-700"></div>
+        <div v-for="i in 3" :key="i" class="bg-default rounded-lg shadow-sm overflow-hidden animate-pulse">
+          <div class="h-48 bg-accented"></div>
           <div class="p-6 space-y-3">
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-            <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+            <div class="h-4 bg-accented rounded w-3/4"></div>
+            <div class="h-4 bg-accented rounded w-full"></div>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
           v-for="article in articles"
           :key="article.id"
           :to="`/blog/${article.slug}`"
-          class="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
+          class="bg-default rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
         >
           <div v-if="getCoverImage(article)" class="w-full h-48 overflow-hidden">
             <img
@@ -45,14 +45,14 @@
               >
                 {{ category.name }}
               </UBadge>
-              <span v-if="article.published" class="text-sm text-gray-500 dark:text-gray-400">
+              <span v-if="article.published" class="text-sm text-muted">
                 {{ formatDate(article.published) }}
               </span>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-500 transition-colors">
+            <h3 class="text-xl font-semibold text-highlighted mb-2 group-hover:text-primary transition-colors">
               {{ article.title }}
             </h3>
-            <p v-if="article.excerpt" class="text-gray-600 dark:text-gray-400 line-clamp-2">
+            <p v-if="article.excerpt" class="text-toned line-clamp-2">
               {{ article.excerpt }}
             </p>
           </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+  <div class="min-h-screen bg-muted dark:bg-default">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
       <div class="mb-6">
         <UBreadcrumb :items="breadcrumbItems" />
@@ -30,10 +30,10 @@
           </div>
         </div>
 
-        <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 shadow-lg z-50">
+        <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-default border-t border-default p-4 shadow-lg z-50">
           <div class="max-w-7xl mx-auto flex gap-3">
-            <div v-if="isBabysitter" class="flex-1 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center">
-              <p class="text-xs text-gray-600 dark:text-gray-400 text-center">
+            <div v-if="isBabysitter" class="flex-1 p-3 bg-muted dark:bg-default rounded-lg border border-default flex items-center justify-center">
+              <p class="text-xs text-toned text-center">
                 {{ $t('bookings.sitter.actions.babysitterCannotBook') }}
               </p>
             </div>
@@ -63,24 +63,24 @@
 
       <div v-else-if="pending" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p class="text-gray-500 dark:text-gray-400">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p class="text-muted">
             Загрузка...
           </p>
         </div>
       </div>
       <div v-else-if="error" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center">
-          <Icon name="i-lucide-alert-circle" size="48" class="text-red-500 mx-auto mb-4" />
-          <p class="text-red-500 dark:text-red-400 text-lg">
+          <Icon name="i-lucide-alert-circle" size="48" class="text-error-500 mx-auto mb-4" />
+          <p class="text-error-500 dark:text-error-400 text-lg">
             Ошибка загрузки данных
           </p>
         </div>
       </div>
       <div v-else class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center">
-          <Icon name="i-lucide-user-x" size="48" class="text-gray-400 mx-auto mb-4" />
-          <p class="text-gray-500 dark:text-gray-400 text-lg">
+          <Icon name="i-lucide-user-x" size="48" class="text-dimmed mx-auto mb-4" />
+          <p class="text-muted text-lg">
             Ситтер не найден
           </p>
         </div>

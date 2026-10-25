@@ -10,7 +10,7 @@
     <li
       v-for="(item, index) in items"
       :key="index"
-      class="text-gray-700 dark:text-gray-300"
+      class="text-default"
     >
       <template v-for="(child, childIndex) in item.children" :key="childIndex">
         <BlogText

@@ -18,7 +18,7 @@
         />
       </template>
     </template>
-    <div v-else class="text-gray-500 dark:text-gray-400">
+    <div v-else class="text-muted">
       Контент не найден (тип: {{ typeof content }}, массив: {{ Array.isArray(content) }})
     </div>
   </div>

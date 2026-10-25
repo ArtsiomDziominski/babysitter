@@ -3,7 +3,7 @@
     <template #body>
       <div class="space-y-6 max-h-[70vh] overflow-y-auto">
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             {{ $t('bookings.search.timeStart') }}
           </label>
           <UInput
@@ -16,7 +16,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             {{ $t('bookings.search.timeEnd') }}
           </label>
           <UInput

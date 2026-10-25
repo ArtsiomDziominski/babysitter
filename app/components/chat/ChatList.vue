@@ -1,21 +1,21 @@
 <template>
-  <div class="w-80 max-xl:w-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 max-xl:border-r-0 flex flex-col">
-    <div class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-      <h1 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white">
+  <div class="w-80 max-xl:w-full bg-default border-r border-default max-xl:border-r-0 flex flex-col">
+    <div class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-default bg-default">
+      <h1 class="text-xl max-xl:text-lg font-semibold text-highlighted">
         {{ $t('account.messages.title') }}
       </h1>
     </div>
     <div v-if="loading" class="flex-1 flex items-center justify-center">
-      <div class="text-gray-500">{{ $t('account.messages.loading') }}</div>
+      <div class="text-muted">{{ $t('account.messages.loading') }}</div>
     </div>
     <div v-else class="flex-1 overflow-y-auto">
       <div class="py-1">
         <button
           v-for="chat in chats"
           :key="chat.id"
-          class="w-full flex items-center gap-3 px-4 max-xl:px-3 py-3 max-xl:py-2 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors text-left group"
+          class="w-full flex items-center gap-3 px-4 max-xl:px-3 py-3 max-xl:py-2 hover:bg-elevated transition-colors text-left group"
           :class="activeChatId === chat.id
-            ? 'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-primary-500'
+            ? 'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-primary'
             : ''"
           @click="$emit('select', chat.id)"
         >
@@ -25,30 +25,30 @@
               :icon="chat.icon"
               :alt="chat.name"
               size="md"
-              class="max-xl:w-10 max-xl:h-10 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-800"
-              :class="activeChatId === chat.id ? 'ring-primary-500' : 'ring-transparent'"
+              class="max-xl:w-10 max-xl:h-10 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-neutral-800"
+              :class="activeChatId === chat.id ? 'ring-primary' : 'ring-transparent'"
             />
             <div
               v-if="chat.unreadCount > 0"
-              class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs font-medium rounded-full min-w-[20px] h-5 px-1.5 flex items-center justify-center"
+              class="absolute -top-1 -right-1 bg-primary text-white text-xs font-medium rounded-full min-w-[20px] h-5 px-1.5 flex items-center justify-center"
             >
               {{ chat.unreadCount > 9 ? '9+' : chat.unreadCount }}
             </div>
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-1">
-              <div class="font-medium text-gray-900 dark:text-white truncate">{{ chat.name }}</div>
+              <div class="font-medium text-highlighted truncate">{{ chat.name }}</div>
               <div
                 v-if="chat.lastMessage"
-                class="text-xs text-gray-500 dark:text-gray-400 flex-shrink-0 ml-2"
+                class="text-xs text-muted flex-shrink-0 ml-2"
               >
                 {{ formatTime(getLastMessageTime(chat.id)) }}
               </div>
             </div>
             <div
               v-if="chat.lastMessage"
-              class="text-sm text-gray-600 dark:text-gray-400 truncate"
-              :class="chat.unreadCount > 0 ? 'font-medium text-gray-900 dark:text-white' : ''"
+              class="text-sm text-toned truncate"
+              :class="chat.unreadCount > 0 ? 'font-medium text-highlighted' : ''"
             >
               {{ chat.lastMessage }}
             </div>

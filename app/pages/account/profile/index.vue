@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
-      <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white mb-8 max-xl:mb-4">
+    <div class="bg-default rounded-lg shadow-sm p-8 max-xl:p-4">
+      <h1 class="text-2xl max-xl:text-xl font-bold text-highlighted mb-8 max-xl:mb-4">
         {{ $t('account.basicData.title') }}
       </h1>
 
@@ -10,7 +10,7 @@
           <!-- Левая колонка с полями -->
           <div class="flex-1 space-y-6 max-xl:space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label class="block text-sm font-medium text-default mb-2">
                 {{ $t('account.basicData.name') }}
               </label>
               <UInput
@@ -21,7 +21,7 @@
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label class="block text-sm font-medium text-default mb-2">
                 {{ $t('account.basicData.surname') }}
               </label>
               <UInput
@@ -29,13 +29,13 @@
                   :placeholder="$t('account.basicData.surnamePlaceholder')"
                   size="lg"
               />
-              <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              <p class="mt-2 text-xs text-muted">
                 {{ $t('account.basicData.surnamePrivacy') }}
               </p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label class="block text-sm font-medium text-default mb-2">
                 {{ $t('account.basicData.mobilePhone') }}
               </label>
               <UInput
@@ -46,7 +46,7 @@
             </div>
 
 <!--            <div>-->
-<!--              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">-->
+<!--              <label class="block text-sm font-medium text-default mb-2">-->
 <!--                {{ $t('account.basicData.city') }}-->
 <!--              </label>-->
 <!--              <USelect-->

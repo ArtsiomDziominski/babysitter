@@ -10,7 +10,7 @@ const stats = [
 </script>
 
 <template>
-  <section class="py-16 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
+  <section class="py-16 bg-default border-y border-default">
     <UContainer>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
         <div
@@ -20,12 +20,12 @@ const stats = [
           class="text-center space-y-2"
         >
           <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/40 mb-2">
-            <Icon :name="stat.icon" size="24" class="text-primary-600 dark:text-primary-400" />
+            <Icon :name="stat.icon" size="24" class="text-primary" />
           </div>
-          <div class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+          <div class="text-3xl lg:text-4xl font-bold text-highlighted">
             {{ stat.value }}
           </div>
-          <div class="text-sm text-gray-500 dark:text-gray-400 font-medium">
+          <div class="text-sm text-muted font-medium">
             {{ t(`home.stats.${stat.key}`) }}
           </div>
         </div>

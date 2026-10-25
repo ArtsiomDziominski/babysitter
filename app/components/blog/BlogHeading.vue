@@ -1,7 +1,7 @@
 <template>
   <component
     :is="`h${block.level || 1}`"
-    class="font-semibold text-gray-900 dark:text-white mt-6 mb-4 first:mt-0"
+    class="font-semibold text-highlighted mt-6 mb-4 first:mt-0"
     :class="{
       'text-3xl': block.level === 1,
       'text-2xl': block.level === 2,

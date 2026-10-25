@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-4">
-    <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg space-y-4">
+    <div class="p-4 border border-default rounded-lg space-y-4">
       <div class="flex items-center justify-between">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label class="block text-sm font-medium text-default">
           {{ $t('account.booking.trustedPerson.title') }}
         </label>
         <UButton
@@ -73,10 +73,10 @@
       </div>
 
       <div v-if="selectedTrustedContact" class="space-y-2">
-        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+        <div class="flex items-center justify-between p-3 bg-muted rounded-lg">
           <div>
             <span class="font-medium">{{ selectedTrustedContact.lastName }} {{ selectedTrustedContact.firstName }}</span>
-            <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <div class="text-sm text-muted mt-1">
               <span>{{ selectedTrustedContact.phone }}</span>
               <span v-if="selectedTrustedContact.relationship" class="ml-2">
                 ({{ selectedTrustedContact.relationship }})
@@ -94,12 +94,12 @@
         </div>
       </div>
 
-      <div v-else class="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
+      <div v-else class="text-sm text-muted text-center py-4">
         {{ $t('account.booking.trustedPerson.noContacts') }}
       </div>
 
-      <div v-if="profileContacts.length > 0 && availableProfileContacts.length > 0" class="pt-4 border-t border-gray-200 dark:border-gray-700">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+      <div v-if="profileContacts.length > 0 && availableProfileContacts.length > 0" class="pt-4 border-t border-default">
+        <label class="block text-sm font-medium text-default mb-3">
           {{ $t('account.booking.trustedPerson.description') }}
         </label>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -114,7 +114,7 @@
             <div class="flex items-center gap-2">
               <Icon name="i-lucide-plus" size="16" />
               <span>{{ contact.lastName }} {{ contact.firstName }}</span>
-              <span v-if="contact.relationship" class="text-gray-500">
+              <span v-if="contact.relationship" class="text-muted">
                 ({{ contact.relationship }})
               </span>
             </div>
@@ -122,8 +122,8 @@
         </div>
       </div>
 
-      <div v-if="profileContacts.length === 0" class="pt-4 border-t border-gray-200 dark:border-gray-700">
-        <p class="text-sm text-gray-500 dark:text-gray-400">
+      <div v-if="profileContacts.length === 0" class="pt-4 border-t border-default">
+        <p class="text-sm text-muted">
           {{ $t('account.booking.trustedPerson.noContacts') }}
         </p>
       </div>

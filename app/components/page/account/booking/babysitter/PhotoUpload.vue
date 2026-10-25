@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center gap-4">
     <div class="relative group">
-      <div class="w-[140px] h-[140px] rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800">
+      <div class="w-[140px] h-[140px] rounded-xl overflow-hidden border-2 border-default bg-elevated">
         <img
           v-if="photoSrc"
           :src="photoSrc"
@@ -10,7 +10,7 @@
         />
         <div
           v-else
-          class="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500"
+          class="w-full h-full flex items-center justify-center text-dimmed"
         >
           <Icon name="mdi:camera-outline" size="48" />
         </div>

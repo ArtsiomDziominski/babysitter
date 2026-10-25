@@ -33,8 +33,8 @@
         <div
           class="rounded-2xl px-4 py-2 shadow-sm relative"
           :class="message.role === 'user'
-            ? 'bg-primary-500 text-white rounded-tr-sm'
-            : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-tl-sm border border-gray-200 dark:border-gray-700'"
+            ? 'bg-primary text-white rounded-tr-sm'
+            : 'bg-default text-highlighted rounded-tl-sm border border-default'"
           style="max-width: 100%; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; box-sizing: border-box;"
         >
           <div class="text-sm whitespace-pre-wrap" style="word-break: break-word; overflow-wrap: anywhere; word-wrap: break-word;">
@@ -47,24 +47,24 @@
             ? 'text-right justify-end' 
             : 'text-left'"
         >
-          <span class="text-gray-500 dark:text-gray-400">{{ formatMessageTime(message) }}</span>
+          <span class="text-muted">{{ formatMessageTime(message) }}</span>
           <div
             v-if="message.role === 'user'"
             class="flex items-center"
           >
             <div
               v-if="message.isPending"
-              class="w-3.5 h-3.5 border-2 rounded-full animate-spin border-green-400 border-t-green-600"
+              class="w-3.5 h-3.5 border-2 rounded-full animate-spin border-success-400 border-t-success-600"
             ></div>
             <Icon
               v-else-if="message.isRead"
               name="i-lucide-check-check"
-              class="w-3.5 h-3.5 text-green-500"
+              class="w-3.5 h-3.5 text-success-500"
             />
             <Icon
               v-else
               name="i-lucide-check"
-              class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400"
+              class="w-3.5 h-3.5 text-muted"
             />
           </div>
         </div>

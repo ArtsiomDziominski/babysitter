@@ -1,21 +1,21 @@
 <template>
-  <div class="border-b border-gray-200 dark:border-gray-700 pb-8 max-xl:pb-4">
-    <h2 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white mb-6 max-xl:mb-4">
+  <div class="border-b border-default pb-8 max-xl:pb-4">
+    <h2 class="text-xl max-xl:text-lg font-semibold text-highlighted mb-6 max-xl:mb-4">
       {{ $t('account.security.changeEmail') }}
     </h2>
 
     <form @submit.prevent="handleEmailChange" class="space-y-4 max-w-md max-xl:max-w-full">
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.currentEmail') }}
         </label>
-        <p class="text-gray-900 dark:text-white text-base">
+        <p class="text-highlighted text-base">
           {{ authStore.currentUser?.email }}
         </p>
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.newEmail') }}
         </label>
         <UInput
@@ -27,7 +27,7 @@
       </div>
 
       <div v-if="showVerificationCode">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.verificationCode') }}
         </label>
         <UInput
@@ -36,7 +36,7 @@
             :placeholder="$t('account.security.verificationCodePlaceholder')"
             size="lg"
         />
-        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        <p class="mt-2 text-xs text-muted">
           {{ $t('account.security.verificationCodeHint') }}
         </p>
       </div>

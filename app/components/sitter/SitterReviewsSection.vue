@@ -1,13 +1,13 @@
 <template>
   <div class="space-y-4">
-    <div v-if="sitter.experience" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+    <div v-if="sitter.experience" class="bg-default rounded-2xl shadow-sm border border-default p-4">
       <div class="flex items-center gap-3">
         <div class="p-2 bg-primary/10 rounded-lg">
-          <Icon name="i-lucide-briefcase" size="20" class="text-primary-500" />
+          <Icon name="i-lucide-briefcase" size="20" class="text-primary" />
         </div>
         <div>
-          <div class="text-sm font-medium text-gray-900 dark:text-white">{{ $t('bookings.sitter.sections.experience') }}</div>
-          <div class="text-base font-semibold text-gray-700 dark:text-gray-300">{{ formatExperience }}</div>
+          <div class="text-sm font-medium text-highlighted">{{ $t('bookings.sitter.sections.experience') }}</div>
+          <div class="text-base font-semibold text-default">{{ formatExperience }}</div>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
     <div
       v-for="review in reviews"
       :key="review.id"
-      class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 md:p-8 hover:shadow-md transition-shadow"
+      class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8 hover:shadow-md transition-shadow"
     >
       <div class="flex items-start justify-between mb-4">
         <div class="flex-1">
@@ -39,12 +39,12 @@
               size="md"
             />
             <div v-else class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-              <span class="text-primary-600 dark:text-primary-400 font-bold text-lg">
+              <span class="text-primary font-bold text-lg">
                 {{ getAuthorName(review.author).charAt(0).toUpperCase() }}
               </span>
             </div>
             <div>
-              <div class="font-semibold text-gray-900 dark:text-white text-lg">
+              <div class="font-semibold text-highlighted text-lg">
                 {{ getAuthorName(review.author) }}
               </div>
               <div class="flex items-center gap-0.5 mt-1">
@@ -52,7 +52,7 @@
                   v-for="i in 5"
                   :key="i"
                   class="text-lg leading-none"
-                  :class="i <= review.rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'"
+                  :class="i <= review.rating ? 'text-yellow-400' : 'text-dimmed'"
                 >
                   {{ i <= review.rating ? '★' : '☆' }}
                 </span>
@@ -60,23 +60,23 @@
             </div>
           </div>
         </div>
-        <span class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+        <span class="text-sm text-muted whitespace-nowrap">
           {{ formatDate(review.createdAt) }}
         </span>
       </div>
-      <p v-if="review.comment" class="text-gray-700 dark:text-gray-300 leading-relaxed">
+      <p v-if="review.comment" class="text-default leading-relaxed">
         {{ review.comment }}
       </p>
     </div>
-    <div v-if="pending" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-12 text-center">
-      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500 mx-auto mb-4"></div>
-      <p class="text-gray-500 dark:text-gray-400">
+    <div v-if="pending" class="bg-default rounded-2xl shadow-sm border border-default p-12 text-center">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+      <p class="text-muted">
         Загрузка отзывов...
       </p>
     </div>
-    <div v-else-if="!reviews || reviews.length === 0" class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-12 text-center">
-      <Icon name="i-lucide-message-square" size="48" class="text-gray-400 mx-auto mb-4" />
-      <p class="text-gray-500 dark:text-gray-400 text-lg">
+    <div v-else-if="!reviews || reviews.length === 0" class="bg-default rounded-2xl shadow-sm border border-default p-12 text-center">
+      <Icon name="i-lucide-message-square" size="48" class="text-dimmed mx-auto mb-4" />
+      <p class="text-muted text-lg">
         Пока нет отзывов
       </p>
     </div>

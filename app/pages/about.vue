@@ -1,33 +1,33 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+  <div class="min-h-screen bg-muted dark:bg-default py-8">
     <UContainer>
       <div class="max-w-4xl mx-auto">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
-          <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+        <div class="bg-default rounded-lg shadow-sm p-8">
+          <h1 class="text-3xl font-bold text-highlighted mb-6">
             {{ $t('about.title') }}
           </h1>
 
           <div class="prose prose-gray dark:prose-invert max-w-none">
             <section class="mb-8">
-              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-lg">
+              <p class="text-default mb-4 leading-relaxed text-lg">
                 {{ $t('about.intro') }}
               </p>
             </section>
 
             <section class="mb-8">
-              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 class="text-2xl font-semibold text-highlighted mb-4">
                 {{ $t('about.mission.title') }}
               </h2>
-              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+              <p class="text-default mb-4 leading-relaxed">
                 {{ $t('about.mission.description') }}
               </p>
             </section>
 
             <section class="mb-8">
-              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 class="text-2xl font-semibold text-highlighted mb-4">
                 {{ $t('about.values.title') }}
               </h2>
-              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2 ml-4">
+              <ul class="list-disc list-inside text-default mb-4 space-y-2 ml-4">
                 <li v-for="(value, index) in values" :key="index">
                   <strong>{{ $t(`about.values.items.${value}.title`) }}</strong>
                   <span class="ml-2">{{ $t(`about.values.items.${value}.description`) }}</span>
@@ -36,29 +36,29 @@
             </section>
 
             <section class="mb-8">
-              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 class="text-2xl font-semibold text-highlighted mb-4">
                 {{ $t('about.howItWorks.title') }}
               </h2>
-              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+              <p class="text-default mb-4 leading-relaxed">
                 {{ $t('about.howItWorks.description') }}
               </p>
             </section>
 
             <section class="mb-8">
-              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 class="text-2xl font-semibold text-highlighted mb-4">
                 {{ $t('about.safety.title') }}
               </h2>
-              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+              <p class="text-default mb-4 leading-relaxed">
                 {{ $t('about.safety.description') }}
               </p>
             </section>
 
             <section class="mb-8">
-              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 class="text-2xl font-semibold text-highlighted mb-4">
                 {{ $t('about.contact.title') }}
               </h2>
-              <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mt-4">
-                <p class="text-gray-700 dark:text-gray-300">
+              <div class="bg-muted rounded-lg p-4 mt-4">
+                <p class="text-default">
                   <strong>{{ $t('about.contact.email') }}:</strong> info@sitter.ge
                 </p>
               </div>

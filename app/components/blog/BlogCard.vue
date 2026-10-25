@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer overflow-hidden"
+    class="bg-default rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer overflow-hidden"
     @click="$emit('click')"
   >
     <div class="flex gap-3 sm:gap-6 p-3 sm:p-6">
@@ -25,14 +25,14 @@
               >
                 {{ category.name }}
               </UBadge>
-              <span v-if="post.published" class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
+              <span v-if="post.published" class="text-xs sm:text-sm text-muted whitespace-nowrap">
                 {{ formatDate(post.published) }}
               </span>
             </div>
-            <h2 class="text-base sm:text-xl font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+            <h2 class="text-base sm:text-xl font-semibold text-highlighted mb-2 line-clamp-2">
               {{ post.title }}
             </h2>
-            <p v-if="post.excerpt" class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 line-clamp-2">
+            <p v-if="post.excerpt" class="text-sm sm:text-base text-toned mb-3 sm:mb-4 line-clamp-2">
               {{ post.excerpt }}
             </p>
           </div>
@@ -47,7 +47,7 @@
                 :alt="authorName"
                 class="w-5 h-5 sm:w-6 sm:h-6 rounded-full"
               />
-              <span class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+              <span class="text-xs sm:text-sm text-toned">
                 {{ authorName }}
               </span>
             </div>

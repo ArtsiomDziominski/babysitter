@@ -11,7 +11,7 @@
         v-if="showFallback"
         :size="size"
         :class="avatarClass"
-        class="bg-gray-200 dark:bg-gray-700 animate-pulse"
+        class="bg-accented animate-pulse"
       />
     </template>
   </ClientOnly>

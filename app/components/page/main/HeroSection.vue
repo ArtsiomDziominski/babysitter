@@ -3,7 +3,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-pink-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 pt-20 pb-28 lg:pt-28 lg:pb-36">
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-pink-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 pt-20 pb-28 lg:pt-28 lg:pb-36">
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-200/30 dark:bg-primary-800/10 rounded-full blur-3xl" />
       <div class="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-pink-200/20 dark:bg-pink-800/10 rounded-full blur-3xl" />
@@ -17,11 +17,11 @@ const { t } = useI18n()
           {{ t('home.hero.trusted') }}
         </div>
 
-        <h1 class="hero-fade-in hero-delay-1 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-gray-900 dark:text-white leading-[1.1] tracking-tight">
+        <h1 class="hero-fade-in hero-delay-1 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-highlighted leading-[1.1] tracking-tight">
           {{ t('home.hero.title') }}
         </h1>
 
-        <p class="hero-fade-in hero-delay-2 text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        <p class="hero-fade-in hero-delay-2 text-lg sm:text-xl lg:text-2xl text-toned max-w-2xl mx-auto leading-relaxed">
           {{ t('home.hero.subtitle') }}
         </p>
 
@@ -47,17 +47,17 @@ const { t } = useI18n()
           </UButton>
         </div>
 
-        <div class="hero-fade-in hero-delay-4 flex flex-wrap justify-center gap-x-8 gap-y-3 pt-8 text-sm text-gray-500 dark:text-gray-400">
+        <div class="hero-fade-in hero-delay-4 flex flex-wrap justify-center gap-x-8 gap-y-3 pt-8 text-sm text-muted">
           <span class="flex items-center gap-1.5">
-            <Icon name="mdi:check-decagram" size="18" class="text-green-500" />
+            <Icon name="mdi:check-decagram" size="18" class="text-success-500" />
             {{ t('home.hero.trustVerified') }}
           </span>
           <span class="flex items-center gap-1.5">
-            <Icon name="mdi:currency-usd-off" size="18" class="text-green-500" />
+            <Icon name="mdi:currency-usd-off" size="18" class="text-success-500" />
             {{ t('home.hero.trustFree') }}
           </span>
           <span class="flex items-center gap-1.5">
-            <Icon name="mdi:headset" size="18" class="text-green-500" />
+            <Icon name="mdi:headset" size="18" class="text-success-500" />
             {{ t('home.hero.trustSupport') }}
           </span>
         </div>

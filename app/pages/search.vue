@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 max-xl:py-2">
+  <div class="min-h-screen bg-muted dark:bg-default py-8 max-xl:py-2">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-xl:px-2">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm max-xl:rounded-none">
+      <div class="bg-default rounded-lg shadow-sm max-xl:rounded-none">
         <SearchForm
             v-model="searchForm"
             @search="handleSearch"
@@ -32,12 +32,12 @@
             />
 
             <div v-if="isLoading" class="flex justify-center items-center py-12">
-              <div class="text-gray-500 dark:text-gray-400">{{ $t('bookings.loading') }}</div>
+              <div class="text-muted">{{ $t('bookings.loading') }}</div>
             </div>
 
             <template v-else>
               <div v-if="filteredSitters.length === 0" class="text-center py-12">
-                <p class="text-gray-500 dark:text-gray-400">{{ $t('bookings.emptyShort') }}</p>
+                <p class="text-muted">{{ $t('bookings.emptyShort') }}</p>
               </div>
 
               <SearchSitterList

@@ -9,32 +9,32 @@
           :title="$t('account.orders.review.alreadyExists')"
         />
 
-        <div v-if="booking" class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-          <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+        <div v-if="booking" class="p-4 bg-muted dark:bg-default rounded-lg border border-default">
+          <h3 class="text-sm font-semibold text-highlighted mb-3">
             {{ $t('account.orders.review.orderDetails') }}
           </h3>
           <div class="space-y-2 text-sm">
             <div class="flex justify-between">
-              <span class="text-gray-600 dark:text-gray-400">{{ $t('account.orders.review.orderNumber') }}:</span>
-              <span class="font-medium text-gray-900 dark:text-white">#{{ booking.id }}</span>
+              <span class="text-toned">{{ $t('account.orders.review.orderNumber') }}:</span>
+              <span class="font-medium text-highlighted">#{{ booking.id }}</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600 dark:text-gray-400">{{ $t('account.orders.review.date') }}:</span>
-              <span class="text-gray-900 dark:text-white">{{ formatDate(booking.startTime) }}</span>
+              <span class="text-toned">{{ $t('account.orders.review.date') }}:</span>
+              <span class="text-highlighted">{{ formatDate(booking.startTime) }}</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600 dark:text-gray-400">{{ $t('account.orders.review.time') }}:</span>
-              <span class="text-gray-900 dark:text-white">{{ formatTimeRange(booking.startTime, booking.endTime) }}</span>
+              <span class="text-toned">{{ $t('account.orders.review.time') }}:</span>
+              <span class="text-highlighted">{{ formatTimeRange(booking.startTime, booking.endTime) }}</span>
             </div>
             <div v-if="targetName" class="flex justify-between">
-              <span class="text-gray-600 dark:text-gray-400">{{ $t('account.orders.review.target') }}:</span>
-              <span class="text-gray-900 dark:text-white">{{ targetName }}</span>
+              <span class="text-toned">{{ $t('account.orders.review.target') }}:</span>
+              <span class="text-highlighted">{{ targetName }}</span>
             </div>
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             {{ $t('account.orders.review.rating') }}
           </label>
           <div class="flex gap-2">
@@ -43,7 +43,7 @@
               :key="star"
               type="button"
               class="text-3xl transition-colors cursor-pointer"
-              :class="star <= rating ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'"
+              :class="star <= rating ? 'text-yellow-400' : 'text-dimmed'"
               @click="rating = star"
             >
               ★
@@ -52,7 +52,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label class="block text-sm font-medium text-default mb-2">
             {{ $t('account.orders.review.comment') }}
           </label>
           <UTextarea
@@ -63,8 +63,8 @@
           />
         </div>
 
-        <div class="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-          <p class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <div class="p-3 bg-muted dark:bg-default rounded-lg border border-default">
+          <p class="text-xs font-medium text-default mb-2">
             {{ $t('account.orders.review.quickReactions') }}
           </p>
           <div class="flex flex-wrap gap-2 mb-3">
@@ -78,7 +78,7 @@
               {{ emoji }}
             </button>
           </div>
-          <p class="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <p class="text-xs font-medium text-default mb-2">
             {{ $t('account.orders.review.quickTemplates') }}
           </p>
           <div class="flex flex-wrap gap-2">
@@ -86,7 +86,7 @@
               v-for="template in reviewTemplates"
               :key="template"
               type="button"
-              class="px-3 py-1.5 text-xs bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300 cursor-pointer"
+              class="px-3 py-1.5 text-xs bg-default border border-accented rounded-md hover:bg-elevated transition-colors text-default cursor-pointer"
               @click="addTemplateToComment(template)"
             >
               {{ template }}

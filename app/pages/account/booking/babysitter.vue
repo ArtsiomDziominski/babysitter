@@ -1,10 +1,10 @@
 <template>
   <div class="flex-1">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 max-xl:p-4">
+    <div class="bg-default rounded-lg shadow-sm p-8 max-xl:p-4">
       <div class="flex items-center justify-between mb-8 max-xl:mb-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3">
         <div class="max-xl:w-full">
-          <h1 class="text-2xl max-xl:text-xl font-bold text-gray-900 dark:text-white">{{ t('account.nannyForm.title') }}</h1>
-          <p class="text-sm max-xl:text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <h1 class="text-2xl max-xl:text-xl font-bold text-highlighted">{{ t('account.nannyForm.title') }}</h1>
+          <p class="text-sm max-xl:text-xs text-muted mt-1">
             {{ t('account.nannyForm.subtitle') }}
           </p>
         </div>
@@ -46,8 +46,8 @@
 
         <PageAccountBookingBabysitterScheduleSection />
 
-        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-          <label class="flex items-center gap-3 text-sm font-medium text-green-700 dark:text-green-400 cursor-pointer">
+        <div class="bg-success-50 dark:bg-success-900/20 border border-success-200 dark:border-success-800 rounded-lg p-4">
+          <label class="flex items-center gap-3 text-sm font-medium text-success-700 dark:text-success-400 cursor-pointer">
             <UCheckbox v-model="form.showInSearch"/>
             <span>{{ t('account.nannyForm.showInSearch') }}</span>
           </label>

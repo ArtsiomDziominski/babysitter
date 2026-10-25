@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="chat"
-    class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center gap-3 shadow-sm"
+    class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-default bg-default flex items-center gap-3 shadow-sm"
   >
     <UButton
         color="neutral"
@@ -19,12 +19,12 @@
       class="max-xl:w-8 max-xl:h-8"
     />
     <div class="flex-1 min-w-0">
-      <h2 class="text-base max-xl:text-sm font-semibold text-gray-900 dark:text-white truncate">
+      <h2 class="text-base max-xl:text-sm font-semibold text-highlighted truncate">
         {{ chat.name }}
       </h2>
       <p
         v-if="chat.type === 'user'"
-        class="text-xs max-xl:text-[10px] text-gray-500 dark:text-gray-400"
+        class="text-xs max-xl:text-[10px] text-muted"
       >
         {{ chat.role === UserRole.BABYSITTER ? $t('account.role.nanny') : $t('account.role.parent') }}
       </p>

@@ -1,8 +1,8 @@
 <template>
   <div class="relative group" ref="triggerRef">
-    <div class="text-2xl max-xl:text-lg font-bold text-gray-900 dark:text-white cursor-pointer break-words">
+    <div class="text-2xl max-xl:text-lg font-bold text-highlighted cursor-pointer break-words">
       {{ priceOneChild ? parseFloat(priceOneChild) : 0 }} {{ siteConfig.currency }}
-      <span class="text-sm max-xl:text-xs font-normal text-gray-500 dark:text-gray-400">
+      <span class="text-sm max-xl:text-xs font-normal text-muted">
         {{ $t('bookings.sitter.perHour') }}
       </span>
     </div>
@@ -10,37 +10,37 @@
       <div
         v-if="isHovered"
         ref="menuRef"
-        class="fixed w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-[9999] p-4"
+        class="fixed w-64 bg-default rounded-lg shadow-lg border border-default z-[9999] p-4"
         :style="menuStyle"
       >
         <div class="space-y-3">
           <div v-if="priceOneChild" class="flex justify-between items-center">
-            <span class="text-sm text-gray-600 dark:text-gray-400">1 ребенок:</span>
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">
+            <span class="text-sm text-toned">1 ребенок:</span>
+            <span class="text-sm font-semibold text-highlighted">
               {{ parseFloat(priceOneChild) }} {{ siteConfig.currency }}/час
             </span>
           </div>
           <div v-if="priceTwoChildren" class="flex justify-between items-center">
-            <span class="text-sm text-gray-600 dark:text-gray-400">2 ребенка:</span>
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">
+            <span class="text-sm text-toned">2 ребенка:</span>
+            <span class="text-sm font-semibold text-highlighted">
               {{ parseFloat(priceTwoChildren) }} {{ siteConfig.currency }}/час
             </span>
           </div>
           <div v-if="priceThreeChildren" class="flex justify-between items-center">
-            <span class="text-sm text-gray-600 dark:text-gray-400">3 ребенка:</span>
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">
+            <span class="text-sm text-toned">3 ребенка:</span>
+            <span class="text-sm font-semibold text-highlighted">
               {{ parseFloat(priceThreeChildren) }} {{ siteConfig.currency }}/час
             </span>
           </div>
-          <div v-if="onlineLesson" class="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-gray-700">
-            <span class="text-sm text-gray-600 dark:text-gray-400">Онлайн урок:</span>
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">
+          <div v-if="onlineLesson" class="flex justify-between items-center pt-2 border-t border-default">
+            <span class="text-sm text-toned">Онлайн урок:</span>
+            <span class="text-sm font-semibold text-highlighted">
               {{ parseFloat(onlineLesson) }} {{ siteConfig.currency }}/час
             </span>
           </div>
-          <div v-if="minOrderAmount" class="flex justify-between items-center pt-2 border-t border-gray-200 dark:border-gray-700">
-            <span class="text-sm text-gray-600 dark:text-gray-400">Минимальный заказ:</span>
-            <span class="text-sm font-semibold text-gray-900 dark:text-white">
+          <div v-if="minOrderAmount" class="flex justify-between items-center pt-2 border-t border-default">
+            <span class="text-sm text-toned">Минимальный заказ:</span>
+            <span class="text-sm font-semibold text-highlighted">
               {{ parseFloat(minOrderAmount) }} {{ siteConfig.currency }}
             </span>
           </div>

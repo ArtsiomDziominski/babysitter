@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden">
+  <div class="bg-default rounded-lg shadow-sm overflow-hidden">
     <div v-if="coverImage" class="w-full h-64 md:h-96">
       <img
         :src="coverImage"
@@ -21,20 +21,20 @@
         </UBadge>
       </div>
 
-      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <h1 class="text-3xl md:text-4xl font-bold text-highlighted mb-4">
         {{ article.title }}
       </h1>
 
-      <div v-if="article.excerpt" class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+      <div v-if="article.excerpt" class="text-lg text-toned mb-6">
         {{ article.excerpt }}
       </div>
 
       <div class="prose prose-lg dark:prose-invert max-w-none">
         <BlogContent v-if="article.content" :content="article.content" />
-        <div v-else class="text-gray-500 dark:text-gray-400">{{ $t('blog.article.noContent') }}</div>
+        <div v-else class="text-muted">{{ $t('blog.article.noContent') }}</div>
       </div>
 
-      <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="mt-8 pt-6 border-t border-default">
         <div v-if="article.tags && article.tags.length > 0" class="mb-4">
           <div class="flex flex-wrap gap-2">
             <UBadge
@@ -48,7 +48,7 @@
           </div>
         </div>
         
-        <div v-if="article.author || article.published" class="flex items-center gap-4 flex-wrap text-sm text-gray-600 dark:text-gray-400">
+        <div v-if="article.author || article.published" class="flex items-center gap-4 flex-wrap text-sm text-toned">
           <div v-if="article.author" class="flex items-center gap-3">
             <img
               v-if="article.author.avatar"
@@ -56,7 +56,7 @@
               :alt="authorName"
               class="w-10 h-10 rounded-full"
             />
-            <span class="font-semibold text-gray-900 dark:text-white">
+            <span class="font-semibold text-highlighted">
               {{ authorName }}
             </span>
           </div>

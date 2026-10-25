@@ -1,14 +1,14 @@
 <template>
   <div class="mt-12">
-    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+    <h2 class="text-2xl font-bold text-highlighted mb-6">
       {{ $t('blog.relatedArticles.title') }}
     </h2>
     <div v-if="loading" class="flex flex-wrap gap-6">
-      <div v-for="i in 3" :key="i" class="flex-1 min-w-[280px] bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden animate-pulse">
-        <div class="h-48 bg-gray-200 dark:bg-gray-700"></div>
+      <div v-for="i in 3" :key="i" class="flex-1 min-w-[280px] bg-default rounded-lg shadow-sm overflow-hidden animate-pulse">
+        <div class="h-48 bg-accented"></div>
         <div class="p-4 space-y-3">
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-          <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+          <div class="h-4 bg-accented rounded w-3/4"></div>
+          <div class="h-4 bg-accented rounded w-full"></div>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
         />
       </NuxtLink>
     </div>
-    <div v-else class="text-center py-8 text-gray-500 dark:text-gray-400">
+    <div v-else class="text-center py-8 text-muted">
       {{ $t('blog.relatedArticles.notFound') }}
     </div>
   </div>
