@@ -1,50 +1,38 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const steps = [
-  { key: 'step1', icon: 'mdi:account-search-outline', color: 'bg-info-100 dark:bg-info-900/40 text-info-600 dark:text-info-400' },
-  { key: 'step2', icon: 'mdi:card-account-details-star-outline', color: 'bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400' },
-  { key: 'step3', icon: 'mdi:handshake-outline', color: 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400' }
-]
+const steps = ['step1', 'step2', 'step3']
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-muted">
+  <section class="pt-20 sm:pt-28">
     <UContainer>
-      <div v-reveal class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-highlighted mb-4">
+      <div class="mb-10 text-center">
+        <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
           {{ t('home.howItWorks.title') }}
         </h2>
-        <p class="text-lg text-toned max-w-2xl mx-auto">
+        <p class="mt-3 text-lg text-muted">
           {{ t('home.howItWorks.subtitle') }}
         </p>
       </div>
 
-      <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-        <div class="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-accented" />
-
-        <div
+      <ol class="grid gap-8 md:grid-cols-3">
+        <li
           v-for="(step, index) in steps"
-          :key="step.key"
-          v-reveal="index * 150"
-          class="relative text-center"
+          :key="step"
+          class="flex flex-col gap-3 border-t-2 border-dashed border-accented pt-7"
         >
-          <div class="relative inline-flex items-center justify-center mb-6">
-            <div :class="['w-20 h-20 lg:w-24 lg:h-24 rounded-2xl flex items-center justify-center shadow-sm', step.color]">
-              <Icon :name="step.icon" class="w-10 h-10 lg:w-12 lg:h-12" />
-            </div>
-            <div class="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-sm font-bold shadow-lg">
-              {{ index + 1 }}
-            </div>
-          </div>
-          <h3 class="text-xl font-semibold text-highlighted mb-2">
-            {{ t(`home.howItWorks.${step.key}.title`) }}
+          <span class="font-display text-5xl font-semibold leading-none text-primary" aria-hidden="true">
+            {{ String(index + 1).padStart(2, '0') }}
+          </span>
+          <h3 class="mt-2 text-xl font-extrabold text-highlighted">
+            {{ t(`home.howItWorks.${step}.title`) }}
           </h3>
-          <p class="text-toned max-w-xs mx-auto">
-            {{ t(`home.howItWorks.${step.key}.description`) }}
+          <p class="text-muted">
+            {{ t(`home.howItWorks.${step}.description`) }}
           </p>
-        </div>
-      </div>
+        </li>
+      </ol>
     </UContainer>
   </section>
 </template>

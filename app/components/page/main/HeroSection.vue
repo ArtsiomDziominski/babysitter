@@ -1,88 +1,92 @@
 <script setup lang="ts">
 const { t } = useI18n()
+
+const city = ref('')
+
+const avatars = [
+  { text: 'АК', class: 'bg-amber-200 text-amber-900' },
+  { text: 'МЛ', class: 'bg-sky-200 text-sky-900' },
+  { text: 'ЕД', class: 'bg-rose-200 text-rose-900' }
+]
+
+const search = () => {
+  const value = city.value.trim()
+  navigateTo({ path: '/search', query: value ? { city: value } : undefined })
+}
 </script>
 
 <template>
-  <section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-pink-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 pt-20 pb-28 lg:pt-28 lg:pb-36">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-200/30 dark:bg-primary-800/10 rounded-full blur-3xl" />
-      <div class="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-pink-200/20 dark:bg-pink-800/10 rounded-full blur-3xl" />
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-100/20 dark:bg-violet-900/5 rounded-full blur-3xl" />
-    </div>
+  <UContainer class="pt-6 sm:pt-8">
+    <div class="grid gap-4 lg:grid-cols-3">
+      <div class="relative isolate flex flex-col justify-end gap-6 overflow-hidden rounded-[2.25rem] bg-primary-600 p-6 text-white sm:min-h-[26rem] sm:p-12 lg:col-span-2 dark:bg-primary-700">
+        <div class="absolute -top-16 -right-16 -z-10 size-72 rounded-full bg-white/10" aria-hidden="true" />
+        <div class="absolute top-16 right-32 -z-10 size-24 rounded-full bg-white/15" aria-hidden="true" />
 
-    <UContainer class="relative">
-      <div class="max-w-4xl mx-auto text-center space-y-8">
-        <div class="hero-fade-in inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100/80 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-sm font-medium backdrop-blur-sm border border-primary-200/50 dark:border-primary-800/30">
-          <Icon name="mdi:shield-check-outline" size="18" />
-          {{ t('home.hero.trusted') }}
-        </div>
-
-        <h1 class="hero-fade-in hero-delay-1 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-highlighted leading-[1.1] tracking-tight">
+        <h1 class="max-w-2xl font-display text-[1.75rem] font-semibold leading-[1.08] tracking-tight text-balance min-[400px]:text-4xl sm:text-5xl lg:text-6xl">
           {{ t('home.hero.title') }}
         </h1>
-
-        <p class="hero-fade-in hero-delay-2 text-lg sm:text-xl lg:text-2xl text-toned max-w-2xl mx-auto leading-relaxed">
+        <p class="max-w-lg text-lg text-white/90 text-balance">
           {{ t('home.hero.subtitle') }}
         </p>
 
-        <div class="hero-fade-in hero-delay-3 flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <UButton
-            to="/search"
+        <form class="flex max-w-xl flex-wrap gap-2 rounded-[1.75rem] bg-white p-1.5 sm:rounded-full" @submit.prevent="search">
+          <UInput
+            v-model="city"
+            :placeholder="t('home.hero.searchPlaceholder')"
+            :aria-label="t('home.hero.searchPlaceholder')"
+            icon="i-lucide-map-pin"
+            variant="none"
             size="xl"
-            color="primary"
-            class="group px-8 py-4 text-lg font-semibold shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <Icon name="mdi:magnify" size="22" class="group-hover:scale-110 transition-transform" />
-            {{ t('home.hero.cta') }}
-          </UButton>
+            class="min-w-48 flex-1"
+            :ui="{ base: 'text-stone-900 placeholder:text-stone-500', leadingIcon: 'text-stone-500' }"
+          />
           <UButton
-            to="/register"
+            type="submit"
+            :label="t('home.hero.cta')"
+            icon="i-lucide-search"
             size="xl"
-            variant="outline"
             color="neutral"
-            class="px-8 py-4 text-lg font-semibold hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <Icon name="mdi:account-plus-outline" size="22" />
-            {{ t('home.hero.ctaSecondary') }}
-          </UButton>
-        </div>
-
-        <div class="hero-fade-in hero-delay-4 flex flex-wrap justify-center gap-x-8 gap-y-3 pt-8 text-sm text-muted">
-          <span class="flex items-center gap-1.5">
-            <Icon name="mdi:check-decagram" size="18" class="text-success-500" />
-            {{ t('home.hero.trustVerified') }}
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="mdi:currency-usd-off" size="18" class="text-success-500" />
-            {{ t('home.hero.trustFree') }}
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="mdi:headset" size="18" class="text-success-500" />
-            {{ t('home.hero.trustSupport') }}
-          </span>
-        </div>
+            class="w-full justify-center rounded-full bg-stone-900 px-6 text-white hover:bg-stone-800 sm:w-auto"
+          />
+        </form>
       </div>
-    </UContainer>
-  </section>
+
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-1 flex-col justify-between gap-6 rounded-[2.25rem] bg-default p-8">
+          <div class="flex -space-x-3" aria-hidden="true">
+            <span
+              v-for="avatar in avatars"
+              :key="avatar.text"
+              class="flex size-12 items-center justify-center rounded-full text-xs font-bold ring-4 ring-(--ui-bg)"
+              :class="avatar.class"
+            >
+              {{ avatar.text }}
+            </span>
+            <span class="flex size-12 items-center justify-center rounded-full bg-inverted text-xs font-bold text-inverted ring-4 ring-(--ui-bg)">2k+</span>
+          </div>
+          <div>
+            <p class="font-display text-5xl font-semibold text-highlighted">
+              4.9<span class="text-2xl text-muted">/5</span>
+            </p>
+            <p class="mt-2 text-muted">
+              {{ t('home.stats.rating') }} · {{ t('home.hero.trusted') }}
+            </p>
+          </div>
+        </div>
+
+        <NuxtLink
+          to="/register"
+          class="group flex items-center justify-between gap-4 rounded-[2.25rem] bg-stone-900 px-8 py-7 text-white dark:bg-stone-800"
+        >
+          <span>
+            <span class="block text-sm text-stone-300">{{ t('home.hero.babysitterPrompt') }}</span>
+            <span class="mt-1 block font-display text-xl font-semibold">{{ t('home.cta.ctaBabysitter') }}</span>
+          </span>
+          <span class="flex size-13 shrink-0 items-center justify-center rounded-full bg-primary-600 transition-transform group-hover:rotate-45" aria-hidden="true">
+            <UIcon name="i-lucide-arrow-up-right" class="size-6 text-white" />
+          </span>
+        </NuxtLink>
+      </div>
+    </div>
+  </UContainer>
 </template>
-
-<style scoped>
-.hero-fade-in {
-  animation: heroFadeIn 0.8s ease-out both;
-}
-.hero-delay-1 { animation-delay: 0.1s; }
-.hero-delay-2 { animation-delay: 0.2s; }
-.hero-delay-3 { animation-delay: 0.35s; }
-.hero-delay-4 { animation-delay: 0.5s; }
-
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

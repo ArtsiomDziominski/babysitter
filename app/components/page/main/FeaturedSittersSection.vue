@@ -3,85 +3,68 @@ const { t } = useI18n()
 const siteConfig = useSiteConfig()
 
 const sitters = [
-  { name: 'Анна М.', experience: 3, rating: 4.9, reviewCount: 47, price: 25, verified: true, gradient: 'from-rose-400 to-pink-500' },
-  { name: 'Мария К.', experience: 5, rating: 4.8, reviewCount: 62, price: 30, verified: true, gradient: 'from-violet-400 to-purple-500' },
-  { name: 'Елена Д.', experience: 2, rating: 5.0, reviewCount: 28, price: 20, verified: true, gradient: 'from-sky-400 to-info-500' },
-  { name: 'Натали С.', experience: 7, rating: 4.9, reviewCount: 93, price: 35, verified: true, gradient: 'from-amber-400 to-orange-500' },
-  { name: 'Софи Р.', experience: 4, rating: 4.7, reviewCount: 34, price: 22, verified: false, gradient: 'from-emerald-400 to-teal-500' },
-  { name: 'Дарья В.', experience: 6, rating: 4.8, reviewCount: 71, price: 28, verified: true, gradient: 'from-fuchsia-400 to-pink-500' }
+  { name: 'Анна М.', experience: 3, rating: 4.9, price: 25, tint: 'bg-amber-200 text-amber-900 dark:bg-amber-900/60 dark:text-amber-100' },
+  { name: 'Мария К.', experience: 5, rating: 4.8, price: 30, tint: 'bg-sky-200 text-sky-900 dark:bg-sky-900/60 dark:text-sky-100' },
+  { name: 'Елена Д.', experience: 2, rating: 5.0, price: 20, tint: 'bg-rose-200 text-rose-900 dark:bg-rose-900/60 dark:text-rose-100' },
+  { name: 'Натали С.', experience: 7, rating: 4.9, price: 35, tint: 'bg-emerald-200 text-emerald-900 dark:bg-emerald-900/60 dark:text-emerald-100' },
+  { name: 'Софи Р.', experience: 4, rating: 4.7, price: 22, tint: 'bg-violet-200 text-violet-900 dark:bg-violet-900/60 dark:text-violet-100' },
+  { name: 'Дарья В.', experience: 6, rating: 4.8, price: 28, tint: 'bg-orange-200 text-orange-900 dark:bg-orange-900/60 dark:text-orange-100' }
 ]
 
-const getInitials = (name: string) => name.split(' ').map(n => n[0]).join('')
+const initials = (name: string) => name.split(' ').map(part => part[0]).join('')
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-default">
+  <section class="pt-20 sm:pt-28">
     <UContainer>
-      <div v-reveal class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-highlighted mb-2">
+          <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
             {{ t('home.featured.title') }}
           </h2>
-          <p class="text-lg text-toned">
+          <p class="mt-3 text-lg text-muted">
             {{ t('home.featured.subtitle') }}
           </p>
         </div>
-        <UButton to="/search" variant="outline" color="primary" size="lg" class="shrink-0">
-          {{ t('home.featured.viewAll') }}
-          <Icon name="mdi:arrow-right" size="18" />
-        </UButton>
+        <UButton
+          to="/search"
+          :label="t('home.featured.viewAll')"
+          trailing-icon="i-lucide-arrow-right"
+          color="neutral"
+          variant="ghost"
+          size="lg"
+          class="rounded-full bg-default px-5 font-bold"
+        />
       </div>
+    </UContainer>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div
-          v-for="(sitter, i) in sitters"
-          :key="sitter.name"
-          v-reveal="i * 100"
-          class="group relative bg-default rounded-2xl border border-default p-6 hover:shadow-xl hover:shadow-neutral-200/50 dark:hover:shadow-neutral-900/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-        >
-          <div v-if="sitter.verified" class="absolute top-4 right-4">
-            <div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-success-100 dark:bg-success-900/40 text-success-700 dark:text-success-400 text-xs font-medium">
-              <Icon name="mdi:check-decagram" size="14" />
-              {{ t('home.featured.verified') }}
+    <UContainer class="max-sm:px-0">
+      <ul class="scrollbar-hide flex snap-x gap-4 overflow-x-auto pb-2 max-sm:px-4">
+        <li v-for="sitter in sitters" :key="sitter.name" class="w-64 shrink-0 snap-start sm:w-72">
+          <NuxtLink to="/search" class="group flex h-full flex-col gap-4 rounded-[2rem] bg-default p-3">
+            <div class="flex h-56 items-end justify-between rounded-3xl p-4 sm:h-64" :class="sitter.tint">
+              <span class="font-display text-4xl font-semibold" aria-hidden="true">{{ initials(sitter.name) }}</span>
+              <span class="flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-sm font-bold text-stone-900">
+                <UIcon name="i-mdi-star" class="size-4 text-amber-500" />
+                {{ sitter.rating.toFixed(1) }}
+              </span>
             </div>
-          </div>
-
-          <div class="flex items-center gap-4 mb-4">
-            <div :class="['w-16 h-16 rounded-xl bg-gradient-to-br flex items-center justify-center text-white text-xl font-bold shadow-md group-hover:scale-105 transition-transform duration-300', sitter.gradient]">
-              {{ getInitials(sitter.name) }}
+            <div class="flex flex-col gap-1 px-2 pb-2">
+              <h3 class="text-lg font-extrabold text-highlighted">{{ sitter.name }}</h3>
+              <p class="text-sm text-muted">{{ sitter.experience }} {{ t('home.featured.experience') }}</p>
+              <div class="mt-2 flex items-center justify-between">
+                <p class="text-lg font-extrabold text-highlighted">
+                  {{ sitter.price }} {{ siteConfig.currency }}
+                  <span class="text-sm font-medium text-muted">{{ t('home.featured.perHour') }}</span>
+                </p>
+                <span class="flex size-11 items-center justify-center rounded-full bg-inverted transition-transform group-hover:rotate-45" aria-hidden="true">
+                  <UIcon name="i-lucide-arrow-up-right" class="size-5 text-inverted" />
+                </span>
+              </div>
             </div>
-            <div>
-              <h3 class="text-lg font-semibold text-highlighted group-hover:text-primary transition-colors">
-                {{ sitter.name }}
-              </h3>
-              <p class="text-sm text-muted">
-                {{ sitter.experience }} {{ t('home.featured.experience') }}
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-3 mb-4">
-            <div class="flex items-center gap-1">
-              <Icon name="mdi:star" size="18" class="text-amber-400" />
-              <span class="font-semibold text-highlighted">{{ sitter.rating }}</span>
-            </div>
-            <span class="text-sm text-dimmed">·</span>
-            <span class="text-sm text-muted">
-              {{ sitter.reviewCount }} {{ t('home.featured.reviews') }}
-            </span>
-          </div>
-
-          <div class="flex items-center justify-between pt-4 border-t border-default">
-            <div class="text-lg font-bold text-highlighted">
-              {{ sitter.price }} {{ siteConfig.currency }}
-              <span class="text-sm font-normal text-muted">{{ t('home.featured.perHour') }}</span>
-            </div>
-            <UButton size="sm" variant="soft" color="primary" class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {{ t('home.featured.contact') }}
-            </UButton>
-          </div>
-        </div>
-      </div>
+          </NuxtLink>
+        </li>
+      </ul>
     </UContainer>
   </section>
 </template>

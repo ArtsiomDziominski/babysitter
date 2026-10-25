@@ -1,78 +1,57 @@
 <template>
-  <header class="header">
-    <div class="header__container">
-      <div class="header__content">
-        <NuxtLink to="/" class="header__logo">
-          <img :src="siteConfig.logo" :alt="siteConfig.name" class="header__logo-icon"/>
-          <span class="header__logo-text max-xl:hidden">{{ siteConfig.name }}</span>
-        </NuxtLink>
+  <UHeader to="/" mode="slideover" :ui="{ title: 'items-center gap-2' }">
+    <template #title>
+      <img :src="siteConfig.logo" :alt="siteConfig.name" class="size-8 rounded-md object-contain"/>
+      <span class="text-lg font-semibold text-highlighted">{{ siteConfig.name }}</span>
+    </template>
 
-        <nav class="header__nav max-xl:hidden">
-          <NuxtLink
-              v-for="item in navLinks"
-              :key="item.to"
-              :to="item.to"
-              class="header__nav-link"
-          >
-            {{ item.label }}
-          </NuxtLink>
-        </nav>
+    <UNavigationMenu :items="navItems" variant="link" />
 
-        <div class="header__controls max-xl:flex-1 max-xl:justify-end">
-          <MobileMenu :nav-links="navLinks" />
+    <template #right>
+      <ClientOnly>
+        <USelect
+            v-if="localeOptions.length > 0"
+            :model-value="locale"
+            :items="localeOptions"
+            labelKey="name"
+            valueKey="code"
+            variant="ghost"
+            icon="i-lucide-globe"
+            class="max-lg:hidden w-36"
+            @update:model-value="(value) => setLocale(value as 'ka' | 'en' | 'ru' | 'uk')"
+        />
+        <template #fallback>
+          <div class="max-lg:hidden w-36 h-8 rounded-md bg-elevated animate-pulse"></div>
+        </template>
+      </ClientOnly>
 
-          <div class="max-xl:hidden flex items-center gap-4">
-          <ClientOnly>
-            <template v-if="localeOptions.length > 0">
-              <div class="header__selects">
-                <USelect
-                    :model-value="locale"
-                    :items="localeOptions"
-                    labelKey="name"
-                    valueKey="code"
-                    @update:model-value="(value) => setLocale(value as 'ka' | 'en' | 'ru' | 'uk')"
-                    class="header__select header__select--locale"
-                />
-              </div>
-            </template>
-            <template #fallback>
-              <div class="header__select-fallback"></div>
-              <div class="header__select-fallback header__select-fallback--locale"></div>
-            </template>
-          </ClientOnly>
+      <UColorModeButton />
 
-          <ClientOnly>
-            <template v-if="!authStore.isAuthenticated">
-              <UButton color="primary" to="/login" variant="solid">
-                {{ $t('header.login') }}
-              </UButton>
-            </template>
-            <template v-else>
-              <div class="header__auth">
-                <UDropdownMenu :items="accountMenuItems" :popper="{ placement: 'bottom-end' }">
-                  <UAvatar
-                      :src="authStore.currentUser?.avatar"
-                      :alt="authStore.currentUser?.name"
-                      size="md"
-                      class="header__avatar"
-                  />
-                </UDropdownMenu>
-              </div>
-            </template>
-            <template #fallback>
-              <div class="header__auth-fallback"></div>
-            </template>
-          </ClientOnly>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+      <ClientOnly>
+        <UButton v-if="!authStore.isAuthenticated" color="primary" to="/login" class="max-lg:hidden">
+          {{ $t('header.login') }}
+        </UButton>
+        <UDropdownMenu v-else :items="accountMenuItems" :content="{ align: 'end' }">
+          <UAvatar
+              :src="authStore.currentUser?.avatar"
+              :alt="authStore.currentUser?.name"
+              size="md"
+              class="cursor-pointer ring-2 ring-transparent hover:ring-primary transition"
+          />
+        </UDropdownMenu>
+        <template #fallback>
+          <div class="size-8 rounded-full bg-elevated animate-pulse"></div>
+        </template>
+      </ClientOnly>
+    </template>
+
+    <template #body>
+      <MobileMenu :nav-links="navLinks" />
+    </template>
+  </UHeader>
 </template>
 
 <script setup lang="ts">
-import { UserRole } from '~/const/roles'
-
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
 const siteConfig = useSiteConfig()
@@ -86,52 +65,16 @@ const navLinks = computed(() => {
   return nav
 })
 
+const navItems = computed(() => navLinks.value.map(link => ({ label: link.label, to: link.to })))
+
 onMounted(() => {
   authStore.loadAvatarUrl()
 })
 
-const localeOptions = computed(() => {
-  if (!locales.value || locales.value.length === 0) {
-    return []
-  }
-  return locales.value
-})
+const localeOptions = computed(() => locales.value ?? [])
 
 const accountMenuItems = computed(() => {
-  const role = authStore.currentUser?.role
   const user = authStore.currentUser
-
-  const mainMenuItems = [
-    {
-      label: t('header.menu.profile'),
-      icon: 'i-lucide-user',
-      to: '/account/profile'
-    },
-    {
-      label: t('header.menu.order'),
-      icon: 'i-lucide-clipboard-list',
-      to: '/account/orders'
-    },
-    {
-      label: t('header.menu.messages'),
-      icon: 'i-lucide-message-square',
-      to: '/account/messages'
-    }
-  ]
-
-  if (role === UserRole.PARENT) {
-    // mainMenuItems.push({
-    //   label: t('header.menu.favorites'),
-    //   icon: 'i-lucide-heart',
-    //   to: '/account/favorites'
-    // })
-  } else if (role === UserRole.BABYSITTER) {
-    // mainMenuItems.push({
-    //   label: t('header.menu.schedule'),
-    //   icon: 'i-lucide-calendar-clock',
-    //   to: '/account/schedule'
-    // })
-  }
 
   return [
     [
@@ -143,14 +86,23 @@ const accountMenuItems = computed(() => {
         type: 'label'
       }
     ],
-    mainMenuItems,
-    // [
-    //   {
-    //     label: t('header.menu.settings'),
-    //     icon: 'i-lucide-settings',
-    //     to: '/account/settings'
-    //   }
-    // ],
+    [
+      {
+        label: t('header.menu.profile'),
+        icon: 'i-lucide-user',
+        to: '/account/profile'
+      },
+      {
+        label: t('header.menu.order'),
+        icon: 'i-lucide-clipboard-list',
+        to: '/account/orders'
+      },
+      {
+        label: t('header.menu.messages'),
+        icon: 'i-lucide-message-square',
+        to: '/account/messages'
+      }
+    ],
     [
       {
         label: t('header.logout'),

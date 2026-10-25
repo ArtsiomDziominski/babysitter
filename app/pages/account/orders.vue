@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-default rounded-lg shadow-sm p-8 max-xl:p-4">
+  <div class="bg-default rounded-xl border border-default p-6 sm:p-8 max-xl:p-4">
     <h1 class="text-2xl max-xl:text-xl font-bold text-highlighted mb-8 max-xl:mb-4">
       {{ $t('account.orders.title') }}
     </h1>
@@ -9,13 +9,8 @@
       @update:selected-status="selectedStatus = $event"
     />
 
-    <div v-if="isLoading" class="flex items-center justify-center py-12">
-      <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-        <p class="text-muted">
-          {{ $t('account.orders.loading') }}
-        </p>
-      </div>
+    <div v-if="isLoading" class="space-y-3">
+      <USkeleton v-for="n in 3" :key="n" class="h-28 w-full rounded-xl" />
     </div>
 
     <div v-else-if="error" class="text-center py-12">
@@ -27,11 +22,14 @@
       </UButton>
     </div>
 
-    <div v-else-if="orders.length === 0" class="text-center py-12">
-      <p class="text-muted">
-        {{ $t('account.orders.empty') }}
-      </p>
-    </div>
+    <UEmpty
+      v-else-if="orders.length === 0"
+      icon="i-lucide-clipboard-list"
+      :title="$t('account.orders.empty')"
+      :actions="[{ label: $t('header.bookings'), to: '/search', icon: 'i-lucide-search' }]"
+      variant="naked"
+      class="py-12"
+    />
 
     <div v-else class="space-y-4 max-xl:space-y-3">
       <PageAccountOrdersCard

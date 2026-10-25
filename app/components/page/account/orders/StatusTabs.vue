@@ -1,31 +1,20 @@
 <template>
-  <div class="mb-6 max-xl:mb-4">
-    <div class="flex gap-1 overflow-x-auto scrollbar-hide -mx-8 px-8 max-xl:-mx-4 max-xl:px-4">
-      <button
-        v-for="tab in tabs"
-        :key="tab.value ?? 'all'"
-        @click="$emit('update:selectedStatus', tab.value)"
-        class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-semibold whitespace-nowrap transition-all duration-200 relative group flex-shrink-0 cursor-pointer"
-        :class="selectedStatus === tab.value
-          ? 'text-primary'
-          : 'text-toned hover:text-highlighted'"
-      >
-        <span class="relative z-10">{{ tab.label }}</span>
-        <span
-          v-if="selectedStatus === tab.value"
-          class="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-full transition-all duration-200"
-        ></span>
-        <span
-          v-else
-          class="absolute bottom-0 left-0 right-0 h-0.5 bg-transparent group-hover:bg-neutral-300 dark:group-hover:bg-neutral-600 transition-all duration-200"
-        ></span>
-      </button>
-    </div>
+  <div class="mb-6 max-xl:mb-4 overflow-x-auto scrollbar-hide">
+    <UTabs
+      :model-value="selectedStatus ?? ALL"
+      :items="tabs"
+      :content="false"
+      variant="link"
+      class="w-max min-w-full"
+      @update:model-value="$emit('update:selectedStatus', $event === ALL ? null : String($event))"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n()
+
+const ALL = 'all'
 
 defineProps<{
   selectedStatus: string | null
@@ -36,7 +25,7 @@ defineEmits<{
 }>()
 
 const tabs = computed(() => [
-  { value: null, label: t('account.orders.tabs.all') },
+  { value: ALL, label: t('account.orders.tabs.all') },
   { value: 'pending', label: t('account.orders.status.pending') },
   { value: 'confirmed', label: t('account.orders.status.confirmed') },
   { value: 'in_progress', label: t('account.orders.status.in_progress') },
@@ -44,4 +33,3 @@ const tabs = computed(() => [
   { value: 'cancelled', label: t('account.orders.status.cancelled') }
 ])
 </script>
-

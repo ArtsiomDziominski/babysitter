@@ -125,14 +125,15 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] py-8">
-    <UPageCard class="w-full max-w-md">
+  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-var(--ui-header-height))] py-10">
+    <UPageCard variant="outline" class="w-full max-w-md bg-default" :ui="{ container: 'sm:p-8' }">
       <UAuthForm
         :schema="schema"
         :title="t('auth.register')"
         :description="t('auth.registerDescription')"
         icon="i-lucide-user-plus"
         :fields="fields"
+        :submit="{ label: t('auth.register'), block: true }"
         :loading="isLoading"
         @submit="onSubmit"
       >

@@ -1,22 +1,20 @@
 <template>
   <div class="w-80 max-xl:w-full bg-default border-r border-default max-xl:border-r-0 flex flex-col">
-    <div class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-default bg-default">
-      <h1 class="text-xl max-xl:text-lg font-semibold text-highlighted">
+    <div class="px-4 max-xl:px-3 h-16 flex items-center border-b border-default">
+      <h1 class="text-lg font-semibold text-highlighted">
         {{ $t('account.messages.title') }}
       </h1>
     </div>
     <div v-if="loading" class="flex-1 flex items-center justify-center">
-      <div class="text-muted">{{ $t('account.messages.loading') }}</div>
+      <UIcon name="i-lucide-loader-circle" class="size-6 animate-spin text-muted" />
     </div>
     <div v-else class="flex-1 overflow-y-auto">
-      <div class="py-1">
+      <div class="p-2 space-y-0.5">
         <button
           v-for="chat in chats"
           :key="chat.id"
-          class="w-full flex items-center gap-3 px-4 max-xl:px-3 py-3 max-xl:py-2 hover:bg-elevated transition-colors text-left group"
-          :class="activeChatId === chat.id
-            ? 'bg-primary-50 dark:bg-primary-900/20 border-l-2 border-primary'
-            : ''"
+          class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-elevated/60 transition-colors text-left group"
+          :class="activeChatId === chat.id ? 'bg-primary/10 hover:bg-primary/10' : ''"
           @click="$emit('select', chat.id)"
         >
           <div class="relative flex-shrink-0">
@@ -24,13 +22,11 @@
               :src="chat.avatar"
               :icon="chat.icon"
               :alt="chat.name"
-              size="md"
-              class="max-xl:w-10 max-xl:h-10 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-neutral-800"
-              :class="activeChatId === chat.id ? 'ring-primary' : 'ring-transparent'"
+              size="lg"
             />
             <div
               v-if="chat.unreadCount > 0"
-              class="absolute -top-1 -right-1 bg-primary text-white text-xs font-medium rounded-full min-w-[20px] h-5 px-1.5 flex items-center justify-center"
+              class="absolute -top-1 -right-1 bg-primary text-inverted text-xs font-medium rounded-full min-w-[20px] h-5 px-1.5 flex items-center justify-center"
             >
               {{ chat.unreadCount > 9 ? '9+' : chat.unreadCount }}
             </div>

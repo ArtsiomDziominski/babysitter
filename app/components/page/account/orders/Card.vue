@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-default rounded-lg p-6 max-xl:p-4 hover:shadow-md transition-shadow">
+  <div class="bg-default border border-default rounded-xl p-6 max-xl:p-4 hover:border-primary/40 transition-colors">
     <div class="flex items-start justify-between mb-4 max-xl:mb-3 max-xl:flex-col max-xl:gap-3">
       <div class="flex-1 max-xl:w-full">
         <div class="flex items-center gap-3 mb-2 max-xl:flex-wrap max-xl:gap-2">
@@ -19,12 +19,12 @@
           >
             {{ order.customer.name }}
           </h3>
-          <span
-            class="px-2 py-1 text-xs max-xl:text-[10px] font-medium rounded flex-shrink-0"
-            :class="getStatusClass(order.status)"
-          >
-            {{ getStatusText(order.status) }}
-          </span>
+          <UBadge
+            :label="getStatusText(order.status)"
+            :color="getStatusColor(order.status)"
+            variant="subtle"
+            class="rounded-full shrink-0"
+          />
         </div>
         <div class="space-y-1 max-xl:space-y-0.5 text-sm max-xl:text-xs text-toned">
           <p>
@@ -114,15 +114,15 @@ defineEmits<{
 
 const userRole = computed(() => authStore.currentUser?.role)
 
-const getStatusClass = (status: BookingListItem['status']) => {
-  const classes = {
-    pending: 'bg-warning-100 dark:bg-warning-900/30 text-warning-800 dark:text-warning-300',
-    confirmed: 'bg-info-100 dark:bg-info-900/30 text-info-800 dark:text-info-300',
-    in_progress: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
-    completed: 'bg-success-100 dark:bg-success-900/30 text-success-800 dark:text-success-300',
-    cancelled: 'bg-error-100 dark:bg-error-900/30 text-error-800 dark:text-error-300'
-  }
-  return classes[status]
+const getStatusColor = (status: BookingListItem['status']) => {
+  const colors = {
+    pending: 'warning',
+    confirmed: 'info',
+    in_progress: 'primary',
+    completed: 'success',
+    cancelled: 'error'
+  } as const
+  return colors[status]
 }
 
 const getStatusText = (status: BookingListItem['status']) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-default rounded-2xl shadow-lg border border-default p-6">
+  <div class="bg-default rounded-xl border border-default p-6">
     <div class="space-y-4 mb-6">
       <div v-if="sitter.priceOneChild || sitter.priceTwoChildren || sitter.priceThreeChildren">
         <div class="text-sd font-semibold text-highlighted mb-3">

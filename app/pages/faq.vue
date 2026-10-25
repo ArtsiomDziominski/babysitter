@@ -1,9 +1,6 @@
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default py-8">
-    <UContainer>
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-default rounded-lg shadow-sm p-8">
-          <h1 class="text-3xl font-bold text-highlighted mb-2">
+  <div class="max-w-3xl mx-auto py-10 lg:py-16">
+          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted mb-2">
             {{ $t('faq.title') }}
           </h1>
           <p class="text-toned mb-8">
@@ -11,11 +8,8 @@
           </p>
 
           <div class="space-y-4">
-            <UAccordion :items="faqItems" :ui="{ wrapper: 'space-y-2' }" />
+            <UAccordion :items="faqItems" />
           </div>
-        </div>
-      </div>
-    </UContainer>
   </div>
 </template>
 

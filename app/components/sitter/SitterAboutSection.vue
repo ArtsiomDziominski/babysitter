@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <div v-if="sitter.detailedDescription" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.detailedDescription" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <h3 class="text-xl font-bold text-highlighted mb-4">
         {{ $t('bookings.sitter.sections.about') }}
       </h3>
@@ -9,7 +9,7 @@
       </p>
     </div>
 
-    <div v-if="sitter.education" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.education" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-graduation-cap" size="24" class="text-primary" />
@@ -23,7 +23,7 @@
       </p>
     </div>
 
-    <div v-if="sitter.preferences" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.preferences" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-heart" size="24" class="text-primary" />
@@ -37,7 +37,7 @@
       </p>
     </div>
 
-    <div v-if="sitter.advantages && sitter.advantages.length > 0" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.advantages && sitter.advantages.length > 0" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-award" size="24" class="text-primary" />
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <div v-if="sitter.petAttitude" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.petAttitude" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <div class="flex items-center gap-3 mb-4">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-dog" size="24" class="text-primary" />

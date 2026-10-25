@@ -1,61 +1,51 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const testimonials = [
-  { key: '1', rating: 5, gradient: 'from-rose-400 to-pink-500' },
-  { key: '2', rating: 5, gradient: 'from-violet-400 to-purple-500' },
-  { key: '3', rating: 5, gradient: 'from-sky-400 to-info-500' }
-]
+const featured = '4'
+const others = ['3', '7']
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-default">
+  <section class="pt-20 sm:pt-28">
     <UContainer>
-      <div v-reveal class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-highlighted mb-4">
+      <div class="mb-10">
+        <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
           {{ t('home.reviews.title') }}
         </h2>
-        <p class="text-lg text-toned max-w-2xl mx-auto">
+        <p class="mt-3 text-lg text-muted">
           {{ t('home.reviews.subtitle') }}
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div
-          v-for="(item, i) in testimonials"
-          :key="item.key"
-          v-reveal="i * 150"
-          class="relative p-6 lg:p-8 rounded-2xl bg-muted border border-default hover:shadow-lg transition-shadow duration-300"
-        >
-          <Icon name="mdi:format-quote-open" size="36" class="text-primary-200 dark:text-primary-800 mb-4" />
-
-          <p class="text-default leading-relaxed mb-6">
-            {{ t(`home.testimonials.${item.key}.text`) }}
-          </p>
-
-          <div class="flex gap-1 mb-4">
-            <Icon
-              v-for="star in item.rating"
-              :key="star"
-              name="mdi:star"
-              size="18"
-              class="text-amber-400"
+      <div class="grid gap-4 lg:grid-cols-3">
+        <figure class="flex flex-col justify-between gap-8 rounded-[2.25rem] bg-primary-100 p-8 sm:p-12 lg:col-span-2 dark:bg-primary-950">
+          <blockquote class="font-display text-2xl font-medium leading-snug text-highlighted sm:text-3xl">
+            «{{ t(`home.testimonials.${featured}.text`) }}»
+          </blockquote>
+          <figcaption>
+            <UUser
+              :name="t(`home.testimonials.${featured}.name`)"
+              :description="t(`home.testimonials.${featured}.city`)"
+              :avatar="{ alt: t(`home.testimonials.${featured}.name`), class: 'bg-default' }"
+              size="lg"
             />
-          </div>
+          </figcaption>
+        </figure>
 
-          <div class="flex items-center gap-3 pt-4 border-t border-default">
-            <div :class="['w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center text-white text-sm font-bold', item.gradient]">
-              {{ t(`home.testimonials.${item.key}.name`).charAt(0) }}
-            </div>
-            <div>
-              <div class="font-semibold text-highlighted text-sm">
-                {{ t(`home.testimonials.${item.key}.name`) }}
-              </div>
-              <div class="text-xs text-muted">
-                {{ t(`home.testimonials.${item.key}.city`) }}
-              </div>
-            </div>
-          </div>
+        <div class="flex flex-col gap-4">
+          <figure
+            v-for="key in others"
+            :key="key"
+            class="flex flex-1 flex-col gap-4 rounded-[1.75rem] bg-default p-7"
+          >
+            <blockquote class="text-default">
+              «{{ t(`home.testimonials.${key}.text`) }}»
+            </blockquote>
+            <figcaption class="mt-auto text-sm">
+              <span class="font-bold text-highlighted">{{ t(`home.testimonials.${key}.name`) }}</span>
+              <span class="text-muted"> · {{ t(`home.testimonials.${key}.city`) }}</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </UContainer>

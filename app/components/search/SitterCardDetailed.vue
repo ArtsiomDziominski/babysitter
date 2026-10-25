@@ -1,11 +1,11 @@
 <template>
   <div
-      class="relative border border-default rounded-lg p-6 max-xl:p-3 hover:shadow-md transition-shadow"
+      class="relative bg-default border border-default rounded-xl p-5 max-xl:p-3 hover:border-primary/40 hover:shadow-md transition"
   >
     <div class="flex gap-6 max-xl:flex-col max-xl:gap-3">
       <div class="flex-shrink-0 flex flex-col max-xl:items-center max-xl:w-full">
         <div
-            class="relative w-[140px] h-[140px] max-xl:w-full max-xl:max-w-none max-xl:h-auto max-xl:aspect-square bg-accented rounded-xl border-2 border-default overflow-hidden cursor-pointer"
+            class="relative w-[140px] h-[140px] max-xl:w-full max-xl:max-w-none max-xl:h-auto max-xl:aspect-[4/3] bg-elevated rounded-xl overflow-hidden cursor-pointer"
             @click="$emit('book', sitter.id.toString())"
         >
           <img
@@ -20,15 +20,14 @@
               size="48"
               class="text-dimmed absolute inset-0 m-auto"
           />
-          <div
+          <UBadge
               v-if="sitter.isOnline"
-              class="absolute top-2 left-2 flex items-center gap-1.5"
-          >
-            <span class="w-4 h-4 bg-success-500 rounded-full border-2 border-(--ui-bg)"></span>
-            <span class="text-xs text-success-600 dark:text-success-400 font-medium">{{
-                $t('bookings.sitter.online')
-              }}</span>
-          </div>
+              :label="$t('bookings.sitter.online')"
+              color="success"
+              variant="solid"
+              size="sm"
+              class="absolute top-2 left-2 rounded-full"
+          />
         </div>
         <div v-if="sitter.city"
              class="flex items-center justify-center gap-1 mt-2 text-xs text-muted">
@@ -46,7 +45,7 @@
             </h3>
             <div class="flex items-center gap-2 mt-1 max-xl:flex-wrap max-xl:text-xs">
               <div class="flex items-center">
-                <Icon name="i-lucide-star" class="text-yellow-400 max-xl:w-3 max-xl:h-3"/>
+                <UIcon name="i-mdi-star" class="size-4 text-amber-400"/>
                 <span class="ml-1 text-sm max-xl:text-xs font-medium text-default">
                   {{ sitter.rating ? parseFloat(sitter.rating) : 0 }}
                 </span>
@@ -80,36 +79,35 @@
         </p>
 
         <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
-          <span
-              class="px-2 py-1 text-xs max-xl:text-[10px] bg-elevated text-default rounded break-words">
+          <UBadge color="neutral" variant="soft" icon="i-lucide-briefcase">
             {{ $t('bookings.sitter.experience') }} {{ sitter.experience }} {{ yearWord }}
-          </span>
+          </UBadge>
         </div>
 
         <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
-          <span
+          <UBadge
               v-for="advantage in displayedAdvantages"
               :key="advantage"
-              class="px-2 py-1 text-xs max-xl:text-[10px] bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded break-words"
-          >
-            {{ advantage }}
-          </span>
+              :label="advantage"
+              variant="subtle"
+          />
         </div>
 
         <div class="flex flex-wrap gap-2 mb-4 max-xl:mb-3">
-          <span
+          <UBadge
               v-for="tag in sitter.certifications"
               :key="tag"
-              class="px-2 py-1 text-xs max-xl:text-[10px] bg-elevated text-default rounded break-words"
-          >
-            {{ tag }}
-          </span>
+              :label="tag"
+              color="neutral"
+              variant="outline"
+          />
         </div>
 
         <UButton
             color="primary"
             size="lg"
-            class="absolute right-6 bottom-6 max-xl:!relative max-xl:!right-auto max-xl:!bottom-auto max-xl:!static max-xl:w-full max-xl:mt-2 max-xl:mb-0 cursor-pointer"
+            trailing-icon="i-lucide-arrow-right"
+            class="absolute right-5 bottom-5 max-xl:!relative max-xl:!right-auto max-xl:!bottom-auto max-xl:!static max-xl:w-full max-xl:mt-2 max-xl:mb-0 cursor-pointer"
             @click="$emit('book', sitter.id.toString())"
         >
           {{ $t('bookings.sitter.details') }}

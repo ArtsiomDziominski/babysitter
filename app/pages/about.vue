@@ -1,9 +1,6 @@
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default py-8">
-    <UContainer>
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-default rounded-lg shadow-sm p-8">
-          <h1 class="text-3xl font-bold text-highlighted mb-6">
+  <div class="max-w-3xl mx-auto py-10 lg:py-16">
+          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted mb-6">
             {{ $t('about.title') }}
           </h1>
 
@@ -64,9 +61,6 @@
               </div>
             </section>
           </div>
-        </div>
-      </div>
-    </UContainer>
   </div>
 </template>
 

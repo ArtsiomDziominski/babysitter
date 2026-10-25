@@ -2,66 +2,60 @@
 const { t } = useI18n()
 
 const services = [
-  { key: 'home', icon: 'mdi:home-heart', color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20', border: 'border-rose-100 dark:border-rose-900/30' },
-  { key: 'transport', icon: 'mdi:car-child-seat', color: 'text-info-500', bg: 'bg-info-50 dark:bg-info-900/20', border: 'border-info-100 dark:border-info-900/30' },
-  { key: 'school', icon: 'mdi:school-outline', color: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-900/20', border: 'border-emerald-100 dark:border-emerald-900/30' },
-  { key: 'party', icon: 'mdi:party-popper', color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-900/20', border: 'border-amber-100 dark:border-amber-900/30' },
-  { key: 'mall', icon: 'mdi:shopping-outline', color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-900/20', border: 'border-violet-100 dark:border-violet-900/30' },
-  { key: 'relatives', icon: 'mdi:account-group-outline', color: 'text-pink-500', bg: 'bg-pink-50 dark:bg-pink-900/20', border: 'border-pink-100 dark:border-pink-900/30' },
-  { key: 'chores', icon: 'mdi:broom', color: 'text-teal-500', bg: 'bg-teal-50 dark:bg-teal-900/20', border: 'border-teal-100 dark:border-teal-900/30' },
+  { key: 'transport', icon: 'i-lucide-car' },
+  { key: 'school', icon: 'i-lucide-school' },
+  { key: 'party', icon: 'i-lucide-party-popper' },
+  { key: 'mall', icon: 'i-lucide-shopping-bag' },
+  { key: 'relatives', icon: 'i-lucide-users' },
+  { key: 'chores', icon: 'i-lucide-sparkles' }
 ]
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-default">
+  <section class="pt-20 sm:pt-28">
     <UContainer>
-      <div v-reveal class="text-center mb-14">
-        <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-          {{ t('home.babysitterCan.label') }}
-        </p>
-        <h2 class="text-3xl lg:text-4xl font-black text-highlighted mb-4">
+      <div class="mb-10 text-center">
+        <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
           {{ t('home.babysitterCan.title') }}
         </h2>
-        <p class="text-lg text-muted max-w-2xl mx-auto">
+        <p class="mt-3 text-lg text-muted">
           {{ t('home.babysitterCan.subtitle') }}
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div
-          v-for="(service, i) in services"
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <li class="flex min-h-64 flex-col justify-between gap-6 rounded-[2rem] bg-primary-100 p-8 sm:col-span-2 lg:row-span-2 dark:bg-primary-950">
+          <span class="flex size-16 items-center justify-center rounded-2xl bg-default">
+            <UIcon name="i-lucide-house" class="size-8 text-primary" />
+          </span>
+          <p class="max-w-md font-display text-2xl font-semibold leading-snug text-highlighted sm:text-3xl">
+            {{ t('home.babysitterCan.services.home') }}
+          </p>
+        </li>
+
+        <li
+          v-for="service in services"
           :key="service.key"
-          v-reveal="i * 70"
-          :class="[
-            'group relative p-5 rounded-2xl border transition-all duration-300 cursor-default',
-            'hover:-translate-y-1 hover:shadow-lg',
-            service.bg, service.border,
-            i === 3 ? 'sm:col-span-2 lg:col-span-1' : ''
-          ]"
+          class="flex flex-col gap-4 rounded-[2rem] bg-default p-7"
         >
-          <div :class="['w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-default shadow-sm group-hover:scale-110 transition-transform duration-300', service.color]">
-            <Icon :name="service.icon" size="22" />
-          </div>
-          <p class="text-default font-medium leading-snug text-sm">
+          <span class="flex size-13 items-center justify-center rounded-2xl bg-(--home-bg)">
+            <UIcon :name="service.icon" class="size-6 text-highlighted" />
+          </span>
+          <p class="text-lg font-bold leading-snug text-highlighted">
             {{ t(`home.babysitterCan.services.${service.key}`) }}
           </p>
-        </div>
+        </li>
 
-        <div
-          v-reveal="services.length * 70"
-          class="group relative p-5 rounded-2xl border border-dashed border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/10 transition-all duration-300 hover:-translate-y-1 flex flex-col items-start justify-center gap-3"
-        >
-          <div class="w-11 h-11 rounded-xl bg-default shadow-sm flex items-center justify-center text-primary">
-            <Icon name="mdi:dots-horizontal" size="22" />
-          </div>
-          <p class="text-primary font-semibold text-sm leading-snug">
-            {{ t('home.babysitterCan.more') }}
-          </p>
-          <NuxtLink to="/search" class="text-xs text-primary hover:text-primary-700 font-medium underline underline-offset-4 transition-colors">
-            {{ t('home.babysitterCan.cta') }} →
+        <li class="sm:col-span-2">
+          <NuxtLink
+            to="/search"
+            class="flex h-full flex-col justify-between gap-4 rounded-[2rem] bg-stone-900 p-7 text-white sm:flex-row sm:items-end dark:bg-stone-800"
+          >
+            <span class="font-display text-xl font-semibold">{{ t('home.babysitterCan.more') }}</span>
+            <span class="font-bold text-primary-300">{{ t('home.babysitterCan.cta') }} →</span>
           </NuxtLink>
-        </div>
-      </div>
+        </li>
+      </ul>
     </UContainer>
   </section>
 </template>

@@ -1,8 +1,6 @@
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default py-8">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-default rounded-lg shadow-sm p-8">
-        <h1 class="text-3xl font-bold text-highlighted mb-4">
+  <div class="max-w-3xl mx-auto py-10 lg:py-16">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted mb-4">
           საჯარო შეთავაზება
         </h1>
         <p class="text-sm text-muted mb-8">
@@ -93,8 +91,6 @@
             </div>
           </section>
         </div>
-      </div>
-    </div>
   </div>
 </template>
 

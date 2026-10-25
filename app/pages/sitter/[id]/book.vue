@@ -4,8 +4,8 @@
       <UBreadcrumb :items="breadcrumbItems" />
     </div>
 
-    <div v-if="sitter && !isLoading" class="bg-default rounded-lg shadow-sm p-6 md:p-8">
-      <h1 class="text-2xl font-bold text-highlighted mb-2">
+    <div v-if="sitter && !isLoading" class="bg-default rounded-xl border border-default p-6 md:p-8">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-highlighted mb-2">
         {{ $t('account.booking.create.title') }}
       </h1>
       <p class="text-muted mb-6">
@@ -67,7 +67,7 @@
 
     <div v-else-if="isLoading" class="flex items-center justify-center py-24">
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+        <UIcon name="i-lucide-loader-circle" class="size-10 animate-spin text-primary mx-auto mb-4" />
         <p class="text-muted">
           {{ $t('account.booking.create.loading') }}
         </p>

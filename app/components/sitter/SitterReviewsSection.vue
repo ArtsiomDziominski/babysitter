@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <div v-if="sitter.experience" class="bg-default rounded-2xl shadow-sm border border-default p-4">
+    <div v-if="sitter.experience" class="bg-default rounded-xl border border-default p-4">
       <div class="flex items-center gap-3">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-briefcase" size="20" class="text-primary" />
@@ -27,7 +27,7 @@
     <div
       v-for="review in reviews"
       :key="review.id"
-      class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8 hover:shadow-md transition-shadow"
+      class="bg-default rounded-xl border border-default p-6 md:p-8"
     >
       <div class="flex items-start justify-between mb-4">
         <div class="flex-1">
@@ -68,13 +68,13 @@
         {{ review.comment }}
       </p>
     </div>
-    <div v-if="pending" class="bg-default rounded-2xl shadow-sm border border-default p-12 text-center">
+    <div v-if="pending" class="bg-default rounded-xl border border-default p-12 text-center">
       <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
       <p class="text-muted">
         Загрузка отзывов...
       </p>
     </div>
-    <div v-else-if="!reviews || reviews.length === 0" class="bg-default rounded-2xl shadow-sm border border-default p-12 text-center">
+    <div v-else-if="!reviews || reviews.length === 0" class="bg-default rounded-xl border border-default p-12 text-center">
       <Icon name="i-lucide-message-square" size="48" class="text-dimmed mx-auto mb-4" />
       <p class="text-muted text-lg">
         Пока нет отзывов
