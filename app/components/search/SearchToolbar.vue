@@ -1,40 +1,35 @@
 <template>
   <div class="flex items-center justify-between mb-6 max-xl:flex-col max-xl:items-stretch max-xl:gap-4">
     <div class="flex items-center gap-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-      <span class="text-sm text-toned">
-        {{ $t('bookings.found') }}: {{ count }}
+      <span class="text-sm text-muted">
+        {{ $t('bookings.found') }}: <span class="font-semibold text-highlighted">{{ count }}</span>
       </span>
       <USelect
         :model-value="sortBy"
         :items="sortOptions"
         labelKey="label"
         valueKey="value"
-        size="sm"
+        icon="i-lucide-arrow-up-down"
+        variant="ghost"
         @update:model-value="$emit('update:sortBy', $event)"
       />
     </div>
     <div class="flex items-center gap-2 max-xl:hidden">
       <UTooltip :text="$t('bookings.view.tooltip.list')">
         <UButton
-          :variant="viewMode === SearchViewMode.LIST ? 'solid' : 'outline'"
-          :class="viewMode === SearchViewMode.LIST ? '' : 'cursor-pointer'"
-          color="primary"
-          size="sm"
+          icon="i-lucide-list"
+          :variant="viewMode === SearchViewMode.LIST ? 'soft' : 'ghost'"
+          :color="viewMode === SearchViewMode.LIST ? 'primary' : 'neutral'"
           @click="$emit('update:viewMode', SearchViewMode.LIST)"
-        >
-          <Icon name="i-lucide-list" />
-        </UButton>
+        />
       </UTooltip>
       <UTooltip :text="$t('bookings.view.tooltip.card')">
         <UButton
-          :variant="viewMode === SearchViewMode.CARD ? 'solid' : 'outline'"
-          :class="viewMode === SearchViewMode.CARD ? '' : 'cursor-pointer'"
-          color="primary"
-          size="sm"
+          icon="i-lucide-layout-grid"
+          :variant="viewMode === SearchViewMode.CARD ? 'soft' : 'ghost'"
+          :color="viewMode === SearchViewMode.CARD ? 'primary' : 'neutral'"
           @click="$emit('update:viewMode', SearchViewMode.CARD)"
-        >
-          <Icon name="i-lucide-grid" />
-        </UButton>
+        />
       </UTooltip>
       <!-- <UTooltip :text="$t('bookings.view.tooltip.map')">
         <UButton

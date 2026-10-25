@@ -1,25 +1,27 @@
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default py-8 max-xl:py-2">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-xl:px-2">
-      <div class="bg-default rounded-lg shadow-sm max-xl:rounded-none">
-        <SearchForm
-            v-model="searchForm"
-            @search="handleSearch"
-        />
+  <div class="py-6 lg:py-10">
+    <SearchForm
+        v-model="searchForm"
+        @search="handleSearch"
+    />
 
-        <div class="flex max-xl:flex-col">
-          <SearchFilters v-model="filters" class="max-xl:hidden"/>
+    <div class="mt-6 flex gap-8 max-xl:flex-col max-xl:gap-0">
+          <aside class="w-72 shrink-0 max-xl:hidden">
+            <div class="sticky top-[calc(var(--ui-header-height)+1.5rem)] rounded-xl border border-default bg-default p-5">
+              <SearchFilters v-model="filters"/>
+            </div>
+          </aside>
 
-          <div class="flex-1 p-6 max-xl:p-3">
+          <div class="flex-1 min-w-0">
             <div class="max-xl:mb-3">
               <UButton
-                  color="primary"
+                  color="neutral"
                   variant="outline"
-                  size="sm"
-                  class="xl:hidden mb-3 w-full"
+                  icon="i-lucide-sliders-horizontal"
+                  block
+                  class="xl:hidden mb-3"
                   @click="isFiltersModalOpen = true"
               >
-                <Icon name="i-lucide-filter" class="mr-2"/>
                 {{ $t('bookings.filters.title') }}
               </UButton>
             </div>
@@ -31,14 +33,18 @@
                 @update:view-mode="handleViewModeUpdate"
             />
 
-            <div v-if="isLoading" class="flex justify-center items-center py-12">
-              <div class="text-muted">{{ $t('bookings.loading') }}</div>
+            <div v-if="isLoading" class="space-y-4">
+              <USkeleton v-for="n in 3" :key="n" class="h-48 w-full rounded-xl" />
             </div>
 
             <template v-else>
-              <div v-if="filteredSitters.length === 0" class="text-center py-12">
-                <p class="text-muted">{{ $t('bookings.emptyShort') }}</p>
-              </div>
+              <UEmpty
+                  v-if="filteredSitters.length === 0"
+                  icon="i-lucide-search-x"
+                  :title="$t('bookings.emptyShort')"
+                  variant="naked"
+                  class="py-16"
+              />
 
               <SearchSitterList
                   v-else-if="viewMode === SearchViewMode.LIST"
@@ -55,8 +61,6 @@
               <SearchSitterMap v-else/>
             </template>
           </div>
-        </div>
-      </div>
     </div>
 
     <SearchFiltersModal

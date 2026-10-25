@@ -1,31 +1,35 @@
 <template>
-  <div class="p-6 max-xl:p-3 border-b border-default">
-    <h1 class="text-2xl font-bold text-highlighted mb-6 max-xl:mb-3 max-xl:text-lg">
+  <div>
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted mb-6 max-xl:mb-4">
       {{ $t('bookings.title') }}
     </h1>
 
-    <div class="grid grid-cols-1 max-xl:grid-cols-2 md:grid-cols-[1fr_1fr_1fr_1fr] gap-4 max-xl:gap-2">
+    <div class="grid grid-cols-2 xl:grid-cols-4 gap-2 rounded-2xl border border-default bg-default p-2 shadow-sm">
       <USelect
         v-model="selectedCity"
         :items="cityOptions"
         :placeholder="$t('bookings.search.city')"
         labelKey="label"
         valueKey="value"
-        size="lg"
+        icon="i-lucide-map-pin"
+        size="xl"
+        variant="soft"
       />
       <UInput
         v-model="modelValue.date"
         type="date"
         :placeholder="$t('bookings.search.date')"
         icon="i-lucide-calendar"
-        size="lg"
+        size="xl"
+        variant="soft"
       />
       <UInput
         v-model="modelValue.timeStart"
         type="time"
         :placeholder="$t('bookings.search.timeStart')"
         icon="i-lucide-clock"
-        size="lg"
+        size="xl"
+        variant="soft"
         class="max-xl:hidden"
       />
       <UInput
@@ -33,7 +37,8 @@
         type="time"
         :placeholder="$t('bookings.search.timeEnd')"
         icon="i-lucide-clock"
-        size="lg"
+        size="xl"
+        variant="soft"
         class="max-xl:hidden"
       />
       <!-- <UButton

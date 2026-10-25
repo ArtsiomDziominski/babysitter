@@ -1,18 +1,18 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-4 lg:gap-6">
     <div
       v-for="sitter in sitters"
       :key="sitter.id"
-      class="bg-default rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden cursor-pointer"
+      class="group bg-default rounded-xl border border-default hover:border-primary/40 hover:shadow-md transition overflow-hidden cursor-pointer"
       @click="$emit('book', sitter.id.toString())"
     >
       <div class="relative">
-        <div class="w-[246px] h-[256px] max-xl:w-full max-xl:aspect-[246/256] bg-accented overflow-hidden">
+        <div class="w-full aspect-[4/3] bg-elevated overflow-hidden">
           <img
             v-if="sitter.avatarUrl"
             :src="sitter.avatarUrl"
             :alt="formatName(sitter.firstName, sitter.lastName)"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform"
           />
           <div
             v-else
@@ -20,13 +20,13 @@
           >
             <Icon name="i-lucide-user" size="48" />
           </div>
-          <div
+          <UBadge
               v-if="sitter.isOnline"
-              class="absolute top-2 right-2 flex items-center gap-1.5"
-          >
-            <span class="w-4 h-4 bg-success-500 rounded-full border-2 border-(--ui-bg)"></span>
-            <span class="text-xs text-success-600 dark:text-success-400 font-medium">Онлайн</span>
-          </div>
+              :label="$t('bookings.sitter.online')"
+              color="success"
+              variant="solid"
+              class="absolute top-3 right-3 rounded-full"
+          />
         </div>
       </div>
 
@@ -34,7 +34,7 @@
         <h3 class="text-lg font-semibold text-highlighted mb-1 max-xl:text-base">
           {{ formatName(sitter.firstName, sitter.lastName) }}{{ getAge(sitter.birthDate) }}
         </h3>
-        <div class="text-xl font-bold text-highlighted mb-3 max-xl:text-lg">
+        <div class="text-xl font-bold text-primary mb-3 max-xl:text-lg">
           {{ sitter.priceOneChild ? parseFloat(sitter.priceOneChild) : 0 }} {{ siteConfig.currency }}/час
         </div>
 

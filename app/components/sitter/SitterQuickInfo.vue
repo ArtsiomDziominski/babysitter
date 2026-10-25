@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-default rounded-2xl shadow-sm border border-default p-4">
+  <div v-if="sitter.registeredAt" class="bg-default rounded-xl border border-default p-4">
     <div class="flex flex-wrap items-center gap-3 text-sm text-toned">
       <div v-if="sitter.registeredAt" class="flex items-center gap-1.5">
         <Icon name="i-lucide-clock" size="16" />

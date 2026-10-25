@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <div v-if="sitter.workConditions" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.workConditions" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <div class="flex items-center gap-3 mb-6">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-file-text" size="24" class="text-primary" />
@@ -14,7 +14,7 @@
       </p>
     </div>
 
-    <div v-if="sitter.safetyInfo" class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
+    <div v-if="sitter.safetyInfo" class="bg-default rounded-xl border border-default p-6 md:p-8">
       <div class="flex items-center gap-3 mb-6">
         <div class="p-2 bg-primary/10 rounded-lg">
           <Icon name="i-lucide-shield-check" size="24" class="text-primary" />
@@ -28,7 +28,7 @@
       </p>
     </div>
 
-    <div v-if="!sitter.workConditions && !sitter.safetyInfo" class="bg-default rounded-2xl shadow-sm border border-default p-12 text-center">
+    <div v-if="!sitter.workConditions && !sitter.safetyInfo" class="bg-default rounded-xl border border-default p-12 text-center">
       <Icon name="i-lucide-info" size="48" class="text-dimmed mx-auto mb-4" />
       <p class="text-muted text-lg">
         Информация о работе не указана

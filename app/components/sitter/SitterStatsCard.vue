@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-default rounded-2xl shadow-lg border border-default p-6">
+  <div class="bg-default rounded-xl border border-default p-6">
     <h3 class="text-lg font-semibold text-highlighted mb-4">
       {{ $t('bookings.sitter.stats.title') }}
     </h3>
