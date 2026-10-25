@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-container bg-muted dark:bg-default flex flex-col h-[calc(100vh-12rem)] max-xl:h-[calc(100vh-8rem)] rounded-lg max-xl:rounded-none overflow-hidden">
+  <div class="flex flex-col h-[calc(100dvh-var(--ui-header-height)-5rem)] max-lg:h-[calc(100dvh-var(--ui-header-height)-6rem)] min-h-[28rem] rounded-xl border border-default bg-default overflow-hidden">
     <div class="flex h-full max-xl:relative">
       <ChatList
         :chats="chats"
@@ -16,12 +16,12 @@
         <ChatHeader :chat="activeChat || null" @back="handleBackToChatList" />
 
         <div v-if="!activeChat" class="flex-1 flex items-center justify-center">
-          <div class="text-muted">{{ $t('account.messages.selectChat') }}</div>
+          <UEmpty icon="i-lucide-messages-square" :title="$t('account.messages.selectChat')" variant="naked" />
         </div>
 
         <div v-else class="flex-1 flex flex-col min-h-0">
           <div v-if="loadingMessages" class="flex-1 flex items-center justify-center">
-            <div class="text-muted">{{ $t('account.messages.loadingMessages') }}</div>
+            <UIcon name="i-lucide-loader-circle" class="size-6 animate-spin text-muted" />
           </div>
           <ChatMessagesList
             v-else
@@ -642,34 +642,3 @@ onUnmounted(() => {
   }
 })
 </script>
-
-<style scoped>
-.chat-container {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.overflow-y-auto::-webkit-scrollbar {
-  width: 6px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.dark .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.dark .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-</style>

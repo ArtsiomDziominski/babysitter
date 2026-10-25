@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="chat"
-    class="px-4 max-xl:px-3 py-3 max-xl:py-2 border-b border-default bg-default flex items-center gap-3 shadow-sm"
+    class="px-4 max-xl:px-3 h-16 shrink-0 border-b border-default bg-default flex items-center gap-3"
   >
     <UButton
         color="neutral"
