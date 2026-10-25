@@ -1,51 +1,27 @@
 <script setup lang="ts">
 const { t } = useI18n()
+
+const links = computed(() => [
+  { label: t('home.cta.ctaBabysitter'), to: '/register', icon: 'i-lucide-user-plus', size: 'xl' as const, color: 'neutral' as const },
+  { label: t('home.cta.ctaParent'), to: '/search', size: 'xl' as const, color: 'neutral' as const, variant: 'outline' as const, class: 'text-white ring-white/40 hover:bg-white/10' }
+])
 </script>
 
 <template>
-  <section class="relative py-20 lg:py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-violet-700 dark:from-primary-800 dark:via-primary-900 dark:to-violet-900" />
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-    </div>
-
-    <UContainer class="relative">
-      <div v-reveal class="max-w-3xl mx-auto text-center space-y-8">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/90 text-sm font-medium backdrop-blur-sm">
-          <Icon name="mdi:heart-outline" size="18" />
-          {{ t('home.cta.badge') }}
+  <UPageSection :ui="{ container: 'py-16 sm:py-24' }">
+    <UPageCTA
+      :title="t('home.cta.title')"
+      :description="t('home.cta.subtitle')"
+      :links="links"
+      variant="solid"
+      class="bg-gradient-to-br from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-900"
+      :ui="{ title: 'text-white', description: 'text-white/85' }"
+    >
+      <template #top>
+        <div class="flex justify-center pt-10 sm:pt-16">
+          <UBadge :label="t('home.cta.badge')" icon="i-lucide-heart" color="neutral" variant="outline" class="rounded-full bg-white/10 text-white ring-white/30" />
         </div>
-
-        <h2 class="text-3xl lg:text-5xl font-bold text-white leading-tight">
-          {{ t('home.cta.title') }}
-        </h2>
-
-        <p class="text-lg lg:text-xl text-primary-100/80 max-w-xl mx-auto">
-          {{ t('home.cta.subtitle') }}
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <UButton
-            to="/register"
-            size="xl"
-            color="neutral"
-            variant="solid"
-            class="px-8 py-4 text-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 shadow-xl"
-          >
-            <Icon name="mdi:account-plus" size="22" />
-            {{ t('home.cta.ctaBabysitter') }}
-          </UButton>
-          <UButton
-            to="/search"
-            size="xl"
-            variant="outline"
-            class="px-8 py-4 text-lg font-semibold text-white border-white/30 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300"
-          >
-            {{ t('home.cta.ctaParent') }}
-          </UButton>
-        </div>
-      </div>
-    </UContainer>
-  </section>
+      </template>
+    </UPageCTA>
+  </UPageSection>
 </template>

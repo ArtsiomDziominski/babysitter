@@ -2,66 +2,39 @@
 const { t } = useI18n()
 
 const services = [
-  { key: 'home', icon: 'mdi:home-heart', color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-900/20', border: 'border-rose-100 dark:border-rose-900/30' },
-  { key: 'transport', icon: 'mdi:car-child-seat', color: 'text-info-500', bg: 'bg-info-50 dark:bg-info-900/20', border: 'border-info-100 dark:border-info-900/30' },
-  { key: 'school', icon: 'mdi:school-outline', color: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-900/20', border: 'border-emerald-100 dark:border-emerald-900/30' },
-  { key: 'party', icon: 'mdi:party-popper', color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-900/20', border: 'border-amber-100 dark:border-amber-900/30' },
-  { key: 'mall', icon: 'mdi:shopping-outline', color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-900/20', border: 'border-violet-100 dark:border-violet-900/30' },
-  { key: 'relatives', icon: 'mdi:account-group-outline', color: 'text-pink-500', bg: 'bg-pink-50 dark:bg-pink-900/20', border: 'border-pink-100 dark:border-pink-900/30' },
-  { key: 'chores', icon: 'mdi:broom', color: 'text-teal-500', bg: 'bg-teal-50 dark:bg-teal-900/20', border: 'border-teal-100 dark:border-teal-900/30' },
+  { key: 'home', icon: 'i-lucide-house' },
+  { key: 'transport', icon: 'i-lucide-car' },
+  { key: 'school', icon: 'i-lucide-school' },
+  { key: 'party', icon: 'i-lucide-party-popper' },
+  { key: 'mall', icon: 'i-lucide-shopping-bag' },
+  { key: 'relatives', icon: 'i-lucide-users' },
+  { key: 'chores', icon: 'i-lucide-sparkles' }
 ]
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-default">
-    <UContainer>
-      <div v-reveal class="text-center mb-14">
-        <p class="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-          {{ t('home.babysitterCan.label') }}
-        </p>
-        <h2 class="text-3xl lg:text-4xl font-black text-highlighted mb-4">
-          {{ t('home.babysitterCan.title') }}
-        </h2>
-        <p class="text-lg text-muted max-w-2xl mx-auto">
-          {{ t('home.babysitterCan.subtitle') }}
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div
-          v-for="(service, i) in services"
-          :key="service.key"
-          v-reveal="i * 70"
-          :class="[
-            'group relative p-5 rounded-2xl border transition-all duration-300 cursor-default',
-            'hover:-translate-y-1 hover:shadow-lg',
-            service.bg, service.border,
-            i === 3 ? 'sm:col-span-2 lg:col-span-1' : ''
-          ]"
-        >
-          <div :class="['w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-default shadow-sm group-hover:scale-110 transition-transform duration-300', service.color]">
-            <Icon :name="service.icon" size="22" />
-          </div>
-          <p class="text-default font-medium leading-snug text-sm">
-            {{ t(`home.babysitterCan.services.${service.key}`) }}
-          </p>
-        </div>
-
-        <div
-          v-reveal="services.length * 70"
-          class="group relative p-5 rounded-2xl border border-dashed border-primary-200 dark:border-primary-800 bg-primary-50/50 dark:bg-primary-900/10 transition-all duration-300 hover:-translate-y-1 flex flex-col items-start justify-center gap-3"
-        >
-          <div class="w-11 h-11 rounded-xl bg-default shadow-sm flex items-center justify-center text-primary">
-            <Icon name="mdi:dots-horizontal" size="22" />
-          </div>
-          <p class="text-primary font-semibold text-sm leading-snug">
-            {{ t('home.babysitterCan.more') }}
-          </p>
-          <NuxtLink to="/search" class="text-xs text-primary hover:text-primary-700 font-medium underline underline-offset-4 transition-colors">
-            {{ t('home.babysitterCan.cta') }} →
-          </NuxtLink>
-        </div>
-      </div>
-    </UContainer>
-  </section>
+  <UPageSection
+    :headline="t('home.babysitterCan.label')"
+    :title="t('home.babysitterCan.title')"
+    :description="t('home.babysitterCan.subtitle')"
+    class="bg-muted/50"
+  >
+    <UPageGrid class="grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+      <UPageCard
+        v-for="service in services"
+        :key="service.key"
+        :icon="service.icon"
+        :description="t(`home.babysitterCan.services.${service.key}`)"
+        :ui="{ leadingIcon: 'text-primary', description: 'text-default font-medium' }"
+      />
+      <UPageCard
+        :title="t('home.babysitterCan.more')"
+        :description="`${t('home.babysitterCan.cta')} →`"
+        icon="i-lucide-ellipsis"
+        to="/search"
+        variant="soft"
+        :ui="{ root: 'border border-dashed border-primary/40 bg-primary/5', leadingIcon: 'text-primary', title: 'text-primary', description: 'text-primary underline underline-offset-4' }"
+      />
+    </UPageGrid>
+  </UPageSection>
 </template>

@@ -2,34 +2,20 @@
 const { t } = useI18n()
 
 const stats = [
-  { value: '500+', key: 'sitters', icon: 'mdi:account-group' },
-  { value: '2000+', key: 'families', icon: 'mdi:home-heart' },
-  { value: '5000+', key: 'bookings', icon: 'mdi:calendar-check' },
-  { value: '4.9', key: 'rating', icon: 'mdi:star' }
+  { value: '500+', key: 'sitters' },
+  { value: '2000+', key: 'families' },
+  { value: '5000+', key: 'bookings' },
+  { value: '4.9', key: 'rating' }
 ]
 </script>
 
 <template>
-  <section class="py-16 bg-default border-y border-default">
-    <UContainer>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-        <div
-          v-for="(stat, i) in stats"
-          :key="stat.key"
-          v-reveal="i * 100"
-          class="text-center space-y-2"
-        >
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/40 mb-2">
-            <Icon :name="stat.icon" size="24" class="text-primary" />
-          </div>
-          <div class="text-3xl lg:text-4xl font-bold text-highlighted">
-            {{ stat.value }}
-          </div>
-          <div class="text-sm text-muted font-medium">
-            {{ t(`home.stats.${stat.key}`) }}
-          </div>
-        </div>
+  <UContainer>
+    <dl class="grid grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-default bg-(--ui-border)">
+      <div v-for="stat in stats" :key="stat.key" class="bg-default px-6 py-8 text-center">
+        <dt class="text-sm text-muted">{{ t(`home.stats.${stat.key}`) }}</dt>
+        <dd class="mt-2 text-3xl lg:text-4xl font-bold tracking-tight text-highlighted">{{ stat.value }}</dd>
       </div>
-    </UContainer>
-  </section>
+    </dl>
+  </UContainer>
 </template>
