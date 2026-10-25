@@ -2,58 +2,66 @@
 import { UserRole } from '~/const/roles'
 
 const authStore = useAuthStore()
+const { t } = useI18n()
 
-defineProps<{
+const props = defineProps<{
   activeTab: string
 }>()
+
+const items = computed(() => [
+  {
+    label: t('account.messages.title'),
+    icon: 'i-lucide-message-square',
+    to: '/account/messages',
+    active: props.activeTab === 'messages'
+  },
+  {
+    label: t('account.orders.title'),
+    icon: 'i-lucide-clipboard-list',
+    to: '/account/orders',
+    active: props.activeTab === 'orders'
+  },
+  {
+    label: t('account.booking.title'),
+    icon: 'i-lucide-baby',
+    to: authStore.user.role === UserRole.PARENT ? '/account/booking/kids' : '/account/booking/babysitter',
+    active: props.activeTab === 'booking'
+  },
+  {
+    label: t('account.profile'),
+    icon: 'i-lucide-user',
+    to: '/account/profile',
+    active: props.activeTab === 'profile'
+  }
+])
 </script>
 
 <template>
-  <div class="mb-6">
-    <div class="flex items-center gap-6 border-b border-default overflow-x-auto scrollbar-hide">
-      <NuxtLink
-        to="/account/messages"
-        class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
-        :class="activeTab === 'messages'
-          ? 'text-primary border-b-2 border-primary'
-          : 'text-toned hover:text-highlighted'"
-      >
-        {{ $t('account.messages.title') }}
-      </NuxtLink>
-      <NuxtLink
-        to="/account/orders"
-        class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
-        :class="activeTab === 'orders'
-          ? 'text-primary border-b-2 border-primary'
-          : 'text-toned hover:text-highlighted'"
-      >
-        {{ $t('account.orders.title') }}
-      </NuxtLink>
-      <NuxtLink
-        :to="authStore.user.role === UserRole.PARENT ? '/account/booking/kids' : '/account/booking/babysitter'"
-        class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
-        :class="activeTab === 'booking'
-          ? 'text-primary border-b-2 border-primary'
-          : 'text-toned hover:text-highlighted'"
-      >
-        {{ $t('account.booking.title') }}
-      </NuxtLink>
-      <NuxtLink
-        to="/account/profile"
-        class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
-        :class="activeTab === 'profile'
-          ? 'text-primary border-b-2 border-primary'
-          : 'text-toned hover:text-highlighted'"
-      >
-        {{ $t('account.profile') }}
-      </NuxtLink>
-      <div class="ml-auto flex items-center gap-3 max-xl:hidden flex-shrink-0">
-        <span class="text-sm font-medium text-highlighted">
-          {{ authStore.currentUser?.name }}
-        </span>
-        <UserAvatar size="xs" />
+  <aside class="lg:w-64 shrink-0">
+    <div class="lg:sticky lg:top-[calc(var(--ui-header-height)+2rem)] space-y-4">
+      <div class="max-lg:hidden flex items-center gap-3 rounded-lg border border-default bg-default p-4">
+        <UserAvatar size="lg" />
+        <div class="min-w-0">
+          <p class="font-semibold text-highlighted truncate">{{ authStore.currentUser?.name }}</p>
+          <p class="text-sm text-muted truncate">{{ authStore.currentUser?.email }}</p>
+        </div>
+      </div>
+
+      <UNavigationMenu
+        :items="items"
+        orientation="vertical"
+        class="max-lg:hidden"
+      />
+
+      <div class="lg:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide border-b border-default">
+        <UNavigationMenu
+          :items="items"
+          orientation="horizontal"
+          variant="pill"
+          class="w-max"
+          :ui="{ linkLabel: 'overflow-visible' }"
+        />
       </div>
     </div>
-  </div>
+  </aside>
 </template>
-

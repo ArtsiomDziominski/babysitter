@@ -18,14 +18,11 @@ const activeTab = computed(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <PageAccountNavigation :active-tab="activeTab" />
+  <div class="py-6 lg:py-10 flex gap-8 max-lg:flex-col max-lg:gap-4">
+    <PageAccountNavigation :active-tab="activeTab" />
 
-      <!-- Основной контент -->
-      <main class="flex-1">
-        <NuxtPage />
-      </main>
+    <div class="flex-1 min-w-0">
+      <NuxtPage />
     </div>
   </div>
 </template>
