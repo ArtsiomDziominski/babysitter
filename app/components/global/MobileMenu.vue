@@ -1,51 +1,42 @@
 <template>
-  <UDropdownMenu
-      :items="dropdownItems"
-      :popper="{ placement: 'bottom-end' }"
-      class="xl:hidden"
-  >
-    <UButton
-        color="neutral"
-        variant="ghost"
-        icon="i-lucide-menu"
-        class="xl:hidden mr-2"
-    />
+  <div class="flex flex-col gap-6">
+    <UNavigationMenu :items="navItems" orientation="vertical" class="-mx-2.5" />
 
-    <template #content-top>
-      <ClientOnly>
-        <template v-if="localeOptions.length > 0">
-          <div class="p-2">
-            <USelect
-                :model-value="locale"
-                :items="localeOptions"
-                labelKey="name"
-                valueKey="code"
-                @update:model-value="(value) => setLocale(value as 'ka' | 'en' | 'ru' | 'uk')"
-                size="sm"
-                class="w-full"
-            />
-          </div>
-        </template>
-      </ClientOnly>
-    </template>
+    <ClientOnly>
+      <template v-if="authStore.isAuthenticated">
+        <USeparator />
+        <div class="flex items-center gap-3">
+          <UAvatar :src="authStore.currentUser?.avatar" :alt="authStore.currentUser?.name" size="md" />
+          <span class="font-medium text-highlighted truncate">{{ authStore.currentUser?.name }}</span>
+        </div>
+        <UNavigationMenu :items="accountItems" orientation="vertical" class="-mx-2.5" />
+      </template>
+    </ClientOnly>
 
-    <template #content-bottom>
-      <ClientOnly>
-        <template v-if="!authStore.isAuthenticated">
-          <div class="p-2">
-            <UButton color="primary" to="/login" variant="solid" size="sm" class="w-full">
-              {{ $t('header.login') }}
-            </UButton>
-          </div>
-        </template>
-      </ClientOnly>
-    </template>
-  </UDropdownMenu>
+    <USeparator />
+
+    <ClientOnly>
+      <USelect
+          v-if="localeOptions.length > 0"
+          :model-value="locale"
+          :items="localeOptions"
+          labelKey="name"
+          valueKey="code"
+          icon="i-lucide-globe"
+          class="w-full"
+          @update:model-value="(value) => setLocale(value as 'ka' | 'en' | 'ru' | 'uk')"
+      />
+    </ClientOnly>
+
+    <ClientOnly>
+      <UButton v-if="!authStore.isAuthenticated" color="primary" to="/login" block>
+        {{ $t('header.login') }}
+      </UButton>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { UserRole } from '~/const/roles'
-
 const { locale, locales, t, setLocale } = useI18n()
 const authStore = useAuthStore()
 
@@ -53,76 +44,19 @@ const props = defineProps<{
   navLinks: Array<{ to: string; label: string }>
 }>()
 
-const localeOptions = computed(() => {
-  if (!locales.value || locales.value.length === 0) {
-    return []
-  }
-  return locales.value
-})
+const localeOptions = computed(() => locales.value ?? [])
 
-const dropdownItems = computed(() => {
-  const items: any[] = []
+const navItems = computed(() => props.navLinks.map(link => ({ label: link.label, to: link.to })))
 
-  // Навигационные ссылки
-  if (props.navLinks.length > 0) {
-    items.push(
-      props.navLinks.map(link => ({
-        label: link.label,
-        to: link.to
-      }))
-    )
-  }
-
-  // Меню аккаунта (если авторизован)
-  if (authStore.isAuthenticated) {
-    const user = authStore.currentUser
-    
-    // Информация о пользователе
-    items.push([
-      {
-        label: user?.name || '',
-        avatar: {
-          src: user?.avatar
-        },
-        type: 'label'
-      }
-    ])
-
-    // Пункты меню
-    items.push([
-      {
-        label: t('header.menu.profile'),
-        icon: 'i-lucide-user',
-        to: '/account/profile'
-      },
-      {
-        label: t('header.menu.order'),
-        icon: 'i-lucide-clipboard-list',
-        to: '/account/orders'
-      },
-      {
-        label: t('header.menu.messages'),
-        icon: 'i-lucide-message-square',
-        to: '/account/messages'
-      }
-    ])
-
-    // Выход
-    items.push([
-      {
-        label: t('header.logout'),
-        icon: 'i-lucide-log-out',
-        onSelect: () => handleLogout()
-      }
-    ])
-  }
-
-  return items
-})
+const accountItems = computed(() => [
+  { label: t('header.menu.profile'), icon: 'i-lucide-user', to: '/account/profile' },
+  { label: t('header.menu.order'), icon: 'i-lucide-clipboard-list', to: '/account/orders' },
+  { label: t('header.menu.messages'), icon: 'i-lucide-message-square', to: '/account/messages' },
+  { label: t('header.logout'), icon: 'i-lucide-log-out', onSelect: () => handleLogout() }
+])
 
 const handleLogout = () => {
   authStore.logout()
   navigateTo('/')
 }
 </script>
-

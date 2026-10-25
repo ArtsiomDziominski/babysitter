@@ -56,6 +56,22 @@ const createHeaderMount = (options: HeaderTestOptions = {}) => {
             return () => h('a', { href: props.to }, slots.default?.())
           },
         }),
+        UHeader: defineComponent({
+          setup(_, { slots }) {
+            return () =>
+              h('header', [slots.title?.(), slots.default?.(), slots.right?.(), slots.body?.()])
+          },
+        }),
+        UNavigationMenu: defineComponent({
+          props: {
+            items: { type: Array, required: true },
+          },
+          setup(props) {
+            return () =>
+              h('nav', (props.items as any[]).map(item => h('a', { href: item.to }, item.label)))
+          },
+        }),
+        UColorModeButton: true,
         UButton: defineComponent({
           props: {
             to: { type: String, required: false },

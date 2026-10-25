@@ -96,7 +96,7 @@ const activeSection = computed(() => {
 </script>
 
 <template>
-  <div class="flex gap-6 max-xl:flex-col max-xl:gap-0">
+  <div>
     <PageAccountSectionSidebar :items="menuItems" :active-section="activeSection" />
     <NuxtPage />
   </div>
