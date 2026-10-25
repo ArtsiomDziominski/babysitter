@@ -1,19 +1,13 @@
 <template>
-  <aside class="w-64 max-xl:w-full flex-shrink-0 max-xl:mb-4">
-    <nav class="space-y-1 max-xl:flex max-xl:gap-2 max-xl:overflow-x-auto max-xl:pb-2">
-      <NuxtLink
-        v-for="item in items"
-        :key="item.section"
-        :to="item.to"
-        class="block px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium rounded-lg transition-colors max-xl:flex-shrink-0 max-xl:whitespace-nowrap"
-        :class="activeSection === item.section
-          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary'
-          : 'text-default hover:bg-elevated'"
-      >
-        {{ $t(item.label) }}
-      </NuxtLink>
-    </nav>
-  </aside>
+  <div class="mb-6 border-b border-default overflow-x-auto scrollbar-hide">
+    <UNavigationMenu
+      :items="navItems"
+      variant="link"
+      highlight
+      class="w-max"
+      :ui="{ linkLabel: 'overflow-visible' }"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -28,6 +22,12 @@ interface Props {
   activeSection: string
 }
 
-defineProps<Props>()
-</script>
+const props = defineProps<Props>()
+const { t } = useI18n()
 
+const navItems = computed(() => props.items.map(item => ({
+  label: t(item.label),
+  to: item.to,
+  active: props.activeSection === item.section
+})))
+</script>
