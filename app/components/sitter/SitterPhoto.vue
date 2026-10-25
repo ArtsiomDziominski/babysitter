@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full aspect-square max-w-[430px] max-h-[430px] overflow-hidden rounded-2xl shadow-2xl mx-auto">
+  <div class="relative w-full aspect-square max-w-[430px] max-h-[430px] overflow-hidden rounded-xl mx-auto">
     <div
       v-if="sitter.avatar"
       class="absolute inset-0 bg-cover bg-center"
@@ -9,7 +9,7 @@
     </div>
     <div
       v-else
-      class="absolute inset-0 bg-gradient-to-br from-neutral-400 to-neutral-600 dark:from-neutral-600 dark:to-neutral-800"
+      class="absolute inset-0 bg-gradient-to-br from-primary-300 to-primary-600 dark:from-primary-700 dark:to-primary-950"
     >
       <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
       <div class="absolute inset-0 flex items-center justify-center">

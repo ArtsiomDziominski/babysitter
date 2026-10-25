@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-muted dark:bg-default">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+  <div>
+    <div class="py-6 md:py-8">
       <div class="mb-6">
         <UBreadcrumb :items="breadcrumbItems" />
       </div>
@@ -30,9 +30,9 @@
           </div>
         </div>
 
-        <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-default border-t border-default p-4 shadow-lg z-50">
+        <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-default/90 backdrop-blur border-t border-default p-4 z-50">
           <div class="max-w-7xl mx-auto flex gap-3">
-            <div v-if="isBabysitter" class="flex-1 p-3 bg-muted dark:bg-default rounded-lg border border-default flex items-center justify-center">
+            <div v-if="isBabysitter" class="flex-1 p-3 bg-muted rounded-lg border border-default flex items-center justify-center">
               <p class="text-xs text-toned text-center">
                 {{ $t('bookings.sitter.actions.babysitterCannotBook') }}
               </p>
@@ -41,20 +41,22 @@
               v-else
               color="primary"
               size="lg"
+              icon="i-lucide-calendar-plus"
+              block
               class="flex-1 font-semibold"
               @click="handleContact"
             >
-              <Icon name="i-lucide-calendar-plus" size="20" class="mr-2" />
               {{ $t('bookings.sitter.actions.book') }}
             </UButton>
             <UButton
               v-if="!isBabysitter"
               variant="outline"
               size="lg"
+              icon="i-lucide-message-circle"
+              block
               class="flex-1 font-semibold"
               @click="handleMessage"
             >
-              <Icon name="i-lucide-message-circle" size="20" class="mr-2" />
               {{ $t('bookings.sitter.actions.message') }}
             </UButton>
           </div>
@@ -63,7 +65,7 @@
 
       <div v-else-if="pending" class="flex items-center justify-center min-h-[60vh]">
         <div class="text-center">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <UIcon name="i-lucide-loader-circle" class="size-10 animate-spin text-primary mx-auto mb-4" />
           <p class="text-muted">
             Загрузка...
           </p>

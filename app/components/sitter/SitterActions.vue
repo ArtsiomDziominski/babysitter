@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-default rounded-2xl shadow-sm border border-default p-4">
+  <div class="bg-default rounded-xl border border-default p-4">
     <div class="space-y-3">
       <div v-if="isBabysitter" class="p-4 bg-muted dark:bg-default rounded-lg border border-default">
         <p class="text-sm text-toned text-center">
