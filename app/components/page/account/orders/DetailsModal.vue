@@ -10,12 +10,12 @@
             <p class="text-sm font-medium text-muted mb-1">
               {{ $t('account.orders.details.status') }}
             </p>
-            <span
-              class="px-2 py-1 text-xs font-medium rounded inline-block"
-              :class="getStatusClass(details.status)"
-            >
-              {{ getStatusText(details.status) }}
-            </span>
+            <UBadge
+              :label="getStatusText(details.status)"
+              :color="getStatusColor(details.status)"
+              variant="subtle"
+              class="rounded-full"
+            />
           </div>
           <div>
             <p class="text-sm font-medium text-muted mb-1">
@@ -310,15 +310,15 @@ const isOpen = computed({
   }
 })
 
-const getStatusClass = (status: BookingDetails['status']) => {
-  const classes = {
-    pending: 'bg-warning-100 dark:bg-warning-900/30 text-warning-800 dark:text-warning-300',
-    confirmed: 'bg-info-100 dark:bg-info-900/30 text-info-800 dark:text-info-300',
-    in_progress: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300',
-    completed: 'bg-success-100 dark:bg-success-900/30 text-success-800 dark:text-success-300',
-    cancelled: 'bg-error-100 dark:bg-error-900/30 text-error-800 dark:text-error-300'
-  }
-  return classes[status]
+const getStatusColor = (status: BookingDetails['status']) => {
+  const colors = {
+    pending: 'warning',
+    confirmed: 'info',
+    in_progress: 'primary',
+    completed: 'success',
+    cancelled: 'error'
+  } as const
+  return colors[status]
 }
 
 const getStatusText = (status: BookingDetails['status']) => {

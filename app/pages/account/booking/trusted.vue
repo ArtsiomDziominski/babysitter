@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1">
-    <div class="bg-default rounded-lg shadow-sm p-8 max-xl:p-4">
+    <div class="bg-default rounded-xl border border-default p-6 sm:p-8 max-xl:p-4">
       <div class="flex items-center justify-between mb-8 max-xl:mb-4 max-xl:flex-col max-xl:items-stretch max-xl:gap-3">
         <h1 class="text-2xl max-xl:text-xl font-bold text-highlighted">
           {{ $t('account.booking.trustedPerson.title') }}

@@ -1,9 +1,10 @@
 <template>
-  <div class="border-t border-default bg-default p-4 max-xl:p-3">
+  <div class="border-t border-default bg-default p-3">
     <UChatPrompt
       :model-value="input"
       :disabled="disabled"
       :placeholder="$t('account.messages.inputPlaceholder')"
+      variant="subtle"
       @update:model-value="$emit('update:input', $event)"
       @submit="$emit('submit')"
     >

@@ -1,7 +1,7 @@
 <template>
   <div
     ref="messagesContainer"
-    class="flex-1 overflow-y-auto overflow-x-hidden px-4 max-xl:px-3 py-4 max-xl:py-3 space-y-3 max-xl:space-y-2 w-full min-w-0 max-w-full"
+    class="flex-1 overflow-y-auto overflow-x-hidden bg-muted/40 px-4 max-xl:px-3 py-4 max-xl:py-3 space-y-3 max-xl:space-y-2 w-full min-w-0 max-w-full"
   >
     <div
       v-for="(message, index) in messages"
@@ -31,10 +31,10 @@
         style="max-width: 70%; min-width: 0; flex-shrink: 1;"
       >
         <div
-          class="rounded-2xl px-4 py-2 shadow-sm relative"
+          class="rounded-2xl px-4 py-2 relative"
           :class="message.role === 'user'
-            ? 'bg-primary text-white rounded-tr-sm'
-            : 'bg-default text-highlighted rounded-tl-sm border border-default'"
+            ? 'bg-primary text-inverted rounded-br-md'
+            : 'bg-default text-highlighted rounded-bl-md ring ring-default'"
           style="max-width: 100%; min-width: 0; word-wrap: break-word; overflow-wrap: break-word; box-sizing: border-box;"
         >
           <div class="text-sm whitespace-pre-wrap" style="word-break: break-word; overflow-wrap: anywhere; word-wrap: break-word;">
@@ -54,12 +54,12 @@
           >
             <div
               v-if="message.isPending"
-              class="w-3.5 h-3.5 border-2 rounded-full animate-spin border-success-400 border-t-success-600"
+              class="w-3.5 h-3.5 border-2 rounded-full animate-spin border-primary/30 border-t-primary"
             ></div>
             <Icon
               v-else-if="message.isRead"
               name="i-lucide-check-check"
-              class="w-3.5 h-3.5 text-success-500"
+              class="w-3.5 h-3.5 text-primary"
             />
             <Icon
               v-else
