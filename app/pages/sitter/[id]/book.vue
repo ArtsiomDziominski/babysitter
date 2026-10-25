@@ -4,11 +4,11 @@
       <UBreadcrumb :items="breadcrumbItems" />
     </div>
 
-    <div v-if="sitter && !isLoading" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 md:p-8">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+    <div v-if="sitter && !isLoading" class="bg-default rounded-lg shadow-sm p-6 md:p-8">
+      <h1 class="text-2xl font-bold text-highlighted mb-2">
         {{ $t('account.booking.create.title') }}
       </h1>
-      <p class="text-gray-500 dark:text-gray-400 mb-6">
+      <p class="text-muted mb-6">
         {{ $t('account.booking.create.subtitle', { name: sitter.name }) }}
       </p>
 
@@ -67,8 +67,8 @@
 
     <div v-else-if="isLoading" class="flex items-center justify-center py-24">
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-        <p class="text-gray-500 dark:text-gray-400">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+        <p class="text-muted">
           {{ $t('account.booking.create.loading') }}
         </p>
       </div>
@@ -76,8 +76,8 @@
 
     <div v-else class="flex items-center justify-center py-24">
       <div class="text-center">
-        <Icon name="i-lucide-alert-circle" size="48" class="text-red-500 mx-auto mb-4" />
-        <p class="text-red-500 dark:text-red-400 text-lg mb-4">
+        <Icon name="i-lucide-alert-circle" size="48" class="text-error-500 mx-auto mb-4" />
+        <p class="text-error-500 dark:text-error-400 text-lg mb-4">
           {{ sitterError ? $t('account.booking.create.loadError') : $t('account.booking.create.notFound') }}
         </p>
         <UButton

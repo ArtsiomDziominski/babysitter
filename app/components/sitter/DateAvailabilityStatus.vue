@@ -8,7 +8,7 @@
       <span>{{ availabilityStatus.message }}</span>
     </div>
     <div v-if="availabilityStatus.slots && availabilityStatus.slots.length > 0" class="mt-2">
-      <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+      <p class="text-xs text-muted mb-1">
         Доступное время:
       </p>
       <div class="flex flex-wrap gap-1.5">
@@ -156,17 +156,17 @@ const checkTimeInSlots = (selectedTime: string, slots: string[]): boolean => {
 const statusClasses = computed(() => {
   switch (availabilityStatus.value.type) {
     case 'available':
-      return 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800'
+      return 'bg-success-50 dark:bg-success-900/20 text-success-700 dark:text-success-300 border border-success-200 dark:border-success-800'
     case 'time-invalid':
-      return 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800'
+      return 'bg-error-50 dark:bg-error-900/20 text-error-700 dark:text-error-300 border border-error-200 dark:border-error-800'
     case 'not-working':
-      return 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800'
+      return 'bg-warning-50 dark:bg-warning-900/20 text-warning-700 dark:text-warning-300 border border-warning-200 dark:border-warning-800'
     case 'no-schedule':
-      return 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700'
+      return 'bg-muted text-toned border border-default'
     case 'no-date':
-      return 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700'
+      return 'bg-muted text-toned border border-default'
     default:
-      return 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700'
+      return 'bg-muted text-toned border border-default'
   }
 })
 

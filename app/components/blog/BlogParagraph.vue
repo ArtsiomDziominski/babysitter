@@ -1,5 +1,5 @@
 <template>
-  <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+  <p class="text-default mb-4 leading-relaxed">
     <BlogText
       v-for="(child, index) in textChildren"
       :key="index"

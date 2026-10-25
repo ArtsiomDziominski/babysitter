@@ -2,6 +2,29 @@
 @import "@nuxt/ui";
 @import "./header.css";
 
+@theme static {
+  --color-coral-50: #fff5f2;
+  --color-coral-100: #ffe8e1;
+  --color-coral-200: #ffd3c6;
+  --color-coral-300: #ffb39f;
+  --color-coral-400: #fd8a6f;
+  --color-coral-500: #f56a4c;
+  --color-coral-600: #dd4d2f;
+  --color-coral-700: #b93d24;
+  --color-coral-800: #983522;
+  --color-coral-900: #7e3122;
+  --color-coral-950: #45150d;
+}
+
+:root {
+  --ui-primary: var(--ui-color-primary-600);
+  --ui-radius: 0.5rem;
+}
+
+.dark {
+  --ui-primary: var(--ui-color-primary-400);
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

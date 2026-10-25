@@ -7,8 +7,8 @@
         :to="item.to"
         class="block px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium rounded-lg transition-colors max-xl:flex-shrink-0 max-xl:whitespace-nowrap"
         :class="activeSection === item.section
-          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
-          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'"
+          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary'
+          : 'text-default hover:bg-elevated'"
       >
         {{ $t(item.label) }}
       </NuxtLink>

@@ -1,8 +1,8 @@
 <template>
   <div class="space-y-4">
-    <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg space-y-4">
+    <div class="p-4 border border-default rounded-lg space-y-4">
       <div class="flex items-center justify-between">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label class="block text-sm font-medium text-default">
           {{ $t('account.booking.create.selectedChildren') }}
         </label>
         <UButton
@@ -65,11 +65,11 @@
         <div
           v-for="(child, index) in selectedChildren"
           :key="index"
-          class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
+          class="flex items-center justify-between p-3 bg-muted rounded-lg"
         >
           <div>
             <span class="font-medium">{{ child.name || $t('account.booking.create.childAge', { index: index + 1 }) }}</span>
-            <span v-if="child.age" class="text-gray-500 ml-2">
+            <span v-if="child.age" class="text-muted ml-2">
               ({{ child.age }} {{ $t('account.orders.details.years') }})
             </span>
           </div>
@@ -84,12 +84,12 @@
         </div>
       </div>
 
-      <div v-else class="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
+      <div v-else class="text-sm text-muted text-center py-4">
         {{ $t('account.booking.create.noChildrenSelected') }}
       </div>
 
-      <div v-if="profileChildren.length > 0 && availableProfileChildren.length > 0" class="pt-4 border-t border-gray-200 dark:border-gray-700">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+      <div v-if="profileChildren.length > 0 && availableProfileChildren.length > 0" class="pt-4 border-t border-default">
+        <label class="block text-sm font-medium text-default mb-3">
           {{ $t('account.booking.create.selectChildrenFromProfile') }}
         </label>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -104,7 +104,7 @@
             <div class="flex items-center gap-2">
               <Icon name="i-lucide-plus" size="16" />
               <span>{{ child.name }}</span>
-              <span v-if="child.age !== null && child.age !== undefined" class="text-gray-500">
+              <span v-if="child.age !== null && child.age !== undefined" class="text-muted">
                 ({{ child.age }} {{ $t('account.orders.details.years') }})
               </span>
             </div>
@@ -112,8 +112,8 @@
         </div>
       </div>
 
-      <div v-if="profileChildren.length === 0" class="pt-4 border-t border-gray-200 dark:border-gray-700">
-        <p class="text-sm text-gray-500 dark:text-gray-400">
+      <div v-if="profileChildren.length === 0" class="pt-4 border-t border-default">
+        <p class="text-sm text-muted">
           {{ $t('account.booking.create.noChildrenInProfile') }}
         </p>
       </div>

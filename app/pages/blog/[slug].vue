@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+  <div class="min-h-screen bg-muted dark:bg-default py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <BlogBreadcrumbs :article-title="article?.title" />
 
       <div v-if="loading" class="text-center py-12">
-        <p class="text-gray-500 dark:text-gray-400">{{ $t('blog.article.loading') }}</p>
+        <p class="text-muted">{{ $t('blog.article.loading') }}</p>
       </div>
 
       <template v-else-if="article">
@@ -17,7 +17,7 @@
       </template>
 
       <div v-else class="text-center py-12">
-        <p class="text-gray-500 dark:text-gray-400">{{ $t('blog.article.notFound') }}</p>
+        <p class="text-muted">{{ $t('blog.article.notFound') }}</p>
         <UButton
           variant="ghost"
           class="mt-4"

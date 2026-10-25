@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.booking.trustedPerson.lastName') }}
         </label>
         <UInput
@@ -15,7 +15,7 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.booking.trustedPerson.firstName') }}
         </label>
         <UInput
@@ -29,7 +29,7 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      <label class="block text-sm font-medium text-default mb-2">
         {{ $t('account.booking.trustedPerson.phone') }}
       </label>
       <UInput
@@ -42,7 +42,7 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      <label class="block text-sm font-medium text-default mb-2">
         {{ $t('account.booking.trustedPerson.relationship') }}
       </label>
       <UInput

@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 md:p-8">
+  <div class="bg-default rounded-2xl shadow-sm border border-default p-6 md:p-8">
     <div class="flex items-center justify-between mb-6">
       <div class="flex items-center gap-3">
         <div class="p-2 bg-primary/10 rounded-lg">
-          <Icon name="i-lucide-calendar" size="24" class="text-primary-500" />
+          <Icon name="i-lucide-calendar" size="24" class="text-primary" />
         </div>
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+        <h3 class="text-xl font-bold text-highlighted">
           Расписание
         </h3>
       </div>
@@ -14,27 +14,27 @@
         <button
           @click="previousPeriod"
           :disabled="isPastPeriod"
-          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+          class="p-2 hover:bg-elevated rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
         >
-          <Icon name="i-lucide-chevron-left" size="20" class="text-gray-600 dark:text-gray-400" />
+          <Icon name="i-lucide-chevron-left" size="20" class="text-toned" />
         </button>
         <button
           @click="nextPeriod"
-          class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+          class="p-2 hover:bg-elevated rounded-lg transition-colors"
         >
-          <Icon name="i-lucide-chevron-right" size="20" class="text-gray-600 dark:text-gray-400" />
+          <Icon name="i-lucide-chevron-right" size="20" class="text-toned" />
         </button>
       </div>
     </div>
 
     <div class="flex items-center justify-between mb-6">
-      <div class="text-lg font-semibold text-gray-900 dark:text-white">
+      <div class="text-lg font-semibold text-highlighted">
         {{ currentPeriodTitle }}
       </div>
       <div class="flex items-center gap-2">
         <button
           @click="goToToday"
-          class="px-3 py-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          class="px-3 py-1.5 text-sm text-toned hover:text-highlighted transition-colors"
         >
           Сегодня
         </button>
@@ -43,8 +43,8 @@
             @click="viewMode = 'week'"
             class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             :class="viewMode === 'week'
-              ? 'bg-primary-500 text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'"
+              ? 'bg-primary text-white'
+              : 'bg-elevated text-default hover:bg-accented'"
           >
             Неделя
           </button>
@@ -52,8 +52,8 @@
             @click="viewMode = 'month'"
             class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             :class="viewMode === 'month'
-              ? 'bg-primary-500 text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'"
+              ? 'bg-primary text-white'
+              : 'bg-elevated text-default hover:bg-accented'"
           >
             Месяц
           </button>
@@ -65,20 +65,20 @@
       <div
         v-for="day in weekDays"
         :key="day.date.toISOString()"
-        class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow"
-        :class="isToday(day.date) ? 'bg-primary/5 border-primary-300 dark:border-primary-700' : 'bg-gray-50 dark:bg-gray-700/30'"
+        class="border border-default rounded-lg p-4 hover:shadow-md transition-shadow"
+        :class="isToday(day.date) ? 'bg-primary/5 border-primary-300 dark:border-primary-700' : 'bg-muted'"
       >
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-3">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div class="text-sm font-medium text-muted">
               {{ formatDayName(day.date) }}
             </div>
-            <div class="text-lg font-semibold text-gray-900 dark:text-white">
+            <div class="text-lg font-semibold text-highlighted">
               {{ day.date.getDate() }} {{ formatMonthName(day.date) }}
             </div>
             <div
               v-if="isToday(day.date)"
-              class="px-2 py-0.5 bg-primary-500 text-white text-xs font-medium rounded"
+              class="px-2 py-0.5 bg-primary text-white text-xs font-medium rounded"
             >
               Сегодня
             </div>
@@ -93,7 +93,7 @@
             {{ slot }}
           </span>
         </div>
-        <div v-else class="text-sm text-gray-400 dark:text-gray-500">
+        <div v-else class="text-sm text-dimmed">
           Нет доступного времени
         </div>
       </div>
@@ -104,7 +104,7 @@
         <div
           v-for="dayName in dayNames"
           :key="dayName"
-          class="text-center text-sm font-semibold text-gray-500 dark:text-gray-400 py-2"
+          class="text-center text-sm font-semibold text-muted py-2"
         >
           {{ dayName }}
         </div>
@@ -118,22 +118,22 @@
             ? day.slots && day.slots.length > 0
               ? 'bg-primary/5 border-primary-200 dark:border-primary-800 hover:bg-primary/10'
               : isToday(day.date)
-                ? 'bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600'
-                : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
-            : 'bg-gray-50 dark:bg-gray-900/50 border-gray-100 dark:border-gray-800 opacity-50'"
+                ? 'bg-elevated border-accented'
+                : 'bg-default border-default'
+            : 'bg-muted border-default opacity-50'"
         >
           <div class="flex items-center justify-between mb-1 flex-shrink-0">
             <span
               class="text-sm font-medium"
               :class="day.isCurrentMonth
-                ? 'text-gray-900 dark:text-white'
-                : 'text-gray-400 dark:text-gray-600'"
+                ? 'text-highlighted'
+                : 'text-dimmed'"
             >
               {{ day.date.getDate() }}
             </span>
             <div
               v-if="isToday(day.date) && day.isCurrentMonth"
-              class="w-1.5 h-1.5 bg-primary-500 rounded-full"
+              class="w-1.5 h-1.5 bg-primary rounded-full"
             ></div>
           </div>
           <div v-if="day.slots && day.slots.length > 0" class="space-y-1 overflow-y-auto flex-1 scrollbar-hide min-h-0">
@@ -151,8 +151,8 @@
     </div>
 
     <div v-if="!sitter.schedule || sitter.schedule.length === 0" class="text-center py-12">
-      <Icon name="i-lucide-calendar-x" size="48" class="text-gray-400 mx-auto mb-4" />
-      <p class="text-gray-500 dark:text-gray-400 text-lg">
+      <Icon name="i-lucide-calendar-x" size="48" class="text-dimmed mx-auto mb-4" />
+      <p class="text-muted text-lg">
         Расписание не указано
       </p>
     </div>

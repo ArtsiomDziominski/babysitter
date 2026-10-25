@@ -5,7 +5,7 @@
         :preview="avatarPreview"
         :src="avatarUrl"
         size="3xl"
-        class="border-4 border-gray-200 dark:border-gray-700 w-36 h-36 max-xl:w-28 max-xl:h-28"
+        class="border-4 border-default w-36 h-36 max-xl:w-28 max-xl:h-28"
         :show-fallback="true"
       />
 

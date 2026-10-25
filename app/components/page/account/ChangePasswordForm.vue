@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h2 class="text-xl max-xl:text-lg font-semibold text-gray-900 dark:text-white mb-6 max-xl:mb-4">
+    <h2 class="text-xl max-xl:text-lg font-semibold text-highlighted mb-6 max-xl:mb-4">
       {{ $t('account.security.changePassword') }}
     </h2>
 
     <form @submit.prevent="handlePasswordChange" class="space-y-4 max-w-md max-xl:max-w-full">
       <div v-if="!showPasswordVerificationCode">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.newPassword') }}
         </label>
         <UInput
@@ -18,7 +18,7 @@
       </div>
 
       <div v-if="showPasswordVerificationCode">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.verificationCode') }}
         </label>
         <UInput
@@ -27,7 +27,7 @@
             :placeholder="$t('account.security.verificationCodePlaceholder')"
             size="lg"
         />
-        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        <p class="mt-2 text-xs text-muted">
           {{ $t('account.security.passwordVerificationCodeHint') }}
         </p>
       </div>

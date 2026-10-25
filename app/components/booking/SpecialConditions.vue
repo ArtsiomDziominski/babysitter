@@ -1,43 +1,43 @@
 <template>
   <div class="space-y-3">
-    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    <label class="block text-sm font-medium text-default mb-2">
       {{ $t('account.booking.create.specialConditions.title') }}
     </label>
     <div class="space-y-2">
       <template v-if="bookingType === 'offline'">
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="childIsSick" @update:model-value="$emit('update:childIsSick', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.childIsSick') }}
           </span>
         </label>
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="hasSpecialNeedsChild" @update:model-value="$emit('update:hasSpecialNeedsChild', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.hasSpecialNeedsChild') }}
           </span>
         </label>
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="needsHelpWithHomework" @update:model-value="$emit('update:needsHelpWithHomework', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.needsHelpWithHomework') }}
           </span>
         </label>
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="needsOutdoorActivities" @update:model-value="$emit('update:needsOutdoorActivities', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.needsOutdoorActivities') }}
           </span>
         </label>
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="needsCarTransportation" @update:model-value="$emit('update:needsCarTransportation', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.needsCarTransportation') }}
           </span>
         </label>
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="needsWalking" @update:model-value="$emit('update:needsWalking', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.needsWalking') }}
           </span>
         </label>
@@ -45,7 +45,7 @@
       <template v-else>
         <label class="flex items-center gap-3 cursor-pointer">
           <UCheckbox :model-value="needsHelpWithHomework" @update:model-value="$emit('update:needsHelpWithHomework', $event)" />
-          <span class="text-sm text-gray-700 dark:text-gray-300">
+          <span class="text-sm text-default">
             {{ $t('account.booking.create.specialConditions.needsHelpWithHomework') }}
           </span>
         </label>

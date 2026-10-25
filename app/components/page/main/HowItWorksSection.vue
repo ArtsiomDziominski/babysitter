@@ -2,26 +2,26 @@
 const { t } = useI18n()
 
 const steps = [
-  { key: 'step1', icon: 'mdi:account-search-outline', color: 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400' },
+  { key: 'step1', icon: 'mdi:account-search-outline', color: 'bg-info-100 dark:bg-info-900/40 text-info-600 dark:text-info-400' },
   { key: 'step2', icon: 'mdi:card-account-details-star-outline', color: 'bg-violet-100 dark:bg-violet-900/40 text-violet-600 dark:text-violet-400' },
   { key: 'step3', icon: 'mdi:handshake-outline', color: 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400' }
 ]
 </script>
 
 <template>
-  <section class="py-20 lg:py-28 bg-gray-50 dark:bg-gray-950">
+  <section class="py-20 lg:py-28 bg-muted">
     <UContainer>
       <div v-reveal class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 class="text-3xl lg:text-4xl font-bold text-highlighted mb-4">
           {{ t('home.howItWorks.title') }}
         </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        <p class="text-lg text-toned max-w-2xl mx-auto">
           {{ t('home.howItWorks.subtitle') }}
         </p>
       </div>
 
       <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-        <div class="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-gray-300 dark:border-gray-700" />
+        <div class="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-accented" />
 
         <div
           v-for="(step, index) in steps"
@@ -37,10 +37,10 @@ const steps = [
               {{ index + 1 }}
             </div>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 class="text-xl font-semibold text-highlighted mb-2">
             {{ t(`home.howItWorks.${step.key}.title`) }}
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 max-w-xs mx-auto">
+          <p class="text-toned max-w-xs mx-auto">
             {{ t(`home.howItWorks.${step.key}.description`) }}
           </p>
         </div>

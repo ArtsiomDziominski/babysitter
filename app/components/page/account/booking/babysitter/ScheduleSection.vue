@@ -2,12 +2,12 @@
   <div>
     <div class="flex items-center justify-between mb-4">
       <div>
-        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ t('account.nannySchedule.title') }}</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-400">{{ t('account.nannySchedule.subtitle') }}</p>
+        <h2 class="text-xl font-semibold text-highlighted">{{ t('account.nannySchedule.title') }}</h2>
+        <p class="text-sm text-muted">{{ t('account.nannySchedule.subtitle') }}</p>
       </div>
     </div>
 
-    <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 space-y-4">
+    <div class="rounded-lg border border-default p-4 space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
           <UButton
@@ -18,7 +18,7 @@
               class="cursor-pointer"
               @click="goPrev"
           />
-          <div class="font-semibold text-gray-900 dark:text-white w-[200px] text-center">
+          <div class="font-semibold text-highlighted w-[200px] text-center">
             {{ calendarViewMode === 'week' ? weekLabel : monthLabel }}
           </div>
           <UButton
@@ -70,7 +70,7 @@
     <UModal v-model:open="isModalOpen" :title="t('account.nannySchedule.editDay')">
       <template #body>
         <div class="space-y-3">
-          <div class="text-sm text-gray-500 dark:text-gray-400">{{ selectedDateLabel }}</div>
+          <div class="text-sm text-muted">{{ selectedDateLabel }}</div>
           <div
               v-for="(interval, idx) in draftIntervals"
               :key="idx"
@@ -93,14 +93,14 @@
           <UButton variant="outline" size="sm" @click="addDraftInterval">
             {{ t('account.nannySchedule.addInterval') }}
           </UButton>
-          <div class="pt-3 border-t border-gray-200 dark:border-gray-700 space-y-2">
+          <div class="pt-3 border-t border-default space-y-2">
             <label class="flex items-center gap-2 text-sm cursor-pointer">
               <UCheckbox v-model="applyToAllDays" @update:model-value="handleRecurringChange('allDays')" />
-              <span class="text-gray-700 dark:text-gray-300">{{ t('account.nannySchedule.applyToAllDays') }}</span>
+              <span class="text-default">{{ t('account.nannySchedule.applyToAllDays') }}</span>
             </label>
             <label class="flex items-center gap-2 text-sm cursor-pointer">
               <UCheckbox v-model="applyToWeekdays" @update:model-value="handleRecurringChange('weekdays')" />
-              <span class="text-gray-700 dark:text-gray-300">{{ t('account.nannySchedule.applyToWeekdays') }}</span>
+              <span class="text-default">{{ t('account.nannySchedule.applyToWeekdays') }}</span>
             </label>
           </div>
         </div>

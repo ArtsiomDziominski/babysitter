@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-4 sm:py-8">
+  <div class="min-h-screen bg-muted dark:bg-default py-4 sm:py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-4 sm:mb-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 class="text-2xl sm:text-3xl font-bold text-highlighted mb-2">
           {{ $t('blog.title') }}
         </h1>
-        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        <p class="text-sm sm:text-base text-toned">
           {{ $t('blog.subtitle') }}
         </p>
       </div>
@@ -74,7 +74,7 @@
           </div>
 
           <div v-if="loading" class="text-center py-12">
-            <p class="text-gray-500 dark:text-gray-400">{{ $t('blog.loading') }}</p>
+            <p class="text-muted">{{ $t('blog.loading') }}</p>
           </div>
 
           <div v-else-if="posts.length > 0" class="space-y-4 sm:space-y-6">
@@ -87,7 +87,7 @@
           </div>
 
           <div v-else class="text-center py-12">
-            <p class="text-gray-500 dark:text-gray-400">
+            <p class="text-muted">
               {{ $t('blog.notFound') }}
             </p>
           </div>
@@ -104,7 +104,7 @@
               <span class="hidden sm:inline">{{ $t('blog.previous') }}</span>
             </UButton>
             <div class="flex items-center gap-2">
-              <span class="text-sm text-gray-600 dark:text-gray-400">
+              <span class="text-sm text-toned">
                 {{ $t('blog.pageInfo', { current: currentPage, total: meta.totalPages }) }}
               </span>
             </div>

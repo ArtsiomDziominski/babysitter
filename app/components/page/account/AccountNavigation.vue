@@ -10,13 +10,13 @@ defineProps<{
 
 <template>
   <div class="mb-6">
-    <div class="flex items-center gap-6 border-b border-gray-200 dark:border-gray-700 overflow-x-auto scrollbar-hide">
+    <div class="flex items-center gap-6 border-b border-default overflow-x-auto scrollbar-hide">
       <NuxtLink
         to="/account/messages"
         class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
         :class="activeTab === 'messages'
-          ? 'text-primary-500 border-b-2 border-primary-500'
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+          ? 'text-primary border-b-2 border-primary'
+          : 'text-toned hover:text-highlighted'"
       >
         {{ $t('account.messages.title') }}
       </NuxtLink>
@@ -24,8 +24,8 @@ defineProps<{
         to="/account/orders"
         class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
         :class="activeTab === 'orders'
-          ? 'text-primary-500 border-b-2 border-primary-500'
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+          ? 'text-primary border-b-2 border-primary'
+          : 'text-toned hover:text-highlighted'"
       >
         {{ $t('account.orders.title') }}
       </NuxtLink>
@@ -33,8 +33,8 @@ defineProps<{
         :to="authStore.user.role === UserRole.PARENT ? '/account/booking/kids' : '/account/booking/babysitter'"
         class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
         :class="activeTab === 'booking'
-          ? 'text-primary-500 border-b-2 border-primary-500'
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+          ? 'text-primary border-b-2 border-primary'
+          : 'text-toned hover:text-highlighted'"
       >
         {{ $t('account.booking.title') }}
       </NuxtLink>
@@ -42,13 +42,13 @@ defineProps<{
         to="/account/profile"
         class="px-4 max-xl:px-3 py-3 max-xl:py-2 text-sm max-xl:text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0"
         :class="activeTab === 'profile'
-          ? 'text-primary-500 border-b-2 border-primary-500'
-          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'"
+          ? 'text-primary border-b-2 border-primary'
+          : 'text-toned hover:text-highlighted'"
       >
         {{ $t('account.profile') }}
       </NuxtLink>
       <div class="ml-auto flex items-center gap-3 max-xl:hidden flex-shrink-0">
-        <span class="text-sm font-medium text-gray-900 dark:text-white">
+        <span class="text-sm font-medium text-highlighted">
           {{ authStore.currentUser?.name }}
         </span>
         <UserAvatar size="xs" />
