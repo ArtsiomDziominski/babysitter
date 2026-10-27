@@ -3,68 +3,65 @@ const { t } = useI18n()
 const siteConfig = useSiteConfig()
 
 const sitters = [
-  { name: 'Анна М.', experience: 3, rating: 4.9, price: 25, tint: 'bg-amber-200 text-amber-900 dark:bg-amber-900/60 dark:text-amber-100' },
-  { name: 'Мария К.', experience: 5, rating: 4.8, price: 30, tint: 'bg-sky-200 text-sky-900 dark:bg-sky-900/60 dark:text-sky-100' },
-  { name: 'Елена Д.', experience: 2, rating: 5.0, price: 20, tint: 'bg-rose-200 text-rose-900 dark:bg-rose-900/60 dark:text-rose-100' },
-  { name: 'Натали С.', experience: 7, rating: 4.9, price: 35, tint: 'bg-emerald-200 text-emerald-900 dark:bg-emerald-900/60 dark:text-emerald-100' },
-  { name: 'Софи Р.', experience: 4, rating: 4.7, price: 22, tint: 'bg-violet-200 text-violet-900 dark:bg-violet-900/60 dark:text-violet-100' },
-  { name: 'Дарья В.', experience: 6, rating: 4.8, price: 28, tint: 'bg-orange-200 text-orange-900 dark:bg-orange-900/60 dark:text-orange-100' }
-]
-
-const initials = (name: string) => name.split(' ').map(part => part[0]).join('')
+  {
+    key: 'anna', rating: '4.9', price: 25, langs: ['RU', 'KA', 'EN'],
+    avatar: { skin: '#f5c7a9', skin2: '#e7ad8c', hair: '#3b2620', top: '#e8573a', top2: '#d14328' },
+    bg: '#ffe1d6', blob: '#f9b9a6', blobPath: 'M40 120C40 50 110 20 170 40s110 70 90 150-110 110-170 80S40 190 40 120Z'
+  },
+  {
+    key: 'maria', rating: '4.8', price: 30, langs: ['RU', 'KA'],
+    avatar: { skin: '#e9b48f', skin2: '#d79b75', hair: '#1f1714', top: '#fffdfa', top2: '#e8e1ff' },
+    bg: '#efeaff', blob: '#cfc2ff', blobPath: 'M60 80c50-60 160-50 200 10s10 170-60 190S30 250 30 180 20 130 60 80Z'
+  },
+  {
+    key: 'elena', rating: '5.0', price: 20, langs: ['RU', 'EN'],
+    avatar: { skin: '#f2c4a0', skin2: '#e2aa83', hair: '#8a3b22', top: '#1c1917', top2: '#3a3330' },
+    bg: '#fff1c7', blob: '#ffd56b', blobPath: 'M50 150c-10-80 60-120 130-110s100 80 80 140-90 100-150 80S56 200 50 150Z'
+  },
+  {
+    key: 'natali', rating: '4.9', price: 35, langs: ['RU', 'KA', 'EN'],
+    avatar: { skin: '#c98d68', skin2: '#b77a56', hair: '#2b1a14', top: '#ffc93d', top2: '#f5b72c' },
+    bg: '#fde0d8', blob: '#ee876e', blobPath: 'M70 60c60-30 170 0 190 70s-30 150-110 150S20 230 30 160 30 80 70 60Z'
+  }
+] as const
 </script>
 
 <template>
-  <section class="pt-20 sm:pt-28">
-    <UContainer>
-      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+  <section id="sitters" class="sec" aria-labelledby="home-sitters-title">
+    <div class="wrap">
+      <div class="sec-head">
         <div>
-          <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
-            {{ t('home.featured.title') }}
-          </h2>
-          <p class="mt-3 text-lg text-muted">
-            {{ t('home.featured.subtitle') }}
-          </p>
+          <span class="eyebrow">{{ t('home.featured.eyebrow') }}</span>
+          <h2 id="home-sitters-title" class="display">{{ t('home.featured.title') }}</h2>
         </div>
-        <UButton
-          to="/search"
-          :label="t('home.featured.viewAll')"
-          trailing-icon="i-lucide-arrow-right"
-          color="neutral"
-          variant="ghost"
-          size="lg"
-          class="rounded-full bg-default px-5 font-bold"
-        />
+        <NuxtLink to="/search" class="btn btn-soft">{{ t('home.featured.viewAll') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLink>
       </div>
-    </UContainer>
 
-    <UContainer class="max-sm:px-0">
-      <ul class="scrollbar-hide flex snap-x gap-4 overflow-x-auto pb-2 max-sm:px-4">
-        <li v-for="sitter in sitters" :key="sitter.name" class="w-64 shrink-0 snap-start sm:w-72">
-          <NuxtLink to="/search" class="group flex h-full flex-col gap-4 rounded-[2rem] bg-default p-3">
-            <div class="flex h-56 items-end justify-between rounded-3xl p-4 sm:h-64" :class="sitter.tint">
-              <span class="font-display text-4xl font-semibold" aria-hidden="true">{{ initials(sitter.name) }}</span>
-              <span class="flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-sm font-bold text-stone-900">
-                <UIcon name="i-mdi-star" class="size-4 text-amber-500" />
-                {{ sitter.rating.toFixed(1) }}
-              </span>
+      <div class="sitters">
+        <article v-for="sitter in sitters" :key="sitter.key" class="scard">
+          <div class="ph">
+            <svg class="bb" viewBox="0 0 300 300" preserveAspectRatio="none" aria-hidden="true">
+              <rect width="300" height="300" :fill="sitter.bg" />
+              <path :d="sitter.blobPath" :fill="sitter.blob" />
+            </svg>
+            <PageMainSitterAvatar class="av" :variant="sitter.key" v-bind="sitter.avatar" />
+            <span class="badge"><span class="ck"><UIcon name="i-lucide-check" class="size-3" /></span>{{ t('home.featured.verifiedFemale') }}</span>
+            <button class="fav" type="button" :aria-label="t('home.featured.favorite')"><UIcon name="i-lucide-heart" class="size-[18px]" /></button>
+            <span class="rt"><UIcon name="i-mdi-star" />{{ sitter.rating }}</span>
+          </div>
+          <div class="body">
+            <h3>{{ t(`home.featured.sitters.${sitter.key}.name`) }}</h3>
+            <p class="loc"><UIcon name="i-lucide-map-pin" />{{ t(`home.featured.sitters.${sitter.key}.meta`) }}</p>
+            <div class="langs"><span v-for="lang in sitter.langs" :key="lang">{{ lang }}</span></div>
+            <div class="foot">
+              <span class="price">{{ sitter.price }} {{ siteConfig.currency }}<small>{{ t('home.featured.perHour') }}</small></span>
+              <NuxtLink to="/search" class="go" :aria-label="t('home.featured.profileOf', { name: t(`home.featured.sitters.${sitter.key}.name`) })">
+                <UIcon name="i-lucide-arrow-up-right" class="ico" />
+              </NuxtLink>
             </div>
-            <div class="flex flex-col gap-1 px-2 pb-2">
-              <h3 class="text-lg font-extrabold text-highlighted">{{ sitter.name }}</h3>
-              <p class="text-sm text-muted">{{ sitter.experience }} {{ t('home.featured.experience') }}</p>
-              <div class="mt-2 flex items-center justify-between">
-                <p class="text-lg font-extrabold text-highlighted">
-                  {{ sitter.price }} {{ siteConfig.currency }}
-                  <span class="text-sm font-medium text-muted">{{ t('home.featured.perHour') }}</span>
-                </p>
-                <span class="flex size-11 items-center justify-center rounded-full bg-inverted transition-transform group-hover:rotate-45" aria-hidden="true">
-                  <UIcon name="i-lucide-arrow-up-right" class="size-5 text-inverted" />
-                </span>
-              </div>
-            </div>
-          </NuxtLink>
-        </li>
-      </ul>
-    </UContainer>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 </template>

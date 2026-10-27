@@ -1,53 +1,38 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const featured = '4'
-const others = ['3', '7']
+const reviews = ['4', '3', '7']
+
+const initials = (name: string) => name.split(' ').map(part => part[0]).join('').toUpperCase()
 </script>
 
 <template>
-  <section class="pt-20 sm:pt-28">
-    <UContainer>
-      <div class="mb-10">
-        <h2 class="font-display text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl lg:text-5xl">
-          {{ t('home.reviews.title') }}
-        </h2>
-        <p class="mt-3 text-lg text-muted">
-          {{ t('home.reviews.subtitle') }}
-        </p>
-      </div>
-
-      <div class="grid gap-4 lg:grid-cols-3">
-        <figure class="flex flex-col justify-between gap-8 rounded-[2.25rem] bg-primary-100 p-8 sm:p-12 lg:col-span-2 dark:bg-primary-950">
-          <blockquote class="font-display text-2xl font-medium leading-snug text-highlighted sm:text-3xl">
-            «{{ t(`home.testimonials.${featured}.text`) }}»
-          </blockquote>
-          <figcaption>
-            <UUser
-              :name="t(`home.testimonials.${featured}.name`)"
-              :description="t(`home.testimonials.${featured}.city`)"
-              :avatar="{ alt: t(`home.testimonials.${featured}.name`), class: 'bg-default' }"
-              size="lg"
-            />
-          </figcaption>
-        </figure>
-
-        <div class="flex flex-col gap-4">
-          <figure
-            v-for="key in others"
-            :key="key"
-            class="flex flex-1 flex-col gap-4 rounded-[1.75rem] bg-default p-7"
-          >
-            <blockquote class="text-default">
-              «{{ t(`home.testimonials.${key}.text`) }}»
-            </blockquote>
-            <figcaption class="mt-auto text-sm">
-              <span class="font-bold text-highlighted">{{ t(`home.testimonials.${key}.name`) }}</span>
-              <span class="text-muted"> · {{ t(`home.testimonials.${key}.city`) }}</span>
-            </figcaption>
-          </figure>
+  <section class="sec" aria-labelledby="home-reviews-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">{{ t('home.reviews.label') }}</span>
+          <h2 id="home-reviews-title" class="display">{{ t('home.reviews.title') }}</h2>
+        </div>
+        <div class="agg">
+          <span class="big">4.9</span>
+          <p><span style="color:#e8a10f;letter-spacing:2px">★★★★★</span><br>{{ t('home.reviews.summary') }}<br>{{ t('home.reviews.summaryCities') }}</p>
         </div>
       </div>
-    </UContainer>
+
+      <div class="revs">
+        <figure v-for="key in reviews" :key="key" class="rev" style="margin:0">
+          <div class="stars5" role="img" :aria-label="t('home.reviews.stars')">
+            <UIcon v-for="i in 5" :key="i" name="i-mdi-star" />
+          </div>
+          <div class="q" aria-hidden="true">“</div>
+          <blockquote>{{ t(`home.testimonials.${key}.text`) }}</blockquote>
+          <figcaption class="who">
+            <span class="ini">{{ initials(t(`home.testimonials.${key}.name`)) }}</span>
+            <div><b>{{ t(`home.testimonials.${key}.name`) }}</b><span>{{ t(`home.testimonials.${key}.city`) }}</span></div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 </template>
