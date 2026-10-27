@@ -21,7 +21,8 @@ export default defineNuxtConfig({
     },
     fonts: {
         families: [
-            { name: 'Unbounded', provider: 'google', weights: [500, 600] }
+            { name: 'Unbounded', provider: 'google', weights: [500, 600, 700, 800] },
+            { name: 'Onest', provider: 'google', weights: [400, 500, 600, 700] }
         ]
     },
     i18n: {

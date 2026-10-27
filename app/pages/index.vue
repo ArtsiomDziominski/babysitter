@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-(--home-bg) pb-20 sm:pb-28">
+  <div>
     <PageMainHeroSection />
     <PageMainStatsSection />
     <PageMainBabysitterCanSection />

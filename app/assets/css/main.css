@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@import "./home.css";
 
 @theme static {
   --color-coral-50: #fff5f2;
@@ -14,6 +15,7 @@
   --color-coral-900: #7e3122;
   --color-coral-950: #45150d;
 
+  --font-sans: 'Onest', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Unbounded', sans-serif;
 }
 
@@ -25,7 +27,7 @@
 
 .dark {
   --ui-primary: var(--ui-color-primary-400);
-  --home-bg: var(--ui-color-neutral-950);
+  --home-bg: #141110;
 }
 
 .scrollbar-hide {

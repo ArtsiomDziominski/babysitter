@@ -15,7 +15,15 @@
       "settings": "Settings",
       "profile": "Profile",
       "order": "Orders"
-    }
+    },
+    "findSitter": "Find a babysitter",
+    "becomeSitter": "Become a babysitter",
+    "language": "Language",
+    "toggleTheme": "Toggle theme",
+    "openMenu": "Open menu",
+    "home": "Sitter.ge home",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation"
   },
   "cities": {
     "minsk": "Minsk",
@@ -51,26 +59,52 @@
       "babysitterPrompt": "Are you a babysitter?",
       "searchPlaceholder": "Your city...",
       "titleLine1": "Find",
-      "titleLine2": "a trusted babysitter"
+      "titleLine2": "a trusted babysitter",
+      "liveCount": "{count} babysitters",
+      "liveToday": "available today",
+      "liveCity": "in Tbilisi",
+      "titleStart": "Find",
+      "titleMid": "a verified",
+      "titleAccent": "babysitter",
+      "titleEnd": "near you",
+      "where": "Where",
+      "when": "When",
+      "anyTime": "Any time",
+      "popular": "Popular:",
+      "createProfile": "Create a profile"
     },
     "howItWorks": {
       "title": "How it works",
       "subtitle": "Find your perfect babysitter in 3 simple steps",
       "step1": {
         "title": "Search babysitters",
-        "description": "Browse profiles of verified babysitters in your area"
+        "description": "Browse profiles of verified babysitters in your area",
+        "text": "Enter your district and time, and we will show verified babysitters available nearby."
       },
       "step2": {
         "title": "View profiles & reviews",
-        "description": "Check experience, qualifications, and reviews from other parents"
+        "description": "Check experience, qualifications, and reviews from other parents",
+        "text": "Experience, languages, documents and honest reviews from other parents, all on one page."
       },
       "step3": {
         "title": "Contact & hire",
-        "description": "Message the babysitter directly and arrange everything"
+        "description": "Message the babysitter directly and arrange everything",
+        "text": "Message them directly in chat, agree on the details and confirm the booking."
       },
       "step4": {
         "title": "Enjoy your free time",
         "description": "Your children are in safe hands, and you can take care of your business"
+      },
+      "headlineStart": "Three steps to",
+      "headlineEnd": "a calm evening",
+      "lead": "On average, parents find a babysitter in 20 minutes, from search to a confirmed booking.",
+      "demo": {
+        "search": "Vake · today, 18:30",
+        "reviews": "42 reviews",
+        "quote": "Very attentive, my son loves her!",
+        "ask": "Hi! Are you free this evening?",
+        "answer": "Yes, I can do 18:30 to 22:00",
+        "booked": "Booked"
       }
     },
     "featured": {
@@ -82,14 +116,37 @@
       "reviews": "reviews",
       "verified": "Verified",
       "contact": "Contact",
-      "label": "Top babysitters"
+      "label": "Top babysitters",
+      "eyebrow": "Top of the week",
+      "verifiedFemale": "Verified",
+      "favorite": "Add to favorites",
+      "profileOf": "Profile: {name}",
+      "sitters": {
+        "anna": {
+          "name": "Anna M.",
+          "meta": "Vake · 3 years of experience"
+        },
+        "maria": {
+          "name": "Maria K.",
+          "meta": "Saburtalo · 5 years of experience"
+        },
+        "elena": {
+          "name": "Elena D.",
+          "meta": "Mtatsminda · 2 years of experience"
+        },
+        "natali": {
+          "name": "Natali S.",
+          "meta": "Batumi · 7 years of experience"
+        }
+      }
     },
     "advantages": {
       "title": "Why choose us",
       "subtitle": "We care about your family's safety and comfort",
       "verified": {
         "title": "Verified babysitters",
-        "description": "All our babysitters undergo document verification and interviews"
+        "description": "All our babysitters undergo document verification and interviews",
+        "short": "Document checks and a personal interview with every candidate."
       },
       "safe": {
         "title": "Safety",
@@ -97,18 +154,26 @@
       },
       "flexible": {
         "title": "Flexible schedule",
-        "description": "Choose the time that suits you"
+        "description": "Choose the time that suits you",
+        "short": "Mornings, evenings or weekends: pick the time that suits you."
       },
       "support": {
         "title": "24/7 Support",
-        "description": "Our support service is always ready to help"
-      }
+        "description": "Our support service is always ready to help",
+        "short": "Our support team is always ready to help, day and night."
+      },
+      "eyebrow": "Why Sitter.ge",
+      "intro": "We vet every babysitter as if they were going to look after our own children.",
+      "chip": "Documents, interview and references, before the first booking"
     },
     "reviews": {
       "title": "Parent reviews",
       "subtitle": "See what other parents say about our service",
       "more": "All reviews",
-      "label": "Reviews"
+      "label": "Reviews",
+      "summary": "1,200+ reviews from families",
+      "summaryCities": "in Tbilisi, Batumi and Kutaisi",
+      "stars": "5 out of 5"
     },
     "testimonials": {
       "1": {
@@ -181,7 +246,8 @@
         "perk3": "Free registration",
         "subtitle": "Create a profile and start receiving requests from families in your city today.",
         "title": "Earn doing what you love"
-      }
+      },
+      "lead": "Join 2,000+ families who already get everything done."
     },
     "babysitterCan": {
       "label": "Capabilities",
@@ -197,12 +263,66 @@
         "mall": "Entertain your child at the mall while you're busy",
         "relatives": "Take the child to grandparents or relatives",
         "chores": "Keep kids busy while you handle household tasks"
+      },
+      "eyebrow": "Services",
+      "titleStart": "A babysitter",
+      "titleEnd": "can",
+      "lead": "Everything grandma usually helps with, when grandma is far away. By the hour, no yearly contracts.",
+      "tags": {
+        "evening": "Date night",
+        "meeting": "Business meeting",
+        "night": "Night shift"
       }
     },
     "blog": {
       "title": "Useful articles",
       "subtitle": "Read our articles about parenting and babysitting",
-      "cta": "Read all articles"
+      "cta": "Read all articles",
+      "eyebrow": "Blog",
+      "minutes": "{n} min read",
+      "read": "Read"
+    },
+    "scene": {
+      "chatAuthor": "Anna · now",
+      "chatText": "On my way! Be there at 18:30",
+      "seal": "VERIFIED · SAFE · CARING · ",
+      "verified": "Verified",
+      "sitterMeta": "3 years of experience · Vake, Tbilisi",
+      "choose": "Choose",
+      "bookingTitle": "Booking confirmed",
+      "bookingTime": "Today, 18:30–22:00",
+      "where": "Where",
+      "whereValue": "Vake, Tbilisi",
+      "kids": "Kids",
+      "kidsValue": "2 · aged 4 and 7",
+      "payment": "Payment",
+      "paymentValue": "In person"
+    },
+    "places": {
+      "tbilisi": "Tbilisi",
+      "batumi": "Batumi",
+      "kutaisi": "Kutaisi",
+      "vake": "Vake",
+      "saburtalo": "Saburtalo",
+      "mtatsminda": "Mtatsminda",
+      "didube": "Didube",
+      "gldani": "Gldani",
+      "isani": "Isani",
+      "ortachala": "Ortachala"
+    },
+    "statsCards": {
+      "sitters": "babysitters",
+      "families": "families with us",
+      "bookings": "bookings",
+      "support": "support",
+      "online": "online"
+    },
+    "ribbon": {
+      "evening": "An evening out",
+      "kindergarten": "Kindergarten pickup",
+      "club": "Rides to clubs",
+      "birthday": "Birthday parties",
+      "homework": "Homework help"
     }
   },
   "footer": {
@@ -228,7 +348,13 @@
       "terms": "Terms of Use",
       "cookies": "Cookie Policy",
       "offer": "Public Offer"
-    }
+    },
+    "parents": {
+      "title": "Tips for parents",
+      "text": "Useful articles and new babysitters in your area, once a month.",
+      "cta": "Read the blog"
+    },
+    "legalLabel": "Legal information"
   },
   "auth": {
     "login": "Login",
