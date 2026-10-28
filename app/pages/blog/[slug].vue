@@ -21,7 +21,7 @@
         <UButton
           variant="ghost"
           class="mt-4"
-          @click="router.push('/blog')"
+          @click="router.push(localePath('/blog'))"
         >
           {{ $t('blog.article.returnToBlog') }}
         </UButton>
@@ -36,6 +36,7 @@ import type { BlogPost } from '~/types/blog'
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
+const localePath = useLocalePath()
 const articles = useArticles()
 const siteConfig = useSiteConfig()
 

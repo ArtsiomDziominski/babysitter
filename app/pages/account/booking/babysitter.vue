@@ -111,7 +111,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('account.nannyForm.title'),
   twitterDescription: () => t('account.nannyForm.subtitle'),

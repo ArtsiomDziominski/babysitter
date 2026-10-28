@@ -34,7 +34,7 @@ const sitters = [
           <span class="eyebrow">{{ t('home.featured.eyebrow') }}</span>
           <h2 id="home-sitters-title" class="display">{{ t('home.featured.title') }}</h2>
         </div>
-        <NuxtLink to="/search" class="btn btn-soft">{{ t('home.featured.viewAll') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLink>
+        <NuxtLinkLocale to="/search" class="btn btn-soft">{{ t('home.featured.viewAll') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLinkLocale>
       </div>
 
       <div class="sitters">
@@ -55,9 +55,9 @@ const sitters = [
             <div class="langs"><span v-for="lang in sitter.langs" :key="lang">{{ lang }}</span></div>
             <div class="foot">
               <span class="price">{{ sitter.price }} {{ siteConfig.currency }}<small>{{ t('home.featured.perHour') }}</small></span>
-              <NuxtLink to="/search" class="go" :aria-label="t('home.featured.profileOf', { name: t(`home.featured.sitters.${sitter.key}.name`) })">
+              <NuxtLinkLocale to="/search" class="go" :aria-label="t('home.featured.profileOf', { name: t(`home.featured.sitters.${sitter.key}.name`) })">
                 <UIcon name="i-lucide-arrow-up-right" class="ico" />
-              </NuxtLink>
+              </NuxtLinkLocale>
             </div>
           </div>
         </article>

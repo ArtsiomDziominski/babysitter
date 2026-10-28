@@ -173,13 +173,13 @@
           <p class="text-sm font-medium text-muted mb-1">
             {{ $t('account.orders.details.babysitter') }}
           </p>
-          <NuxtLink
+          <NuxtLinkLocale
             v-if="details.babysitterId"
             :to="`/sitter/${details.babysitterId}`"
             class="text-highlighted hover:text-primary transition-colors"
           >
             {{ getBabysitterName(details) }}
-          </NuxtLink>
+          </NuxtLinkLocale>
           <p
             v-else
             class="text-highlighted"

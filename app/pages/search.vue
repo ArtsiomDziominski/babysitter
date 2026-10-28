@@ -80,6 +80,7 @@ import { CITY_KEYS } from '~/const/cities'
 const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
@@ -92,7 +93,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('seo.search.title'),
   twitterDescription: () => t('seo.search.description'),
@@ -283,7 +283,7 @@ onMounted(() => {
 })
 
 const handleBook = (sitterId: string | number) => {
-  router.push(`/sitter/${ sitterId }`)
+  router.push(localePath(`/sitter/${ sitterId }`))
 }
 
 const isFiltersModalOpen = ref(false)

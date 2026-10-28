@@ -44,7 +44,7 @@ onMounted(() => {
           <span class="eyebrow">{{ t('home.blog.eyebrow') }}</span>
           <h2 id="home-blog-title" class="display">{{ t('home.blog.title') }}</h2>
         </div>
-        <NuxtLink to="/blog" class="btn btn-soft">{{ t('home.blog.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLink>
+        <NuxtLinkLocale to="/blog" class="btn btn-soft">{{ t('home.blog.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLinkLocale>
       </div>
 
       <div v-if="loading" class="arts" aria-hidden="true">
@@ -55,7 +55,7 @@ onMounted(() => {
       </div>
 
       <div v-else-if="articles.length > 0" class="arts">
-        <NuxtLink v-for="(article, index) in articles" :key="article.id" :to="`/blog/${article.slug}`" class="art">
+        <NuxtLinkLocale v-for="(article, index) in articles" :key="article.id" :to="`/blog/${article.slug}`" class="art">
           <div class="cv">
             <img v-if="coverOf(article)" :src="coverOf(article)" :alt="article.title" loading="lazy" style="width:100%;height:100%;object-fit:cover;max-width:none">
 
@@ -100,7 +100,7 @@ onMounted(() => {
             <h3>{{ article.title }}</h3>
             <span class="rd">{{ t('home.blog.read') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></span>
           </div>
-        </NuxtLink>
+        </NuxtLinkLocale>
       </div>
     </div>
   </section>

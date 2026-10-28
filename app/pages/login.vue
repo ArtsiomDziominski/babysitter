@@ -7,6 +7,7 @@ const { t, locale } = useI18n()
 const toast = useToast()
 const authStore = useAuthStore()
 const router = useRouter()
+const localePath = useLocalePath()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
@@ -20,8 +21,7 @@ useSeoMeta({
   ogDescription: () => t('seo.login.description'),
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
-  ogLocale: locale.value
+  ogType: 'website'
 })
 
 useHead({
@@ -71,7 +71,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       title: t('auth.loginSuccess'), 
       color: 'success' 
     })
-    await router.push(target)
+    await router.push(localePath(target))
   } catch (error: any) {
     const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.loginError')
     toast.add({ 
@@ -101,12 +101,12 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
           <div class="text-center text-sm text-muted mt-4 space-y-2">
             <div>
               {{ t('auth.noAccount') }}
-              <ULink to="/register" class="font-medium">
+              <ULink :to="localePath('/register')" class="font-medium">
                 {{ t('auth.register') }}
               </ULink>
             </div>
             <div>
-              <ULink to="/forgot-password" class="font-medium">
+              <ULink :to="localePath('/forgot-password')" class="font-medium">
                 {{ t('auth.forgotPassword') }}
               </ULink>
             </div>

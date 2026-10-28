@@ -4,6 +4,8 @@ import { UserRole } from '~/const/roles'
 const route = useRoute()
 const authStore = useAuthStore()
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
+const getRouteBaseName = useRouteBaseName()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
@@ -16,7 +18,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('account.sections.booking'),
   twitterDescription: () => t('account.sections.booking'),
@@ -47,14 +48,14 @@ const defaultPath = computed(() =>
 )
 
 watchEffect(() => {
-  if (route.path === '/account/booking') {
-    navigateTo(defaultPath.value, { replace: true })
+  if (getRouteBaseName(route) === 'account-booking') {
+    navigateTo(localePath(defaultPath.value), { replace: true })
   }
 })
 
 watchEffect(() => {
-  if (!isParent.value && route.path.startsWith('/account/booking') && !route.path.includes('/account/booking/babysitter')) {
-    navigateTo('/account/booking/babysitter', { replace: true })
+  if (!isParent.value && route.path.includes('/account/booking') && !route.path.includes('/account/booking/babysitter')) {
+    navigateTo(localePath('/account/booking/babysitter'), { replace: true })
   }
 })
 

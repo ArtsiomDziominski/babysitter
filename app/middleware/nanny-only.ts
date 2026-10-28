@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware(() => {
   const authStore = useAuthStore()
 
   if (authStore.user.role !== UserRole.BABYSITTER) {
-    return navigateTo('/search')
+    return navigateTo(useLocalePath()('/search'))
   }
 })
 

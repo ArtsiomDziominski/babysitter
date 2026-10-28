@@ -13,7 +13,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('account.sections.profile'),
   twitterDescription: () => t('account.sections.profile'),

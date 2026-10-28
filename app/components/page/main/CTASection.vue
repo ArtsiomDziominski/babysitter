@@ -20,8 +20,8 @@ const { t } = useI18n()
         <h2 id="home-cta-title" class="display">{{ t('home.cta.title') }}</h2>
         <p>{{ t('home.cta.lead') }}</p>
         <div class="acts">
-          <NuxtLink to="/search" class="btn btn-white"><UIcon name="i-lucide-search" class="ico" />{{ t('home.cta.ctaParent') }}</NuxtLink>
-          <NuxtLink to="/register" class="btn btn-dark">{{ t('home.cta.sitter.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLink>
+          <NuxtLinkLocale to="/search" class="btn btn-white"><UIcon name="i-lucide-search" class="ico" />{{ t('home.cta.ctaParent') }}</NuxtLinkLocale>
+          <NuxtLinkLocale to="/register" class="btn btn-dark">{{ t('home.cta.sitter.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLinkLocale>
         </div>
       </div>
     </div>

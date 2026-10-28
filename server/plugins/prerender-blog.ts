@@ -1,6 +1,7 @@
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('prerender:routes', async (ctx) => {
     const config = useRuntimeConfig()
+    const localeCodes = (config.public.siteConfig.locales as Array<{ code: string }>).map((l) => l.code)
     const strapiUrl = config.strapiUrl
     const strapiApiToken = config.strapiApiToken
 
@@ -38,7 +39,7 @@ export default defineNitroPlugin((nitroApp) => {
         articles.forEach((article: any) => {
           const slug = article.attributes?.slug || article.slug
           if (slug) {
-            allArticles.push(`/blog/${slug}`)
+            allArticles.push(...localeCodes.map((code) => `/${code}/blog/${slug}`))
           }
         })
 

@@ -3,6 +3,7 @@ import * as z from 'zod'
 import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
 
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const toast = useToast()
 const route = useRoute()
 const siteConfig = useSiteConfig()
@@ -17,8 +18,7 @@ useSeoMeta({
   ogDescription: () => t('seo.forgotPassword.description'),
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
-  ogLocale: locale.value
+  ogType: 'website'
 })
 
 useHead({
@@ -65,7 +65,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
           <div class="text-center text-sm text-muted mt-4 space-y-2">
             <div>
               {{ t('auth.rememberPassword') }}
-              <ULink to="/login" class="font-medium">
+              <ULink :to="localePath('/login')" class="font-medium">
                 {{ t('auth.login') }}
               </ULink>
             </div>

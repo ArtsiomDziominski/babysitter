@@ -6,6 +6,7 @@ const { t, locale } = useI18n()
 const toast = useToast()
 const authStore = useAuthStore()
 const router = useRouter()
+const localePath = useLocalePath()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
@@ -19,8 +20,7 @@ useSeoMeta({
   ogDescription: () => t('seo.register.description'),
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
-  ogLocale: locale.value
+  ogType: 'website'
 })
 
 useHead({
@@ -111,7 +111,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       title: t('auth.registerSuccess'), 
       color: 'success' 
     })
-    await router.push('/choose-role')
+    await router.push(localePath('/choose-role'))
   } catch (error: any) {
     const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.registerError')
     toast.add({ 
@@ -140,7 +140,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         <template #footer>
           <div class="text-center text-sm text-muted mt-4">
             {{ t('auth.haveAccount') }}
-            <ULink to="/login" class="font-medium">
+            <ULink :to="localePath('/login')" class="font-medium">
               {{ t('auth.login') }}
             </ULink>
           </div>

@@ -6,13 +6,13 @@
           <span class="text-lg max-xl:text-base font-semibold text-highlighted">
             #{{ order.id }}
           </span>
-          <NuxtLink
+          <NuxtLinkLocale
             v-if="sitterId && userRole === UserRole.PARENT"
             :to="`/sitter/${sitterId}`"
             class="text-lg max-xl:text-base font-semibold text-highlighted hover:text-primary transition-colors break-words"
           >
             {{ order.customer.name }}
-          </NuxtLink>
+          </NuxtLinkLocale>
           <h3
             v-else
             class="text-lg max-xl:text-base font-semibold text-highlighted break-words"
@@ -95,6 +95,7 @@ import type { BookingListItem } from '~/composables/useBookings'
 import { UserRole } from '~/const/roles'
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const authStore = useAuthStore()
 const siteConfig = useSiteConfig()
 
@@ -202,7 +203,7 @@ const childrenTooltipText = computed((): string | undefined => {
 
 const contactTo = computed(() => {
   const to = `/account/messages?chat=${chatId.value}`
-  return chatId.value ? to : to + `&userId=${userId.value}`
+  return localePath(chatId.value ? to : to + `&userId=${userId.value}`)
 })
 </script>
 

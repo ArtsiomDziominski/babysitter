@@ -3,16 +3,16 @@
     <UButton
       variant="ghost"
       icon="i-lucide-arrow-left"
-      @click="router.push('/blog')"
+      @click="router.push(localePath('/blog'))"
     />
     <nav class="flex items-center gap-2 text-sm text-toned">
-      <NuxtLink to="/" class="hover:text-primary transition-colors">
+      <NuxtLinkLocale to="/" class="hover:text-primary transition-colors">
         {{ $t('blog.breadcrumbs.home') }}
-      </NuxtLink>
+      </NuxtLinkLocale>
       <Icon name="i-lucide-chevron-right" size="16" />
-      <NuxtLink to="/blog" class="hover:text-primary transition-colors">
+      <NuxtLinkLocale to="/blog" class="hover:text-primary transition-colors">
         {{ $t('blog.title') }}
-      </NuxtLink>
+      </NuxtLinkLocale>
       <template v-if="articleTitle">
         <Icon name="i-lucide-chevron-right" size="16" />
         <span class="text-highlighted">{{ articleTitle }}</span>
@@ -29,5 +29,6 @@ interface Props {
 defineProps<Props>()
 
 const router = useRouter()
+const localePath = useLocalePath()
 </script>
 

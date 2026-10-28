@@ -84,7 +84,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('account.booking.trustedPerson.title'),
   twitterDescription: () => t('account.booking.trustedPerson.description'),

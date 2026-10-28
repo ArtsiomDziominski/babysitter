@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
@@ -17,7 +18,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('account.sections.profile'),
   twitterDescription: () => t('account.sections.profile'),
@@ -32,7 +32,7 @@ useHead({
 })
 
 onMounted(() => {
-  navigateTo('/account/profile')
+  navigateTo(localePath('/account/profile'))
 })
 </script>
 
