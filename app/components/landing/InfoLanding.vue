@@ -38,7 +38,7 @@
 
       <UPageCTA
         :title="$t(`${i18nPrefix}.ctaTitle`)"
-        :links="[{ label: $t(`${i18nPrefix}.ctaButton`), to: ctaTo, size: 'lg', trailingIcon: 'i-lucide-arrow-right' }]"
+        :links="[{ label: $t(`${i18nPrefix}.ctaButton`), to: localePath(ctaTo), size: 'lg', trailingIcon: 'i-lucide-arrow-right' }]"
         variant="soft"
         :ui="{ container: 'py-10 sm:py-12 lg:py-12', title: 'text-2xl sm:text-3xl' }"
       />
@@ -63,6 +63,7 @@ const props = defineProps<{
 const STEPS_COUNT = 4
 
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 const { getHowToSchema, addStructuredData } = useStructuredData()

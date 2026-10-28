@@ -9,6 +9,7 @@ definePageMeta({
 const { t } = useI18n()
 const authStore = useAuthStore()
 const router = useRouter()
+const localePath = useLocalePath()
 const toast = useToast()
 
 type RoleOption = { label: string; value: UserRole; description: string }
@@ -21,7 +22,7 @@ const options = computed<RoleOption[]>(() => [
 const selectedRole = ref<UserRole>(authStore.user.role ?? UserRole.PARENT)
 const isSubmitting = ref(false)
 
-const redirectByRole = (role: UserRole) => (role === UserRole.PARENT ? '/search' : '/account/profile')
+const redirectByRole = (role: UserRole) => localePath(role === UserRole.PARENT ? '/search' : '/account/profile')
 
 onMounted(() => {
   if (authStore.user.role) {

@@ -101,6 +101,7 @@ const bookId = route.params.id as string
 const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
@@ -181,12 +182,12 @@ const breadcrumbItems = computed(() => [
   {
     label: 'Главная',
     icon: 'i-lucide-home',
-    to: '/'
+    to: localePath('/')
   },
   {
     label: 'Поиск',
     icon: 'i-lucide-search',
-    to: '/search'
+    to: localePath('/search')
   },
   {
     label: sitter.value?.name || 'Ситтер',
@@ -200,7 +201,7 @@ const toggleFavorite = () => {
 
 const handleContact = () => {
   const router = useRouter()
-  router.push(`/sitter/${bookId}/book`)
+  router.push(localePath(`/sitter/${bookId}/book`))
 }
 
 const handleMessage = () => {

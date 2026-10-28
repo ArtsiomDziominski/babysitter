@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
@@ -32,7 +33,7 @@ useHead({
 })
 
 onMounted(() => {
-  navigateTo('/account/profile')
+  navigateTo(localePath('/account/profile'))
 })
 </script>
 

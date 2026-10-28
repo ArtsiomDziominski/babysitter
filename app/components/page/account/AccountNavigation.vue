@@ -3,6 +3,7 @@ import { UserRole } from '~/const/roles'
 
 const authStore = useAuthStore()
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const props = defineProps<{
   activeTab: string
@@ -12,25 +13,25 @@ const items = computed(() => [
   {
     label: t('account.messages.title'),
     icon: 'i-lucide-message-square',
-    to: '/account/messages',
+    to: localePath('/account/messages'),
     active: props.activeTab === 'messages'
   },
   {
     label: t('account.orders.title'),
     icon: 'i-lucide-clipboard-list',
-    to: '/account/orders',
+    to: localePath('/account/orders'),
     active: props.activeTab === 'orders'
   },
   {
     label: t('account.booking.title'),
     icon: 'i-lucide-baby',
-    to: authStore.user.role === UserRole.PARENT ? '/account/booking/kids' : '/account/booking/babysitter',
+    to: localePath(authStore.user.role === UserRole.PARENT ? '/account/booking/kids' : '/account/booking/babysitter'),
     active: props.activeTab === 'booking'
   },
   {
     label: t('account.profile'),
     icon: 'i-lucide-user',
-    to: '/account/profile',
+    to: localePath('/account/profile'),
     active: props.activeTab === 'profile'
   }
 ])

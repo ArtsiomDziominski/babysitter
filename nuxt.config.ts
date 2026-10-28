@@ -29,7 +29,10 @@ export default defineNuxtConfig({
         locales: [...siteConfig.locales],
         langDir: siteConfig.langDir,
         defaultLocale: siteConfig.defaultLocale,
-        strategy: 'no_prefix',
+        // Каждая локаль живёт под своим префиксом: /ru/..., /en/..., /ka/..., /uk/...
+        // Старые адреса без префикса редиректит server/middleware/locale-redirect.ts
+        strategy: 'prefix',
+        baseUrl: process.env.SITE_URL || siteConfig.url,
         detectBrowserLanguage: {
             useCookie: true,
             cookieKey: 'i18n_redirected',
@@ -67,16 +70,18 @@ export default defineNuxtConfig({
             ]
         }
     },
-    routeRules: {
-        '/blog': { prerender: true },
-        '/blog/**': { prerender: true }
-    },
+    routeRules: Object.fromEntries(
+        siteConfig.locales.flatMap((l: { code: string }) => [
+            [`/${l.code}/blog`, { prerender: true }],
+            [`/${l.code}/blog/**`, { prerender: true }]
+        ])
+    ),
     nitro: {
         prerender: {
             // Обход ссылок пререндерил /, /search, /login и все /account/** как статический HTML
             // без авторизации и языка пользователя — такие страницы должны рендериться на сервере
             crawlLinks: false,
-            routes: ['/blog']
+            routes: siteConfig.locales.map((l: { code: string }) => `/${l.code}/blog`)
         }
     }
 })

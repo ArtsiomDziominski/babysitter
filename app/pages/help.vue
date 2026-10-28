@@ -71,19 +71,19 @@
               </h2>
               <ul class="list-disc list-inside text-default mb-4 space-y-2 ml-4">
                 <li>
-                  <NuxtLink to="/faq" class="text-primary hover:text-primary-600">
+                  <NuxtLinkLocale to="/faq" class="text-primary hover:text-primary-600">
                     {{ $t('footer.info.faq') }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
                 </li>
                 <li>
-                  <NuxtLink to="/about" class="text-primary hover:text-primary-600">
+                  <NuxtLinkLocale to="/about" class="text-primary hover:text-primary-600">
                     {{ $t('footer.info.about') }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
                 </li>
                 <li>
-                  <NuxtLink to="/blog" class="text-primary hover:text-primary-600">
+                  <NuxtLinkLocale to="/blog" class="text-primary hover:text-primary-600">
                     {{ $t('footer.info.blog') }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
                 </li>
               </ul>
             </section>

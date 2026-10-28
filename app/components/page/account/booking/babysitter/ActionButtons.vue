@@ -37,6 +37,7 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const babysitterApi = useBabysitter()
 const authStore = useAuthStore()
 const modalStore = useModalStore()
@@ -85,7 +86,7 @@ const handleDelete = () => {
         color: 'error',
         handler: async () => {
           modalStore.close()
-          await navigateTo('/account/messages?chat=admin')
+          await navigateTo(localePath('/account/messages?chat=admin'))
         }
       }
     ]

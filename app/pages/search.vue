@@ -80,6 +80,7 @@ import { CITY_KEYS } from '~/const/cities'
 const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
@@ -283,7 +284,7 @@ onMounted(() => {
 })
 
 const handleBook = (sitterId: string | number) => {
-  router.push(`/sitter/${ sitterId }`)
+  router.push(localePath(`/sitter/${ sitterId }`))
 }
 
 const isFiltersModalOpen = ref(false)
