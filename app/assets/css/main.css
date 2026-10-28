@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 @import "./home.css";
+@import "./site-chrome.css";
 
 @theme static {
   --color-coral-50: #fff5f2;

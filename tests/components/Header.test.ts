@@ -1,17 +1,22 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { computed, defineComponent, h, onMounted, ref } from 'vue'
+import { computed, defineComponent, h, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import Header from '../../app/components/global/Header.vue'
 import { UserRole } from '../../app/const/roles'
 
 type HeaderTestOptions = {
   isAuthenticated?: boolean
   locales?: Array<{ code: string; name: string }>
+  path?: string
+  colorMode?: 'light' | 'dark'
 }
 
 const createHeaderMount = (options: HeaderTestOptions = {}) => {
   const navigateTo = vi.fn()
   const setLocale = vi.fn()
+  const localePath = (path: string) => `/ru${path === '/' ? '' : path}`
+  const route = reactive({ path: options.path ?? '/ru', fullPath: options.path ?? '/ru' })
+  const colorMode = reactive({ value: options.colorMode ?? 'light', preference: options.colorMode ?? 'light' })
 
   const authStore = {
     isAuthenticated: options.isAuthenticated ?? false,
@@ -23,25 +28,24 @@ const createHeaderMount = (options: HeaderTestOptions = {}) => {
   }
 
   vi.stubGlobal('computed', computed)
+  vi.stubGlobal('ref', ref)
+  vi.stubGlobal('watch', watch)
   vi.stubGlobal('onMounted', onMounted)
+  vi.stubGlobal('onBeforeUnmount', onBeforeUnmount)
   vi.stubGlobal('navigateTo', navigateTo)
+  vi.stubGlobal('useLocalePath', () => localePath)
+  vi.stubGlobal('useRoute', () => route)
+  vi.stubGlobal('useColorMode', () => colorMode)
   vi.stubGlobal('useAuthStore', () => authStore)
-  vi.stubGlobal('useSiteConfig', () => ({
-    name: 'Babysitter',
-    logo: '/logo.svg',
-  }))
   vi.stubGlobal('useI18n', () => ({
     locale: ref('ru'),
-    locales: ref(options.locales ?? [{ code: 'ru', name: 'Русский' }]),
+    locales: ref(options.locales ?? [{ code: 'ru', name: 'Русский' }, { code: 'en', name: 'English' }]),
     t: (key: string) => `t:${key}`,
     setLocale,
   }))
 
   const wrapper = mount(Header, {
     global: {
-      mocks: {
-        $t: (key: string) => `t:${key}`,
-      },
       stubs: {
         ClientOnly: defineComponent({
           setup(_, { slots }) {
@@ -56,84 +60,14 @@ const createHeaderMount = (options: HeaderTestOptions = {}) => {
             return () => h('a', { href: props.to }, slots.default?.())
           },
         }),
-        UHeader: defineComponent({
-          setup(_, { slots }) {
-            return () =>
-              h('header', [slots.title?.(), slots.default?.(), slots.right?.(), slots.body?.()])
-          },
-        }),
-        UNavigationMenu: defineComponent({
-          props: {
-            items: { type: Array, required: true },
-          },
-          setup(props) {
-            return () =>
-              h('nav', (props.items as any[]).map(item => h('a', { href: item.to }, item.label)))
-          },
-        }),
-        UColorModeButton: true,
-        UButton: defineComponent({
-          props: {
-            to: { type: String, required: false },
-          },
-          setup(props, { slots }) {
-            return () =>
-              h(
-                'button',
-                {
-                  'data-test': 'login-button',
-                  'data-to': props.to,
-                },
-                slots.default?.()
-              )
-          },
-        }),
-        USelect: defineComponent({
-          props: {
-            modelValue: { type: String, required: false },
-            items: { type: Array, required: false },
-            labelKey: { type: String, required: false },
-            valueKey: { type: String, required: false },
-          },
-          emits: ['update:model-value'],
-          setup(_, { emit }) {
-            return () =>
-              h(
-                'button',
-                {
-                  'data-test': 'locale-select',
-                  onClick: () => emit('update:model-value', 'en'),
-                },
-                'locale-select'
-              )
-          },
-        }),
-        UAvatar: defineComponent({
-          props: {
-            alt: { type: String, required: false },
-            src: { type: String, required: false },
-          },
-          setup(props) {
-            return () => h('img', { 'data-test': 'avatar', alt: props.alt, src: props.src })
-          },
-        }),
+        UIcon: true,
         UDropdownMenu: defineComponent({
           name: 'UDropdownMenu',
           props: {
             items: { type: Array, required: true },
-            popper: { type: Object, required: false },
           },
           setup(_, { slots }) {
-            return () => h('div', { 'data-test': 'account-dropdown' }, slots.default?.())
-          },
-        }),
-        MobileMenu: defineComponent({
-          name: 'MobileMenu',
-          props: {
-            navLinks: { type: Array, required: true },
-          },
-          setup(props) {
-            return () => h('div', { 'data-test': 'mobile-menu', 'data-size': props.navLinks.length })
+            return () => h('div', { 'data-test': 'dropdown' }, slots.default?.())
           },
         }),
       },
@@ -143,67 +77,90 @@ const createHeaderMount = (options: HeaderTestOptions = {}) => {
   return {
     wrapper,
     authStore,
+    colorMode,
     navigateTo,
     setLocale,
   }
 }
+
+const dropdowns = (wrapper: ReturnType<typeof mount>) => wrapper.findAllComponents({ name: 'UDropdownMenu' })
 
 describe('Header', () => {
   afterEach(() => {
     vi.unstubAllGlobals()
   })
 
-  it('renders guest state: basic nav and login button', () => {
+  it('renders guest state: nav links and login button', () => {
     const { wrapper, authStore } = createHeaderMount({ isAuthenticated: false })
+    const nav = wrapper.find('nav.nav')
 
     expect(authStore.loadAvatarUrl).toHaveBeenCalledTimes(1)
-    expect(wrapper.text()).toContain('Babysitter')
-    expect(wrapper.text()).toContain('t:header.bookings')
-    expect(wrapper.text()).toContain('t:header.blog')
-    expect(wrapper.text()).not.toContain('t:header.messages')
-    expect(wrapper.text()).toContain('t:header.login')
-    expect(wrapper.find('[data-test="account-dropdown"]').exists()).toBe(false)
-    expect(wrapper.find('[data-test="mobile-menu"]').attributes('data-size')).toBe('2')
+    expect(wrapper.find('.brand').text()).toBe('Sitter.ge')
+    expect(nav.findAll('a').map(a => a.attributes('href'))).toEqual(['/ru/search', '/ru/kak-stat-bebisitterom', '/ru/blog'])
+    expect(nav.text()).toContain('t:header.findSitter')
+    expect(wrapper.find('.hdr-right a.btn').attributes('href')).toBe('/ru/login')
+    expect(wrapper.find('.acc').exists()).toBe(false)
   })
 
-  it('renders authenticated state: messages link and account menu', () => {
+  it('highlights the main action on home and the current section elsewhere', () => {
+    const home = createHeaderMount({ path: '/ru' })
+    expect(home.wrapper.find('nav.nav a.on').attributes('href')).toBe('/ru/search')
+    vi.unstubAllGlobals()
+
+    const blog = createHeaderMount({ path: '/ru/blog/some-article' })
+    expect(blog.wrapper.find('nav.nav a.on').attributes('href')).toBe('/ru/blog')
+  })
+
+  it('renders authenticated state: account menu instead of login', () => {
     const { wrapper } = createHeaderMount({ isAuthenticated: true })
-    const dropdown = wrapper.findComponent({ name: 'UDropdownMenu' })
+    const account = dropdowns(wrapper).at(-1)!
 
-    expect(wrapper.text()).toContain('t:header.messages')
-    expect(wrapper.find('[data-test="login-button"]').exists()).toBe(false)
-    expect(wrapper.find('[data-test="avatar"]').attributes('alt')).toBe('Jane Doe')
-    expect(wrapper.find('[data-test="mobile-menu"]').attributes('data-size')).toBe('3')
-    expect(dropdown.exists()).toBe(true)
+    expect(wrapper.find('.hdr-right a.btn').exists()).toBe(false)
+    expect(wrapper.find('.acc img').attributes('alt')).toBe('Jane Doe')
 
-    const items = dropdown.props('items') as any[]
+    const items = account.props('items') as any[]
     expect(items[0][0].label).toBe('Jane Doe')
-    expect(items[1].map(item => item.to)).toEqual(['/account/profile', '/account/orders', '/account/messages'])
+    expect(items[1].map((item: any) => item.to)).toEqual(['/ru/account/profile', '/ru/account/orders', '/ru/account/messages'])
     expect(items[2][0].label).toBe('t:header.logout')
   })
 
-  it('changes locale via locale select', async () => {
-    const { wrapper, setLocale } = createHeaderMount({ isAuthenticated: false })
+  it('changes locale from the language menu and the mobile menu', async () => {
+    const { wrapper, setLocale } = createHeaderMount()
+    const items = dropdowns(wrapper).at(0)!.props('items') as any[]
 
-    await wrapper.find('[data-test="locale-select"]').trigger('click')
+    items[1].onSelect()
     expect(setLocale).toHaveBeenCalledWith('en')
+
+    await wrapper.find('#site-mnav .langs button:last-child').trigger('click')
+    expect(setLocale).toHaveBeenCalledTimes(2)
   })
 
   it('runs logout action from account menu item', () => {
     const { wrapper, authStore, navigateTo } = createHeaderMount({ isAuthenticated: true })
-    const dropdown = wrapper.findComponent({ name: 'UDropdownMenu' })
-    const items = dropdown.props('items') as any[]
-    const logoutItem = items[2][0]
+    const items = dropdowns(wrapper).at(-1)!.props('items') as any[]
 
-    logoutItem.onSelect()
+    items[2][0].onSelect()
 
     expect(authStore.logout).toHaveBeenCalledTimes(1)
-    expect(navigateTo).toHaveBeenCalledWith('/')
+    expect(navigateTo).toHaveBeenCalledWith('/ru')
   })
 
-  it('hides locale select when locales list is empty', () => {
+  it('toggles theme and mobile menu', async () => {
+    const { wrapper, colorMode } = createHeaderMount({ colorMode: 'light' })
+
+    await wrapper.find('.iconbtn:not(.burger)').trigger('click')
+    expect(colorMode.preference).toBe('dark')
+
+    const burger = wrapper.find('.burger')
+    await burger.trigger('click')
+    expect(burger.attributes('aria-expanded')).toBe('true')
+    expect(wrapper.find('#site-mnav').classes()).toContain('open')
+  })
+
+  it('hides language switch when locales list is empty', () => {
     const { wrapper } = createHeaderMount({ locales: [] })
 
-    expect(wrapper.find('[data-test="locale-select"]').exists()).toBe(false)
+    expect(wrapper.find('.chipbtn').exists()).toBe(false)
+    expect(wrapper.find('#site-mnav .langs').exists()).toBe(false)
   })
 })
