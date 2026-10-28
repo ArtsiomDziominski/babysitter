@@ -47,6 +47,8 @@ export default defineNuxtConfig({
             apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3003',
             siteUrl: process.env.SITE_URL || siteConfig.url,
             siteName: process.env.SITE_NAME || siteConfig.name,
+            // Переопределяется через NUXT_PUBLIC_GA_MEASUREMENT_ID, пустое значение отключает GA
+            gaMeasurementId: 'G-X0XKEG9JE7',
             siteConfig: {
                 ...siteConfig,
                 name: process.env.SITE_NAME || siteConfig.name,
