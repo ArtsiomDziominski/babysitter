@@ -101,7 +101,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: props.article ? 'article' : 'website',
-  ogLocale: locale.value,
   ...(props.article
     ? {
         articlePublishedTime: '2024-01-01T00:00:00Z',

@@ -266,7 +266,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: 'ka',
   twitterCard: 'summary_large_image',
   twitterTitle: pageTitle,
   twitterDescription: pageDescription,

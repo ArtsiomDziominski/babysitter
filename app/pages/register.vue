@@ -20,8 +20,7 @@ useSeoMeta({
   ogDescription: () => t('seo.register.description'),
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
-  ogLocale: locale.value
+  ogType: 'website'
 })
 
 useHead({

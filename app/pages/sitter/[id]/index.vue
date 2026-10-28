@@ -165,7 +165,6 @@ useSeoMeta({
   ogImage: seoImage,
   ogUrl: currentUrl,
   ogType: () => sitter.value ? 'profile' : 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: seoTitle,
   twitterDescription: seoDescription,

@@ -1,14 +1,6 @@
-const LOCALIZED_URLS: Record<string, string> = {
-  ru: '/kak-stat-bebisitterom',
-  en: '/how-to-become-babysitter',
-  uk: '/yak-staty-bebisiterom',
-  ka: '/rogor-gavides-bebisiteri'
-}
-
 export default defineNuxtRouteMiddleware((to) => {
   if (useRouteBaseName()(to) !== 'become-sitter') return
 
-  // useI18n() работает только внутри setup компонента — в middleware берём локаль из экземпляра i18n
-  const locale = useNuxtApp().$i18n.locale.value
-  return navigateTo(useLocalePath()(LOCALIZED_URLS[locale] || LOCALIZED_URLS.ru))
+  // Адрес страницы в текущей локали берётся из её definePageMeta({ i18n: { paths } })
+  return navigateTo(useLocalePath()('how-to-become-babysitter'))
 })

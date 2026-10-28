@@ -10,6 +10,24 @@
 const SKIP_PREFIXES = ['/api/', '/_nuxt/', '/__nuxt', '/_i18n/', '/_ipx/', '/_fonts/', '/_payload']
 const COOKIE_KEY = 'i18n_redirected'
 
+// Страница «как стать бебиситтером» имеет свой адрес в каждой локали (см. pages/how-to-become-babysitter.vue).
+// Раньше все слаги открывались в любой локали — теперь чужой слаг ведёт на адрес своей локали
+const BECOME_BABYSITTER_PATHS: Record<string, string> = {
+  ru: '/kak-stat-bebisitterom',
+  en: '/how-to-become-babysitter',
+  uk: '/yak-staty-bebisiterom',
+  ka: '/rogor-gavides-bebisiteri'
+}
+const BECOME_BABYSITTER_SLUGS = [...Object.values(BECOME_BABYSITTER_PATHS), '/yak-stats-bebisiteram']
+
+function localizePath(path: string, locale: string): string {
+  const clean = path.replace(/\/+$/, '')
+  if (BECOME_BABYSITTER_SLUGS.includes(clean)) {
+    return BECOME_BABYSITTER_PATHS[locale] || BECOME_BABYSITTER_PATHS.ru!
+  }
+  return clean
+}
+
 export default defineEventHandler((event) => {
   if (event.method !== 'GET' && event.method !== 'HEAD') return
 
@@ -26,7 +44,14 @@ export default defineEventHandler((event) => {
   const defaultLocale = siteConfig.defaultLocale as string
 
   const firstSegment = path.split('/')[1] || ''
-  if (localeCodes.includes(firstSegment)) return
+  if (localeCodes.includes(firstSegment)) {
+    const rest = path.slice(firstSegment.length + 1).replace(/\/+$/, '')
+    const localized = localizePath(rest, firstSegment)
+    if (localized !== rest) {
+      return sendRedirect(event, `/${firstSegment}${localized}${url.search}`, 301)
+    }
+    return
+  }
 
   const query = new URLSearchParams(url.search)
   const langParam = query.get('lang')
@@ -49,7 +74,7 @@ export default defineEventHandler((event) => {
   }
 
   const search = query.toString()
-  const target = `/${locale}${path === '/' ? '' : path.replace(/\/+$/, '')}${search ? `?${search}` : ''}`
+  const target = `/${locale}${path === '/' ? '' : localizePath(path, locale)}${search ? `?${search}` : ''}`
 
   return sendRedirect(event, target, code)
 })
