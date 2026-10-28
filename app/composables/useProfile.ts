@@ -77,6 +77,13 @@ export const useProfile = () => {
       redirect: 'follow',
     })
 
+    // The API redirects to a presigned storage URL. fetch follows it with our
+    // Authorization header, which storage rejects (400), but the URL itself is
+    // valid for <img>, so take it whenever the redirect happened
+    if (response.redirected && response.url) {
+      return response.url
+    }
+
     if (response.status === 404) {
       return null
     }

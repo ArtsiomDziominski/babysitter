@@ -88,7 +88,7 @@ export const useAuthStore = defineStore('auth', () => {
     async function loadAvatarUrl() {
         if (!process.client) return
         const avatar = user.value?.avatar
-        if (!avatar || avatar.startsWith('http')) {
+        if (!avatar || isAbsoluteUrl(avatar) || isAbsoluteUrl(user.value?.avatarUrl)) {
             return
         }
 

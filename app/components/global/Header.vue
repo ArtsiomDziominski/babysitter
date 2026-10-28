@@ -55,10 +55,8 @@ const navLinks = computed(() => {
   ]
 })
 
-// On the home page the first link is highlighted as the main action, elsewhere the current section is.
-const isOn = (to: string, index: number) => {
+const isOn = (to: string) => {
   const target = localePath(to)
-  if (route.path === localePath('/')) return index === 0
   return route.path === target || route.path.startsWith(`${target}/`)
 }
 
@@ -121,7 +119,7 @@ onBeforeUnmount(() => {
       </NuxtLink>
 
       <nav class="nav" :aria-label="t('header.mainNav')">
-        <NuxtLink v-for="(link, index) in navLinks" :key="link.to" :to="localePath(link.to)" :class="{ on: isOn(link.to, index) }">{{ link.label }}</NuxtLink>
+        <NuxtLink v-for="link in navLinks" :key="link.to" :to="localePath(link.to)" :class="{ on: isOn(link.to) }">{{ link.label }}</NuxtLink>
       </nav>
 
       <div class="hdr-right">
