@@ -104,9 +104,9 @@ describe('Header', () => {
     expect(wrapper.find('.acc').exists()).toBe(false)
   })
 
-  it('highlights the main action on home and the current section elsewhere', () => {
+  it('highlights nothing on home and the current section elsewhere', () => {
     const home = createHeaderMount({ path: '/ru' })
-    expect(home.wrapper.find('nav.nav a.on').attributes('href')).toBe('/ru/search')
+    expect(home.wrapper.find('nav.nav a.on').exists()).toBe(false)
     vi.unstubAllGlobals()
 
     const blog = createHeaderMount({ path: '/ru/blog/some-article' })
