@@ -84,7 +84,6 @@ useSeoMeta({
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
   ogType: 'website',
-  ogLocale: locale.value,
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('account.orders.title'),
   twitterDescription: () => t('account.orders.title'),

@@ -18,8 +18,7 @@ useSeoMeta({
   ogDescription: () => t('seo.forgotPassword.description'),
   ogImage: `${siteConfig.url}${siteConfig.logo}`,
   ogUrl: currentUrl,
-  ogType: 'website',
-  ogLocale: locale.value
+  ogType: 'website'
 })
 
 useHead({

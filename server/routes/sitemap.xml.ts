@@ -13,7 +13,8 @@ export default defineEventHandler(async (event) => {
   const baseUrl = siteConfig.url
   const apiBaseUrl = config.public.apiBaseUrl
 
-  const publicPages = [
+  // path — один адрес для всех локалей или свой адрес для каждой локали
+  const publicPages: Array<{ path: string | Record<string, string>; priority: string; changefreq: string }> = [
     { path: '/', priority: '1.0', changefreq: 'daily' },
     { path: '/search', priority: '0.9', changefreq: 'daily' },
     { path: '/about', priority: '0.7', changefreq: 'monthly' },
@@ -24,11 +25,16 @@ export default defineEventHandler(async (event) => {
     { path: '/terms', priority: '0.5', changefreq: 'yearly' },
     { path: '/cookies', priority: '0.5', changefreq: 'yearly' },
     { path: '/public-offer', priority: '0.5', changefreq: 'yearly' },
-    { path: '/kak-stat-bebisitterom', priority: '0.8', changefreq: 'monthly' },
-    { path: '/how-to-become-babysitter', priority: '0.8', changefreq: 'monthly' },
-    { path: '/yak-staty-bebisiterom', priority: '0.8', changefreq: 'monthly' },
-    { path: '/yak-stats-bebisiteram', priority: '0.8', changefreq: 'monthly' },
-    { path: '/rogor-gavides-bebisiteri', priority: '0.8', changefreq: 'monthly' },
+    {
+      path: {
+        ru: '/kak-stat-bebisitterom',
+        en: '/how-to-become-babysitter',
+        uk: '/yak-staty-bebisiterom',
+        ka: '/rogor-gavides-bebisiteri'
+      },
+      priority: '0.8',
+      changefreq: 'monthly'
+    },
     { path: '/kak-najti-bebisittera-v-tbilisi', priority: '0.9', changefreq: 'weekly' },
     { path: '/kak-najti-bebisittera-v-batumi', priority: '0.9', changefreq: 'weekly' },
     { path: '/kak-najti-bebisittera-v-kutaisi', priority: '0.9', changefreq: 'weekly' },
@@ -146,11 +152,14 @@ export default defineEventHandler(async (event) => {
   const lastmod = new Date().toISOString().split('T')[0]
 
   // Адрес страницы в конкретной локали: /ru, /ru/search, /en/blog/slug
-  const localizedUrl = (path: string, code: string) => `${baseUrl}/${code}${path === '/' ? '' : path}`
+  const localizedUrl = (path: string | Record<string, string>, code: string) => {
+    const localePath = typeof path === 'string' ? path : path[code] || path[defaultLocale]!
+    return `${baseUrl}/${code}${localePath === '/' ? '' : localePath}`
+  }
 
   // Каждая страница попадает в sitemap в каждой локали,
   // и у каждой записи есть hreflang-ссылки на все языковые версии + x-default
-  const renderUrls = (path: string, pageLastmod: string, changefreq: string, priority: string) => {
+  const renderUrls = (path: string | Record<string, string>, pageLastmod: string, changefreq: string, priority: string) => {
     const alternates = locales
       .map((locale) => `
     <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localizedUrl(path, locale.code))}" />`)

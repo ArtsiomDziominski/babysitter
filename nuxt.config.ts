@@ -33,6 +33,8 @@ export default defineNuxtConfig({
         // Старые адреса без префикса редиректит server/middleware/locale-redirect.ts
         strategy: 'prefix',
         baseUrl: process.env.SITE_URL || siteConfig.url,
+        // Локализованные адреса страниц задаются в definePageMeta({ i18n: { paths } })
+        customRoutes: 'meta',
         detectBrowserLanguage: {
             useCookie: true,
             cookieKey: 'i18n_redirected',

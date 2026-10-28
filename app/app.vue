@@ -22,6 +22,8 @@ const currentLocale = computed(() => {
 // canonical страницы задают сами, поэтому i18n-canonical отсюда не берём
 const localeHead = useLocaleHead({ seo: true })
 const hreflangLinks = computed(() => (localeHead.value.link || []).filter((link: any) => link.hreflang))
+// og:locale (ru_RU) и og:locale:alternate для остальных языков
+const ogLocaleMeta = computed(() => localeHead.value.meta || [])
 
 addStructuredData(getOrganizationSchema())
 
@@ -29,7 +31,8 @@ useHead({
   htmlAttrs: {
     lang: () => currentLocale.value.split('-')[0]
   },
-  link: hreflangLinks
+  link: hreflangLinks,
+  meta: ogLocaleMeta
 })
 
 onMounted(() => {
