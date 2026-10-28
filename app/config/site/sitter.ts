@@ -1,7 +1,8 @@
 export default {
     name: 'Sitter.ge',
     url: 'https://sitter.ge',
-    logo: '/logo.jpg',
+    logo: '/logo.png',
+    icon: '/logo.svg',
     description: 'Sitter is a platform for finding babysitters near you',
     keywords: [
         'babysitters', 'babysitter', 'babysitting', 'babysitter near me', 'babysitter near you', 'babysitter near my location',

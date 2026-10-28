@@ -9,6 +9,7 @@ export const useSiteConfig = () => {
     name: string
     url: string
     logo: string
+    icon: string
     description: string
     keywords: string[]
     author: string
