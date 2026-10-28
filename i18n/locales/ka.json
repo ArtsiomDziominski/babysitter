@@ -23,7 +23,12 @@
     "openMenu": "მენიუს გახსნა",
     "home": "Sitter.ge — მთავარი",
     "mainNav": "მთავარი ნავიგაცია",
-    "mobileNav": "მობილური ნავიგაცია"
+    "mobileNav": "მობილური ნავიგაცია",
+    "nav": {
+      "kids": "ჩემი შვილები",
+      "sitterProfile": "ჩემი პროფილი",
+      "chooseRole": "როლის არჩევა"
+    }
   },
   "cities": {
     "minsk": "მინსკი",

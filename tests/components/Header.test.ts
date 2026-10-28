@@ -6,6 +6,7 @@ import { UserRole } from '../../app/const/roles'
 
 type HeaderTestOptions = {
   isAuthenticated?: boolean
+  role?: UserRole | null
   locales?: Array<{ code: string; name: string }>
   path?: string
   colorMode?: 'light' | 'dark'
@@ -21,8 +22,9 @@ const createHeaderMount = (options: HeaderTestOptions = {}) => {
   const authStore = {
     isAuthenticated: options.isAuthenticated ?? false,
     currentUser: options.isAuthenticated
-      ? { name: 'Jane Doe', avatar: '/avatar.jpg', role: UserRole.PARENT }
+      ? { name: 'Jane Doe', avatar: 'avatars/1.jpeg', role: options.role === undefined ? UserRole.PARENT : options.role }
       : null,
+    avatarSrc: options.isAuthenticated ? 'https://cdn.example.com/avatar.jpg' : undefined,
     loadAvatarUrl: vi.fn(),
     logout: vi.fn(),
   }
@@ -117,11 +119,26 @@ describe('Header', () => {
 
     expect(wrapper.find('.hdr-right a.btn').exists()).toBe(false)
     expect(wrapper.find('.acc img').attributes('alt')).toBe('Jane Doe')
+    expect(wrapper.find('.acc img').attributes('src')).toBe('https://cdn.example.com/avatar.jpg')
 
     const items = account.props('items') as any[]
     expect(items[0][0].label).toBe('Jane Doe')
-    expect(items[1].map((item: any) => item.to)).toEqual(['/ru/account/profile', '/ru/account/orders', '/ru/account/messages'])
+    expect(items[1].map((item: any) => item.to)).toEqual(['/ru/account/profile', '/ru/account/booking/kids', '/ru/account/orders', '/ru/account/messages'])
     expect(items[2][0].label).toBe('t:header.logout')
+  })
+
+  it('shows nav links for the user role', () => {
+    const navHrefs = (role: UserRole | null) => {
+      const { wrapper } = createHeaderMount({ isAuthenticated: true, role })
+      const hrefs = wrapper.find('nav.nav').findAll('a').map(a => a.attributes('href'))
+      vi.unstubAllGlobals()
+      return hrefs
+    }
+
+    expect(navHrefs(UserRole.PARENT)).toEqual(['/ru/search', '/ru/account/orders', '/ru/account/messages'])
+    expect(navHrefs(UserRole.BABYSITTER)).toEqual(['/ru/account/booking/babysitter', '/ru/account/orders', '/ru/account/messages'])
+    expect(navHrefs(UserRole.ADMIN)).toEqual(['/ru/search', '/ru/account/orders', '/ru/account/messages'])
+    expect(navHrefs(null)).toEqual(['/ru/search', '/ru/choose-role', '/ru/blog'])
   })
 
   it('changes locale from the language menu and the mobile menu', async () => {

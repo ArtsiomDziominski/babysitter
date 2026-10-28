@@ -23,7 +23,12 @@
     "openMenu": "Open menu",
     "home": "Sitter.ge home",
     "mainNav": "Main navigation",
-    "mobileNav": "Mobile navigation"
+    "mobileNav": "Mobile navigation",
+    "nav": {
+      "kids": "My kids",
+      "sitterProfile": "My profile",
+      "chooseRole": "Choose a role"
+    }
   },
   "cities": {
     "minsk": "Minsk",

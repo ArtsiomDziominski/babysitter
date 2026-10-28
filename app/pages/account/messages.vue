@@ -30,7 +30,7 @@
             :chat-avatar="activeChat ? activeChat.avatar : undefined"
             :chat-icon="activeChat ? activeChat.icon : undefined"
             :chat-name="activeChat ? activeChat.name : undefined"
-            :current-user-avatar="authStore.currentUser?.avatar"
+            :current-user-avatar="authStore.avatarSrc"
             :current-user-name="authStore.currentUser?.name"
             :has-more="activeChat && typeof activeChat.id === 'number' ? (messagesPagination.get(activeChat.id)?.hasMore ?? false) : false"
             :loading="loadingMore"

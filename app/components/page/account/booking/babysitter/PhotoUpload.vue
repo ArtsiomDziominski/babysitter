@@ -85,7 +85,7 @@ const hasPhoto = computed(() => {
 })
 
 const photoSrc = computed(() => {
-  return photoPreview.value || authStore.currentUser?.avatar || null
+  return photoPreview.value || authStore.avatarSrc || null
 })
 
 const ALLOWED_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
