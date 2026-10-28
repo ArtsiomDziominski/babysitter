@@ -96,7 +96,7 @@ const { t } = useI18n()
 
         <article class="tile t-more">
           <h3>{{ t('home.babysitterCan.more') }}</h3>
-          <NuxtLink to="/search" class="btn btn-coral">{{ t('home.babysitterCan.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLink>
+          <NuxtLinkLocale to="/search" class="btn btn-coral">{{ t('home.babysitterCan.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLinkLocale>
         </article>
       </div>
     </div>

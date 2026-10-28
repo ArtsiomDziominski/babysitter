@@ -8,9 +8,7 @@
 </template>
 
 <script setup lang="ts">
-const { locale, locales, defaultLocale, setLocale } = useI18n()
-const route = useRoute()
-const siteConfig = useSiteConfig()
+const { locale, locales } = useI18n()
 const notifications = useNotifications()
 const { getOrganizationSchema, addStructuredData } = useStructuredData()
 
@@ -20,31 +18,10 @@ const currentLocale = computed(() => {
   return typeof localeString === 'string' ? localeString : 'ka'
 })
 
-const hreflangLinks = computed(() => {
-  const basePath = route.path
-  const links = locales.value.map((loc: any) => ({
-    rel: 'alternate',
-    hreflang: loc.iso || loc.code,
-    href: `${siteConfig.url}${basePath}?lang=${loc.code}`
-  }))
-  
-  links.push({
-    rel: 'alternate',
-    hreflang: 'x-default',
-    href: `${siteConfig.url}${basePath}?lang=${defaultLocale}`
-  })
-  
-  return links
-})
-
-watch(() => route.query.lang, (langParam) => {
-  if (langParam && typeof langParam === 'string') {
-    const validLocale = locales.value.find((l: any) => l.code === langParam)
-    if (validLocale && locale.value !== langParam) {
-      setLocale(langParam as 'ka' | 'en' | 'ru' | 'uk')
-    }
-  }
-}, { immediate: true })
+// hreflang-ссылки на ту же страницу в каждой локали (/ru/..., /en/...) + x-default.
+// canonical страницы задают сами, поэтому i18n-canonical отсюда не берём
+const localeHead = useLocaleHead({ seo: true })
+const hreflangLinks = computed(() => (localeHead.value.link || []).filter((link: any) => link.hreflang))
 
 addStructuredData(getOrganizationSchema())
 

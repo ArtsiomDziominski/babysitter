@@ -315,13 +315,14 @@ const clearFilters = () => {
 
 
 const router = useRouter()
+const localePath = useLocalePath()
 
 const goToPage = (page: number) => {
   currentPage.value = page
 }
 
 const navigateToPost = (slug: string) => {
-  router.push(`/blog/${slug}`)
+  router.push(localePath(`/blog/${slug}`))
 }
 
 onUnmounted(() => {

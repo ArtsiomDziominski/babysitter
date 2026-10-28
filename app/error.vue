@@ -23,7 +23,7 @@
           <UButton
             color="primary"
             size="xl"
-            to="/"
+            :to="localePath('/')"
             icon="i-lucide-home"
             class="min-w-[200px]"
           >
@@ -33,7 +33,7 @@
             color="neutral"
             variant="outline"
             size="xl"
-            to="/search"
+            :to="localePath('/search')"
             icon="i-lucide-search"
             class="min-w-[200px]"
           >
@@ -84,6 +84,8 @@ defineProps({
     default: null
   }
 })
+
+const localePath = useLocalePath()
 </script>
 
 <style scoped>

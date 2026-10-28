@@ -82,7 +82,7 @@
         </p>
         <UButton
           variant="outline"
-          @click="router.push('/search')"
+          @click="router.push(localePath('/search'))"
         >
           {{ $t('account.booking.create.backToSearch') }}
         </UButton>
@@ -101,6 +101,7 @@ import { useBookingPrice } from '~/composables/useBookingPrice'
 
 const route = useRoute()
 const router = useRouter()
+const localePath = useLocalePath()
 const sitterId = route.params.id as string
 const babysitterApi = useBabysitter()
 const bookingsApi = useBookings()
@@ -195,17 +196,17 @@ const breadcrumbItems = computed(() => [
   {
     label: t('common.home'),
     icon: 'i-lucide-home',
-    to: '/'
+    to: localePath('/')
   },
   {
     label: t('common.search'),
     icon: 'i-lucide-search',
-    to: '/search'
+    to: localePath('/search')
   },
   {
     label: sitter.value?.name || t('common.sitter'),
     icon: 'i-lucide-user',
-    to: `/sitter/${sitterId}`
+    to: localePath(`/sitter/${sitterId}`)
   },
   {
     label: t('common.booking'),
@@ -214,7 +215,7 @@ const breadcrumbItems = computed(() => [
 ])
 
 const handleCancel = () => {
-  router.push(`/sitter/${sitterId}`)
+  router.push(localePath(`/sitter/${sitterId}`))
 }
 
 const handleSubmit = async () => {
@@ -322,7 +323,7 @@ const handleSubmit = async () => {
       color: 'success'
     })
 
-    router.push('/account/orders')
+    router.push(localePath('/account/orders'))
   } catch (error: any) {
     console.error('Ошибка создания бронирования:', error)
     toast.add({

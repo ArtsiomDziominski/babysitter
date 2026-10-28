@@ -24,10 +24,11 @@ interface Props {
 
 const props = defineProps<Props>()
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const navItems = computed(() => props.items.map(item => ({
   label: t(item.label),
-  to: item.to,
+  to: localePath(item.to),
   active: props.activeSection === item.section
 })))
 </script>

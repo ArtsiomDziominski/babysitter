@@ -142,79 +142,46 @@ export default defineEventHandler(async (event) => {
   }
 
   const locales = (siteConfig.locales as Array<{ code: string; iso?: string }>).filter((loc) => loc.code)
+  const defaultLocale = siteConfig.defaultLocale as string
   const lastmod = new Date().toISOString().split('T')[0]
+
+  // Адрес страницы в конкретной локали: /ru, /ru/search, /en/blog/slug
+  const localizedUrl = (path: string, code: string) => `${baseUrl}/${code}${path === '/' ? '' : path}`
+
+  // Каждая страница попадает в sitemap в каждой локали,
+  // и у каждой записи есть hreflang-ссылки на все языковые версии + x-default
+  const renderUrls = (path: string, pageLastmod: string, changefreq: string, priority: string) => {
+    const alternates = locales
+      .map((locale) => `
+    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localizedUrl(path, locale.code))}" />`)
+      .join('') + `
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(localizedUrl(path, defaultLocale))}" />`
+
+    return locales
+      .map((locale) => `
+  <url>
+    <loc>${escapeXml(localizedUrl(path, locale.code))}</loc>
+    <lastmod>${pageLastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>${alternates}
+  </url>`)
+      .join('')
+  }
 
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">`
 
   for (const page of publicPages) {
-    const fullUrl = `${baseUrl}${page.path}`
-    sitemap += `
-  <url>
-    <loc>${escapeXml(fullUrl)}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>`
-
-    for (const locale of locales) {
-      const localeUrl = `${baseUrl}${page.path}?lang=${locale.code}`
-      sitemap += `
-    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localeUrl)}" />`
-    }
-
-    const defaultUrl = `${baseUrl}${page.path}?lang=${siteConfig.defaultLocale}`
-    sitemap += `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`
-
-    sitemap += `
-  </url>`
+    sitemap += renderUrls(page.path, lastmod, page.changefreq, page.priority)
   }
 
   for (const sitterPage of sitterPages) {
-    const fullUrl = `${baseUrl}${sitterPage.path}`
-    sitemap += `
-  <url>
-    <loc>${escapeXml(fullUrl)}</loc>
-    <lastmod>${sitterPage.lastmod || lastmod}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>`
-
-    for (const locale of locales) {
-      const localeUrl = `${baseUrl}${sitterPage.path}?lang=${locale.code}`
-      sitemap += `
-    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localeUrl)}" />`
-    }
-
-    const defaultUrl = `${baseUrl}${sitterPage.path}?lang=${siteConfig.defaultLocale}`
-    sitemap += `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`
-
-    sitemap += `
-  </url>`
+    sitemap += renderUrls(sitterPage.path, sitterPage.lastmod || lastmod, 'weekly', '0.8')
   }
 
   for (const blogPage of blogPages) {
-    const fullUrl = `${baseUrl}${blogPage.path}`
-    sitemap += `
-  <url>
-    <loc>${escapeXml(fullUrl)}</loc>
-    <lastmod>${blogPage.lastmod || lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>`
-
-    for (const locale of locales) {
-      const localeUrl = `${baseUrl}${blogPage.path}?lang=${locale.code}`
-      sitemap += `
-    <xhtml:link rel="alternate" hreflang="${escapeXml(locale.iso || locale.code)}" href="${escapeXml(localeUrl)}" />`
-    }
-
-    const defaultUrl = `${baseUrl}${blogPage.path}?lang=${siteConfig.defaultLocale}`
-    sitemap += `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(defaultUrl)}" />`
-
-    sitemap += `
-  </url>`
+    sitemap += renderUrls(blogPage.path, blogPage.lastmod || lastmod, 'monthly', '0.7')
   }
 
   sitemap += `

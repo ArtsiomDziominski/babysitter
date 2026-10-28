@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 const anna = { skin: '#f5c7a9', skin2: '#e7ad8c', hair: '#3b2620' }
@@ -27,7 +28,7 @@ const search = () => {
   const query: Record<string, string> = {}
   if (place.value) query.city = place.value
   if (date.value) query.date = date.value
-  navigateTo({ path: '/search', query })
+  navigateTo(localePath({ path: '/search', query }))
 }
 
 const onDateBlur = () => {
@@ -104,14 +105,14 @@ const onPointerMove = (event: PointerEvent) => {
 
           <div class="cities">
             <span class="hide-m">{{ t('home.hero.popular') }}</span>
-            <NuxtLink v-for="city in cities" :key="city" :to="{ path: '/search', query: { city } }">{{ city }}</NuxtLink>
+            <NuxtLinkLocale v-for="city in cities" :key="city" :to="{ path: '/search', query: { city } }">{{ city }}</NuxtLinkLocale>
           </div>
 
-          <NuxtLink to="/register" class="sitter-link">
+          <NuxtLinkLocale to="/register" class="sitter-link">
             <span class="sb" aria-hidden="true"><UIcon name="i-mdi-heart" class="ico" /></span>
             <span>{{ t('home.hero.babysitterPrompt') }} <strong>{{ t('home.hero.createProfile') }}</strong></span>
             <UIcon name="i-lucide-arrow-right" class="ico" style="color:#fff" aria-hidden="true" />
-          </NuxtLink>
+          </NuxtLinkLocale>
         </div>
 
         <div ref="scene" class="scene" aria-hidden="true">

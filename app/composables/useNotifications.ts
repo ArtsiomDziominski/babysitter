@@ -12,6 +12,8 @@ export const useNotifications = () => {
   const router = useRouter()
   const toast = useToast()
   const { t } = useI18n()
+  const localePath = useLocalePath()
+  const getRouteBaseName = useRouteBaseName()
   const websocket = useWebSocket()
 
   const handleNewMessageNotification = (notification: NotificationData) => {
@@ -21,7 +23,7 @@ export const useNotifications = () => {
 
     const conversationId = notification.conversationId
     const route = useRoute()
-    const isOnMessagesPage = route.path === '/account/messages'
+    const isOnMessagesPage = getRouteBaseName(route) === 'account-messages'
     const activeChatId = route.query.chat
     const isActiveChat = isOnMessagesPage && activeChatId && String(activeChatId) === String(conversationId)
 
@@ -35,7 +37,7 @@ export const useNotifications = () => {
       description: messagePreview.length > 50 ? messagePreview.substring(0, 50) + '...' : messagePreview,
       color: 'neutral',
       onClick: () => {
-        router.push(`/account/messages?chat=${conversationId}`)
+        router.push(localePath(`/account/messages?chat=${conversationId}`))
       }
     })
   }

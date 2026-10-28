@@ -26,7 +26,7 @@
       v-else-if="orders.length === 0"
       icon="i-lucide-clipboard-list"
       :title="$t('account.orders.empty')"
-      :actions="[{ label: $t('header.bookings'), to: '/search', icon: 'i-lucide-search' }]"
+      :actions="[{ label: $t('header.bookings'), to: localePath('/search'), icon: 'i-lucide-search' }]"
       variant="naked"
       class="py-12"
     />
@@ -65,6 +65,7 @@ definePageMeta({
 })
 
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
 const bookingsApi = useBookings()
 const toast = useToast()
 const authStore = useAuthStore()
@@ -302,7 +303,7 @@ const handleAction = async (orderId: number, action: string) => {
       }
       
       if (sitterId) {
-        router.push(`/sitter/${sitterId}/book`)
+        router.push(localePath(`/sitter/${sitterId}/book`))
       } else {
         toast.add({
           title: t('account.orders.actions.repeatError'),

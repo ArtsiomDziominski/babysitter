@@ -13,7 +13,7 @@
       </div>
     </div>
     <div v-else-if="articles.length > 0" class="flex flex-wrap gap-6">
-      <NuxtLink
+      <NuxtLinkLocale
         v-for="article in articles"
         :key="article.id"
         :to="`/blog/${article.slug}`"
@@ -22,7 +22,7 @@
         <BlogCard
           :post="article"
         />
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
     <div v-else class="text-center py-8 text-muted">
       {{ $t('blog.relatedArticles.notFound') }}
