@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
 const authStore = useAuthStore()
 
 const avatarSrc = computed(() => {
-  return props.preview || props.src || authStore.currentUser?.avatar
+  return props.preview || props.src || authStore.avatarSrc
 })
 
 const avatarAlt = computed(() => {

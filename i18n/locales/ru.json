@@ -23,7 +23,12 @@
     "openMenu": "Открыть меню",
     "home": "Sitter.ge — на главную",
     "mainNav": "Основная навигация",
-    "mobileNav": "Мобильная навигация"
+    "mobileNav": "Мобильная навигация",
+    "nav": {
+      "kids": "Мои дети",
+      "sitterProfile": "Моя анкета",
+      "chooseRole": "Выбрать роль"
+    }
   },
   "cities": {
     "minsk": "Минск",

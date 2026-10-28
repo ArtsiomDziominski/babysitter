@@ -57,13 +57,7 @@ const ALLOWED_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
 const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']
 const MAX_FILE_SIZE = 5 * 1024 * 1024
 
-// avatarUrl приходит только при входе/регистрации; после перезагрузки страницы
-// ссылка на фото лежит в avatar (store подменяет ключ на presigned URL)
-const avatarUrl = computed(() => {
-  const user = authStore.currentUser
-  if (user?.avatarUrl) return user.avatarUrl
-  return user?.avatar?.startsWith('http') ? user.avatar : undefined
-})
+const avatarUrl = computed(() => authStore.avatarSrc)
 const hasAvatar = computed(() => !!authStore.currentUser?.avatar || !!avatarUrl.value || !!avatarPreview.value)
 
 const handleFileSelect = async (event: Event) => {

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UserRole } from '~/const/roles'
+
 const localePath = useLocalePath()
 const { t, locale, locales, setLocale } = useI18n()
 const authStore = useAuthStore()
@@ -15,11 +17,43 @@ const localizedBecomeSitterUrls: Record<string, string> = {
 
 const becomeSitterUrl = computed(() => localizedBecomeSitterUrls[locale.value] || localizedBecomeSitterUrls.ru)
 
-const navLinks = computed(() => [
-  { to: '/search', label: t('header.findSitter') },
-  { to: becomeSitterUrl.value, label: t('header.becomeSitter') },
-  { to: '/blog', label: t('header.blog') }
-])
+const role = computed(() => authStore.currentUser?.role)
+
+// Role-specific page in the account: parents fill in their kids, babysitters their profile
+const roleLink = computed(() => {
+  if (role.value === UserRole.PARENT) return { to: '/account/booking/kids', label: t('header.nav.kids'), icon: 'i-lucide-baby' }
+  if (role.value === UserRole.BABYSITTER) return { to: '/account/booking/babysitter', label: t('header.nav.sitterProfile'), icon: 'i-lucide-id-card' }
+  return null
+})
+
+const navLinks = computed(() => {
+  if (!authStore.isAuthenticated) {
+    return [
+      { to: '/search', label: t('header.findSitter') },
+      { to: becomeSitterUrl.value, label: t('header.becomeSitter') },
+      { to: '/blog', label: t('header.blog') }
+    ]
+  }
+  if (!role.value) {
+    return [
+      { to: '/search', label: t('header.findSitter') },
+      { to: '/choose-role', label: t('header.nav.chooseRole') },
+      { to: '/blog', label: t('header.blog') }
+    ]
+  }
+  if (role.value === UserRole.BABYSITTER) {
+    return [
+      { to: '/account/booking/babysitter', label: t('header.nav.sitterProfile') },
+      { to: '/account/orders', label: t('header.menu.order') },
+      { to: '/account/messages', label: t('header.messages') }
+    ]
+  }
+  return [
+    { to: '/search', label: t('header.findSitter') },
+    { to: '/account/orders', label: t('header.menu.order') },
+    { to: '/account/messages', label: t('header.messages') }
+  ]
+})
 
 // On the home page the first link is highlighted as the main action, elsewhere the current section is.
 const isOn = (to: string, index: number) => {
@@ -38,9 +72,10 @@ const localeItems = computed(() => localeOptions.value.map(l => ({
 })))
 
 const accountMenuItems = computed(() => [
-  [{ label: authStore.currentUser?.name || '', avatar: { src: authStore.currentUser?.avatar }, type: 'label' as const }],
+  [{ label: authStore.currentUser?.name || '', avatar: { src: authStore.avatarSrc }, type: 'label' as const }],
   [
     { label: t('header.menu.profile'), icon: 'i-lucide-user', to: localePath('/account/profile') },
+    ...(roleLink.value ? [{ label: roleLink.value.label, icon: roleLink.value.icon, to: localePath(roleLink.value.to) }] : []),
     { label: t('header.menu.order'), icon: 'i-lucide-clipboard-list', to: localePath('/account/orders') },
     { label: t('header.menu.messages'), icon: 'i-lucide-message-square', to: localePath('/account/messages') }
   ],
@@ -107,7 +142,7 @@ onBeforeUnmount(() => {
           <NuxtLink v-if="!authStore.isAuthenticated" :to="localePath('/login')" class="btn btn-ink">{{ t('header.login') }}</NuxtLink>
           <UDropdownMenu v-else :items="accountMenuItems" :content="{ align: 'end' }">
             <button type="button" class="acc" :aria-label="authStore.currentUser?.name || t('header.profile')">
-              <img v-if="authStore.currentUser?.avatar" :src="authStore.currentUser.avatar" :alt="authStore.currentUser?.name">
+              <img v-if="authStore.avatarSrc" :src="authStore.avatarSrc" :alt="authStore.currentUser?.name">
               <UIcon v-else name="i-lucide-user" class="ico" />
             </button>
           </UDropdownMenu>
@@ -142,7 +177,6 @@ onBeforeUnmount(() => {
           <NuxtLink v-if="!authStore.isAuthenticated" :to="localePath('/login')" class="btn btn-ink">{{ t('header.login') }}</NuxtLink>
           <template v-else>
             <NuxtLink :to="localePath('/account/profile')">{{ t('header.menu.profile') }}</NuxtLink>
-            <NuxtLink :to="localePath('/account/messages')">{{ t('header.menu.messages') }}</NuxtLink>
             <button type="button" @click="handleLogout">{{ t('header.logout') }}</button>
           </template>
         </ClientOnly>

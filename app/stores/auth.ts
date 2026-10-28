@@ -55,6 +55,15 @@ export const useAuthStore = defineStore('auth', () => {
     const isAuthenticated = computed(() => isAuth.value && !!accessToken.value)
     const currentUser = computed(() => user.value)
 
+    // avatar holds the storage key until loadAvatarUrl swaps it for a presigned URL;
+    // avatarUrl is the presigned URL returned on login/registration
+    const isAbsoluteUrl = (value?: string) => !!value && /^(https?:|data:|blob:)/.test(value)
+    const avatarSrc = computed(() => {
+        if (isAbsoluteUrl(user.value?.avatarUrl)) return user.value.avatarUrl
+        if (isAbsoluteUrl(user.value?.avatar)) return user.value.avatar
+        return undefined
+    })
+
     function setToken(token: string | null) {
         accessToken.value = token
         tokenCookie.value = token
@@ -211,6 +220,7 @@ export const useAuthStore = defineStore('auth', () => {
         setRole,
         setToken,
         setChildren,
+        avatarSrc,
         loadAvatarUrl,
         fetchProfile,
         restoreAuth,
