@@ -1,120 +1,152 @@
-<template>
-  <UHeader to="/" mode="slideover" :ui="{ title: 'items-center gap-2' }">
-    <template #title>
-      <img :src="siteConfig.logo" :alt="siteConfig.name" class="size-8 rounded-md object-contain"/>
-      <span class="text-lg font-semibold text-highlighted">{{ siteConfig.name }}</span>
-    </template>
-
-    <UNavigationMenu :items="navItems" variant="link" />
-
-    <template #right>
-      <ClientOnly>
-        <USelect
-            v-if="localeOptions.length > 0"
-            :model-value="locale"
-            :items="localeOptions"
-            labelKey="name"
-            valueKey="code"
-            variant="ghost"
-            icon="i-lucide-globe"
-            class="max-lg:hidden w-36"
-            @update:model-value="(value) => setLocale(value as 'ka' | 'en' | 'ru' | 'uk')"
-        />
-        <template #fallback>
-          <div class="max-lg:hidden w-36 h-8 rounded-md bg-elevated animate-pulse"></div>
-        </template>
-      </ClientOnly>
-
-      <UColorModeButton />
-
-      <ClientOnly>
-        <UButton v-if="!authStore.isAuthenticated" color="primary" to="/login" class="max-lg:hidden">
-          {{ $t('header.login') }}
-        </UButton>
-        <UDropdownMenu v-else :items="accountMenuItems" :content="{ align: 'end' }">
-          <UAvatar
-              :src="authStore.currentUser?.avatar"
-              :alt="authStore.currentUser?.name"
-              size="md"
-              class="cursor-pointer ring-2 ring-transparent hover:ring-primary transition"
-          />
-        </UDropdownMenu>
-        <template #fallback>
-          <div class="size-8 rounded-full bg-elevated animate-pulse"></div>
-        </template>
-      </ClientOnly>
-    </template>
-
-    <template #body>
-      <MobileMenu :nav-links="navLinks" />
-    </template>
-  </UHeader>
-</template>
-
 <script setup lang="ts">
-const { locale, locales, t, setLocale } = useI18n()
+const localePath = useLocalePath()
+const { t, locale, locales, setLocale } = useI18n()
 const authStore = useAuthStore()
-const siteConfig = useSiteConfig()
+const colorMode = useColorMode()
+const route = useRoute()
 
-const navLinks = computed(() => {
-  const nav = [
-    { to: '/search', label: t('header.bookings') },
-    { to: '/blog', label: t('header.blog') }
-  ]
-  if (authStore.isAuthenticated) nav.push({ to: '/account/messages', label: t('header.messages') })
-  return nav
-})
+const localizedBecomeSitterUrls: Record<string, string> = {
+  ru: '/kak-stat-bebisitterom',
+  en: '/how-to-become-babysitter',
+  uk: '/yak-staty-bebisiterom',
+  be: '/yak-stats-bebisiteram',
+  ka: '/rogor-gavides-bebisiteri'
+}
 
-const navItems = computed(() => navLinks.value.map(link => ({ label: link.label, to: link.to })))
+const becomeSitterUrl = computed(() => localizedBecomeSitterUrls[locale.value] || localizedBecomeSitterUrls.ru)
 
-onMounted(() => {
-  authStore.loadAvatarUrl()
-})
+const navLinks = computed(() => [
+  { to: '/search', label: t('header.findSitter') },
+  { to: becomeSitterUrl.value, label: t('header.becomeSitter') },
+  { to: '/blog', label: t('header.blog') }
+])
 
-const localeOptions = computed(() => locales.value ?? [])
+// On the home page the first link is highlighted as the main action, elsewhere the current section is.
+const isOn = (to: string, index: number) => {
+  const target = localePath(to)
+  if (route.path === localePath('/')) return index === 0
+  return route.path === target || route.path.startsWith(`${target}/`)
+}
 
-const accountMenuItems = computed(() => {
-  const user = authStore.currentUser
+type LocaleCode = 'ka' | 'en' | 'ru' | 'uk'
+const localeOptions = computed(() => (locales.value ?? []) as Array<{ code: LocaleCode; name?: string }>)
+const currentLocaleName = computed(() => localeOptions.value.find(l => l.code === locale.value)?.name || locale.value)
 
-  return [
-    [
-      {
-        label: user?.name || '',
-        avatar: {
-          src: user?.avatar
-        },
-        type: 'label'
-      }
-    ],
-    [
-      {
-        label: t('header.menu.profile'),
-        icon: 'i-lucide-user',
-        to: '/account/profile'
-      },
-      {
-        label: t('header.menu.order'),
-        icon: 'i-lucide-clipboard-list',
-        to: '/account/orders'
-      },
-      {
-        label: t('header.menu.messages'),
-        icon: 'i-lucide-message-square',
-        to: '/account/messages'
-      }
-    ],
-    [
-      {
-        label: t('header.logout'),
-        icon: 'i-lucide-log-out',
-        onSelect: () => handleLogout()
-      }
-    ]
-  ]
-})
+const localeItems = computed(() => localeOptions.value.map(l => ({
+  label: l.name || l.code,
+  onSelect: () => setLocale(l.code)
+})))
+
+const accountMenuItems = computed(() => [
+  [{ label: authStore.currentUser?.name || '', avatar: { src: authStore.currentUser?.avatar }, type: 'label' as const }],
+  [
+    { label: t('header.menu.profile'), icon: 'i-lucide-user', to: localePath('/account/profile') },
+    { label: t('header.menu.order'), icon: 'i-lucide-clipboard-list', to: localePath('/account/orders') },
+    { label: t('header.menu.messages'), icon: 'i-lucide-message-square', to: localePath('/account/messages') }
+  ],
+  [{ label: t('header.logout'), icon: 'i-lucide-log-out', onSelect: () => handleLogout() }]
+])
 
 const handleLogout = () => {
   authStore.logout()
-  navigateTo('/')
+  navigateTo(localePath('/'))
 }
+
+const toggleTheme = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
+const menuOpen = ref(false)
+watch(() => route.fullPath, () => { menuOpen.value = false })
+
+const scrolled = ref(false)
+const onScroll = () => { scrolled.value = window.scrollY > 8 }
+
+onMounted(() => {
+  authStore.loadAvatarUrl()
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
+
+<template>
+  <header class="hdr" :class="{ scrolled }">
+    <div class="wrap">
+      <NuxtLink :to="localePath('/')" class="brand" :aria-label="t('header.home')">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="18" fill="#E8573A" />
+          <path fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" d="M14 29 32 15l18 14" />
+          <path fill="#fff" d="M32 51c-8.4-5.6-12.5-10.2-12.5-15.3 0-3.7 2.9-6.6 6.4-6.6 2.6 0 4.8 1.4 6.1 3.6 1.3-2.2 3.5-3.6 6.1-3.6 3.5 0 6.4 2.9 6.4 6.6 0 5.1-4.1 9.7-12.5 15.3Z" />
+        </svg>
+        <span>Sitter<span class="ge">.ge</span></span>
+      </NuxtLink>
+
+      <nav class="nav" :aria-label="t('header.mainNav')">
+        <NuxtLink v-for="(link, index) in navLinks" :key="link.to" :to="localePath(link.to)" :class="{ on: isOn(link.to, index) }">{{ link.label }}</NuxtLink>
+      </nav>
+
+      <div class="hdr-right">
+        <UDropdownMenu v-if="localeItems.length > 0" :items="localeItems" :content="{ align: 'end' }">
+          <button type="button" class="chipbtn" :aria-label="`${t('header.language')}: ${currentLocaleName}`">
+            <UIcon name="i-lucide-globe" class="ico" />
+            {{ currentLocaleName }}
+            <UIcon name="i-lucide-chevron-down" class="size-3" />
+          </button>
+        </UDropdownMenu>
+
+        <button type="button" class="iconbtn" :aria-label="t('header.toggleTheme')" @click="toggleTheme">
+          <UIcon name="i-lucide-sun" class="ico sun" />
+          <UIcon name="i-lucide-moon" class="ico moon" />
+        </button>
+
+        <ClientOnly>
+          <NuxtLink v-if="!authStore.isAuthenticated" :to="localePath('/login')" class="btn btn-ink">{{ t('header.login') }}</NuxtLink>
+          <UDropdownMenu v-else :items="accountMenuItems" :content="{ align: 'end' }">
+            <button type="button" class="acc" :aria-label="authStore.currentUser?.name || t('header.profile')">
+              <img v-if="authStore.currentUser?.avatar" :src="authStore.currentUser.avatar" :alt="authStore.currentUser?.name">
+              <UIcon v-else name="i-lucide-user" class="ico" />
+            </button>
+          </UDropdownMenu>
+        </ClientOnly>
+
+        <button
+          type="button"
+          class="iconbtn burger"
+          :aria-label="t('header.openMenu')"
+          :aria-expanded="menuOpen"
+          aria-controls="site-mnav"
+          @click="menuOpen = !menuOpen"
+        >
+          <UIcon name="i-lucide-menu" class="ico" />
+        </button>
+      </div>
+
+      <nav id="site-mnav" class="mnav" :class="{ open: menuOpen }" :aria-label="t('header.mobileNav')">
+        <NuxtLink v-for="link in navLinks" :key="link.to" :to="localePath(link.to)">{{ link.label }}</NuxtLink>
+        <div v-if="localeOptions.length > 0" class="langs" :aria-label="t('header.language')">
+          <button
+            v-for="l in localeOptions"
+            :key="l.code"
+            type="button"
+            :class="{ on: l.code === locale }"
+            @click="setLocale(l.code)"
+          >
+            {{ l.name || l.code }}
+          </button>
+        </div>
+        <ClientOnly>
+          <NuxtLink v-if="!authStore.isAuthenticated" :to="localePath('/login')" class="btn btn-ink">{{ t('header.login') }}</NuxtLink>
+          <template v-else>
+            <NuxtLink :to="localePath('/account/profile')">{{ t('header.menu.profile') }}</NuxtLink>
+            <NuxtLink :to="localePath('/account/messages')">{{ t('header.menu.messages') }}</NuxtLink>
+            <button type="button" @click="handleLogout">{{ t('header.logout') }}</button>
+          </template>
+        </ClientOnly>
+      </nav>
+    </div>
+  </header>
+</template>

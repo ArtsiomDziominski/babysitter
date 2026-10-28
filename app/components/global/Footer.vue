@@ -1,43 +1,5 @@
-<template>
-  <UFooter class="border-t border-default bg-muted/40" :ui="{ top: 'border-b border-default' }">
-    <template #top>
-      <UContainer>
-        <UFooterColumns :columns="columns">
-          <template #left>
-            <NuxtLink to="/" class="inline-flex items-center gap-2 text-lg font-semibold text-highlighted">
-              <img :src="siteConfig.logo" :alt="siteConfig.name" class="size-9 rounded-md object-contain"/>
-              <span>{{ siteConfig.name }}</span>
-            </NuxtLink>
-            <p class="mt-4 max-w-xs text-sm text-muted">
-              {{ $t('footer.description') }}
-            </p>
-          </template>
-        </UFooterColumns>
-      </UContainer>
-    </template>
-
-    <template #left>
-      <p class="text-sm text-muted">© {{ currentYear }}, Sitter</p>
-    </template>
-
-    <UNavigationMenu :items="legalItems" variant="link" :ui="{ list: 'flex-wrap justify-center' }" />
-
-    <template #right>
-      <UButton
-          v-for="social in socials"
-          :key="social.icon"
-          :icon="social.icon"
-          :to="social.to"
-          :aria-label="social.label"
-          color="neutral"
-          variant="ghost"
-      />
-    </template>
-  </UFooter>
-</template>
-
 <script setup lang="ts">
-const siteConfig = useSiteConfig()
+const localePath = useLocalePath()
 const { locale, t } = useI18n()
 const currentYear = new Date().getFullYear()
 
@@ -63,23 +25,6 @@ const infoLinks = [
   { to: '/help', label: 'footer.info.help' }
 ]
 
-const socials = [
-  { icon: 'i-mdi-instagram', to: '#', label: 'Instagram' },
-  { icon: 'i-mdi-facebook', to: '#', label: 'Facebook' },
-  { icon: 'i-mdi-telegram', to: '#', label: 'Telegram' }
-]
-
-const columns = computed(() => [
-  {
-    label: t('footer.services.title'),
-    children: serviceLinks.value.map(link => ({ label: t(link.label), to: link.to }))
-  },
-  {
-    label: t('footer.info.title'),
-    children: infoLinks.map(link => ({ label: t(link.label), to: link.to }))
-  }
-])
-
 const legalLinks = [
   { to: '/privacy', label: 'footer.legal.privacy' },
   { to: '/terms', label: 'footer.legal.terms' },
@@ -87,6 +32,58 @@ const legalLinks = [
   { to: '/public-offer', label: 'footer.legal.offer' }
 ]
 
-const legalItems = computed(() => legalLinks.map(link => ({ label: t(link.label), to: link.to })))
+const socials = [
+  { icon: 'i-mdi-instagram', to: '#', label: 'Instagram' },
+  { icon: 'i-mdi-facebook', to: '#', label: 'Facebook' },
+  { icon: 'i-mdi-telegram', to: '#', label: 'Telegram' }
+]
 </script>
 
+<template>
+  <footer class="site-footer">
+    <div class="ftr">
+      <div class="wrap">
+        <div class="fgrid">
+          <div>
+            <NuxtLink :to="localePath('/')" class="brand" aria-label="Sitter.ge">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect width="64" height="64" rx="18" fill="#E8573A" />
+                <path fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" d="M14 29 32 15l18 14" />
+                <path fill="#fff" d="M32 51c-8.4-5.6-12.5-10.2-12.5-15.3 0-3.7 2.9-6.6 6.4-6.6 2.6 0 4.8 1.4 6.1 3.6 1.3-2.2 3.5-3.6 6.1-3.6 3.5 0 6.4 2.9 6.4 6.6 0 5.1-4.1 9.7-12.5 15.3Z" />
+              </svg>
+              <span>Sitter<span class="ge">.ge</span></span>
+            </NuxtLink>
+            <p class="tag">{{ t('footer.description') }}</p>
+            <div class="soc">
+              <a v-for="social in socials" :key="social.label" :href="social.to" :aria-label="social.label"><UIcon :name="social.icon" /></a>
+            </div>
+          </div>
+          <div>
+            <h4>{{ t('footer.services.title') }}</h4>
+            <ul>
+              <li v-for="link in serviceLinks" :key="link.to"><NuxtLink :to="localePath(link.to)">{{ t(link.label) }}</NuxtLink></li>
+            </ul>
+          </div>
+          <div>
+            <h4>{{ t('footer.info.title') }}</h4>
+            <ul>
+              <li v-for="link in infoLinks" :key="link.to"><NuxtLink :to="localePath(link.to)">{{ t(link.label) }}</NuxtLink></li>
+            </ul>
+          </div>
+          <div class="app">
+            <h4>{{ t('footer.parents.title') }}</h4>
+            <p style="color:var(--ink-2);font-size:15px;margin:-6px 0 6px">{{ t('footer.parents.text') }}</p>
+            <NuxtLink :to="localePath('/blog')" class="btn btn-ink">{{ t('footer.parents.cta') }} <UIcon name="i-lucide-arrow-right" class="ico arr" /></NuxtLink>
+          </div>
+        </div>
+        <div class="mega" aria-hidden="true"><span>Sitter</span><span class="ge">.ge</span></div>
+        <div class="fbot">
+          <span>© {{ currentYear }}, Sitter</span>
+          <nav :aria-label="t('footer.legalLabel')">
+            <NuxtLink v-for="link in legalLinks" :key="link.to" :to="localePath(link.to)">{{ t(link.label) }}</NuxtLink>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
