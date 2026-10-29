@@ -100,18 +100,18 @@ const isLoading = ref(false)
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
   isLoading.value = true
   try {
-    await authStore.register({
+    const response = await authStore.register({
       firstName: payload.data.name,
       lastName: payload.data.surname,
       email: payload.data.email,
       phone: payload.data.phone,
       password: payload.data.password
     })
-    toast.add({ 
-      title: t('auth.registerSuccess'), 
-      color: 'success' 
+    toast.add({
+      title: t('auth.verifyEmail.codeSent'),
+      color: 'success'
     })
-    await router.push(localePath('/choose-role'))
+    await router.push(localePath({ path: '/verify-email', query: { email: response.email ?? payload.data.email } }))
   } catch (error: any) {
     const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.registerError')
     toast.add({ 

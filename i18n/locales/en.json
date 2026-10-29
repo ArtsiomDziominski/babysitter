@@ -408,7 +408,20 @@
     "loginWithVK": "Log in with VK",
     "loginWithYandex": "Log in with Yandex",
     "registerWithVK": "Sign up with VK",
-    "registerWithYandex": "Sign up with Yandex"
+    "registerWithYandex": "Sign up with Yandex",
+    "verifyEmail": {
+      "title": "Confirm your email",
+      "description": "We sent a 6-digit code to",
+      "submit": "Confirm",
+      "success": "Email confirmed",
+      "error": "Could not confirm the code",
+      "codeSent": "Code sent to your email",
+      "notVerified": "Email is not confirmed. We sent you a new code",
+      "resend": "Resend code",
+      "resendIn": "Resend in {seconds} s",
+      "checkSpam": "No email? Check your spam folder.",
+      "wrongEmail": "Wrong email? Register again"
+    }
   },
   "roleSelection": {
     "title": "Choose your role",

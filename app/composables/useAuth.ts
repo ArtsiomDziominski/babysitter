@@ -17,9 +17,12 @@ interface RegisterRequest {
 
 interface AuthResponseData {
   access_token?: string
+  /** Email ещё не подтверждён: токена нет, на почту отправлен код */
+  requiresEmailVerification?: boolean
+  email?: string
   requires2FA?: boolean
   tempToken?: string
-  user: {
+  user?: {
     id: number
     email: string
     role?: Role
@@ -57,6 +60,21 @@ export const useAuth = () => {
     return response.data
   }
 
+  const verifyEmail = async (email: string, code: string): Promise<AuthResponseData> => {
+    const response = await api.request<ApiAuthResponse>('/auth/verify-email', {
+      method: 'POST',
+      body: JSON.stringify({ email, code }),
+    })
+    return response.data
+  }
+
+  const resendEmailVerification = async (email: string): Promise<void> => {
+    await api.request('/auth/verify-email/resend', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    })
+  }
+
   const getProfile = async (): Promise<{ data: ApiUser }> => {
     return await api.request<{ data: ApiUser }>('/users/profile', {
       method: 'GET',
@@ -66,6 +84,8 @@ export const useAuth = () => {
   return {
     login,
     register,
+    verifyEmail,
+    resendEmailVerification,
     getProfile,
     getAuthToken,
   }

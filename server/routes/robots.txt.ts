@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
   const siteConfig = config.public.siteConfig
   const baseUrl = siteConfig.url
 
-  const privatePaths = ['/account/', '/login', '/register', '/forgot-password', '/choose-role']
+  const privatePaths = ['/account/', '/login', '/register', '/forgot-password', '/verify-email', '/choose-role']
   const localeCodes = (siteConfig.locales as Array<{ code: string }>).map((l) => l.code)
   // Закрытые страницы есть в каждой локали: /ru/account/, /en/login и т.д.
   const disallow = localeCodes
