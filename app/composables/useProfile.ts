@@ -1,10 +1,18 @@
-import type { ApiUser } from './useApi'
+import { unwrapApiResponse, type ApiUser } from './useApi'
 import { UserRole } from '~/const/roles'
 
 interface UpdateProfileRequest {
   firstName: string
   lastName: string
   phone: string
+}
+
+/** Email-уведомления по категориям */
+export interface NotificationSettings {
+  messages: boolean
+  bookings: boolean
+  reviews: boolean
+  marketing: boolean
 }
 
 export const useProfile = () => {
@@ -99,8 +107,23 @@ export const useProfile = () => {
     return response.url
   }
 
+  const getNotificationSettings = async (): Promise<NotificationSettings> => {
+    return unwrapApiResponse(await api.request<{ data: NotificationSettings }>('/users/me/notifications', {
+      method: 'GET',
+    }))
+  }
+
+  const updateNotificationSettings = async (settings: NotificationSettings): Promise<NotificationSettings> => {
+    return unwrapApiResponse(await api.request<{ data: NotificationSettings }>('/users/me/notifications', {
+      method: 'PATCH',
+      body: JSON.stringify(settings),
+    }))
+  }
+
   return {
     updateProfile,
+    getNotificationSettings,
+    updateNotificationSettings,
     updateRole,
     uploadAvatar,
     deleteAvatar,

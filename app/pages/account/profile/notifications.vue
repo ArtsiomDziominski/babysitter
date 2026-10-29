@@ -6,186 +6,35 @@
       </h1>
 
       <form @submit.prevent="handleSave" class="space-y-8 max-xl:space-y-6">
-        <!-- Email уведомления -->
         <div class="space-y-4 max-xl:space-y-3">
           <h2 class="text-lg max-xl:text-base font-semibold text-highlighted">
             {{ $t('account.notifications.emailNotifications') }}
           </h2>
           <div class="space-y-4 max-xl:space-y-3 pl-4 max-xl:pl-2">
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
+            <div
+                v-for="option in options"
+                :key="option.key"
+                class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2"
+            >
               <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.newMessages') }}
+                <label :for="`notify-${option.key}`" class="text-sm max-xl:text-xs font-medium text-default">
+                  {{ $t(option.label) }}
                 </label>
                 <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.newMessagesDesc') }}
+                  {{ $t(option.description) }}
                 </p>
               </div>
               <UCheckbox
-                  v-model="formData.emailNewMessages"
-                  class="max-xl:self-start"
-              />
-            </div>
-
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.bookingUpdates') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.bookingUpdatesDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.emailBookingUpdates"
-                  class="max-xl:self-start"
-              />
-            </div>
-
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.newReviews') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.newReviewsDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.emailNewReviews"
-                  class="max-xl:self-start"
-              />
-            </div>
-
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.reminders') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.remindersDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.emailReminders"
+                  :id="`notify-${option.key}`"
+                  v-model="formData[option.key]"
+                  :disabled="isLoading"
                   class="max-xl:self-start"
               />
             </div>
           </div>
-        </div>
-
-        <!-- Push уведомления -->
-        <div class="space-y-4 max-xl:space-y-3">
-          <h2 class="text-lg max-xl:text-base font-semibold text-highlighted">
-            {{ $t('account.notifications.pushNotifications') }}
-          </h2>
-          <div class="space-y-4 max-xl:space-y-3 pl-4 max-xl:pl-2">
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.newMessages') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.newMessagesDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.pushNewMessages"
-                  class="max-xl:self-start"
-              />
-            </div>
-
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.bookingUpdates') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.bookingUpdatesDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.pushBookingUpdates"
-                  class="max-xl:self-start"
-              />
-            </div>
-
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.reminders') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.remindersDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.pushReminders"
-                  class="max-xl:self-start"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- SMS уведомления -->
-        <div class="space-y-4 max-xl:space-y-3">
-          <h2 class="text-lg max-xl:text-base font-semibold text-highlighted">
-            {{ $t('account.notifications.smsNotifications') }}
-          </h2>
-          <div class="space-y-4 max-xl:space-y-3 pl-4 max-xl:pl-2">
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.bookingConfirmations') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.bookingConfirmationsDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.smsBookingConfirmations"
-                  class="max-xl:self-start"
-              />
-            </div>
-
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.importantUpdates') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.importantUpdatesDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.smsImportantUpdates"
-                  class="max-xl:self-start"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Другие настройки -->
-        <div class="space-y-4 max-xl:space-y-3">
-          <h2 class="text-lg max-xl:text-base font-semibold text-highlighted">
-            {{ $t('account.notifications.otherSettings') }}
-          </h2>
-          <div class="space-y-4 max-xl:space-y-3 pl-4 max-xl:pl-2">
-            <div class="flex items-center justify-between max-xl:flex-col max-xl:items-stretch max-xl:gap-2">
-              <div class="flex-1 max-xl:w-full">
-                <label class="text-sm max-xl:text-xs font-medium text-default">
-                  {{ $t('account.notifications.marketing') }}
-                </label>
-                <p class="text-xs max-xl:text-[10px] text-muted mt-1">
-                  {{ $t('account.notifications.marketingDesc') }}
-                </p>
-              </div>
-              <UCheckbox
-                  v-model="formData.marketing"
-                  class="max-xl:self-start"
-              />
-            </div>
-          </div>
+          <p class="text-xs text-muted pl-4 max-xl:pl-2">
+            {{ $t('account.notifications.securityNote') }}
+          </p>
         </div>
 
         <div class="flex justify-center pt-6 max-xl:pt-4">
@@ -195,6 +44,7 @@
               size="lg"
               class="max-xl:w-full"
               :loading="isSaving"
+              :disabled="isLoading"
           >
             {{ $t('account.notifications.save') }}
           </UButton>
@@ -205,6 +55,8 @@
 </template>
 
 <script setup lang="ts">
+import type { NotificationSettings } from '~/composables/useProfile'
+
 const { t, locale } = useI18n()
 const route = useRoute()
 const siteConfig = useSiteConfig()
@@ -236,25 +88,43 @@ useHead({
   ]
 })
 
-const formData = ref({
-  emailNewMessages: true,
-  emailBookingUpdates: true,
-  emailNewReviews: true,
-  emailReminders: true,
-  pushNewMessages: true,
-  pushBookingUpdates: true,
-  pushReminders: true,
-  smsBookingConfirmations: false,
-  smsImportantUpdates: false,
+const toast = useToast()
+const { getNotificationSettings, updateNotificationSettings } = useProfile()
+
+const options: Array<{ key: keyof NotificationSettings; label: string; description: string }> = [
+  { key: 'messages', label: 'account.notifications.newMessages', description: 'account.notifications.newMessagesDesc' },
+  { key: 'bookings', label: 'account.notifications.bookingUpdates', description: 'account.notifications.bookingUpdatesDesc' },
+  { key: 'reviews', label: 'account.notifications.newReviews', description: 'account.notifications.newReviewsDesc' },
+  { key: 'marketing', label: 'account.notifications.marketing', description: 'account.notifications.marketingDesc' }
+]
+
+const formData = ref<NotificationSettings>({
+  messages: true,
+  bookings: true,
+  reviews: true,
   marketing: false
 })
 
+const isLoading = ref(true)
 const isSaving = ref(false)
+
+onMounted(async () => {
+  try {
+    formData.value = await getNotificationSettings()
+  } catch (error: any) {
+    toast.add({ title: error?.message || t('account.notifications.loadError'), color: 'error' })
+  } finally {
+    isLoading.value = false
+  }
+})
 
 const handleSave = async () => {
   isSaving.value = true
   try {
-    await new Promise(resolve => setTimeout(resolve, 500))
+    formData.value = await updateNotificationSettings(formData.value)
+    toast.add({ title: t('account.notifications.saved'), color: 'success' })
+  } catch (error: any) {
+    toast.add({ title: error?.message || t('account.notifications.saveError'), color: 'error' })
   } finally {
     isSaving.value = false
   }
