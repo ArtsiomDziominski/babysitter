@@ -5,6 +5,7 @@ interface UpdateProfileRequest {
   firstName: string
   lastName: string
   phone: string
+  city?: string
 }
 
 /** Email-уведомления по категориям */

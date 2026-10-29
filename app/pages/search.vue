@@ -105,12 +105,18 @@ useHead({
   ]
 })
 
+// Город из профиля подставляем только при первом заходе на поиск без параметров
+const defaultCity = (query: typeof route.query) => {
+  if (Object.keys(query).length > 0) return ''
+  return useAuthStore().currentUser?.city || ''
+}
+
 const parseQueryParams = () => {
   const query = route.query
 
   return {
     searchForm: {
-      address: (query.city as string) || (query.address as string) || '',
+      address: (query.city as string) || (query.address as string) || defaultCity(query),
       date: (query.date as string) || '',
       timeStart: (query.startTime as string) || '',
       timeEnd: (query.endTime as string) || ''

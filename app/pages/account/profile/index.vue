@@ -45,18 +45,22 @@
               />
             </div>
 
-<!--            <div>-->
-<!--              <label class="block text-sm font-medium text-default mb-2">-->
-<!--                {{ $t('account.basicData.city') }}-->
-<!--              </label>-->
-<!--              <USelect-->
-<!--                  v-model="formData.city"-->
-<!--                  :items="cityOptions"-->
-<!--                  labelKey="label"-->
-<!--                  valueKey="value"-->
-<!--                  size="lg"-->
-<!--              />-->
-<!--            </div>-->
+            <div>
+              <label class="block text-sm font-medium text-default mb-2">
+                {{ $t('account.basicData.city') }}
+              </label>
+              <USelect
+                  v-model="formData.city"
+                  :items="cityOptions"
+                  labelKey="label"
+                  valueKey="value"
+                  size="lg"
+                  class="min-w-60"
+              />
+              <p class="mt-2 text-xs text-muted">
+                {{ $t('account.basicData.cityHint') }}
+              </p>
+            </div>
           </div>
 
           <!-- Правая колонка с фото -->
@@ -140,6 +144,7 @@ const handleSave = async () => {
       firstName: formData.value.name,
       lastName: formData.value.surname,
       phone: formData.value.phone,
+      city: formData.value.city,
     })
     await authStore.fetchProfile()
     toast.add({ title: t('account.nannyForm.saveSuccess'), color: 'success' })
