@@ -85,7 +85,7 @@ async function onResend() {
           </h1>
           <p class="text-sm text-muted">
             {{ t('auth.verifyEmail.description') }}
-            <span class="font-medium text-default break-all">{{ email }}</span>
+            <span class="block font-medium text-default [overflow-wrap:anywhere]">{{ email }}</span>
           </p>
         </div>
 

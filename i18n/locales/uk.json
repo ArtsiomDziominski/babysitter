@@ -396,7 +396,7 @@
     "registerWithVK": "Реєстрація через VK",
     "forgotPassword": "Забули пароль?",
     "resetPassword": "Відновлення пароля",
-    "resetPasswordDescription": "Введіть ваш email, і ми надішлемо вам інструкції з відновлення пароля",
+    "resetPasswordDescription": "Введіть ваш email, і ми надішлемо код для відновлення пароля",
     "resetPasswordSuccess": "Запит надіслано",
     "resetPasswordEmailSent": "Інструкції з відновлення пароля надіслано на ваш email",
     "rememberPassword": "Згадали пароль?",
@@ -419,6 +419,19 @@
       "resendIn": "Надіслати ще раз через {seconds} с",
       "checkSpam": "Не прийшов лист? Перевірте папку «Спам».",
       "wrongEmail": "Вказали не той email? Зареєструватися знову"
+    },
+    "passwordReset": {
+      "sendCode": "Надіслати код",
+      "codeSent": "Якщо такий акаунт існує, ми надіслали код на ваш email",
+      "newPasswordTitle": "Новий пароль",
+      "codeDescription": "Введіть код з листа, надісланого на",
+      "code": "Код з листа",
+      "codeInvalid": "Введіть 6 цифр з листа",
+      "newPassword": "Новий пароль",
+      "submit": "Зберегти пароль",
+      "success": "Пароль змінено",
+      "error": "Не вдалося змінити пароль",
+      "changeEmail": "Вказати інший email"
     }
   },
   "roleSelection": {

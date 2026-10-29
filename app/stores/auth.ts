@@ -195,6 +195,21 @@ export const useAuthStore = defineStore('auth', () => {
         await useAuth().resendEmailVerification(email)
     }
 
+    async function requestPasswordReset(email: string) {
+        await useAuth().requestPasswordReset(email)
+    }
+
+    /** Новый пароль по коду из письма. Без 2FA сразу входим с выданным токеном. */
+    async function resetPassword(email: string, code: string, newPassword: string) {
+        const response = await useAuth().resetPassword(email, code, newPassword)
+        if (response.access_token) {
+            setToken(response.access_token)
+            setUser(mapApiUserToFrontend(response.user as ApiUser))
+            setAuth(true)
+        }
+        return response
+    }
+
     async function saveRole(role: UserRole) {
         const profile = useProfile()
         if (!role) {
@@ -242,6 +257,8 @@ export const useAuthStore = defineStore('auth', () => {
         register,
         verifyEmail,
         resendEmailVerification,
+        requestPasswordReset,
+        resetPassword,
         saveRole,
         logout
     }
