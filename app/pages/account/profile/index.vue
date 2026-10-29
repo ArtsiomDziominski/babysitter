@@ -83,6 +83,7 @@
 import { CITY_KEYS, City } from '~/const/cities'
 
 const { t, locale } = useI18n()
+const toast = useToast()
 const authStore = useAuthStore()
 const route = useRoute()
 const siteConfig = useSiteConfig()
@@ -141,8 +142,14 @@ const handleSave = async () => {
       phone: formData.value.phone,
     })
     await authStore.fetchProfile()
-  } catch (error) {
+    toast.add({ title: t('account.nannyForm.saveSuccess'), color: 'success' })
+  } catch (error: any) {
     console.error('Ошибка при обновлении профиля:', error)
+    toast.add({
+      title: t('account.nannyForm.saveError'),
+      description: error?.message || t('account.nannyForm.tryLater'),
+      color: 'error'
+    })
   } finally {
     isSaving.value = false
   }

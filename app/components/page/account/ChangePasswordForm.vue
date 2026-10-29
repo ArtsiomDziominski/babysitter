@@ -7,6 +7,19 @@
     <form @submit.prevent="handlePasswordChange" class="space-y-4 max-w-md max-xl:max-w-full">
       <div v-if="!showPasswordVerificationCode">
         <label class="block text-sm font-medium text-default mb-2">
+          {{ $t('account.security.currentPassword') }}
+        </label>
+        <UInput
+            v-model="passwordForm.currentPassword"
+            type="password"
+            autocomplete="current-password"
+            :placeholder="$t('account.security.currentPasswordPlaceholder')"
+            size="lg"
+        />
+      </div>
+
+      <div v-if="!showPasswordVerificationCode">
+        <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.newPassword') }}
         </label>
         <UInput
@@ -74,7 +87,10 @@ const { t } = useI18n()
 const security = useSecurity()
 const toast = useToast()
 
+const authStore = useAuthStore()
+
 const passwordForm = ref({
+  currentPassword: '',
   newPassword: '',
   verificationCode: ''
 })
@@ -84,7 +100,7 @@ const isRequestingPasswordCode = ref(false)
 const showPasswordVerificationCode = ref(false)
 
 const handlePasswordChange = async () => {
-  if (!passwordForm.value.newPassword) {
+  if (!passwordForm.value.currentPassword || !passwordForm.value.newPassword) {
     return
   }
 
@@ -99,7 +115,7 @@ const handlePasswordChange = async () => {
 
   isRequestingPasswordCode.value = true
   try {
-    await security.requestPasswordChange()
+    await security.requestPasswordChange({ currentPassword: passwordForm.value.currentPassword })
     toast.add({
       title: t('account.security.passwordCodeSent'),
       description: t('account.security.passwordCodeSentDescription'),
@@ -133,16 +149,21 @@ const handleConfirmPasswordChange = async () => {
 
   isChangingPassword.value = true
   try {
-    await security.confirmPasswordChange({
+    const result = await security.confirmPasswordChange({
       code: passwordForm.value.verificationCode,
       newPassword: passwordForm.value.newPassword
     })
+    // Бэкенд отзывает все прежние токены: без нового следующий запрос вернёт 401 и разлогинит
+    if (result.access_token) {
+      authStore.setToken(result.access_token)
+    }
     toast.add({
       title: t('account.security.passwordSuccess'),
       description: t('account.security.passwordChanged'),
       color: 'success'
     })
     showPasswordVerificationCode.value = false
+    passwordForm.value.currentPassword = ''
     passwordForm.value.newPassword = ''
     passwordForm.value.verificationCode = ''
   } catch (error: any) {
@@ -158,6 +179,7 @@ const handleConfirmPasswordChange = async () => {
 
 const cancelPasswordChange = () => {
   showPasswordVerificationCode.value = false
+  passwordForm.value.currentPassword = ''
   passwordForm.value.newPassword = ''
   passwordForm.value.verificationCode = ''
 }

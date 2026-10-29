@@ -1,3 +1,9 @@
+import { unwrapApiResponse } from './useApi'
+
+interface ChangePasswordRequest {
+  currentPassword: string
+}
+
 interface ChangePasswordRequestResponse {
   message: string
 }
@@ -9,10 +15,13 @@ interface ChangePasswordConfirmRequest {
 
 interface ChangePasswordConfirmResponse {
   message: string
+  // Старые токены отозваны бэкендом, сессию продолжает только этот токен
+  access_token?: string
 }
 
 interface ChangeEmailRequest {
   newEmail: string
+  currentPassword: string
 }
 
 interface ChangeEmailRequestResponse {
@@ -29,12 +38,13 @@ interface ChangeEmailConfirmResponse {
 }
 
 export const useSecurity = () => {
-  const requestPasswordChange = async (): Promise<ChangePasswordRequestResponse> => {
+  const requestPasswordChange = async (data: ChangePasswordRequest): Promise<ChangePasswordRequestResponse> => {
     const api = useApi()
-    return await api.request<ChangePasswordRequestResponse>('/auth/change-password/request', {
+    const response = await api.request<ChangePasswordRequestResponse | { data: ChangePasswordRequestResponse; statusCode: number }>('/auth/change-password/request', {
       method: 'POST',
-      body: JSON.stringify({})
+      body: JSON.stringify(data)
     })
+    return unwrapApiResponse(response)
   }
 
   const confirmPasswordChange = async (data: ChangePasswordConfirmRequest): Promise<ChangePasswordConfirmResponse> => {
@@ -47,10 +57,11 @@ export const useSecurity = () => {
     }
 
     const api = useApi()
-    return await api.request<ChangePasswordConfirmResponse>('/auth/change-password/confirm', {
+    const response = await api.request<ChangePasswordConfirmResponse | { data: ChangePasswordConfirmResponse; statusCode: number }>('/auth/change-password/confirm', {
       method: 'POST',
       body: JSON.stringify(data)
     })
+    return unwrapApiResponse(response)
   }
 
   const requestEmailChange = async (data: ChangeEmailRequest): Promise<ChangeEmailRequestResponse> => {

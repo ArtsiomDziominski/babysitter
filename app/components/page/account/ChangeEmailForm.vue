@@ -26,6 +26,19 @@
         />
       </div>
 
+      <div v-if="!showVerificationCode">
+        <label class="block text-sm font-medium text-default mb-2">
+          {{ $t('account.security.currentPassword') }}
+        </label>
+        <UInput
+            v-model="emailForm.currentPassword"
+            type="password"
+            autocomplete="current-password"
+            :placeholder="$t('account.security.currentPasswordPlaceholder')"
+            size="lg"
+        />
+      </div>
+
       <div v-if="showVerificationCode">
         <label class="block text-sm font-medium text-default mb-2">
           {{ $t('account.security.verificationCode') }}
@@ -86,6 +99,7 @@ const toast = useToast()
 
 const emailForm = ref({
   newEmail: '',
+  currentPassword: '',
   verificationCode: ''
 })
 
@@ -94,19 +108,23 @@ const isVerifyingCode = ref(false)
 const showVerificationCode = ref(false)
 
 const handleEmailChange = async () => {
-  if (!emailForm.value.newEmail) {
+  if (!emailForm.value.newEmail || !emailForm.value.currentPassword) {
     return
   }
 
   isChangingEmail.value = true
   try {
-    await security.requestEmailChange({ newEmail: emailForm.value.newEmail })
+    await security.requestEmailChange({
+      newEmail: emailForm.value.newEmail,
+      currentPassword: emailForm.value.currentPassword
+    })
     toast.add({
       title: t('account.security.emailCodeSent'),
       description: t('account.security.emailCodeSentDescription'),
       color: 'success'
     })
     showVerificationCode.value = true
+    emailForm.value.currentPassword = ''
   } catch (error: any) {
     toast.add({
       title: t('account.security.emailError'),
@@ -155,6 +173,7 @@ const handleVerifyCode = async () => {
 const cancelEmailChange = () => {
   showVerificationCode.value = false
   emailForm.value.newEmail = ''
+  emailForm.value.currentPassword = ''
   emailForm.value.verificationCode = ''
 }
 </script>

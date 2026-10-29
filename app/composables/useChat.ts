@@ -9,12 +9,14 @@ export interface Conversation {
     firstName: string
     lastName: string
     avatar?: string
+    avatarUrl?: string | null
   }
   user2?: {
     id: number
     firstName: string
     lastName: string
     avatar?: string
+    avatarUrl?: string | null
   }
   bookingId?: number | null
   isAdminChat: boolean

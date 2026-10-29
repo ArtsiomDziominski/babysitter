@@ -33,8 +33,8 @@
         <div class="flex-1">
           <div class="flex items-center gap-3 mb-2">
             <UAvatar
-              v-if="review.author.avatar"
-              :src="review.author.avatar"
+              v-if="review.author?.avatarUrl"
+              :src="review.author.avatarUrl"
               :alt="getAuthorName(review.author)"
               size="md"
             />

@@ -23,7 +23,8 @@ export interface Review {
     id: number
     firstName: string
     lastName: string
-    avatar?: string
+    // Presigned URL аватара (бэкенд отдаёт его вместо ключа в хранилище)
+    avatarUrl?: string | null
   }
   target: {
     id: number
