@@ -28,7 +28,8 @@
       "kids": "Мае дзеці",
       "sitterProfile": "Мая анкета",
       "chooseRole": "Выбраць ролю"
-    }
+    },
+    "pendingBookings": "Новых заявак: {count}"
   },
   "cities": {
     "minsk": "Мінск",
@@ -487,11 +488,6 @@
         "loadErrorMessage": "Не атрымалася загрузіць дэталі заказа. Паспрабуйце яшчэ раз."
       },
       "notifications": {
-        "newBooking": "Новае браніраванне",
-        "newBookingMessage": "У вас новае браніраванне",
-        "statusChanged": "Статус заказа зменены",
-        "statusChangedFrom": "з",
-        "statusChangedTo": "на",
         "bookingUpdated": "Заказ абноўлены",
         "bookingUpdatedMessage": "Браніраванне было абноўлена"
       }
@@ -1577,6 +1573,23 @@
       ],
       "ctaTitle": "Гатовыя пачаць?",
       "ctaButton": "Зарэгістравацца як бебісітэр"
+    }
+  },
+  "notifications": {
+    "booking": {
+      "newRequest": "Новая заяўка",
+      "newRequestDesc": "{name}, {time}",
+      "someParent": "Бацькі",
+      "someSitter": "Няня",
+      "open": "Адкрыць",
+      "confirmed": "Браніраванне пацверджана",
+      "confirmedDesc": "{name}, {time}",
+      "cancelled": "Браніраванне адменена",
+      "cancelledDesc": "Браніраванне на {time} адменена іншым бокам",
+      "expiredSitterDesc": "Заяўка на {time} адменена: на яе не адказалі своечасова",
+      "expiredParentDesc": "Няня не адказала на заяўку на {time}. Паспрабуйце іншую няню",
+      "completed": "Браніраванне завершана",
+      "completedDesc": "Пакіньце водгук пра няню {name}"
     }
   }
 }

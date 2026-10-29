@@ -18,6 +18,8 @@ const localizedBecomeSitterUrls: Record<string, string> = {
 const becomeSitterUrl = computed(() => localizedBecomeSitterUrls[locale.value] || localizedBecomeSitterUrls.ru)
 
 const role = computed(() => authStore.currentUser?.role)
+const pendingBookingsCount = useState<number>('pending-bookings-count', () => 0)
+const ordersBadge = (to: string) => (to === '/account/orders' && pendingBookingsCount.value > 0 ? pendingBookingsCount.value : null)
 
 // Role-specific page in the account: parents fill in their kids, babysitters their profile
 const roleLink = computed(() => {
@@ -119,7 +121,9 @@ onBeforeUnmount(() => {
       </NuxtLink>
 
       <nav class="nav" :aria-label="t('header.mainNav')">
-        <NuxtLink v-for="link in navLinks" :key="link.to" :to="localePath(link.to)" :class="{ on: isOn(link.to) }">{{ link.label }}</NuxtLink>
+        <NuxtLink v-for="link in navLinks" :key="link.to" :to="localePath(link.to)" :class="{ on: isOn(link.to) }">
+          {{ link.label }}<ClientOnly><span v-if="ordersBadge(link.to)" class="nav-badge" :aria-label="t('header.pendingBookings', { count: ordersBadge(link.to) })">{{ ordersBadge(link.to) }}</span></ClientOnly>
+        </NuxtLink>
       </nav>
 
       <div class="hdr-right">
@@ -159,7 +163,9 @@ onBeforeUnmount(() => {
       </div>
 
       <nav id="site-mnav" class="mnav" :class="{ open: menuOpen }" :aria-label="t('header.mobileNav')">
-        <NuxtLink v-for="link in navLinks" :key="link.to" :to="localePath(link.to)">{{ link.label }}</NuxtLink>
+        <NuxtLink v-for="link in navLinks" :key="link.to" :to="localePath(link.to)">
+          {{ link.label }}<ClientOnly><span v-if="ordersBadge(link.to)" class="nav-badge">{{ ordersBadge(link.to) }}</span></ClientOnly>
+        </NuxtLink>
         <div v-if="localeOptions.length > 0" class="langs" :aria-label="t('header.language')">
           <button
             v-for="l in localeOptions"

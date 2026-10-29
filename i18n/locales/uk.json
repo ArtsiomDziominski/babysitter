@@ -28,7 +28,8 @@
       "kids": "Мої діти",
       "sitterProfile": "Моя анкета",
       "chooseRole": "Обрати роль"
-    }
+    },
+    "pendingBookings": "Нових заявок: {count}"
   },
   "cities": {
     "minsk": "Мінськ",
@@ -585,11 +586,6 @@
         "loadErrorMessage": "Не вдалося завантажити деталі замовлення. Спробуйте ще раз."
       },
       "notifications": {
-        "newBooking": "Нове бронювання",
-        "newBookingMessage": "У вас нове бронювання",
-        "statusChanged": "Статус замовлення змінено",
-        "statusChangedFrom": "з",
-        "statusChangedTo": "на",
         "bookingUpdated": "Замовлення оновлено",
         "bookingUpdatedMessage": "Бронювання було оновлено"
       }
@@ -1767,6 +1763,23 @@
       ],
       "ctaTitle": "Готові почати?",
       "ctaButton": "Зареєструватися як бебісітер"
+    }
+  },
+  "notifications": {
+    "booking": {
+      "newRequest": "Нова заявка",
+      "newRequestDesc": "{name}, {time}",
+      "someParent": "Батьки",
+      "someSitter": "Няня",
+      "open": "Відкрити",
+      "confirmed": "Бронювання підтверджено",
+      "confirmedDesc": "{name}, {time}",
+      "cancelled": "Бронювання скасовано",
+      "cancelledDesc": "Бронювання на {time} скасовано іншою стороною",
+      "expiredSitterDesc": "Заявку на {time} скасовано: на неї не відповіли вчасно",
+      "expiredParentDesc": "Няня не відповіла на заявку на {time}. Спробуйте іншу няню",
+      "completed": "Бронювання завершено",
+      "completedDesc": "Залиште відгук про няню {name}"
     }
   }
 }

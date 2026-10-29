@@ -141,30 +141,12 @@ watch(selectedStatus, () => {
   loadBookings()
 })
 
-const handleBookingCreated = (data: any) => {
-  toast.add({
-    title: t('account.orders.notifications.newBooking'),
-    description: data.message || t('account.orders.notifications.newBookingMessage'),
-    color: 'info'
-  })
+// Тосты о новых заявках и смене статуса показывает глобальный useNotifications, здесь только обновляем список
+const handleBookingCreated = () => {
   loadBookings()
 }
 
 const handleBookingStatusChanged = (data: any) => {
-  const statusText = {
-    pending: t('account.orders.status.pending'),
-    confirmed: t('account.orders.status.confirmed'),
-    in_progress: t('account.orders.status.in_progress'),
-    completed: t('account.orders.status.completed'),
-    cancelled: t('account.orders.status.cancelled')
-  }
-
-  toast.add({
-    title: t('account.orders.notifications.statusChanged'),
-    description: `${t('account.orders.notifications.statusChangedFrom')} ${statusText[data.oldStatus as keyof typeof statusText]} ${t('account.orders.notifications.statusChangedTo')} ${statusText[data.newStatus as keyof typeof statusText]}`,
-    color: 'info'
-  })
-
   const orderIndex = orders.value.findIndex(o => o.id === data.bookingId)
   if (orderIndex !== -1 && orders.value[orderIndex]) {
     orders.value[orderIndex].status = data.booking.status as any

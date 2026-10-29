@@ -28,7 +28,8 @@
       "kids": "My kids",
       "sitterProfile": "My profile",
       "chooseRole": "Choose a role"
-    }
+    },
+    "pendingBookings": "New requests: {count}"
   },
   "cities": {
     "minsk": "Minsk",
@@ -587,11 +588,6 @@
         "loadErrorMessage": "Failed to load order details. Please try again."
       },
       "notifications": {
-        "newBooking": "New booking",
-        "newBookingMessage": "You have a new booking",
-        "statusChanged": "Order status changed",
-        "statusChangedFrom": "from",
-        "statusChangedTo": "to",
         "bookingUpdated": "Order updated",
         "bookingUpdatedMessage": "Booking has been updated"
       }
@@ -1769,6 +1765,23 @@
       ],
       "ctaTitle": "Ready to start?",
       "ctaButton": "Register as a babysitter"
+    }
+  },
+  "notifications": {
+    "booking": {
+      "newRequest": "New booking request",
+      "newRequestDesc": "{name}, {time}",
+      "someParent": "Parent",
+      "someSitter": "Babysitter",
+      "open": "Open",
+      "confirmed": "Booking confirmed",
+      "confirmedDesc": "{name}, {time}",
+      "cancelled": "Booking cancelled",
+      "cancelledDesc": "The booking for {time} was cancelled by the other side",
+      "expiredSitterDesc": "The request for {time} was cancelled: it was not answered in time",
+      "expiredParentDesc": "The babysitter did not answer the request for {time}. Try another babysitter",
+      "completed": "Booking completed",
+      "completedDesc": "Leave a review about {name}"
     }
   }
 }

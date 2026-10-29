@@ -30,6 +30,7 @@
 .hdr .nav a{padding:9px 16px;border-radius:999px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background .2s,color .2s}
 .hdr .nav a:hover{background:var(--surface-2);color:var(--ink)}
 .hdr .nav a.on{background:var(--ink);color:var(--bg)}
+.hdr .nav-badge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;margin-left:6px;padding:0 5px;border-radius:999px;background:#c33a20;color:#fff;font-size:11px;font-weight:600;line-height:1;vertical-align:1px}
 .hdr .chipbtn{height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border-radius:999px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background .2s}
 .hdr .chipbtn:hover{background:var(--surface)}
 .hdr .iconbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-1);transition:transform .3s var(--ease)}
