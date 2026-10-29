@@ -75,6 +75,21 @@ export const useAuth = () => {
     })
   }
 
+  const requestPasswordReset = async (email: string): Promise<void> => {
+    await api.request('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    })
+  }
+
+  const resetPassword = async (email: string, code: string, newPassword: string): Promise<AuthResponseData> => {
+    const response = await api.request<ApiAuthResponse>('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({ email, code, newPassword }),
+    })
+    return response.data
+  }
+
   const getProfile = async (): Promise<{ data: ApiUser }> => {
     return await api.request<{ data: ApiUser }>('/users/profile', {
       method: 'GET',
@@ -86,6 +101,8 @@ export const useAuth = () => {
     register,
     verifyEmail,
     resendEmailVerification,
+    requestPasswordReset,
+    resetPassword,
     getProfile,
     getAuthToken,
   }

@@ -394,7 +394,7 @@
     "registerWithGitHub": "Register with GitHub",
     "forgotPassword": "Forgot password?",
     "resetPassword": "Reset Password",
-    "resetPasswordDescription": "Enter your email and we'll send you instructions to reset your password",
+    "resetPasswordDescription": "Enter your email and we will send you a code to reset your password",
     "resetPasswordSuccess": "Request sent",
     "resetPasswordEmailSent": "Password reset instructions have been sent to your email",
     "rememberPassword": "Remember your password?",
@@ -421,6 +421,19 @@
       "resendIn": "Resend in {seconds} s",
       "checkSpam": "No email? Check your spam folder.",
       "wrongEmail": "Wrong email? Register again"
+    },
+    "passwordReset": {
+      "sendCode": "Send code",
+      "codeSent": "If an account with this email exists, we sent a code to it",
+      "newPasswordTitle": "New password",
+      "codeDescription": "Enter the code from the email sent to",
+      "code": "Code from the email",
+      "codeInvalid": "Enter the 6 digits from the email",
+      "newPassword": "New password",
+      "submit": "Save password",
+      "success": "Password changed",
+      "error": "Could not change the password",
+      "changeEmail": "Use a different email"
     }
   },
   "roleSelection": {
