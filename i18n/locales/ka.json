@@ -28,7 +28,8 @@
       "kids": "ჩემი შვილები",
       "sitterProfile": "ჩემი პროფილი",
       "chooseRole": "როლის არჩევა"
-    }
+    },
+    "pendingBookings": "ახალი მოთხოვნები: {count}"
   },
   "cities": {
     "minsk": "მინსკი",
@@ -585,11 +586,6 @@
         "loadErrorMessage": "ვერ მოხერხდა შეკვეთის დეტალების ჩატვირთვა. სცადეთ კიდევ ერთხელ."
       },
       "notifications": {
-        "newBooking": "ახალი დაჯავშნა",
-        "newBookingMessage": "თქვენ გაქვთ ახალი დაჯავშნა",
-        "statusChanged": "შეკვეთის სტატუსი შეიცვალა",
-        "statusChangedFrom": "დან",
-        "statusChangedTo": "მდე",
         "bookingUpdated": "შეკვეთა განახლებულია",
         "bookingUpdatedMessage": "დაჯავშნა განახლდა"
       }
@@ -1767,6 +1763,23 @@
       ],
       "ctaTitle": "მზად ხართ დასაწყებად?",
       "ctaButton": "დარეგისტრირდით ბებისიტერად"
+    }
+  },
+  "notifications": {
+    "booking": {
+      "newRequest": "ახალი მოთხოვნა",
+      "newRequestDesc": "{name}, {time}",
+      "someParent": "მშობელი",
+      "someSitter": "ძიძა",
+      "open": "გახსნა",
+      "confirmed": "ჯავშანი დადასტურებულია",
+      "confirmedDesc": "{name}, {time}",
+      "cancelled": "ჯავშანი გაუქმდა",
+      "cancelledDesc": "ჯავშანი {time}-ზე გააუქმა მეორე მხარემ",
+      "expiredSitterDesc": "მოთხოვნა {time}-ზე გაუქმდა: დროულად არ უპასუხეს",
+      "expiredParentDesc": "ძიძამ არ უპასუხა მოთხოვნას {time}-ზე. სცადეთ სხვა ძიძა",
+      "completed": "ჯავშანი დასრულდა",
+      "completedDesc": "დატოვეთ შეფასება: {name}"
     }
   }
 }

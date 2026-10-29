@@ -31,6 +31,7 @@ const createHeaderMount = (options: HeaderTestOptions = {}) => {
 
   vi.stubGlobal('computed', computed)
   vi.stubGlobal('ref', ref)
+  vi.stubGlobal('useState', (_key: string, init?: () => unknown) => ref(init ? init() : undefined))
   vi.stubGlobal('watch', watch)
   vi.stubGlobal('onMounted', onMounted)
   vi.stubGlobal('onBeforeUnmount', onBeforeUnmount)

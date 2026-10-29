@@ -11,6 +11,8 @@ export interface BookingCreatedData {
     endTime: string
     status: string
     totalPrice: number
+    childrenCount?: number
+    parent?: { firstName?: string; lastName?: string }
   }
   message: string
 }
@@ -19,11 +21,14 @@ export interface BookingStatusChangedData {
   bookingId: number
   oldStatus: string
   newStatus: string
+  /** Кто поменял статус. Нет, если статус поменял сервер (автоотмена, начало, завершение) */
+  actorId?: number
   booking: {
     id: number
     status: string
     startTime: string
     endTime: string
+    babysitter?: { user?: { firstName?: string; lastName?: string } }
   }
 }
 
@@ -83,6 +88,27 @@ const isConnected = ref(false)
 const isChatConnected = ref(false)
 const connectionError = ref<string | null>(null)
 let watchInitialized = false
+// Подписки на основной сокет. Хранятся отдельно от экземпляра, чтобы пережить переподключение
+// с новым токеном и подписку до того, как сокет создан
+const mainSocketListeners = new Map<string, Set<(...args: any[]) => void>>()
+
+const listen = (event: string, callback: (...args: any[]) => void) => {
+  if (!mainSocketListeners.has(event)) mainSocketListeners.set(event, new Set())
+  const callbacks = mainSocketListeners.get(event)!
+  if (callbacks.has(callback)) return
+  callbacks.add(callback)
+  socketInstance?.on(event, callback)
+}
+
+const unlisten = (event: string, callback?: (...args: any[]) => void) => {
+  if (callback) {
+    mainSocketListeners.get(event)?.delete(callback)
+    socketInstance?.off(event, callback)
+    return
+  }
+  mainSocketListeners.get(event)?.forEach(cb => socketInstance?.off(event, cb))
+  mainSocketListeners.delete(event)
+}
 
 export const useWebSocket = () => {
   const config = useRuntimeConfig()
@@ -111,6 +137,10 @@ export const useWebSocket = () => {
       reconnectionAttempts: 5
     })
 
+    mainSocketListeners.forEach((callbacks, event) => {
+      callbacks.forEach(callback => socketInstance?.on(event, callback))
+    })
+
     socketInstance.on('connect', () => {
       isConnected.value = true
       connectionError.value = null
@@ -136,89 +166,29 @@ export const useWebSocket = () => {
     }
   }
 
-  const onBookingCreated = (callback: BookingCreatedCallback) => {
-    if (!socketInstance) return
-    socketInstance.on('booking:created', callback)
-  }
+  const onBookingCreated = (callback: BookingCreatedCallback) => listen('booking:created', callback)
 
-  const offBookingCreated = (callback?: BookingCreatedCallback) => {
-    if (!socketInstance) return
-    if (callback) {
-      socketInstance.off('booking:created', callback)
-    } else {
-      socketInstance.off('booking:created')
-    }
-  }
+  const offBookingCreated = (callback?: BookingCreatedCallback) => unlisten('booking:created', callback)
 
-  const onBookingStatusChanged = (callback: BookingStatusChangedCallback) => {
-    if (!socketInstance) return
-    socketInstance.on('booking:status_changed', callback)
-  }
+  const onBookingStatusChanged = (callback: BookingStatusChangedCallback) => listen('booking:status_changed', callback)
 
-  const offBookingStatusChanged = (callback?: BookingStatusChangedCallback) => {
-    if (!socketInstance) return
-    if (callback) {
-      socketInstance.off('booking:status_changed', callback)
-    } else {
-      socketInstance.off('booking:status_changed')
-    }
-  }
+  const offBookingStatusChanged = (callback?: BookingStatusChangedCallback) => unlisten('booking:status_changed', callback)
 
-  const onBookingUpdated = (callback: BookingUpdatedCallback) => {
-    if (!socketInstance) return
-    socketInstance.on('booking:updated', callback)
-  }
+  const onBookingUpdated = (callback: BookingUpdatedCallback) => listen('booking:updated', callback)
 
-  const offBookingUpdated = (callback?: BookingUpdatedCallback) => {
-    if (!socketInstance) return
-    if (callback) {
-      socketInstance.off('booking:updated', callback)
-    } else {
-      socketInstance.off('booking:updated')
-    }
-  }
+  const offBookingUpdated = (callback?: BookingUpdatedCallback) => unlisten('booking:updated', callback)
 
-  const onNotification = (callback: NotificationCallback) => {
-    if (!socketInstance) return
-    socketInstance.on('notification:new', callback)
-  }
+  const onNotification = (callback: NotificationCallback) => listen('notification:new', callback)
 
-  const offNotification = (callback?: NotificationCallback) => {
-    if (!socketInstance) return
-    if (callback) {
-      socketInstance.off('notification:new', callback)
-    } else {
-      socketInstance.off('notification:new')
-    }
-  }
+  const offNotification = (callback?: NotificationCallback) => unlisten('notification:new', callback)
 
-  const onUserConnected = (callback: UserConnectionCallback) => {
-    if (!socketInstance) return
-    socketInstance.on('user:connected', callback)
-  }
+  const onUserConnected = (callback: UserConnectionCallback) => listen('user:connected', callback)
 
-  const offUserConnected = (callback?: UserConnectionCallback) => {
-    if (!socketInstance) return
-    if (callback) {
-      socketInstance.off('user:connected', callback)
-    } else {
-      socketInstance.off('user:connected')
-    }
-  }
+  const offUserConnected = (callback?: UserConnectionCallback) => unlisten('user:connected', callback)
 
-  const onUserDisconnected = (callback: UserConnectionCallback) => {
-    if (!socketInstance) return
-    socketInstance.on('user:disconnected', callback)
-  }
+  const onUserDisconnected = (callback: UserConnectionCallback) => listen('user:disconnected', callback)
 
-  const offUserDisconnected = (callback?: UserConnectionCallback) => {
-    if (!socketInstance) return
-    if (callback) {
-      socketInstance.off('user:disconnected', callback)
-    } else {
-      socketInstance.off('user:disconnected')
-    }
-  }
+  const offUserDisconnected = (callback?: UserConnectionCallback) => unlisten('user:disconnected', callback)
 
   const markNotificationAsRead = (notificationId: number) => {
     if (!socketInstance || !socketInstance.connected) return
