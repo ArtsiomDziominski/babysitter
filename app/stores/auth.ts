@@ -24,6 +24,7 @@ function mapApiUserToFrontend(apiUser: ApiUser): User {
         surname: apiUser.lastName,
         email: apiUser.email,
         phone: apiUser.phone || '',
+        city: apiUser.city || undefined,
         avatar: apiUser.avatar,
         avatarUrl: apiUser.avatarUrl,
         role: apiUser.role === UserRole.PARENT ? UserRole.PARENT : apiUser.role === UserRole.BABYSITTER ? UserRole.BABYSITTER : null,

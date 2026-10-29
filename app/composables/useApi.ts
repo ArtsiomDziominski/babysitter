@@ -18,6 +18,7 @@ export interface ApiUser {
   firstName: string
   lastName: string
   phone?: string
+  city?: string | null
   avatar?: string
   avatarUrl?: string
   twoFactorSecret?: string | null

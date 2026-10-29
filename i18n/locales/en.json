@@ -720,7 +720,8 @@
         "fileTooLarge": "File size exceeds 5MB",
         "uploadFailed": "Failed to upload photo. Please try again.",
         "deleteFailed": "Failed to delete photo. Please try again."
-      }
+      },
+      "cityHint": "Used by default when searching for babysitters"
     },
     "children": {
       "title": "Your Children",
