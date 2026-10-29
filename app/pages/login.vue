@@ -52,9 +52,12 @@ const fields: AuthFormField[] = [
   }
 ]
 
+const { email, requiredString, focusFirstError } = useFormValidation()
+
 const schema = z.object({
-  email: z.string().email(t('auth.invalidEmail')),
-  password: z.string().min(8, t('auth.passwordMinLength'))
+  email: email(),
+  // При входе длину не проверяем: старые пароли могли быть короче текущего правила
+  password: requiredString({ trim: false })
 })
 
 type Schema = z.output<typeof schema>
@@ -110,6 +113,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         :submit="{ label: t('auth.login'), block: true }"
         :loading="isLoading"
         @submit="onSubmit"
+        @error="focusFirstError"
       >
         <template #footer>
           <div class="text-center text-sm text-muted mt-4 space-y-2">

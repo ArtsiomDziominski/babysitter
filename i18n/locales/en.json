@@ -381,7 +381,6 @@
     "agreeToTerms": "I agree to the terms of use",
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
-    "invalidEmail": "Invalid email",
     "passwordMinLength": "Password must be at least 8 characters",
     "nameMinLength": "Name must be at least 2 characters",
     "surnameMinLength": "Surname must be at least 2 characters",
@@ -435,7 +434,8 @@
       "success": "Password changed",
       "error": "Could not change the password",
       "changeEmail": "Use a different email"
-    }
+    },
+    "emailTaken": "This email is already registered. Log in or reset your password"
   },
   "roleSelection": {
     "title": "Choose your role",
@@ -1796,5 +1796,12 @@
     "loadError": "Couldn't load favorites",
     "empty": "No favorites yet",
     "emptyHint": "Tap the heart on a sitter's profile to save them here"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Enter a valid email, e.g. name{'@'}mail.com",
+    "minLength": "At least {min} characters",
+    "maxLength": "No more than {max} characters",
+    "invalid": "Please check this value"
   }
 }

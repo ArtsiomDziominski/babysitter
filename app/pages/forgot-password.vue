@@ -38,8 +38,10 @@ const fields: AuthFormField[] = [
   }
 ]
 
+const { email: emailRule, password, requiredString, focusFirstError } = useFormValidation()
+
 const schema = z.object({
-  email: z.string().email(t('auth.invalidEmail'))
+  email: emailRule()
 })
 
 type Schema = z.output<typeof schema>
@@ -56,12 +58,14 @@ const cooldown = ref(0)
 let timer: ReturnType<typeof setInterval> | undefined
 
 const resetSchema = z.object({
-  code: z.string().regex(/^\d{6}$/, t('auth.passwordReset.codeInvalid')),
-  password: z.string().min(8, t('auth.passwordMinLength')),
-  confirmPassword: z.string()
+  code: z.string().regex(/^\d{6}$/, { error: () => t('auth.passwordReset.codeInvalid') }),
+  password: password(),
+  confirmPassword: requiredString({ trim: false })
 }).refine(data => data.password === data.confirmPassword, {
-  message: t('auth.passwordsDoNotMatch'),
-  path: ['confirmPassword']
+  error: () => t('auth.passwordsDoNotMatch'),
+  path: ['confirmPassword'],
+  when: payload => typeof payload.value === 'object' && payload.value !== null
+    && 'password' in payload.value && 'confirmPassword' in payload.value
 })
 
 const resetState = reactive({ code: '', password: '', confirmPassword: '' })
@@ -141,6 +145,7 @@ async function onReset() {
         :submit="{ label: t('auth.passwordReset.sendCode'), block: true }"
         :loading="isLoading"
         @submit="onSubmit"
+        @error="focusFirstError"
       >
         <template #footer>
           <div class="text-center text-sm text-muted mt-4 space-y-2">
@@ -166,7 +171,7 @@ async function onReset() {
           </p>
         </div>
 
-        <UForm :schema="resetSchema" :state="resetState" class="flex flex-col gap-4" @submit="onReset">
+        <UForm :schema="resetSchema" :state="resetState" class="flex flex-col gap-4" @submit="onReset" @error="focusFirstError">
           <UFormField name="code" :label="t('auth.passwordReset.code')" class="flex flex-col items-center">
             <UPinInput v-model="codeDigits" :length="6" type="number" otp size="lg" autofocus />
           </UFormField>

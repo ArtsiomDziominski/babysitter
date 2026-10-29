@@ -80,18 +80,25 @@ const fields: AuthFormField[] = [
   }
 ]
 
+const { email, password, requiredString, focusFirstError } = useFormValidation()
+
 const schema = z.object({
-  name: z.string().min(2, t('auth.nameMinLength')),
-  surname: z.string().min(2, t('auth.surnameMinLength')),
-  email: z.string().email(t('auth.invalidEmail')),
-  phone: z.string().min(10, t('auth.phoneMinLength')),
-  password: z.string().min(8, t('auth.passwordMinLength')),
-  confirmPassword: z.string(),
-  agree: z.boolean().refine(val => val === true, t('auth.mustAgree'))
+  name: requiredString().min(2, { error: () => t('auth.nameMinLength') }),
+  surname: requiredString().min(2, { error: () => t('auth.surnameMinLength') }),
+  email: email(),
+  phone: requiredString().min(10, { error: () => t('auth.phoneMinLength') }),
+  password: password(),
+  confirmPassword: requiredString({ trim: false }),
+  agree: z.boolean({ error: () => t('auth.mustAgree') }).refine(val => val === true, { error: () => t('auth.mustAgree') })
 }).refine(data => data.password === data.confirmPassword, {
-  message: t('auth.passwordsDoNotMatch'),
-  path: ['confirmPassword']
+  error: () => t('auth.passwordsDoNotMatch'),
+  path: ['confirmPassword'],
+  // Сравниваем пароли, даже если другие поля ещё не заполнены
+  when: payload => typeof payload.value === 'object' && payload.value !== null
+    && 'password' in payload.value && 'confirmPassword' in payload.value
 })
+
+const authForm = useTemplateRef('authForm')
 
 type Schema = z.output<typeof schema>
 
@@ -113,6 +120,12 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     })
     await router.push(localePath({ path: '/verify-email', query: { email: response.email ?? payload.data.email } }))
   } catch (error: any) {
+    // Занятый email подсвечиваем у самого поля, а не только всплывашкой
+    if (error?.statusCode === 409) {
+      authForm.value?.formRef?.setErrors([{ name: 'email', message: t('auth.emailTaken') }], 'email')
+      document.querySelector<HTMLInputElement>('input[name="email"]')?.focus()
+      return
+    }
     const errorMessage = error?.message || error?.details?.[0]?.message || t('auth.registerError')
     toast.add({ 
       title: errorMessage, 
@@ -128,6 +141,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
   <div class="flex flex-col items-center justify-center min-h-[calc(100vh-var(--ui-header-height))] py-10">
     <UPageCard variant="outline" class="w-full max-w-md bg-default" :ui="{ container: 'sm:p-8' }">
       <UAuthForm
+        ref="authForm"
         :schema="schema"
         :title="t('auth.register')"
         :description="t('auth.registerDescription')"
@@ -136,6 +150,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
         :submit="{ label: t('auth.register'), block: true }"
         :loading="isLoading"
         @submit="onSubmit"
+        @error="focusFirstError"
       >
         <template #footer>
           <div class="text-center text-sm text-muted mt-4">
