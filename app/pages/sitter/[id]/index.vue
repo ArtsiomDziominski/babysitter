@@ -8,8 +8,6 @@
       <div v-if="sitter" class="space-y-8">
         <SitterHeader
           :sitter="sitter"
-          :is-favorite="isFavorite"
-          @toggle-favorite="toggleFavorite"
           @contact="handleContact"
           @message="handleMessage"
         />
@@ -106,7 +104,6 @@ const siteConfig = useSiteConfig()
 
 const currentUrl = `${siteConfig.url}${route.path}`
 
-const isFavorite = ref(false)
 const isBabysitter = computed(() => authStore.currentUser?.role === UserRole.BABYSITTER)
 
 const { data: sitter, pending, error } = await useAsyncData<Sitter | null>(
@@ -193,10 +190,6 @@ const breadcrumbItems = computed(() => [
     icon: 'i-lucide-user'
   }
 ])
-
-const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value
-}
 
 const handleContact = () => {
   const router = useRouter()

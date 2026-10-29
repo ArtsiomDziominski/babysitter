@@ -1784,5 +1784,17 @@
       "completed": "Booking completed",
       "completedDesc": "Leave a review about {name}"
     }
+  },
+  "favorites": {
+    "title": "Favorites",
+    "add": "Add to favorites",
+    "remove": "Remove from favorites",
+    "added": "Sitter added to favorites",
+    "removed": "Sitter removed from favorites",
+    "error": "Couldn't update favorites. Please try again",
+    "loginRequired": "Log in to save sitters to favorites",
+    "loadError": "Couldn't load favorites",
+    "empty": "No favorites yet",
+    "emptyHint": "Tap the heart on a sitter's profile to save them here"
   }
 }

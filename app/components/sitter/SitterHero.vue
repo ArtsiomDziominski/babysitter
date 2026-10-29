@@ -3,8 +3,6 @@
     <div class="space-y-4">
       <SitterPhoto
         :sitter="sitter"
-        :is-favorite="isFavorite"
-        @toggle-favorite="$emit('toggle-favorite')"
       />
 
       <SitterQuickInfo :sitter="sitter" />
@@ -28,11 +26,9 @@ import type { Sitter } from '~/types/sitter'
 
 defineProps<{
   sitter: Sitter
-  isFavorite: boolean
 }>()
 
 defineEmits<{
-  'toggle-favorite': []
   contact: []
   message: []
 }>()
