@@ -88,6 +88,7 @@ import type {
 import { mapEverydaySchedules, mapToEverydaySchedules } from '~/composables/useScheduleTransform'
 import { ScheduleMode } from '~/const/schedule'
 import { useAdvantages } from '~/composables/useAdvantages'
+import { unwrapApiResponse } from '~/composables/useApi'
 
 definePageMeta({
   middleware: ['auth', 'nanny-only']
@@ -387,6 +388,11 @@ const loadProfile = async () => {
       resetForm()
     }
   } catch (error: any) {
+    // 404 — анкеты ещё нет (новая няня): это не ошибка, показываем пустую форму
+    if (error?.statusCode === 404) {
+      resetForm()
+      return
+    }
     toast.add({
       title: t('account.nannyForm.loadError'),
       description: error.message || t('account.nannyForm.tryLater'),
@@ -413,13 +419,14 @@ const handleSubmit = async () => {
   isSaving.value = true
   try {
     const payload = buildPayload()
-    const response = hasProfile.value
+    const response = unwrapApiResponse(hasProfile.value
         ? await babysitterApi.updateBabysitter(payload)
-        : await babysitterApi.createBabysitter(payload)
+        : await babysitterApi.createBabysitter(payload))
 
     form.value = {
       ...form.value,
       ...response,
+      advantages: response.advantages ? convertAdvantagesToKeys(response.advantages) : form.value.advantages,
       schedules: response.schedules ?? payload.schedules,
     }
     loadedSnapshot.value = clone(form.value)

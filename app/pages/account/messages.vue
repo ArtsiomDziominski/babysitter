@@ -153,7 +153,8 @@ const chats = computed<Chat[]>(() => {
           ? `${otherUser.firstName} ${otherUser.lastName}`.trim()
           : 'Пользователь',
       type: (conv.isAdminChat ? 'admin' : 'user') as 'admin' | 'user',
-      avatar: conv.isAdminChat ? undefined : otherUser?.avatar,
+      // avatar — ключ в хранилище, для <img> нужен presigned avatarUrl
+      avatar: conv.isAdminChat ? undefined : otherUser?.avatarUrl || undefined,
       icon: conv.isAdminChat ? 'i-lucide-headphones' : undefined,
       role: otherUser ? undefined : undefined,
       lastMessage: lastMessagesMap.value.get(conv.id),
