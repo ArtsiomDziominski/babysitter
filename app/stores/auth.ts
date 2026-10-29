@@ -139,6 +139,10 @@ export const useAuthStore = defineStore('auth', () => {
         const auth = useAuth()
         try {
             const response = await auth.login({ email, password })
+            // Email не подтверждён: страница входа отправит на ввод кода
+            if (response.requiresEmailVerification) {
+                return response
+            }
             if (!response.access_token) {
                 // Аккаунт с включённой 2FA: без кода токена нет, и интерфейс ввода кода пока не реализован
                 throw { statusCode: 401, message: 'Для этого аккаунта включена двухфакторная аутентификация' }
@@ -171,14 +175,24 @@ export const useAuthStore = defineStore('auth', () => {
                 phone: data.phone,
                 ...(data.role ? { role: data.role } : {}),
             })
-            setToken(response.access_token ?? null)
-            const mappedUser = mapApiUserToFrontend(response.user as ApiUser)
-            setUser(mappedUser)
-            setAuth(true)
+            // Токен выдаётся только после ввода кода из письма (verifyEmail)
             return response
         } catch (error) {
             throw error
         }
+    }
+
+    async function verifyEmail(email: string, code: string) {
+        const auth = useAuth()
+        const response = await auth.verifyEmail(email, code)
+        setToken(response.access_token ?? null)
+        setUser(mapApiUserToFrontend(response.user as ApiUser))
+        setAuth(true)
+        return response
+    }
+
+    async function resendEmailVerification(email: string) {
+        await useAuth().resendEmailVerification(email)
     }
 
     async function saveRole(role: UserRole) {
@@ -226,6 +240,8 @@ export const useAuthStore = defineStore('auth', () => {
         restoreAuth,
         login,
         register,
+        verifyEmail,
+        resendEmailVerification,
         saveRole,
         logout
     }

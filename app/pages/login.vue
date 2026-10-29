@@ -64,7 +64,12 @@ const isLoading = ref(false)
 async function onSubmit(payload: FormSubmitEvent<Schema>) {
   isLoading.value = true
   try {
-    await authStore.login(payload.data.email, payload.data.password)
+    const response = await authStore.login(payload.data.email, payload.data.password)
+    if (response.requiresEmailVerification) {
+      toast.add({ title: t('auth.verifyEmail.notVerified'), color: 'warning' })
+      await router.push(localePath({ path: '/verify-email', query: { email: response.email ?? payload.data.email } }))
+      return
+    }
     const role = authStore.user.role
     const target = role ? (role === UserRole.PARENT ? '/search' : '/account/profile') : '/choose-role'
     toast.add({ 
