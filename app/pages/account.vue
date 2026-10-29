@@ -12,6 +12,7 @@ useSeoMeta({
 const activeTab = computed(() => {
   if (route.path.includes('/messages')) return 'messages'
   if (route.path.includes('/orders')) return 'orders'
+  if (route.path.includes('/favorites')) return 'favorites'
   if (route.path.includes('/booking')) return 'booking'
   return 'profile'
 })

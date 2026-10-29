@@ -71,6 +71,15 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       return
     }
     const role = authStore.user.role
+    // Возврат на страницу, откуда отправили логиниться (например, сердечко «Избранное»)
+    const redirect = typeof route.query.redirect === 'string' && route.query.redirect.startsWith('/') && !route.query.redirect.startsWith('//')
+      ? route.query.redirect
+      : null
+    if (role && redirect) {
+      toast.add({ title: t('auth.loginSuccess'), color: 'success' })
+      await router.push(redirect)
+      return
+    }
     const target = role ? (role === UserRole.PARENT ? '/search' : '/account/profile') : '/choose-role'
     toast.add({ 
       title: t('auth.loginSuccess'), 

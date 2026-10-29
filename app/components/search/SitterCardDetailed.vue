@@ -28,6 +28,11 @@
               size="sm"
               class="absolute top-2 left-2 rounded-full"
           />
+          <SitterFavoriteButton
+              :babysitter-id="sitter.id"
+              :size="16"
+              class="absolute top-2 right-2 p-1.5"
+          />
         </div>
         <div v-if="sitter.city"
              class="flex items-center justify-center gap-1 mt-2 text-xs text-muted">

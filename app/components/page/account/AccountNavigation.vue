@@ -22,6 +22,12 @@ const items = computed(() => [
     to: localePath('/account/orders'),
     active: props.activeTab === 'orders'
   },
+  ...(authStore.user.role === UserRole.BABYSITTER ? [] : [{
+    label: t('favorites.title'),
+    icon: 'i-lucide-heart',
+    to: localePath('/account/favorites'),
+    active: props.activeTab === 'favorites'
+  }]),
   {
     label: t('account.booking.title'),
     icon: 'i-lucide-baby',

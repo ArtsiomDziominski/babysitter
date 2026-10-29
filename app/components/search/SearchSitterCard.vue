@@ -27,6 +27,10 @@
               variant="solid"
               class="absolute top-3 right-3 rounded-full"
           />
+          <SitterFavoriteButton
+              :babysitter-id="sitter.id"
+              class="absolute top-3 left-3"
+          />
         </div>
       </div>
 

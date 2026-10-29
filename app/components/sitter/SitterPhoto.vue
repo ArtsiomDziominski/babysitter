@@ -18,16 +18,7 @@
     </div>
 
     <div class="absolute top-3 right-3 flex gap-1.5 z-10">
-      <!-- <button
-        class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md rounded-full p-2 hover:bg-muted transition-all shadow-lg hover:scale-110 active:scale-95"
-        @click="$emit('toggle-favorite')"
-      >
-        <Icon
-          name="i-lucide-heart"
-          :class="isFavorite ? 'text-error-500 fill-error-500' : 'text-toned'"
-          size="18"
-        />
-      </button> -->
+      <SitterFavoriteButton :babysitter-id="sitter.id" />
       <button
         class="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md rounded-full p-2 hover:bg-muted transition-all shadow-lg hover:scale-110 active:scale-95"
         @click="handleShare"
@@ -88,11 +79,6 @@ import { useSitterUtils } from '~/composables/useSitterUtils'
 
 const props = defineProps<{
   sitter: Sitter
-  isFavorite: boolean
-}>()
-
-defineEmits<{
-  'toggle-favorite': []
 }>()
 
 const { formatLastSeen, getAgeText } = useSitterUtils()
