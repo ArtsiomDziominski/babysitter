@@ -44,6 +44,8 @@ export interface BabysitterProfilePayload {
   advantages?: string[]
   birthDate?: string | null
   city?: string | null
+  latitude?: number | null
+  longitude?: number | null
   showInSearch?: boolean
   avatarUrl?: string
   schedules?: BabysitterScheduleBlock[]
@@ -73,6 +75,9 @@ export interface BabysitterListItem {
   advantages?: string[]
   birthDate?: string
   city?: string
+  // Примерная точка на карте (округлена бэком до ~500 м)
+  latitude?: number | null
+  longitude?: number | null
   rating?: string
   completedOrdersCount?: number
   reviewsCount?: number

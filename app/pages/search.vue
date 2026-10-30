@@ -33,7 +33,15 @@
                 @update:view-mode="handleViewModeUpdate"
             />
 
-            <div v-if="isLoading" class="space-y-4">
+            <!-- Карта не пересоздаётся при каждом запросе: пины просто обновляются -->
+            <SearchSitterMap
+                v-if="viewMode === SearchViewMode.MAP"
+                :sitters="filteredSitters"
+                :city="searchForm.address"
+                @book="handleBook"
+            />
+
+            <div v-else-if="isLoading" class="space-y-4">
               <USkeleton v-for="n in 3" :key="n" class="h-48 w-full rounded-xl" />
             </div>
 
@@ -53,12 +61,10 @@
               />
 
               <SearchSitterCard
-                  v-else-if="viewMode === SearchViewMode.CARD"
+                  v-else
                   :sitters="filteredSitters"
                   @book="handleBook"
               />
-
-              <SearchSitterMap v-else/>
             </template>
           </div>
     </div>

@@ -617,6 +617,12 @@
       "experiencePlaceholder": "3",
       "city": "City",
       "cityPlaceholder": "Select city",
+      "location": {
+        "title": "Area on the map",
+        "hint": "Click the map or drag the pin to where you live or are ready to work. Parents only see the approximate area (±500 m); the exact address is not stored.",
+        "myLocation": "My location",
+        "geoError": "Could not determine your location"
+      },
       "about": "About",
       "aboutPlaceholder": "Briefly describe your experience and strengths",
       "minOrder": "Minimum order (BYN)",
@@ -1018,7 +1024,10 @@
     "loading": "Loading...",
     "empty": "No sitters found. Try changing search parameters.",
     "emptyShort": "No sitters found",
-    "mapPlaceholder": "Map will be here",
+    "map": {
+      "approxNote": "We never show sitters' exact location, only the approximate area (±500 m)",
+      "close": "Close"
+    },
     "sitter": {
       "new": "New babysitter",
       "orders": "Orders",
