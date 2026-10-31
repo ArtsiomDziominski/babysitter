@@ -36,9 +36,13 @@
             <!-- Карта не пересоздаётся при каждом запросе: пины просто обновляются -->
             <SearchSitterMap
                 v-if="viewMode === SearchViewMode.MAP"
+                v-model:pick-mode="isPickingNearPoint"
                 :sitters="filteredSitters"
                 :city="searchForm.address"
+                :bounds-active="!!mapBounds"
                 @book="handleBook"
+                @search-area="handleSearchArea"
+                @reset-area="handleResetArea"
             />
 
             <div v-else-if="isLoading" class="space-y-4">
@@ -78,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SearchFilters, SearchForm } from '~/types/sitter'
+import type { MapBounds, SearchFilters, SearchForm } from '~/types/sitter'
 import type { BabysitterListItem, FetchBabysittersParams } from '~/composables/useBabysitter'
 import { SearchViewMode, type SearchViewModeType } from '~/const/viewMode'
 import { CITY_KEYS } from '~/const/cities'
@@ -162,10 +166,23 @@ const viewMode = ref<SearchViewModeType>(SearchViewMode.LIST)
 const handleViewModeUpdate = (newValue: SearchViewModeType) => {
   viewMode.value = newValue
   if (process.client) localStorage.setItem('searchViewMode', newValue)
+  if (newValue === SearchViewMode.MAP) return
+  isPickingNearPoint.value = false
+  // Область карты имеет смысл только на карте: в списке снова ищем по обычным фильтрам
+  if (mapBounds.value) {
+    mapBounds.value = null
+    loadBabysitters()
+  }
 }
 
 const sitters = ref<BabysitterListItem[]>([])
 const isLoading = ref(false)
+// Поиск по видимой области карты («Искать в этой области»)
+const mapBounds = ref<MapBounds | null>(null)
+const nearPoint = useNearPoint()
+// Родитель отмечает на карте, где он, — когда геолокация недоступна
+const isPickingNearPoint = ref(false)
+const toast = useToast()
 
 const { fetchBabysitters } = useBabysitter()
 
@@ -212,10 +229,17 @@ const loadBabysitters = async () => {
   const requestId = ++lastRequestId
   isLoading.value = true
   try {
+    const near = nearPoint.point.value
     const params: FetchBabysittersParams = {
-      sort: sortBy.value || 'recommended',
+      // Без точки родителя сортировать по расстоянию нельзя: пока она определяется, показываем рекомендованных
+      sort: sortBy.value === 'distance' && !near ? 'recommended' : (sortBy.value || 'recommended'),
       limit: SEARCH_LIMIT
     }
+    if (near) {
+      params.nearLat = near[0]
+      params.nearLng = near[1]
+    }
+    if (mapBounds.value) Object.assign(params, mapBounds.value)
 
     if (filters.value.priceMin) params.minRate = filters.value.priceMin
     if (filters.value.priceMax) params.maxRate = filters.value.priceMax
@@ -280,15 +304,54 @@ const handleSearch = () => {
   loadBabysitters()
 }
 
+let previousAddress = searchForm.value.address
+
 watch([sortBy, filters, searchForm], () => {
   if (isUpdatingFromQuery.value || skipNextWatch.value) return
+  // Выбрали город — поиск по области карты больше не нужен
+  if (searchForm.value.address && searchForm.value.address !== previousAddress) mapBounds.value = null
+  previousAddress = searchForm.value.address
   updateQueryParams()
   loadBabysitters()
 }, { deep: true })
 
+// «Ближе ко мне»: точка родителя из геолокации, а если её нет — родитель отмечает себя на карте
+const requestNearPoint = async () => {
+  if (nearPoint.point.value) return
+  if (await nearPoint.locate()) return
+  toast.add({ title: t('bookings.map.geoError'), description: t('bookings.map.pickHint'), color: 'warning' })
+  handleViewModeUpdate(SearchViewMode.MAP)
+  isPickingNearPoint.value = true
+}
+
+watch(sortBy, (value) => {
+  if (value === 'distance') requestNearPoint()
+})
+
+// Точка изменилась — пересчитываем расстояния (и порядок, если сортируем по ним)
+watch(() => nearPoint.point.value, () => {
+  if (!skipNextWatch.value) loadBabysitters()
+})
+
+// «Искать в этой области»: город из формы снимаем, иначе область и город пересекутся в пустоту
+const handleSearchArea = (bounds: MapBounds) => {
+  mapBounds.value = bounds
+  if (searchForm.value.address) {
+    searchForm.value.address = ''
+  } else {
+    loadBabysitters()
+  }
+}
+
+const handleResetArea = () => {
+  mapBounds.value = null
+  loadBabysitters()
+}
+
 onMounted(() => {
   loadBabysitters()
   setInitialViewMode()
+  if (sortBy.value === 'distance') requestNearPoint()
   nextTick(() => {
     skipNextWatch.value = false
   })

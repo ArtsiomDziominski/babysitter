@@ -19,6 +19,8 @@
             <SitterScheduleSection :sitter="sitter" />
 
             <SitterWorkInfoSection :sitter="sitter" />
+
+            <SitterLocationSection :sitter="sitter" />
           </div>
 
           <div class="lg:col-span-1">

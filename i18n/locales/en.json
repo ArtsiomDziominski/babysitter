@@ -946,6 +946,11 @@
       "verificationCodeHint": "The code has been sent to the new email address",
       "verificationCodePlaceholder": "Enter verification code",
       "verifyCode": "Confirm"
+    },
+    "locationReminder": {
+      "title": "Mark your area on the map",
+      "description": "Your profile is currently placed in the city centre. Parents looking for a sitter nearby will find you once you mark the area where you live or are ready to work.",
+      "action": "Mark area"
     }
   },
   "bookings": {
@@ -1008,7 +1013,8 @@
       "priceAsc": "Price: ascending",
       "priceDesc": "Price: descending",
       "rating": "By rating",
-      "newest": "Newest"
+      "newest": "Newest",
+      "distance": "Closest to me"
     },
     "view": {
       "list": "List",
@@ -1026,7 +1032,13 @@
     "emptyShort": "No sitters found",
     "map": {
       "approxNote": "We never show sitters' exact location, only the approximate area (±500 m)",
-      "close": "Close"
+      "close": "Close",
+      "searchArea": "Search this area",
+      "inArea": "In map area",
+      "whereAmI": "Where am I",
+      "pickHint": "Tap the map to show where you are",
+      "geoError": "Could not determine your location",
+      "youAreHere": "You are here"
     },
     "sitter": {
       "new": "New babysitter",
@@ -1076,7 +1088,15 @@
         "preferences": "Preferences",
         "advantages": "Advantages and Skills",
         "petAttitude": "Pet Attitude"
+      },
+      "location": {
+        "title": "Area",
+        "note": "Approximate area (±500 m) is shown; the sitter's exact address is never published"
       }
+    },
+    "distance": {
+      "km": "{km} km",
+      "lessThanKm": "under 1 km"
     }
   },
   "common": {

@@ -36,3 +36,9 @@ export const CITY_CENTERS: Record<string, [number, number]> = {
 
 export const getCityCenter = (city?: string | null): [number, number] =>
   (city && CITY_CENTERS[city]) || CITY_CENTERS[City.TBILISI]!
+
+/** Точка стоит ровно в центре города — значит, няня ещё не отмечала свой район (центр ставит бэк). */
+export const isCityCenter = (city: string | null | undefined, latitude: number, longitude: number) => {
+  const center = city ? CITY_CENTERS[city] : undefined
+  return !!center && Math.abs(center[0] - latitude) < 1e-6 && Math.abs(center[1] - longitude) < 1e-6
+}

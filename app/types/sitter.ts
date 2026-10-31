@@ -38,6 +38,8 @@ export interface Sitter {
   minOrderAmount?: string
   petAttitude?: string
   city?: string
+  latitude?: number | null
+  longitude?: number | null
 }
 
 export interface Review {
@@ -73,4 +75,12 @@ export interface SearchFilters {
   maxRating?: number
   childrenCount?: number
   advantages?: string[]
+}
+
+/** Видимая область карты поиска («Искать в этой области»). */
+export interface MapBounds {
+  minLat: number
+  maxLat: number
+  minLng: number
+  maxLng: number
 }
