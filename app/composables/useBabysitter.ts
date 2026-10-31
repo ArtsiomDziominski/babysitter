@@ -78,6 +78,8 @@ export interface BabysitterListItem {
   // Примерная точка на карте (округлена бэком до ~500 м)
   latitude?: number | null
   longitude?: number | null
+  // Расстояние до точки родителя, км (есть, когда в запросе nearLat/nearLng)
+  distanceKm?: number | null
   rating?: string
   completedOrdersCount?: number
   reviewsCount?: number
@@ -121,6 +123,12 @@ export interface FetchBabysittersParams {
   date?: string
   startTime?: string
   endTime?: string
+  nearLat?: number
+  nearLng?: number
+  minLat?: number
+  maxLat?: number
+  minLng?: number
+  maxLng?: number
 }
 
 export interface BabysitterDetailResponse {
@@ -147,6 +155,8 @@ export interface BabysitterDetailResponse {
   advantages?: string[]
   birthDate?: string
   city?: string
+  latitude?: number | null
+  longitude?: number | null
   rating?: number
   reviewsCount?: number
   available?: boolean
@@ -217,6 +227,11 @@ export const useBabysitter = () => {
     if (params?.date) queryParams.append('date', params.date)
     if (params?.startTime) queryParams.append('startTime', params.startTime)
     if (params?.endTime) queryParams.append('endTime', params.endTime)
+    // Координаты: 0 — допустимое значение, поэтому проверяем на undefined
+    const geoParams = ['nearLat', 'nearLng', 'minLat', 'maxLat', 'minLng', 'maxLng'] as const
+    for (const key of geoParams) {
+      if (params?.[key] !== undefined) queryParams.append(key, params[key]!.toString())
+    }
     if (params?.advantage && params.advantage.length > 0) {
       params.advantage.forEach(adv => {
         queryParams.append('advantage', adv)
@@ -368,6 +383,8 @@ export const mapBabysitterToSitter = (data: BabysitterDetailResponse | null | un
     responseTime: data.responseTime,
     petAttitude: data.petAttitude,
     city: data.city,
+    latitude: data.latitude,
+    longitude: data.longitude,
   }
 }
 

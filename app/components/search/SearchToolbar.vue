@@ -67,7 +67,8 @@ const sortOptions = computed(() => {
       { label: t('bookings.sort.priceAsc'), value: 'price_asc' },
       { label: t('bookings.sort.priceDesc'), value: 'price_desc' },
       { label: t('bookings.sort.rating'), value: 'rating' },
-      { label: t('bookings.sort.newest'), value: 'new' }
+      { label: t('bookings.sort.newest'), value: 'new' },
+      { label: t('bookings.sort.distance'), value: 'distance' }
     ]
   } catch {
     return []

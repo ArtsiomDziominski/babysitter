@@ -23,6 +23,7 @@ const activeTab = computed(() => {
     <PageAccountNavigation :active-tab="activeTab" />
 
     <div class="flex-1 min-w-0">
+      <PageAccountLocationReminder class="mb-4" />
       <NuxtPage />
     </div>
   </div>

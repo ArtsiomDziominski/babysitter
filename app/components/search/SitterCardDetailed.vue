@@ -34,10 +34,10 @@
               class="absolute top-2 right-2 p-1.5"
           />
         </div>
-        <div v-if="sitter.city"
+        <div v-if="sitter.city || sitter.distanceKm != null"
              class="flex items-center justify-center gap-1 mt-2 text-xs text-muted">
           <Icon name="i-lucide-map-pin" size="12"/>
-          <span>{{ getCityName(sitter.city) }}</span>
+          <span>{{ [sitter.city ? getCityName(sitter.city) : '', formatDistance(sitter.distanceKm)].filter(Boolean).join(' · ') }}</span>
         </div>
       </div>
 
@@ -136,6 +136,7 @@ defineEmits<{
 
 const { t } = useI18n()
 const { getDisplayedAdvantages } = useAdvantages()
+const { formatDistance } = useDistance()
 
 const displayedAdvantages = computed(() => getDisplayedAdvantages(props.sitter.advantages))
 

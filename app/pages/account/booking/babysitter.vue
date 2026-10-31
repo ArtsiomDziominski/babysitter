@@ -99,6 +99,7 @@ const authStore = useAuthStore()
 const toast = useToast()
 const { t, locale } = useI18n()
 const { convertAdvantagesToKeys } = useAdvantages()
+const locationReminder = useSitterLocationReminder()
 const route = useRoute()
 const siteConfig = useSiteConfig()
 
@@ -436,6 +437,7 @@ const handleSubmit = async () => {
     loadedSnapshot.value = clone(form.value)
     hasProfile.value = true
     isEditing.value = false
+    locationReminder.update(form.value)
     toast.add({
       title: t('account.nannyForm.saveSuccess'),
       color: 'success',
@@ -479,8 +481,19 @@ provide('babysitterAllDaysIntervals', allDaysIntervals)
 provide('babysitterIsRecurringAllDays', isRecurringAllDays)
 provide('babysitterShowPhotoError', showPhotoError)
 
-onMounted(() => {
-  loadProfile()
+// Из напоминания «Отметьте район»: сразу открываем редактирование и прокручиваем к карте
+const openLocationEditor = async () => {
+  if (route.query.edit !== 'location' || !hasProfile.value) return
+  isEditing.value = true
+  await nextTick()
+  document.getElementById('sitter-location')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+}
+
+watch(() => route.query.edit, openLocationEditor)
+
+onMounted(async () => {
+  await loadProfile()
+  openLocationEditor()
 })
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="sitter-location" class="scroll-mt-24">
     <div class="flex items-center justify-between gap-3 mb-2 max-sm:flex-col max-sm:items-start">
       <label class="block text-sm font-medium text-default">
         {{ t('account.nannyForm.location.title') }}
