@@ -64,6 +64,8 @@
       />
     </div>
 
+    <PageAccountBookingBabysitterLocationPicker />
+
     <div>
       <label class="block text-sm font-medium text-default mb-2">
         {{ t('account.nannyForm.about') }}
@@ -80,7 +82,7 @@
 
 <script setup lang="ts">
 import type { BabysitterProfilePayload } from '~/composables/useBabysitter'
-import { CITY_KEYS, City } from '~/const/cities'
+import { CITY_KEYS, City, getCityCenter } from '~/const/cities'
 
 const form = inject<Ref<BabysitterProfilePayload>>('babysitterForm')
 if (!form) {
@@ -105,7 +107,12 @@ const selectedCity = computed({
     return city ? (city as City) : undefined
   },
   set: (value: City | undefined) => {
+    if ((value ?? null) === form.value.city) return
     form.value.city = value ?? null
+    // Новый город — точка на карте переезжает в его центр, район няня уточняет сама
+    const [latitude, longitude] = value ? getCityCenter(value) : [null, null]
+    form.value.latitude = latitude
+    form.value.longitude = longitude
   }
 })
 

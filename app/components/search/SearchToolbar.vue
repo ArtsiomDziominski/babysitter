@@ -14,7 +14,7 @@
         @update:model-value="$emit('update:sortBy', $event)"
       />
     </div>
-    <div class="flex items-center gap-2 max-xl:hidden">
+    <div class="flex items-center gap-2">
       <UTooltip :text="$t('bookings.view.tooltip.list')">
         <UButton
           icon="i-lucide-list"
@@ -28,20 +28,18 @@
           icon="i-lucide-layout-grid"
           :variant="viewMode === SearchViewMode.CARD ? 'soft' : 'ghost'"
           :color="viewMode === SearchViewMode.CARD ? 'primary' : 'neutral'"
+          class="max-xl:hidden"
           @click="$emit('update:viewMode', SearchViewMode.CARD)"
         />
       </UTooltip>
-      <!-- <UTooltip :text="$t('bookings.view.tooltip.map')">
+      <UTooltip :text="$t('bookings.view.tooltip.map')">
         <UButton
-          :variant="viewMode === SearchViewMode.MAP ? 'solid' : 'outline'"
-          :class="viewMode === SearchViewMode.MAP ? '' : 'cursor-pointer'"
-          color="primary"
-          size="sm"
+          icon="i-lucide-map"
+          :variant="viewMode === SearchViewMode.MAP ? 'soft' : 'ghost'"
+          :color="viewMode === SearchViewMode.MAP ? 'primary' : 'neutral'"
           @click="$emit('update:viewMode', SearchViewMode.MAP)"
-        >
-          <Icon name="i-lucide-map" />
-        </UButton>
-      </UTooltip> -->
+        />
+      </UTooltip>
     </div>
   </div>
 </template>

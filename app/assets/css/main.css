@@ -39,3 +39,63 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+/* Карты (Leaflet) */
+.app-map {
+  isolation: isolate;
+  font-family: inherit;
+  background: var(--ui-bg-elevated);
+}
+
+.dark .app-map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
+}
+
+.dark .app-map .leaflet-control-attribution,
+.dark .app-map .leaflet-bar a {
+  background: var(--ui-bg-elevated);
+  color: var(--ui-text-muted);
+}
+
+.app-map-pin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ui-text-highlighted);
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border-accented);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.app-map-pin.is-active {
+  color: #fff;
+  background: var(--ui-primary);
+  border-color: var(--ui-primary);
+}
+
+.app-map-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ui-primary);
+  border: 3px solid var(--ui-bg);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
+}
+
+.app-map-area {
+  stroke: var(--ui-primary);
+  fill: var(--ui-primary);
+}

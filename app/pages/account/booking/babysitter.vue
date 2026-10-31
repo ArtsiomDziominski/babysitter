@@ -147,6 +147,8 @@ function buildDefaultForm(user?: { name?: string; surname?: string }): Babysitte
     advantages: [],
     birthDate: '',
     city: null,
+    latitude: null,
+    longitude: null,
     showInSearch: false,
     schedules: [],
   }
@@ -365,6 +367,8 @@ const buildPayload = (): BabysitterProfilePayload => {
     advantages: (form.value.advantages || []).map(item => item.trim()).filter(Boolean),
     birthDate: normalizeString(form.value.birthDate),
     city: normalizeString(form.value.city),
+    latitude: normalizeNumber(form.value.latitude),
+    longitude: normalizeNumber(form.value.longitude),
     showInSearch: !!form.value.showInSearch,
     schedules: getCurrentScheduleBlocks(),
   }
