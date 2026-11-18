@@ -24,4 +24,4 @@ The deployment account accepts only the generated key and can run only `/usr/loc
 
 ## One-time server setup
 
-Run `deploy/bootstrap-ci.sh` as root with the matching public key as its first argument. The script installs a separate Node.js 24 runtime, restricted deploy account, systemd service, and narrow sudo rule. It does not change the existing Dagment service.
+Copy both `deploy/bootstrap-ci.sh` and `deploy/babysitter-deploy` to `/tmp` on the server, then run `bootstrap-ci.sh` as root with the matching public key as its first argument. The script installs a separate Node.js 24 runtime, restricted deploy account, systemd service, and narrow sudo rule. It does not change the existing Dagment service.
