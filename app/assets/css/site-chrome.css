@@ -75,6 +75,9 @@
 .site-footer .ftr li a{color:var(--ink-2);transition:color .2s}
 .site-footer .ftr li a:hover{color:var(--coral-text)}
 .site-footer .ftr .tag{margin-top:18px;color:var(--ink-2);max-width:26ch;font-size:16px}
+.site-footer .creator-contact{display:flex;flex-direction:column;gap:4px;margin-top:16px;color:var(--ink-2);font-size:14px}
+.site-footer .creator-contact a{color:var(--ink);overflow-wrap:anywhere}
+.site-footer .creator-contact a:hover{color:var(--coral-text)}
 .site-footer .soc{display:flex;gap:8px;margin-top:22px}
 .site-footer .soc a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-1);transition:transform .3s var(--ease),background .3s,color .3s}
 .site-footer .soc a:hover{transform:translateY(-3px);background:var(--c600);color:#fff}

@@ -347,7 +347,8 @@
       "help": "Help"
     },
     "contact": {
-      "title": "Contact"
+      "title": "Contact",
+      "collaboration": "For collaboration inquiries:"
     },
     "legal": {
       "privacy": "Privacy Policy",

@@ -54,6 +54,10 @@ const socials = [
               <span>Sitter<span class="ge">.ge</span></span>
             </NuxtLink>
             <p class="tag">{{ t('footer.description') }}</p>
+            <div class="creator-contact">
+              <span>{{ t('footer.contact.collaboration') }}</span>
+              <a href="mailto:artsiomdziominski@gmail.com">artsiomdziominski@gmail.com</a>
+            </div>
             <div class="soc">
               <a v-for="social in socials" :key="social.label" :href="social.to" :aria-label="social.label"><UIcon :name="social.icon" /></a>
             </div>
